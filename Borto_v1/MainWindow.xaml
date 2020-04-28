@@ -1,0 +1,122 @@
+﻿<Window x:Class="Borto_v1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Borto_v1"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d" Height="600" Width="1110"
+        WindowStartupLocation="CenterScreen" MinWidth="1110"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        MinHeight="600"
+        Title="Borto"
+        Background="#FF6c6c8d"
+        DataContext="{Binding Main, Source={StaticResource Locator}}" >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding WatchingpageCommand, Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <Storyboard x:Key="CloseMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Width)" Storyboard.TargetName="grid">
+                <EasingDoubleKeyFrame KeyTime="0" Value ="200"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value ="80"/>
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+        <Storyboard x:Key="OpenMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Grid.Width)" Storyboard.TargetName="grid">
+                <EasingDoubleKeyFrame KeyTime="0" Value ="80"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value ="200"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!-- Content-->
+            <Grid  Background="#FF6c6c6d" Grid.Column="1">
+                <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            </Grid>
+            <!-- Menu -->
+            <Grid x:Name="grid" Width="200" Background="#FF6c6c8d"  Grid.Column="0 ">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="button" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10 10 10 10" Style="{StaticResource MaterialDesignFlatButton}" Click="button_Click">
+                    <materialDesign:PackIcon Width="25" Height="25" Kind="Menu" Foreground="White"/>
+                </Button>
+                <ListView Grid.Row="1" x:Name="ListViewMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                    <ListViewItem>
+                        <StackPanel  Margin="18" Height="30" Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Tv" Width="30" Height="30" VerticalAlignment="Center"/>
+                            <TextBlock Text="Watching" Margin="25 0" FontSize="20" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction
+                                                      Command="{Binding WatchingpageCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListViewItem>
+                    <ListViewItem>
+                    <StackPanel   Margin="18" Height="30" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Download" Width="30" Height="30" VerticalAlignment="Center"/>
+                            <TextBlock Text="Download" Margin="25 0" FontSize="20" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction
+                                                      Command="{Binding DownloadPageCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListViewItem>
+                    <ListViewItem>
+                    <StackPanel Margin="18" Height="30" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Upload" Width="30" Height="30" VerticalAlignment="Center"/>
+                        <TextBlock Text="Upload" Margin="25 0" FontSize="20" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction
+                                                      Command="{Binding UploadPageCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    </ListViewItem>
+                    
+                    <ListViewItem>
+                        <StackPanel  Margin="18" Height="30" Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Account" Width="30" Height="30" VerticalAlignment="Center"/>
+                            <TextBlock Text="Account" Margin="25 0" FontSize="20" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction
+                                                      Command="{Binding AccountpageCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <StackPanel  Margin="18" Height="30" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Settings" Width="30" Height="30" VerticalAlignment="Center"/>
+                            <TextBlock Text="Settings" Margin="25 0" FontSize="20" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction
+                                                      Command="{Binding SettingspageCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListViewItem>
+                </ListView>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
