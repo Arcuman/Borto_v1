@@ -12,10 +12,15 @@ namespace Borto_v1.ViewModel
 {
    public class WatchingViewModel : ViewModelBase
     {
+        #region Private members 
         private ObservableCollection<Video> videos = new ObservableCollection<Video>();
         private IFrameNavigationService _navigationService;
 
-      
+        private Video selectedVideo;
+
+        #endregion
+
+        #region Public members
         public ObservableCollection<Video> Videos
         {
             get
@@ -33,42 +38,69 @@ namespace Borto_v1.ViewModel
                 videos = value;
                 RaisePropertyChanged();
             }
+        } 
+        public Video SelectedVideo
+        {
+            get
+            {
+                return selectedVideo;
+            }
+            set
+            {
+                if (selectedVideo == value)
+                {
+                    return;
+                }
+
+                selectedVideo = value;
+                RaisePropertyChanged();
+            }
         }
-        private RelayCommand _downloadpageCommand;
-        public RelayCommand DownloadPageCommand
+        #endregion
+
+        #region Commands
+        private RelayCommandParametr _downloadpageCommand;
+        public RelayCommandParametr DownloadPageCommand
         {
             get
             {
                 return _downloadpageCommand
-                    ?? (_downloadpageCommand = new RelayCommand(
-                    () =>
+                    ?? (_downloadpageCommand = new RelayCommandParametr(
+                    obj =>
                     {
-                        _navigationService.NavigateTo("Download");
-                    }));
-            }
-        } private RelayCommand _uploadpageCommand;
-        public RelayCommand UploadPageCommand
-        {
-            get
-            {
-                return _uploadpageCommand
-                    ?? (_uploadpageCommand = new RelayCommand(
-                    () =>
-                    {
-                        _navigationService.NavigateTo("Upload");
+                        SelectedVideo = obj as Video;
+                        _navigationService.NavigateTo("Download",obj);
                     }));
             }
         }
+        private RelayCommandParametr _viewWatchingPageCommand;
+        public RelayCommandParametr ViewWatchingPageCommand
+        {
+            get
+            {
+                return _viewWatchingPageCommand
+                    ?? (_viewWatchingPageCommand = new RelayCommandParametr(
+                    (obj) =>
+                    {
+                        SelectedVideo = obj as Video;
+                        _navigationService.NavigateTo("VideoWatching",SelectedVideo);
+                    }));
+            }
+        } 
+        #endregion
+
+        #region ctor
         public WatchingViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
             Videos.Add(new Video("Video1","FunnyVideos", "/Assets/camera.jpg",new User("Anton")));
-            Videos.Add(new Video("Video1","FunnyVideos", "/Assets/camera.jpg",new User("Anton")));
-            Videos.Add(new Video("Video1","FunnyVideos", "/Assets/camera.jpg",new User("Anton")));
-            Videos.Add(new Video("Video1","FunnyVideos", "/Assets/camera.jpg",new User("Anton")));
-            Videos.Add(new Video("Video1","FunnyVideos", "/Assets/camera.jpg",new User("Anton")));
+            Videos.Add(new Video("Video2","FunnyVideos", "/Assets/camera.jpg",new User("Anton")));
+            Videos.Add(new Video("Video3","FunnyVideos", "/Assets/camera.jpg",new User("Anton")));
+            Videos.Add(new Video("Video4","FunnyVideos", "/Assets/camera.jpg",new User("Anton")));
+            Videos.Add(new Video("Video5","FunnyVideos", "/Assets/camera.jpg",new User("Anton")));
         }
+        #endregion
     }
 
-    
+
 }

@@ -80,34 +80,55 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\BMenuItem.cs" />
-    <Compile Include="Model\Product.cs" />
+    <Compile Include="Helpers\OpenWindowMessage.cs" />
+    <Compile Include="Helpers\RelayCommandParametr.cs" />
+    <Compile Include="Helpers\WindowType.cs" />
+    <Compile Include="LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\Video.cs" />
-    <Compile Include="Pages\AccountPage.xaml.cs">
+    <Compile Include="Pages\Login\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Login\RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Menu\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DownloadPage.xaml.cs">
+    <Compile Include="Pages\Menu\DownloadPage.xaml.cs">
       <DependentUpon>DownloadPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SettingsPage.xaml.cs">
+    <Compile Include="Pages\Menu\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UploadPage.xaml.cs">
+    <Compile Include="Pages\Menu\UploadPage.xaml.cs">
       <DependentUpon>UploadPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\WatchingPage.xaml.cs">
+    <Compile Include="Pages\VideoWatchingPage.xaml.cs">
+      <DependentUpon>VideoWatchingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Menu\WatchingPage.xaml.cs">
       <DependentUpon>WatchingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Test\Test.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\DownloadViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\UploadViewModel.cs" />
+    <Compile Include="ViewModel\VideoWatchingPageViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="ViewModel\WatchingViewModel.cs" />
     <Page Include="Animation\MenuAnimation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,31 +140,47 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Helpers\FrameNavigationService.cs" />
     <Compile Include="Helpers\IFrameNavigationService.cs" />
+    <Compile Include="Helpers\FrameNavigationService.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\AccountPage.xaml">
+    <Page Include="Pages\Login\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\DownloadPage.xaml">
+    <Page Include="Pages\Login\RegisterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\SettingsPage.xaml">
+    <Page Include="Pages\Menu\AccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\UploadPage.xaml">
+    <Page Include="Pages\Menu\DownloadPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\WatchingPage.xaml">
+    <Page Include="Pages\Menu\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Menu\UploadPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\VideoWatchingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Menu\WatchingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ListBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Styles\Buttons.xaml">
       <SubType>Designer</SubType>

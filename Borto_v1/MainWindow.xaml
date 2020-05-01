@@ -10,8 +10,10 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         MinHeight="600"
         Title="Borto"
+        Name="BortoWindow"
         Background="#FF6c6c8d"
-        DataContext="{Binding Main, Source={StaticResource Locator}}" >
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
+         >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding WatchingpageCommand, Mode=OneWay}" />
@@ -66,30 +68,18 @@
                         </i:Interaction.Triggers>
                     </ListViewItem>
                     <ListViewItem>
-                    <StackPanel   Margin="18" Height="30" Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Download" Width="30" Height="30" VerticalAlignment="Center"/>
-                            <TextBlock Text="Download" Margin="25 0" FontSize="20" VerticalAlignment="Center"/>
+                        <StackPanel Margin="18" Height="30" Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Upload" Width="30" Height="30" VerticalAlignment="Center"/>
+                            <TextBlock Text="Upload" Margin="25 0" FontSize="20" VerticalAlignment="Center"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
                                 <i:InvokeCommandAction
-                                                      Command="{Binding DownloadPageCommand}"/>
+                                                      Command="{Binding UploadPageCommand}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListViewItem>
-                    <ListViewItem>
-                    <StackPanel Margin="18" Height="30" Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Upload" Width="30" Height="30" VerticalAlignment="Center"/>
-                        <TextBlock Text="Upload" Margin="25 0" FontSize="20" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                            <i:InvokeCommandAction
-                                                      Command="{Binding UploadPageCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    </ListViewItem>
-                    
+
                     <ListViewItem>
                         <StackPanel  Margin="18" Height="30" Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Account" Width="30" Height="30" VerticalAlignment="Center"/>
@@ -104,7 +94,7 @@
                     </ListViewItem>
                     <ListViewItem>
                         <StackPanel  Margin="18" Height="30" Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Settings" Width="30" Height="30" VerticalAlignment="Center"/>
+                            <materialDesign:PackIcon Kind="Settings" Width="30" Height="30" VerticalAlignment="Center"/>
                             <TextBlock Text="Settings" Margin="25 0" FontSize="20" VerticalAlignment="Center"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
@@ -115,7 +105,7 @@
                         </i:Interaction.Triggers>
                     </ListViewItem>
                 </ListView>
-
+                <TextBlock Grid.Row="2" Text="{Binding User.Name}"/>
             </Grid>
         </Grid>
     </Grid>

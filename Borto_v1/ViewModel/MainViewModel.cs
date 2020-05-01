@@ -1,5 +1,7 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Borto_v1.Model;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -11,27 +13,32 @@ namespace Borto_v1.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        private List<BMenuItem> menuList = new List<BMenuItem>();
+        #region Private Members
+        private User user;
+        private IFrameNavigationService _navigationService;
 
-        public List<BMenuItem> MenuList
+        #endregion
+
+        #region Public members
+        public User User
         {
             get
             {
-                return menuList;
+                return user;
             }
             set
             {
-                if (menuList == value)
+                if (user == value)
                 {
                     return;
                 }
-                menuList = value;
+                user = value;
                 RaisePropertyChanged();
             }
         }
+        #endregion
 
-        private IFrameNavigationService _navigationService;
-
+        #region Commands
         private RelayCommand _downloadpageCommand;
         public RelayCommand DownloadPageCommand
         {
@@ -42,6 +49,19 @@ namespace Borto_v1.ViewModel
                     () =>
                     {
                         _navigationService.NavigateTo("Download");
+                    }));
+            }
+        } 
+        private RelayCommand _loginpageCommand;
+        public RelayCommand LoginPageCommand
+        {
+            get
+            {
+                return _loginpageCommand
+                    ?? (_loginpageCommand = new RelayCommand(
+                    () =>
+                    {
+                        _navigationService.NavigateTo("Login");
                     }));
             }
         }
@@ -97,15 +117,15 @@ namespace Borto_v1.ViewModel
                     }));
             }
         }
+        #endregion
+
+        #region ctor
+
         public MainViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
-            menuList.Add(new BMenuItem("Download", PackIconKind.Download));
-            menuList.Add(new BMenuItem("Upload", PackIconKind.Upload)); ;
-            menuList.Add(new BMenuItem("Watching", PackIconKind.Watch));
-            menuList.Add(new BMenuItem("Account", PackIconKind.Account));
-            menuList.Add(new BMenuItem("Settings", PackIconKind.Settings));
         }
 
+        #endregion
     }
 }

@@ -1,8 +1,10 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using Borto_v1.ViewModel;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +18,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 namespace Borto_v1
 {
+    
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -24,6 +27,7 @@ namespace Borto_v1
         bool MenuCLosed = false;
         public MainWindow()
         {
+            Thread.Sleep(500);
             InitializeComponent();
         }
 

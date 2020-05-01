@@ -14,21 +14,29 @@ namespace Borto_v1.ViewModel
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DownloadViewModel>();
             SimpleIoc.Default.Register<UploadViewModel>();
             SimpleIoc.Default.Register<WatchingViewModel>();
+            SimpleIoc.Default.Register<VideoWatchingPageViewModel>();
+            SimpleIoc.Default.Register<LoginViewModel>();
+            SimpleIoc.Default.Register<RegisterViewModel>();
+            SimpleIoc.Default.Register<LoginWindowViewModel>();
             SetupNavigation();
         }
 
         private static void SetupNavigation()
         {
             var navigationService = new FrameNavigationService();
-            navigationService.Configure("Download", new Uri("../Pages/DownloadPage.xaml", UriKind.Relative));
-            navigationService.Configure("Upload", new Uri("../Pages/UploadPage.xaml", UriKind.Relative));
-            navigationService.Configure("Watching", new Uri("../Pages/WatchingPage.xaml", UriKind.Relative));
-            navigationService.Configure("Account", new Uri("../Pages/AccountPage.xaml", UriKind.Relative));
-            navigationService.Configure("Settings", new Uri("../Pages/SettingsPage.xaml", UriKind.Relative));
+            navigationService.Configure("Download", new Uri("../Pages/Menu/DownloadPage.xaml", UriKind.Relative));
+            navigationService.Configure("Upload", new Uri("../Pages/Menu/UploadPage.xaml", UriKind.Relative));
+            navigationService.Configure("Watching", new Uri("../Pages/Menu/WatchingPage.xaml", UriKind.Relative));
+            navigationService.Configure("Account", new Uri("../Pages/Menu/AccountPage.xaml", UriKind.Relative));
+            navigationService.Configure("Settings", new Uri("../Pages/Menu/SettingsPage.xaml", UriKind.Relative));
+            navigationService.Configure("VideoWatching", new Uri("../Pages/VideoWatchingPage.xaml", UriKind.Relative));
+            navigationService.Configure("Login", new Uri("../Pages/Login/Login.xaml", UriKind.Relative));
+            navigationService.Configure("Register", new Uri("../Pages/Login/RegisterPage.xaml", UriKind.Relative));
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
         public MainViewModel Main
@@ -36,6 +44,13 @@ namespace Borto_v1.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
+            }
+        }
+        public LoginWindowViewModel LoginWindowViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<LoginWindowViewModel>();
             }
         }
         public DownloadViewModel DownloadViewModel
@@ -66,9 +81,31 @@ namespace Borto_v1.ViewModel
                 return ServiceLocator.Current.GetInstance<AccountViewModel>();
             }
         }
+        public VideoWatchingPageViewModel VideoWatchingPageViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<VideoWatchingPageViewModel>();
+            }
+        }  
+        public LoginViewModel LoginViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<LoginViewModel>();
+            }
+        } 
+        public RegisterViewModel RegisterViewModel
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<RegisterViewModel>();
+            }
+        }
 
         public static void Cleanup()
         {
+
         }
     }
 }

@@ -1,12 +1,17 @@
 ﻿
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\App.xaml;;
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Animation\MenuAnimation.xaml;;
+FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\LoginWindow.xaml;;
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\MainWindow.xaml;;
-FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Pages\AccountPage.xaml;;
-FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Pages\DownloadPage.xaml;;
-FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Pages\SettingsPage.xaml;;
-FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Pages\UploadPage.xaml;;
-FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Pages\WatchingPage.xaml;;
+FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Pages\Login\Login.xaml;;
+FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Pages\Login\RegisterPage.xaml;;
+FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Pages\Menu\AccountPage.xaml;;
+FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Pages\Menu\DownloadPage.xaml;;
+FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Pages\Menu\SettingsPage.xaml;;
+FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Pages\Menu\UploadPage.xaml;;
+FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Pages\VideoWatchingPage.xaml;;
+FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Pages\Menu\WatchingPage.xaml;;
+FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Styles\ListBox.xaml;;
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Styles\Buttons.xaml;;
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Styles\Colors.xaml;;
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Styles\Texts.xaml;;

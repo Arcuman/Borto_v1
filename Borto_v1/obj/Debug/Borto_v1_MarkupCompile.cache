@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\App.xaml
-101090956622
+15-724866075
 
-24-206882630
+331377928993
 1261162326444
-Animation\MenuAnimation.xaml;MainWindow.xaml;Pages\AccountPage.xaml;Pages\DownloadPage.xaml;Pages\SettingsPage.xaml;Pages\UploadPage.xaml;Pages\WatchingPage.xaml;Styles\Buttons.xaml;Styles\Colors.xaml;Styles\Texts.xaml;
+Animation\MenuAnimation.xaml;LoginWindow.xaml;MainWindow.xaml;Pages\Login\Login.xaml;Pages\Login\RegisterPage.xaml;Pages\Menu\AccountPage.xaml;Pages\Menu\DownloadPage.xaml;Pages\Menu\SettingsPage.xaml;Pages\Menu\UploadPage.xaml;Pages\VideoWatchingPage.xaml;Pages\Menu\WatchingPage.xaml;Styles\ListBox.xaml;Styles\Buttons.xaml;Styles\Colors.xaml;Styles\Texts.xaml;
 
 False
 
