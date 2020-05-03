@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Borto_v1.ViewModel
+namespace Borto_v1
 {
     public class MainViewModel : ViewModelBase
     {
@@ -114,6 +114,20 @@ namespace Borto_v1.ViewModel
                     () =>
                     {
                         _navigationService.NavigateTo("Settings");
+                    }));
+            }
+        }
+
+        private RelayCommand _viewWatchingPageCommand;
+        public RelayCommand ViewWatchingPageCommand
+        {
+            get
+            {
+                return _viewWatchingPageCommand
+                    ?? (_viewWatchingPageCommand = new RelayCommand(
+                    () =>
+                    {
+                        _navigationService.NavigateTo("Player");
                     }));
             }
         }

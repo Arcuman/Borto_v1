@@ -7,14 +7,28 @@
          xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Name="LoginWindow1"
-        Title="LoginWindow" Height="450" Width="350"
-        DataContext="{Binding LoginWindowViewModel, Source={StaticResource Locator}}">
+        Title="LoginWindow" Height="470" Width="380"
+        AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None" MouseDown="LoginWindow1_MouseDown" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        DataContext="{Binding LoginWindowViewModel, Source={StaticResource Locator}}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedPageCommand, Mode=OneWay}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid>
-       <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+    <Grid >
+        <Border CornerRadius="10" Background="{StaticResource BackgroundDarkBlueBrush}">
+            <Grid>
+
+                <Grid Grid.Row="1">
+                    <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                </Grid>
+                <Button Click="Close_Button_Click" Padding="1"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="25" Height="25"  Margin="0 3 5 0" Background="Transparent" BorderBrush="Transparent">
+                    <materialDesign:PackIcon Kind="Close" Width="25" Height="25" Foreground="#ffffff" />
+                </Button>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

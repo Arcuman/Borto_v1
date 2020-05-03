@@ -16,12 +16,29 @@ namespace Borto_v1.Model
 
         public User User { get; set; }
 
-        public Video(string name, string description, string image, User user)
+        public Uri Path { get; set; }
+
+        public Video()
+        {
+            Name = null;
+            Description = null;
+            Image = null;
+            User = null;
+            Path = null;
+        }
+
+        public Video(string name, string description, string image, User user,Uri path)
         {
             Name = name;
             Description = description;
             Image = image;
             User = user;
+            Path = path;
+        }
+
+        public void SetVideoPath(Uri pathToVideo)
+        {
+            this.Path = pathToVideo;
         }
     }
 }

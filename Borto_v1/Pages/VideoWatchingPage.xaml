@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Borto_v1"
       mc:Ignorable="d" 
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-      d:DesignHeight="450" d:DesignWidth="800"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="600" d:DesignWidth="1060"
       DataContext="{Binding VideoWatchingPageViewModel, Source={StaticResource Locator}}"
       Title="VideoWatchingPage">
     <i:Interaction.Triggers>

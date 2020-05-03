@@ -8,16 +8,55 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Borto_v1.ViewModel
+namespace Borto_v1
 {
     public class LoginViewModel : ViewModelBase
     {
         #region Private members
         private IFrameNavigationService _navigationService;
 
+        private User user;
+
+        private string login;
         #endregion
 
-        
+
+        #region Public Members
+
+        public User User
+        {
+            get
+            {
+                return user;
+            }
+            set
+            {
+                if (user == value)
+                {
+                    return;
+                }
+                user = value;
+                RaisePropertyChanged();
+            }
+        }
+         public string Login
+        {
+            get
+            {
+                return login;
+            }
+            set
+            {
+                if (login == value)
+                {
+                    return;
+                }
+                login = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        #endregion
 
         #region Commands
         private RelayCommand _registerCommand;
@@ -45,8 +84,9 @@ namespace Borto_v1.ViewModel
                     ?? (_loginCommand = new RelayCommand(
                     () =>
                     {
+                        user = new User("Login",login,"password");
                     Messenger.Default.Send<OpenWindowMessage>(
-                             new OpenWindowMessage() { Type = WindowType.kMain, Argument = new User("Nikita") });
+                             new OpenWindowMessage() { Type = WindowType.kMain, Argument = user });
 
             }));
             }

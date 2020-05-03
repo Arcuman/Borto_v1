@@ -4,9 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Borto_v1"
-       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+       d:DesignHeight="600" d:DesignWidth="1060"
       DataContext="{Binding DownloadViewModel, Source={StaticResource Locator}}"
       Title="DownloadPage">
     <i:Interaction.Triggers>
@@ -14,7 +14,58 @@
             <i:InvokeCommandAction Command="{Binding LoadedPageCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid Background="White">
-        <TextBlock Text="{Binding Video.Name}" FontSize="30"/>
+    <Grid Background="{StaticResource ForegroundColorLight}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Height="55">
+            <materialDesign:ColorZone Height="50" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="PrimaryMid" DockPanel.Dock="Top">
+                <StackPanel  Background="{StaticResource BackgroundLightBlueBrush}" Orientation="Horizontal">
+                    <TextBlock  Text="Download the video" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
+                </StackPanel>
+            </materialDesign:ColorZone>
+        </Grid>
+
+        
+            <Border  Grid.Row="1" HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="{StaticResource BackgroundLightBlueBrush}"
+                Width="350" 
+                Height="450"
+                Margin="60 0"
+                CornerRadius="5">
+            <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                            Mode="PrimaryDark" DockPanel.Dock="Top">
+                <StackPanel>
+                    <TextBlock Foreground="{StaticResource ForegroundColorLight}"
+                           HorizontalAlignment="Center" 
+                           Style="{StaticResource MaterialDesignHeadline3TextBlock}" 
+                           Text="Download"/>
+                    <StackPanel Margin="20 " Orientation="Horizontal">
+                        <TextBlock Text="Name:"  
+                               FontSize="20"
+                               Foreground="{StaticResource ForegroundColorLight}"/>
+                        <Border Margin="20 0" BorderBrush="Black" BorderThickness="0 0 0 1">
+                            <TextBlock Text="{Binding Video.Name}" 
+                               FontSize="20"
+                               MaxWidth="200"
+                               TextTrimming="WordEllipsis"
+                               Foreground="{StaticResource ForegroundColorLight}"/>
+                        </Border>
+                    </StackPanel>
+                    <Border  Width="300" Height="200" CornerRadius="5" Margin="5">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="5"/>
+                        </Border.Effect>
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding Video.Image}"/>
+                        </Border.Background>
+                    </Border>
+                    <Button Content="Download" Foreground="{StaticResource ForegroundColorLight}" Margin="50 "/>
+                </StackPanel>
+            </materialDesign:ColorZone>
+        </Border>
     </Grid>
 </Page>

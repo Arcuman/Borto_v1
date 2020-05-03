@@ -7,60 +7,68 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="1060"
+      d:DesignHeight="600" d:DesignWidth="1060"
       Title="WatchingPage"
       DataContext="{Binding WatchingViewModel, Source={StaticResource Locator}}"
       >
-    <Grid >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Background="BlueViolet" Orientation="Horizontal">
-            <TextBlock Text="Items" Margin="10" FontSize="22" FontWeight="Medium"/>
-        </StackPanel>
 
-        <ListBox   Grid.Row="1" x:Name="ListViewProduct" Background="#FFf1f1f1" ItemsSource="{Binding Videos}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
-           
-            <ListBox.ItemTemplate>
-                <!-- FIX Ripple-->
-                <DataTemplate >
-                    <Border   Name="border" Margin="50 10 50 10" Width="310" Height="260">
-                        <StackPanel >
-                            <Border  Width="300" Height="200" CornerRadius="5" Margin="5">
-                                <Border.Effect>
-                                    <DropShadowEffect ShadowDepth="5"/>
-                                </Border.Effect>
-                                <Border.Background>
-                                    <ImageBrush ImageSource="{Binding Image}"/>
-                                </Border.Background>
-                            </Border>
-                            <Grid>
-                                <StackPanel>
-                                    <TextBlock Margin="5" Text="{Binding Name}" FontSize="14" FontFamily="Franklin Gothic Medium" />
-                                    <TextBlock Margin="5 0" Text="{Binding User.Name}" FontSize="13" />
-                                </StackPanel>
-                                <Button  HorizontalAlignment="Right" Margin="0 0 10 0"
+        <Grid Background="{StaticResource ForegroundColorLight}" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Height="55">
+                <materialDesign:ColorZone Height="50" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="PrimaryMid" DockPanel.Dock="Top">
+                    <StackPanel  Background="{StaticResource BackgroundLightBlueBrush}" Orientation="Horizontal">
+                        <TextBlock  Text="Watch the video" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
+                    </StackPanel>
+                </materialDesign:ColorZone>
+            </Grid>
+            <materialDesign:TransitioningContent Grid.Row="1" x:Name="TransitioningContentSlide"
+OpeningEffect="{materialDesign:TransitionEffect FadeIn, Duration=0:0:1}">
+                <ListBox    x:Name="ListViewProduct" Background="{StaticResource ForegroundColorLight}" ItemsSource="{Binding Videos}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
+
+                    <ListBox.ItemTemplate>
+                        <!-- FIX Ripple-->
+                        <DataTemplate >
+                            <Border   Name="border" Margin="50 10 50 10" Width="310" Height="260">
+                                <StackPanel >
+                                    <Border  Width="300" Height="200" CornerRadius="5" Margin="5">
+                                        <Border.Effect>
+                                            <DropShadowEffect ShadowDepth="5"/>
+                                        </Border.Effect>
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding Image}"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <Grid>
+                                        <StackPanel>
+                                            <TextBlock Margin="5" Text="{Binding Name}" FontSize="14" FontFamily="Franklin Gothic Medium" />
+                                            <TextBlock Margin="5 0" Text="{Binding User.Name}" FontSize="13" />
+                                        </StackPanel>
+                                        <Button  HorizontalAlignment="Right" Margin="0 0 10 0"
                                         Command="{Binding ElementName= ListViewProduct,Path=DataContext.DownloadPageCommand}" 
                                         CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}">
-                                    <materialDesign:PackIcon Width="25" Height="25" Kind="Download"  Foreground="White"/>
-                                </Button>
-                            </Grid>
-                        </StackPanel>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseLeftButtonUp">
-                                <i:InvokeCommandAction Command="{Binding ElementName= ListViewProduct,Path=DataContext.ViewWatchingPageCommand}" 
+                                            <materialDesign:PackIcon Width="25" Height="25" Kind="Download"  Foreground="{StaticResource ForegroundColorLight}"/>
+                                        </Button>
+                                    </Grid>
+                                </StackPanel>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding ElementName= ListViewProduct,Path=DataContext.ViewWatchingPageCommand}" 
                                                        CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
-    </Grid>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </materialDesign:TransitioningContent>
+        </Grid>
 </Page>

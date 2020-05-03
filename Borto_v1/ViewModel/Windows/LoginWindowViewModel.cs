@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Borto_v1.ViewModel
+namespace Borto_v1
 {
     public class LoginWindowViewModel: ViewModelBase
     {

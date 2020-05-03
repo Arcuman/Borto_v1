@@ -1,4 +1,4 @@
-﻿using Borto_v1.Helpers;
+﻿using Borto_v1;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using System;
@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Borto_v1.ViewModel
+namespace Borto_v1
 {
     public class ViewModelLocator
     {
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DownloadViewModel>();
@@ -37,6 +38,7 @@ namespace Borto_v1.ViewModel
             navigationService.Configure("VideoWatching", new Uri("../Pages/VideoWatchingPage.xaml", UriKind.Relative));
             navigationService.Configure("Login", new Uri("../Pages/Login/Login.xaml", UriKind.Relative));
             navigationService.Configure("Register", new Uri("../Pages/Login/RegisterPage.xaml", UriKind.Relative));
+            navigationService.Configure("Player", new Uri("../Pages/Menu/VideoPlayerPage.xaml", UriKind.Relative));
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
         public MainViewModel Main
@@ -105,7 +107,7 @@ namespace Borto_v1.ViewModel
 
         public static void Cleanup()
         {
-
+            
         }
     }
 }

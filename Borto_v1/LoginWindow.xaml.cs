@@ -1,4 +1,4 @@
-﻿using Borto_v1.ViewModel;
+﻿using Borto_v1;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using System;
@@ -39,6 +39,17 @@ namespace Borto_v1
                       this.Close();
                   }
               });
+        }
+
+        private void LoginWindow1_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
+
+        private void Close_Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

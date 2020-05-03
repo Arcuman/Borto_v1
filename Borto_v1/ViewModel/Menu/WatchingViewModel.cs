@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Borto_v1.ViewModel
+namespace Borto_v1
 {
    public class WatchingViewModel : ViewModelBase
     {
@@ -93,11 +93,11 @@ namespace Borto_v1.ViewModel
         public WatchingViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
-            Videos.Add(new Video("Video1","FunnyVideos", "/Assets/camera.jpg",new User("Anton")));
-            Videos.Add(new Video("Video2","FunnyVideos", "/Assets/camera.jpg",new User("Anton")));
-            Videos.Add(new Video("Video3","FunnyVideos", "/Assets/camera.jpg",new User("Anton")));
-            Videos.Add(new Video("Video4","FunnyVideos", "/Assets/camera.jpg",new User("Anton")));
-            Videos.Add(new Video("Video5","FunnyVideos", "/Assets/camera.jpg",new User("Anton")));
+            Videos.Add(new Video("Video1","FunnyVideos", "/Assets/camera.jpg",new User("Anton","Login","pasww"),null));
+            Videos.Add(new Video("Video2","FunnyVideos", "/Assets/camera.jpg",new User("Anton","Login","pasww"),null));
+            Videos.Add(new Video("Video3","FunnyVideos", "/Assets/camera.jpg",new User("Anton","Login","pasww"),null));
+            Videos.Add(new Video("Video4","FunnyVideos", "/Assets/camera.jpg",new User("Anton","Login","pasww"), null));
+            Videos.Add(new Video("Video5","FunnyVideos", "/Assets/camera.jpg", new User("Anton", "Login", "pasww"), null));
         }
         #endregion
     }

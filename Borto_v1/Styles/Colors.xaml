@@ -2,16 +2,24 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Borto_v1" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
 
-    <Color x:Key="BackgroundDarkBlue">#0089D6</Color>
-    <SolidColorBrush x:Key="BackgroundDarkBlueBrush" Color="{StaticResource BackgroundDarkBlue}" />
+    
+    <SolidColorBrush x:Key="ForegroundColorLight" Color="#FFFFFF" />
+        <!--Background Color -->
+    <SolidColorBrush x:Key="BackgroundDarkBlueBrush" Color="#1A3447" />
+    <!--Second Backgound Color -->
+    <SolidColorBrush x:Key="BackgroundLightBlueBrush" Color="#0FAEF0" />
+    <!--Button MaterialDesign Color-->
+    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#49C3F8" />
+    
     <!--Primary-->
-    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#FFCDD2" />
+    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#49C3F8" />
     <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#FF333333" />
-    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#f44336" />
+    
     <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFDDDDDD" />
-    <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#b71c1c" />
+
+    <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#056E9C" />
     <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFFFFFFF" />
     <!--Accent-->
-    <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#ff1744" />
+    <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#056E9C" />
     <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF" />
 </ResourceDictionary>

@@ -9,7 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Borto_v1.Helpers
+namespace Borto_v1
 {
     public class FrameNavigationService : IFrameNavigationService, INotifyPropertyChanged
     {

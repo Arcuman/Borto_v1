@@ -1,12 +1,14 @@
 ﻿using Borto_v1.Model;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Borto_v1.ViewModel
+namespace Borto_v1
 {
     public class UploadViewModel : ViewModelBase
     {
@@ -15,39 +17,44 @@ namespace Borto_v1.ViewModel
 
         private Video video;
 
+        private string image;
+
         #endregion
 
         #region Public members
-        public Video SelectedVideo
+        public string Image
         {
             get
             {
-                return video;
+                return image;
             }
             set
             {
-                if (video == value)
+                if (image == value)
                 {
                     return;
                 }
 
-                video = value;
+                image = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
         #region Commands
-        private RelayCommandParametr _uploadpageCommand;
-        public RelayCommandParametr UploadPageCommand
+        private RelayCommand _setPathtoVideoCommand;
+        public RelayCommand SetPathtoVideoCommand
         {
             get
             {
-                return _uploadpageCommand
-                    ?? (_uploadpageCommand = new RelayCommandParametr(
-                    obj =>
+                return _setPathtoVideoCommand
+                    ?? (_setPathtoVideoCommand = new RelayCommand(
+                    () =>
                     {
-                        SelectedVideo = obj as Video;
+                        OpenFileDialog openFileDialog = new OpenFileDialog();
+                        openFileDialog.Filter = "Media files (*.mp4)|*.mp4";
+                        if (openFileDialog.ShowDialog() == true)
+                             new Uri(openFileDialog.FileName);
                     }));
             }
         }
@@ -56,6 +63,8 @@ namespace Borto_v1.ViewModel
         public UploadViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
+            video = new Video();
+            Image = "/Assets/camera.jpg";
         }
         #endregion
     }

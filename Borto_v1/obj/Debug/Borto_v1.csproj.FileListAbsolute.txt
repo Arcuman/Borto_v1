@@ -89,3 +89,5 @@ D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\Login\
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\Login\RegisterPage.baml
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\LoginWindow.g.cs
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\LoginWindow.baml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\Menu\VideoPlayerPage.g.cs
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\Menu\VideoPlayerPage.baml

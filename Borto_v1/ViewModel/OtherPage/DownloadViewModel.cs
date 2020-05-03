@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Borto_v1.ViewModel
+namespace Borto_v1
 {
     public class DownloadViewModel: ViewModelBase
     {
