@@ -11,6 +11,7 @@
         MinHeight="600"
         Title="Borto"
         Name="BortoWindow"
+        Unloaded="BortoWindow_Unloaded"
         Background="{StaticResource BackgroundDarkBlueBrush}"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
          >
@@ -35,89 +36,94 @@
         </Storyboard>
     </Window.Resources>
     <Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <!-- Content-->
-            <Grid  Background="{StaticResource BackgroundDarkBlueBrush}" Grid.Column="1">
-                <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
-            </Grid>
-            <!-- Menu -->
-            <Grid x:Name="grid" Width="200" Background="{StaticResource BackgroundDarkBlueBrush}"  Grid.Column="0 ">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Button x:Name="button" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10 10 10 10" Style="{StaticResource MaterialDesignFlatButton}" Click="button_Click">
-                    <materialDesign:PackIcon Width="25" Height="25" Kind="Menu" Foreground="{StaticResource ForegroundColorLight}"/>
-                </Button>
-                <ListView Grid.Row="1" x:Name="ListViewMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
-                    <ListViewItem>
-                        <StackPanel  Margin="18" Height="30" Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Tv" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                            <TextBlock Foreground="{StaticResource ForegroundColorLight}" Text="Watching" Margin="25 0" FontSize="20" VerticalAlignment="Center"/>
-                        </StackPanel>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                <i:InvokeCommandAction
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Menu -->
+        <Grid x:Name="grid" Width="200" Background="{StaticResource BackgroundDarkBlueBrush}"  Grid.Column="0 ">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Button  x:Name="button"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Top"
+                     Margin="10 10 10 10"
+                     Style="{StaticResource MaterialDesignFlatButton}" 
+                     
+                     Click="button_Click">
+                <materialDesign:PackIcon Width="25" Height="25" Kind="Menu" Foreground="{StaticResource ForegroundColorLight}"/>
+            </Button>
+            <ListView  Grid.Row="1" x:Name="ListViewMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListViewItem>
+                    <StackPanel  Margin="18" Height="30" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Tv" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                        <TextBlock Foreground="{StaticResource ForegroundColorLight}" Text="Watching" Margin="25 0" FontSize="20" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction
                                                       Command="{Binding WatchingpageCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel Margin="18" Height="30" Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Upload" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                            <TextBlock Text="Upload" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                        </StackPanel>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                <i:InvokeCommandAction
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListViewItem>
+                <ListViewItem>
+                    <StackPanel Margin="18" Height="30" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Upload" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                        <TextBlock Text="Upload" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                    </StackPanel>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction
                                                       Command="{Binding UploadPageCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel Margin="18" Height="30" Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="VideoClassic" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                            <TextBlock Text="Player" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                        </StackPanel>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                <i:InvokeCommandAction
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListViewItem>
+                <ListViewItem >
+                    <StackPanel Margin="18" Height="30" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="VideoClassic"  Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                        <TextBlock Text="Player" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                    </StackPanel>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction
                                                       Command="{Binding ViewWatchingPageCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel  Margin="18" Height="30" Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Account" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                            <TextBlock Text="Account" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                        </StackPanel>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                <i:InvokeCommandAction
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListViewItem>
+                <ListViewItem>
+                    <StackPanel  Margin="18" Height="30" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Account" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                        <TextBlock Text="Account" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                    </StackPanel>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction
                                                       Command="{Binding AccountpageCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel  Margin="18" Height="30" Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Settings" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                            <TextBlock Text="Settings" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                        </StackPanel>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                <i:InvokeCommandAction
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListViewItem>
+                <ListViewItem>
+                    <StackPanel  Margin="18" Height="30" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Settings" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                        <TextBlock Text="Settings" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                    </StackPanel>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                            <i:InvokeCommandAction
                                                       Command="{Binding SettingspageCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ListViewItem>
-                </ListView>
-                <TextBlock Grid.Row="2" Text="{Binding User.Login}"/>
-            </Grid>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListViewItem>
+            </ListView>
+            <TextBlock Grid.Row="2" Text="{Binding User.Login}"/>
+        </Grid>
+        <!-- Content-->
+        <Grid  Name="content"  Background="{StaticResource BackgroundDarkBlueBrush}" Grid.Column="1">
+            <Frame Focusable="False" x:Name="MainFrame" NavigationUIVisibility="Hidden"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
         </Grid>
     </Grid>
 </Window>

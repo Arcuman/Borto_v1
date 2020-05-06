@@ -1,4 +1,5 @@
 ﻿using Borto_v1;
+using GalaSoft.MvvmLight.Messaging;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 namespace Borto_v1
 {
-    
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -27,8 +28,32 @@ namespace Borto_v1
         bool MenuCLosed = false;
         public MainWindow()
         {
-            Thread.Sleep(500);
             InitializeComponent();
+            Messenger.Default.Register<NotificationMessage>(
+             this,
+             message =>
+             {
+                 switch (message.Notification)
+                 {
+                     case "FullScreen":
+                         {
+                             this.WindowStyle = WindowStyle.None;
+                             this.WindowState = WindowState.Maximized;
+                             content.SetValue(Grid.ColumnProperty, 0);
+                             content.SetValue(Grid.ColumnSpanProperty, 2);
+                             break;
+                         }
+                     case "NotFullScreen":
+                         {
+                             this.WindowState = WindowState.Normal;
+                             this.WindowStyle = WindowStyle.SingleBorderWindow;
+                             content.SetValue(Grid.ColumnProperty, 1);
+                             content.SetValue(Grid.ColumnSpanProperty, 1);
+                             break;
+                         }
+
+                 }
+             });
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -44,6 +69,11 @@ namespace Borto_v1
                 closeMenu.Begin();
             }
             MenuCLosed = !MenuCLosed;
+        }
+
+        private void BortoWindow_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Unregister(this);
         }
     }
 }

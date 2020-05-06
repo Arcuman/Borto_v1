@@ -91,3 +91,4 @@ D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\LoginWindow.
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\LoginWindow.baml
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\Menu\VideoPlayerPage.g.cs
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\Menu\VideoPlayerPage.baml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\MediaToolkit.dll

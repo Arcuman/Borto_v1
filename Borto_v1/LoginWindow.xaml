@@ -11,6 +11,7 @@
         AllowsTransparency="True" Background="Transparent"
         WindowStyle="None" MouseDown="LoginWindow1_MouseDown" 
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        Unloaded="LoginWindow1_Unloaded"
         DataContext="{Binding LoginWindowViewModel, Source={StaticResource Locator}}" ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
         >
     <i:Interaction.Triggers>

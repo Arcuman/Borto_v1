@@ -51,5 +51,10 @@ namespace Borto_v1
         {
             this.Close();
         }
+
+        private void LoginWindow1_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Unregister(this);
+        }
     }
 }
