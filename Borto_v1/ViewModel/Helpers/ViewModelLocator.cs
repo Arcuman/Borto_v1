@@ -21,8 +21,6 @@ namespace Borto_v1
             SimpleIoc.Default.Register<UploadViewModel>();
             SimpleIoc.Default.Register<WatchingViewModel>();
             SimpleIoc.Default.Register<VideoWatchingPageViewModel>();
-            SimpleIoc.Default.Register<LoginViewModel>();
-            SimpleIoc.Default.Register<RegisterViewModel>();
             SimpleIoc.Default.Register<LoginWindowViewModel>();
             SetupNavigation();
         }
@@ -90,20 +88,6 @@ namespace Borto_v1
                 return ServiceLocator.Current.GetInstance<VideoWatchingPageViewModel>();
             }
         }  
-        public LoginViewModel LoginViewModel
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<LoginViewModel>();
-            }
-        } 
-        public RegisterViewModel RegisterViewModel
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<RegisterViewModel>();
-            }
-        }
 
         public static void Cleanup()
         {

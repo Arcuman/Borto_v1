@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Ioc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace Borto_v1
         public Login()
         {
             InitializeComponent();
+            this.DataContext = new LoginViewModel(SimpleIoc.Default.GetInstance<IFrameNavigationService>());
         }
 
     }

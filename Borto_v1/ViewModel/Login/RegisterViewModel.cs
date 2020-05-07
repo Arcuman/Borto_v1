@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -25,6 +26,8 @@ namespace Borto_v1
         private string login;
 
         private string password;
+
+        private string message;
         /// <summary>
         /// Is request to DB is send ?
         /// </summary>
@@ -33,10 +36,11 @@ namespace Borto_v1
         /// Is User agree with term of using
         /// </summary>
         private bool isCheck;
+
+        private bool isOpenDialog;
         #endregion
 
         #region Public Members
-
 
         public string Name
         {
@@ -124,6 +128,44 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+        /// <summary>
+        /// Is Open Dialog 
+        /// </summary>
+        public bool IsOpenDialog
+        {
+            get
+            {
+                return isOpenDialog;
+            }
+            set
+            {
+                if (isOpenDialog == value)
+                {
+                    return;
+                }
+                isOpenDialog = value;
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
+        /// Message for the dialog  
+        /// </summary>
+        public string Message
+        {
+            get
+            {
+                return message;
+            }
+            set
+            {
+                if (message == value)
+                {
+                    return;
+                }
+                message = value;
+                RaisePropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -144,6 +186,20 @@ namespace Borto_v1
                     (x) => !IsVisibleProgressBar));
             }
         }
+        
+        private RelayCommand closeDialodCommand;
+        public RelayCommand CloseDialodCommand
+        {
+            get
+            {
+                return closeDialodCommand
+                    ?? (closeDialodCommand = new RelayCommand(
+                    () =>
+                    {
+                        IsOpenDialog = false;
+                    }));
+            }
+        }
 
         private RelayCommandParametr _registerCommand;
         public RelayCommandParametr RegisterCommand
@@ -154,6 +210,7 @@ namespace Borto_v1
                     ?? (_registerCommand = new RelayCommandParametr(
                     (x) =>
                     {
+                        
                         IsVisibleProgressBar = true;
                         ThreadPool.QueueUserWorkItem(
                             o =>
@@ -161,7 +218,8 @@ namespace Borto_v1
                                 if (context.Users.IsExist(Login))
                                 {
                                     IsVisibleProgressBar = false;
-                                    MessageBox.Show("This Login is already exist");
+                                    Message = "This login is already exist";
+                                    IsOpenDialog = true;
                                 }
                                 //ADD VALIDATION HERE
                                 else if (Login != null && Password != null && Name != null)
@@ -169,7 +227,6 @@ namespace Borto_v1
                                     string hashPass = User.getHash(Password);
                                     User user = new User(Name, Login, hashPass);
                                     context.Users.Create(user);
-                                    MessageBox.Show("Successfully registered");
                                     context.Save();
                                     DispatcherHelper.CheckBeginInvokeOnUI(
                                         () =>
@@ -182,13 +239,14 @@ namespace Borto_v1
                                 else
                                 {
                                     IsVisibleProgressBar = false;
-                                    MessageBox.Show("Introduction data!");
+                                    Message = "Incorrect data!";
+                                    IsOpenDialog = true;
                                 }
                             }
                             );
                     },
-                    (x) => 
-                    IsCheck==true && Name?.Length>0 && Login?.Length>0 && Password?.Length>0));
+                    (x) =>
+                    IsCheck == true && Name?.Length > 0 && Login?.Length > 0 && Password?.Length > 0));
             }
         }
         #endregion

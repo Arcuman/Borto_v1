@@ -26,6 +26,10 @@ namespace Borto_v1
         private string password;
 
         private bool isVisibleProgressBar;
+
+        private bool isOpenDialog;
+
+        private string message;
         #endregion
 
 
@@ -79,6 +83,44 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+        /// <summary>
+        /// Is Open Dialog 
+        /// </summary>
+        public bool IsOpenDialog
+        {
+            get
+            {
+                return isOpenDialog;
+            }
+            set
+            {
+                if (isOpenDialog == value)
+                {
+                    return;
+                }
+                isOpenDialog = value;
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
+        /// Message for the dialog  
+        /// </summary>
+        public string Message
+        {
+            get
+            {
+                return message;
+            }
+            set
+            {
+                if (message == value)
+                {
+                    return;
+                }
+                message = value;
+                RaisePropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -100,6 +142,21 @@ namespace Borto_v1
             }
         }
 
+        private RelayCommand closeDialodCommand;
+        public RelayCommand CloseDialodCommand
+        {
+            get
+            {
+                return closeDialodCommand
+                    ?? (closeDialodCommand = new RelayCommand(
+                    () =>
+                    {
+                        IsOpenDialog = false;
+                    }));
+            }
+        }
+
+
         private RelayCommandParametr _loginCommand;
         public RelayCommandParametr LoginCommand
         {
@@ -118,7 +175,6 @@ namespace Borto_v1
 
                                 User user = context.Users.GetUsersByLogin(Login);
                                 context.Save();
-                                MessageBox.Show("Successfully login");
                                 DispatcherHelper.CheckBeginInvokeOnUI(
                                     () =>
                                     {
@@ -130,7 +186,8 @@ namespace Borto_v1
                             else
                             {
                                 IsVisibleProgressBar = false;
-                                MessageBox.Show("Incorrect data");
+                                Message = "Incorrect data!";
+                                IsOpenDialog = true;
                             }
                         }
                     );

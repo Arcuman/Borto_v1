@@ -108,6 +108,8 @@
     <Compile Include="Helpers\MessageWindow\OpenWindowMessage.cs" />
     <Compile Include="Helpers\Command\RelayCommandParametr.cs" />
     <Compile Include="Helpers\MessageWindow\WindowType.cs" />
+    <Compile Include="Helpers\Validation\MinimumCharacterRule.cs" />
+    <Compile Include="Helpers\Validation\NotEmptyValidationRule.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
