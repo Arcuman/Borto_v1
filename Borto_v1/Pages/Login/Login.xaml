@@ -11,7 +11,9 @@
       Name="Login_Haha"
        Height="415" Width="300"
       DataContext="{Binding LoginViewModel, Source={StaticResource Locator}}">
-
+    <Page.Resources>
+        <local:ParametrizedBooleanToVisibilityConverter x:Key="ParametrizedBooleanToVisibilityConverter"/>
+    </Page.Resources>
     <Grid>
         <materialDesign:TransitioningContent Grid.Row="1" x:Name="TransitioningContentSlide"
 OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:1}">
@@ -21,11 +23,29 @@ OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:
                     <StackPanel Margin="0 50 0 0">
                         <TextBlock Text="Sign in to your account" HorizontalAlignment="Center" Foreground="Gray" Margin="30" FontSize="21" FontFamily="Champagne &amp; Limousines" FontWeight="SemiBold"/>
                         <TextBox Margin="20 10" materialDesign:HintAssist.Hint="E-Mail" Text="{Binding Login}"/>
-                        <PasswordBox Margin="20 10" materialDesign:HintAssist.Hint="Password" />
+                        <PasswordBox Margin="20 10"
+                                     materialDesign:HintAssist.Hint="Password"
+                                      local:PasswordBoxAssistant.BindPassword="true"
+                                     local:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Grid Margin="20 0">
                             <CheckBox Content="Remember me" HorizontalAlignment="Left"/>
                         </Grid>
-                        <Button Command="{Binding LoginCommand}"  Content="SIGN IN" Margin="20 20 20 10" Foreground="{StaticResource ForegroundColorLight}"/>
+                        <StackPanel>
+                            <ProgressBar 
+                                Visibility="{Binding IsVisibleProgressBar,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    FallbackValue=Collapsed}"
+                                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                Value="35" 
+                                Margin="20 20 20 10"
+                                IsIndeterminate="{Binding IsVisibleProgressBar}" />
+                            <Button Command="{Binding LoginCommand}" 
+                                    Content="SIGN IN" Margin="20 20 20 10"
+                                    Foreground="{StaticResource ForegroundColorLight}"
+                                     Visibility="{Binding IsVisibleProgressBar,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    ConverterParameter=False}"/>
+                        </StackPanel>
                         <Button Command="{Binding RedisterCommand}" Content="SIGN UP" Margin="30 10 30 10" Foreground="{StaticResource ForegroundColorLight}"/>
                     </StackPanel>
                 </Border>

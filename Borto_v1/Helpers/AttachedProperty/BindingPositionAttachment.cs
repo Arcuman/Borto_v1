@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace Borto_v1
 {
-    public  class BindingPositionAttachment
+    public static class BindingPositionAttachment
     {
 
         private static readonly TimeSpan DefaultValue = new TimeSpan(0);

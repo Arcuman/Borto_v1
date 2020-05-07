@@ -14,7 +14,7 @@ namespace Borto_v1
 
         private VideoRepository videoRepository;
 
-        public IRepository<User> Users
+        public UserRepository Users
         {
             get
             {
@@ -23,7 +23,7 @@ namespace Borto_v1
                 return userRepository;
             }
         }
-         public IRepository<Video> Videos
+         public VideoRepository Videos
         {
             get
             {

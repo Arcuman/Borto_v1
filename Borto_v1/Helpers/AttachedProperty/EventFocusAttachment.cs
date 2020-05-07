@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace Borto_v1
 {
-    public class EventFocusAttachment
+    public static class EventFocusAttachment
     {
         public static Control GetElementToFocus(Control button)
         {

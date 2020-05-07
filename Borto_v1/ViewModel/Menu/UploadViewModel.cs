@@ -1,4 +1,4 @@
-﻿using Borto_v1.Model;
+﻿
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Microsoft.Win32;

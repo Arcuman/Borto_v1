@@ -92,3 +92,9 @@ D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\LoginWindow.
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\Menu\VideoPlayerPage.g.cs
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\Menu\VideoPlayerPage.baml
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\MediaToolkit.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\EntityFramework.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\EntityFramework.SqlServer.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\EntityFramework.xml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\EntityFramework.SqlServer.xml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Borto_v1.Migrations.InitialCreate.resources
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Borto_v1.Migrations.Test1.resources

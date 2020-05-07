@@ -9,9 +9,9 @@ namespace Borto_v1
 
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<User> Users { get; }
+        UserRepository Users { get; }
 
-        IRepository<Video> Videos { get; }
+        VideoRepository Videos { get; }
 
         void Save();
     }
