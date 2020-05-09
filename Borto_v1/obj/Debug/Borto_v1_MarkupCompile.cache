@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\
+D:\Borto\Borto_v1\Borto_v1\obj\Debug\
 Borto_v1
 none
 false
 DEBUG;TRACE
-D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\App.xaml
+D:\Borto\Borto_v1\Borto_v1\App.xaml
 16233738937
 
 542065986685
-132-954733960
+132-135111976
 Animation\MenuAnimation.xaml;LoginWindow.xaml;MainWindow.xaml;Pages\Login\Login.xaml;Pages\Login\RegisterPage.xaml;Pages\Menu\AccountPage.xaml;Pages\Menu\DownloadPage.xaml;Pages\Menu\SettingsPage.xaml;Pages\Menu\UploadPage.xaml;Pages\Menu\VideoPlayerPage.xaml;Pages\VideoWatchingPage.xaml;Pages\Menu\WatchingPage.xaml;Styles\ListBox.xaml;Styles\Buttons.xaml;Styles\Colors.xaml;Styles\Texts.xaml;
 
 False

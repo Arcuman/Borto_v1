@@ -13,6 +13,7 @@
         Name="BortoWindow"
         Unloaded="BortoWindow_Unloaded"
         Background="{StaticResource BackgroundDarkBlueBrush}"
+        Focusable="False"
         DataContext="{Binding Main, Source={StaticResource Locator}}"
          >
     <i:Interaction.Triggers>
