@@ -10,9 +10,14 @@
       d:DesignHeight="600" d:DesignWidth="1060"
       Title="WatchingPage"
       DataContext="{Binding WatchingViewModel, Source={StaticResource Locator}}"
+      
       >
-
-        <Grid Background="{StaticResource ForegroundColorLight}" >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid Background="{StaticResource ForegroundColorLight}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -39,13 +44,13 @@ OpeningEffect="{materialDesign:TransitionEffect FadeIn, Duration=0:0:1}">
                                             <DropShadowEffect ShadowDepth="5"/>
                                         </Border.Effect>
                                         <Border.Background>
-                                            <ImageBrush ImageSource="{Binding Image}"/>
+                                        <ImageBrush ImageSource="{Binding Bitmap}"/>
                                         </Border.Background>
                                     </Border>
                                     <Grid>
                                         <StackPanel>
                                             <TextBlock Margin="5" Text="{Binding Name}" FontSize="14" FontFamily="Franklin Gothic Medium" />
-                                            <TextBlock Margin="5 0" Text="{Binding User.Name}" FontSize="13" />
+                                        <TextBlock Margin="5 0" Text="{Binding User.Name}" FontSize="13" />
                                         </StackPanel>
                                         <Button  HorizontalAlignment="Right" Margin="0 0 10 0"
                                         Command="{Binding ElementName= ListViewProduct,Path=DataContext.DownloadPageCommand}" 

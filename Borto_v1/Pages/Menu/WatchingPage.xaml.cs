@@ -24,6 +24,5 @@ namespace Borto_v1
         {
             InitializeComponent();
         }
-
     }
 }

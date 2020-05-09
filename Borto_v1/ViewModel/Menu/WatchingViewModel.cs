@@ -13,7 +13,8 @@ namespace Borto_v1
    public class WatchingViewModel : ViewModelBase
     {
         #region Private members 
-        private ObservableCollection<Video> videos = new ObservableCollection<Video>();
+        EFUnitOfWork context = new EFUnitOfWork();
+        private ObservableCollection<Video> videos;
         private IFrameNavigationService _navigationService;
 
         private Video selectedVideo;
@@ -87,17 +88,27 @@ namespace Borto_v1
                     }));
             }
         } 
+         private RelayCommandParametr loadedCommand;
+        public RelayCommandParametr LoadedCommand
+        {
+            get
+            {
+                return loadedCommand
+                    ?? (loadedCommand = new RelayCommandParametr(
+                    (obj) =>
+                    {
+                        videos = new ObservableCollection<Video>(context.Videos.GetAll());
+                    }));
+            }
+        } 
+
         #endregion
 
         #region ctor
         public WatchingViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
-            Videos.Add(new Video("Video1","FunnyVideos", "/Assets/camera.jpg",new User("Anton","Login","pasww"),null));
-            Videos.Add(new Video("Video2","FunnyVideos", "/Assets/camera.jpg",new User("Anton","Login","pasww"),null));
-            Videos.Add(new Video("Video3","FunnyVideos", "/Assets/camera.jpg",new User("Anton","Login","pasww"),null));
-            Videos.Add(new Video("Video4","FunnyVideos", "/Assets/camera.jpg",new User("Anton","Login","pasww"), null));
-            Videos.Add(new Video("Video5","FunnyVideos", "/Assets/camera.jpg", new User("Anton", "Login", "pasww"), null));
+            videos = new ObservableCollection<Video>(context.Videos.GetAll());
         }
         #endregion
     }

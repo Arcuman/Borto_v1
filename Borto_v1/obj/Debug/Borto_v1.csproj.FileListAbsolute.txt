@@ -96,8 +96,6 @@ D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\EntityFramew
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\EntityFramework.SqlServer.dll
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\EntityFramework.xml
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\EntityFramework.SqlServer.xml
-D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Borto_v1.Migrations.InitialCreate.resources
-D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Borto_v1.Migrations.Test1.resources
 D:\Borto\Borto_v1\Borto_v1\bin\Debug\Borto_v1.exe.config
 D:\Borto\Borto_v1\Borto_v1\bin\Debug\Borto_v1.exe
 D:\Borto\Borto_v1\Borto_v1\bin\Debug\Borto_v1.pdb
@@ -176,3 +174,30 @@ D:\Borto\Borto_v1\Borto_v1\obj\Debug\Borto_v1.csproj.CoreCompileInputs.cache
 D:\Borto\Borto_v1\Borto_v1\obj\Debug\Borto_v1.csproj.CopyComplete
 D:\Borto\Borto_v1\Borto_v1\obj\Debug\Borto_v1.exe
 D:\Borto\Borto_v1\Borto_v1\obj\Debug\Borto_v1.pdb
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Azure.Core.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Azure.Storage.Blobs.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Azure.Storage.Common.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Microsoft.Azure.KeyVault.Core.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Microsoft.WindowsAzure.Storage.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Newtonsoft.Json.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\System.Buffers.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\System.Memory.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\System.Numerics.Vectors.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Azure.Core.xml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Azure.Storage.Blobs.xml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Azure.Storage.Common.xml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Microsoft.Azure.KeyVault.Core.xml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Microsoft.WindowsAzure.Storage.pdb
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Microsoft.WindowsAzure.Storage.xml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Newtonsoft.Json.xml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\System.Buffers.xml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\System.Memory.xml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\System.Numerics.Vectors.xml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\System.Threading.Tasks.Extensions.xml
