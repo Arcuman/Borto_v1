@@ -5,6 +5,13 @@ VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Borto_v1", "Borto_v1\Borto_v1.csproj", "{881A01CB-A987-4D7E-A4EA-54FCD874EA41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BortoWeb", "BortoWeb\BortoWeb.csproj", "{E856F1C4-F4FA-4675-9ED8-F2AA7AACFA06}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{971450A8-724D-4EF5-9428-2072948F6BAD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E856F1C4-F4FA-4675-9ED8-F2AA7AACFA06} = {E856F1C4-F4FA-4675-9ED8-F2AA7AACFA06}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +22,14 @@ Global
 		{881A01CB-A987-4D7E-A4EA-54FCD874EA41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{881A01CB-A987-4D7E-A4EA-54FCD874EA41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{881A01CB-A987-4D7E-A4EA-54FCD874EA41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E856F1C4-F4FA-4675-9ED8-F2AA7AACFA06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E856F1C4-F4FA-4675-9ED8-F2AA7AACFA06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E856F1C4-F4FA-4675-9ED8-F2AA7AACFA06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E856F1C4-F4FA-4675-9ED8-F2AA7AACFA06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{971450A8-724D-4EF5-9428-2072948F6BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{971450A8-724D-4EF5-9428-2072948F6BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{971450A8-724D-4EF5-9428-2072948F6BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{971450A8-724D-4EF5-9428-2072948F6BAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
