@@ -8,6 +8,7 @@
       mc:Ignorable="d" 
        d:DesignHeight="600" d:DesignWidth="1060"
       Title="UploadPage"
+      Unloaded="UploadPage_Unloaded"
       DataContext="{Binding UploadViewModel, Source={StaticResource Locator}}">
 
     <Grid Background="{StaticResource ForegroundColorLight}">

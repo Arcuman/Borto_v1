@@ -133,11 +133,7 @@ namespace Borto_v1
                     () =>
                     {
                         Messenger.Default.Send<NotificationMessage>(new NotificationMessage(this, "ChooseImage"));
-                        if (PathImage != null)
-                        {
-
-                           
-                        }
+                       
                     }));
             }
         }
@@ -174,7 +170,9 @@ namespace Borto_v1
 
                             maxDuration = Video.GetMaxDuration(PathVideo);
 
-                            serverfilepath = context.Videos.UploadBlobsInChunks(PathVideo, Name);
+                            AzureHelper helper = new AzureHelper();
+
+                            serverfilepath = helper.UploadBlobsInChunks(PathVideo, Name);
 
                             user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
 

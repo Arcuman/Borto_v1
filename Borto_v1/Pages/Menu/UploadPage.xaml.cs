@@ -51,5 +51,10 @@ namespace Borto_v1
                   }
               });
         }
+
+        private void UploadPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Unregister(this);
+        }
     }
 }

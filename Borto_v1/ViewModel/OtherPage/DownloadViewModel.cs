@@ -1,8 +1,10 @@
 ﻿
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +21,7 @@ namespace Borto_v1
 
         private Video video { get; set; }
 
+        private string pathFolder;
         #endregion
 
         #region Public members
@@ -39,23 +42,65 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
-        #endregion
-
-        #region Commands
-        private RelayCommand _uploadpageCommand;
-        public RelayCommand UploadPageCommand
+        
+        public string PathFolder
         {
             get
             {
-                return _uploadpageCommand
-                    ?? (_uploadpageCommand = new RelayCommand(
+                return pathFolder;
+            }
+            set
+            {
+                if (pathFolder == value)
+                {
+                    return;
+                }
+                pathFolder = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        #region Commands
+        private RelayCommand chooseFolderToSaveVideo;
+        public RelayCommand ChooseFolderToSaveVideo
+        {
+            get
+            {
+                return chooseFolderToSaveVideo
+                    ?? (chooseFolderToSaveVideo = new RelayCommand(
                     () =>
                     {
-                        
-                        MessageBox.Show(_navigationService.Parameter.ToString());
+                        Messenger.Default.Send<NotificationMessage>(new NotificationMessage(this, "ChooseFolder"));
                     }));
             }
         }   
+        private RelayCommand downloadVideoCommand;
+        public RelayCommand DownloadVideoCommand
+        {
+            get
+            {
+                return downloadVideoCommand
+                    ?? (downloadVideoCommand = new RelayCommand(
+                    () =>
+                    {
+                        AzureHelper helper = new AzureHelper();
+                        string NameToSave = Video.Name;
+                        if (!string.IsNullOrWhiteSpace(PathFolder))
+                        {
+                            string[] files = Directory.GetFiles(PathFolder);
+                            foreach (var file in files)
+                            {
+                                string filename = file.Substring(file.LastIndexOf('\\') + 1);
+                                if (filename == (Video.Name + ".mp4"))
+                                    NameToSave += Guid.NewGuid().ToString("N");
+                            }
+                        }
+                        helper.download_FromBlob(Video.Path, NameToSave, PathFolder);
+                    }));
+            }
+        }   
+
         private RelayCommand _loadedpageCommand;
         public RelayCommand LoadedPageCommand
         {

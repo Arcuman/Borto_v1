@@ -28,6 +28,9 @@ namespace Borto_v1
 
         public byte[] Image { get; set; }
 
+        /// <summary>
+        /// Path to the Video on Azure (Name + uniq)
+        /// </summary>
         public string Path { get; set; }
 
         public double MaxDuration { get; set; }

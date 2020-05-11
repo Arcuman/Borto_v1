@@ -7,6 +7,7 @@
        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
        d:DesignHeight="600" d:DesignWidth="1060"
+      Unloaded="DownloadPage_Unloaded"
       DataContext="{Binding DownloadViewModel, Source={StaticResource Locator}}"
       Title="DownloadPage">
     <i:Interaction.Triggers>
@@ -31,9 +32,8 @@
         
             <Border  Grid.Row="1" HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Background="{StaticResource BackgroundLightBlueBrush}"
                 Width="350" 
-                Height="450"
+                Height="Auto"
                 Margin="60 0"
                 CornerRadius="5">
             <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth3"
@@ -63,8 +63,21 @@
                             <ImageBrush ImageSource="{Binding Video.Image}"/>
                         </Border.Background>
                     </Border>
-                    <Button Content="Download" Foreground="{StaticResource ForegroundColorLight}" Margin="50 "/>
-                </StackPanel>
+                    <StackPanel  Margin="20 0">
+                    <TextBlock HorizontalAlignment="Center" 
+                               Name="pathFolder"
+                               TextTrimming="WordEllipsis" 
+                               Text="{Binding PathFolder,Mode=TwoWay}" FontSize="20" 
+                               Foreground="{StaticResource ForegroundColorLight}"/>
+                        <Button Width="100" Height="30" Content="Choose"
+                                Margin="20 10"
+                                Command="{Binding ChooseFolderToSaveVideo}"
+                                Foreground="{StaticResource ForegroundColorLight}"/>
+                    </StackPanel>
+                    <Button Content="Download"
+                            Command="{Binding DownloadVideoCommand}"
+                            Foreground="{StaticResource ForegroundColorLight}" Margin="20 20 20 20 "/>
+                  </StackPanel>
             </materialDesign:ColorZone>
         </Border>
     </Grid>
