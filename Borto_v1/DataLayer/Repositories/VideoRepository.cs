@@ -1,14 +1,8 @@
-﻿using Azure.Storage.Blobs;
-using Azure.Storage.Blobs.Models;
-using Azure.Storage.Blobs.Specialized;
+﻿
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Borto_v1
 {
@@ -37,6 +31,10 @@ namespace Borto_v1
         {
             return db.Videos.Where(predicate).ToList();
         }
+        public IEnumerable<Video> FindByUserId(int UserId)
+        {
+            return db.Set<Video>().AsNoTracking().Where(c => c.UserId == UserId).ToList();
+        }
 
         public Video Get(int id)
         {
@@ -45,7 +43,7 @@ namespace Borto_v1
 
         public IEnumerable<Video> GetAll()
         {
-            return db.Videos.Include(c => c.User);
+            return db.Videos.AsNoTracking().Include(c => c.User).ToList();
         }
 
         public void Update(Video item)

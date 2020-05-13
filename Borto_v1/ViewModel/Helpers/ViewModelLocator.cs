@@ -1,11 +1,6 @@
-﻿using Borto_v1;
-using CommonServiceLocator;
+﻿using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Borto_v1
 {
@@ -19,8 +14,8 @@ namespace Borto_v1
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DownloadViewModel>();
             SimpleIoc.Default.Register<UploadViewModel>();
-            SimpleIoc.Default.Register<WatchingViewModel>();
             SimpleIoc.Default.Register<VideoWatchingPageViewModel>();
+            SimpleIoc.Default.Register<AccountViewModel>();
             SimpleIoc.Default.Register<LoginWindowViewModel>();
             SetupNavigation();
         }
@@ -65,13 +60,6 @@ namespace Borto_v1
             get
             {
                 return ServiceLocator.Current.GetInstance<UploadViewModel>();
-            }
-        }
-        public WatchingViewModel WatchingViewModel
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<WatchingViewModel>();
             }
         }
         public AccountViewModel AccountViewModel

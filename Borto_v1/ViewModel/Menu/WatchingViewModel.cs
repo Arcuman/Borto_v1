@@ -1,16 +1,12 @@
 ﻿
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Borto_v1
 {
-   public class WatchingViewModel : ViewModelBase
+
+    public class WatchingViewModel : ViewModelBase,IDisposable
     {
         #region Private members 
         EFUnitOfWork context = new EFUnitOfWork();
@@ -74,6 +70,20 @@ namespace Borto_v1
                     }));
             }
         }
+        private RelayCommandParametr unloadedCommand;
+        public RelayCommandParametr UnloadedCommand
+        {
+            get
+            {
+                return unloadedCommand
+                    ?? (unloadedCommand = new RelayCommandParametr(
+                    obj =>
+                    {
+                        this.Dispose();
+                        videos = null;
+                    }));
+            }
+        }
         private RelayCommandParametr _viewWatchingPageCommand;
         public RelayCommandParametr ViewWatchingPageCommand
         {
@@ -88,20 +98,6 @@ namespace Borto_v1
                     }));
             }
         } 
-         private RelayCommandParametr loadedCommand;
-        public RelayCommandParametr LoadedCommand
-        {
-            get
-            {
-                return loadedCommand
-                    ?? (loadedCommand = new RelayCommandParametr(
-                    (obj) =>
-                    {
-                        videos = new ObservableCollection<Video>(context.Videos.GetAll());
-                    }));
-            }
-        } 
-
         #endregion
 
         #region ctor
@@ -109,6 +105,13 @@ namespace Borto_v1
         {
             _navigationService = navigationService;
             videos = new ObservableCollection<Video>(context.Videos.GetAll());
+        }
+
+        public void Dispose()
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            context.Dispose();
         }
         #endregion
     }

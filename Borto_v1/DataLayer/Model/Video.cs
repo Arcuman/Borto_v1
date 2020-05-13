@@ -1,13 +1,8 @@
 ﻿using MediaToolkit;
 using MediaToolkit.Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace Borto_v1
@@ -20,12 +15,6 @@ namespace Borto_v1
 
         public string Description { get; set; }
 
-        [NotMapped]
-        public BitmapImage Bitmap { 
-            get {
-                return BitMapToByteArray(Image); }
-             }
-
         public byte[] Image { get; set; }
 
         /// <summary>
@@ -36,6 +25,8 @@ namespace Borto_v1
         public double MaxDuration { get; set; }
 
         public DateTime UploadDate { get; set; }
+        [ForeignKey("User")]
+        public int UserId { get; set; }
 
         public User User { get; set; }
 
@@ -55,7 +46,7 @@ namespace Borto_v1
             Name = name;
             Description = description;
             Image = image;
-            User = user;
+            UserId = user.IdUser;
             Path = path;
             MaxDuration = maxDuration;
             UploadDate = DateTime.Now;
@@ -95,23 +86,6 @@ namespace Borto_v1
                 data = ms.ToArray();
             }
             return data;
-        }
-        /// <summary>
-        /// Convert Array to BitMapImage Array via MemoryStream
-        /// </summary>
-        /// <param name="image"></param>
-        /// <returns></returns>
-        public static BitmapImage BitMapToByteArray(byte[] array)
-        {
-            using (var ms = new MemoryStream(array))
-            {
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad; // here
-                image.StreamSource = ms;
-                image.EndInit();
-                return image;
-            }
         }
 
         #endregion

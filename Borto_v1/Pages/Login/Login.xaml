@@ -9,8 +9,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Login"
       Name="Login_Haha"
-      Height="470" Width="380"
-      DataContext="{Binding LoginViewModel}">
+      Height="470" Width="380">
     <Page.Resources>
         <local:ParametrizedBooleanToVisibilityConverter x:Key="ParametrizedBooleanToVisibilityConverter"/>
     </Page.Resources>
@@ -63,9 +62,6 @@ OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:
                                     </Style>
                                 </PasswordBox.Style>
                             </PasswordBox>
-                            <Grid Margin="20 0">
-                                <CheckBox Content="Remember me" HorizontalAlignment="Left"/>
-                            </Grid>
                             <StackPanel>
                                 <ProgressBar 
                                 Visibility="{Binding IsVisibleProgressBar,

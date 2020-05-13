@@ -9,12 +9,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1060"
       Title="WatchingPage"
-      DataContext="{Binding WatchingViewModel, Source={StaticResource Locator}}"
-      
       >
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedCommand, Mode=OneWay}" />
+        <i:EventTrigger EventName="Unloaded">
+            <i:InvokeCommandAction Command="{Binding UnloadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid Background="{StaticResource ForegroundColorLight}" >
@@ -40,17 +38,17 @@ OpeningEffect="{materialDesign:TransitionEffect FadeIn, Duration=0:0:1}">
                             <Border   Name="border" Margin="50 10 50 10" Width="310" Height="260">
                                 <StackPanel >
                                     <Border  Width="300" Height="200" CornerRadius="5" Margin="5">
-                                        <Border.Effect>
-                                            <DropShadowEffect ShadowDepth="5"/>
-                                        </Border.Effect>
-                                        <Border.Background>
-                                        <ImageBrush ImageSource="{Binding Bitmap}"/>
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="5"/>
+                                    </Border.Effect>
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding Image, Mode=OneTime}"/>
                                         </Border.Background>
                                     </Border>
                                     <Grid>
                                         <StackPanel>
-                                            <TextBlock Margin="5" Text="{Binding Name}" FontSize="14" FontFamily="Franklin Gothic Medium" />
-                                        <TextBlock Margin="5 0" Text="{Binding User.Name}" FontSize="13" />
+                                            <TextBlock Margin="5" Text="{Binding Name, Mode=OneTime}" FontSize="14" FontFamily="Franklin Gothic Medium" />
+                                        <TextBlock Margin="5 0" Text="{Binding User.NickName, Mode=OneTime}" FontSize="13" />
                                         </StackPanel>
                                         <Button  HorizontalAlignment="Right" Margin="0 0 10 0"
                                         Command="{Binding ElementName= ListViewProduct,Path=DataContext.DownloadPageCommand}" 

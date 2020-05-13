@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 
 namespace Borto_v1
 {
@@ -45,7 +44,14 @@ namespace Borto_v1
 
         public void Update(User item)
         {
-            db.Entry(item).State = EntityState.Modified;
+            try
+            {
+                db.Entry(item).State = EntityState.Modified;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>

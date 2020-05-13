@@ -4,12 +4,16 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Borto_v1"
-       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
        d:DesignHeight="600" d:DesignWidth="1060"
       Unloaded="DownloadPage_Unloaded"
       DataContext="{Binding DownloadViewModel, Source={StaticResource Locator}}"
       Title="DownloadPage">
+    <Page.Resources>
+        <local:ParametrizedBooleanToVisibilityConverter x:Key="ParametrizedBooleanToVisibilityConverter"/>
+    </Page.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedPageCommand}" />
@@ -66,7 +70,7 @@
                     <StackPanel  Margin="20 0">
                     <TextBlock HorizontalAlignment="Center" 
                                Name="pathFolder"
-                               TextTrimming="WordEllipsis" 
+                               TextWrapping="Wrap"
                                Text="{Binding PathFolder,Mode=TwoWay}" FontSize="20" 
                                Foreground="{StaticResource ForegroundColorLight}"/>
                         <Button Width="100" Height="30" Content="Choose"
@@ -74,10 +78,24 @@
                                 Command="{Binding ChooseFolderToSaveVideo}"
                                 Foreground="{StaticResource ForegroundColorLight}"/>
                     </StackPanel>
-                    <Button Content="Download"
+                    <StackPanel >
+                        <ProgressBar 
+                                Visibility="{Binding IsVisibleProgressBar,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    FallbackValue=Collapsed}"
+                                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                Value="35" 
+                                Margin="20 20 20 10"
+                                IsIndeterminate="{Binding IsVisibleProgressBar}" />
+                        <Button Content="Download"
+                            Visibility="{Binding IsVisibleProgressBar,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    ConverterParameter=False}"
+                        
                             Command="{Binding DownloadVideoCommand}"
                             Foreground="{StaticResource ForegroundColorLight}" Margin="20 20 20 20 "/>
-                  </StackPanel>
+                    </StackPanel>
+                </StackPanel>
             </materialDesign:ColorZone>
         </Border>
     </Grid>

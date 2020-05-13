@@ -3,16 +3,12 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Threading;
 
 namespace Borto_v1
 {
-    public class DownloadViewModel: ViewModelBase
+    public class DownloadViewModel : ViewModelBase
     {
 
         #region Private members
@@ -22,6 +18,8 @@ namespace Borto_v1
         private Video video { get; set; }
 
         private string pathFolder;
+
+        private bool isVisibleProgressBar;
         #endregion
 
         #region Public members
@@ -42,7 +40,7 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
-        
+
         public string PathFolder
         {
             get
@@ -56,6 +54,22 @@ namespace Borto_v1
                     return;
                 }
                 pathFolder = value;
+                RaisePropertyChanged();
+            }
+        }
+        public bool IsVisibleProgressBar
+        {
+            get
+            {
+                return isVisibleProgressBar;
+            }
+            set
+            {
+                if (isVisibleProgressBar == value)
+                {
+                    return;
+                }
+                isVisibleProgressBar = value;
                 RaisePropertyChanged();
             }
         }
@@ -74,32 +88,39 @@ namespace Borto_v1
                         Messenger.Default.Send<NotificationMessage>(new NotificationMessage(this, "ChooseFolder"));
                     }));
             }
-        }   
-        private RelayCommand downloadVideoCommand;
-        public RelayCommand DownloadVideoCommand
+        }
+        private RelayCommandParametr downloadVideoCommand;
+        public RelayCommandParametr DownloadVideoCommand
         {
             get
             {
                 return downloadVideoCommand
-                    ?? (downloadVideoCommand = new RelayCommand(
-                    () =>
+                    ?? (downloadVideoCommand = new RelayCommandParametr(
+                    (obj) =>
                     {
-                        AzureHelper helper = new AzureHelper();
-                        string NameToSave = Video.Name;
-                        if (!string.IsNullOrWhiteSpace(PathFolder))
+                        IsVisibleProgressBar = true;
+                        ThreadPool.QueueUserWorkItem(
+                        (o) =>
                         {
-                            string[] files = Directory.GetFiles(PathFolder);
-                            foreach (var file in files)
+                            AzureHelper helper = new AzureHelper();
+                            string NameToSave = Video.Name;
+                            if (!string.IsNullOrWhiteSpace(PathFolder))
                             {
-                                string filename = file.Substring(file.LastIndexOf('\\') + 1);
-                                if (filename == (Video.Name + ".mp4"))
-                                    NameToSave += Guid.NewGuid().ToString("N");
+                                string[] files = Directory.GetFiles(PathFolder);
+                                foreach (var file in files)
+                                {
+                                    string filename = file.Substring(file.LastIndexOf('\\') + 1);
+                                    if (filename == (Video.Name + ".mp4"))
+                                        NameToSave += Guid.NewGuid().ToString("N");
+                                }
                             }
-                        }
-                        helper.download_FromBlob(Video.Path, NameToSave, PathFolder);
-                    }));
+                            helper.download_FromBlob(Video.Path, NameToSave, PathFolder);
+                            IsVisibleProgressBar = false;
+                        });
+                    },
+                    (x)=> !String.IsNullOrWhiteSpace(PathFolder)));
             }
-        }   
+        }
 
         private RelayCommand _loadedpageCommand;
         public RelayCommand LoadedPageCommand
@@ -110,7 +131,8 @@ namespace Borto_v1
                     ?? (_loadedpageCommand = new RelayCommand(
                     () =>
                     {
-                        Video = _navigationService.Parameter as Video;
+                        if (isVisibleProgressBar == false)
+                            Video = _navigationService.Parameter as Video;
                     }));
             }
         }

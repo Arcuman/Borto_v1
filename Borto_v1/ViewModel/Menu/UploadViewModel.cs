@@ -1,18 +1,10 @@
 ﻿
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Threading;
 using System.Windows.Media.Imaging;
 
 namespace Borto_v1
@@ -30,8 +22,6 @@ namespace Borto_v1
 
         private string description;
 
-        private BitmapImage pathImage;   
-
         private string pathVideo;
 
         /// <summary>
@@ -46,23 +36,26 @@ namespace Borto_v1
         /// image for the store in database
         /// </summary>
         private byte[] image;
+
+        private bool isVisibleProgressBar;
+
         #endregion
 
         #region Public members
-        public BitmapImage PathImage
+        public byte[] Image
         {
             get
             {
-                return pathImage;
+                return image;
             }
             set
             {
-                if (pathImage == value)
+                if (image == value)
                 {
                     return;
                 }
 
-                pathImage = value;
+                image = value;
                 RaisePropertyChanged();
             }
         }
@@ -117,72 +110,95 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
-
+        public bool IsVisibleProgressBar
+        {
+            get
+            {
+                return isVisibleProgressBar;
+            }
+            set
+            {
+                if (isVisibleProgressBar == value)
+                {
+                    return;
+                }
+                isVisibleProgressBar = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region Commands
-        private RelayCommand _setPathtoImageCommand;
-        public RelayCommand SetPathtoImageCommand
+        private RelayCommandParametr _setPathtoImageCommand;
+        public RelayCommandParametr SetPathtoImageCommand
         {
             get
             {
                 
 
                 return _setPathtoImageCommand
-                    ?? (_setPathtoImageCommand = new RelayCommand(
-                    () =>
+                    ?? (_setPathtoImageCommand = new RelayCommandParametr(
+                    (o) =>
                     {
                         Messenger.Default.Send<NotificationMessage>(new NotificationMessage(this, "ChooseImage"));
-                       
-                    }));
+
+                    },
+                    (x) => IsVisibleProgressBar == false));
             }
         }
-        private RelayCommand _setPathtoVideoCommand;
-        public RelayCommand SetPathtoVideoCommand
+        private RelayCommandParametr _setPathtoVideoCommand;
+        public RelayCommandParametr SetPathtoVideoCommand
         {
             get
             {
                 
 
                 return _setPathtoVideoCommand
-                    ?? (_setPathtoVideoCommand = new RelayCommand(
-                    () =>
+                    ?? (_setPathtoVideoCommand = new RelayCommandParametr(
+                    (o) =>
                     {
                         Messenger.Default.Send<NotificationMessage>(new NotificationMessage(this, "ChooseVideo"));
-                        
-                    }));
+
+                    },
+                    (x) => IsVisibleProgressBar == false));
             }
         }
 
-        private RelayCommand uploadCommand;
-        public RelayCommand UploadCommand
+        private RelayCommandParametr uploadCommand;
+        public RelayCommandParametr UploadCommand
         {
             get
             {
                 return uploadCommand
-                    ?? (uploadCommand = new RelayCommand(
-                    () =>
+                    ?? (uploadCommand = new RelayCommandParametr(
+                    (obj) =>
                     {
                         if (PathVideo != "Choose Video" && !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(Description))
                         {
+                            IsVisibleProgressBar = true;
+                            ThreadPool.QueueUserWorkItem(
+                            (o) =>
+                            {
+                                maxDuration = Video.GetMaxDuration(PathVideo);
 
-                            image = Video.BitMapToByteArray(PathImage);
+                                AzureHelper helper = new AzureHelper();
 
-                            maxDuration = Video.GetMaxDuration(PathVideo);
+                                serverfilepath = helper.upload_ToBlob(PathVideo, Name);
 
-                            AzureHelper helper = new AzureHelper();
+                                user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
 
-                            serverfilepath = helper.UploadBlobsInChunks(PathVideo, Name);
+                                Video video = new Video(Name, Description, image, user, serverfilepath, maxDuration);
 
-                            user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
+                                context.Videos.Create(video);
 
-                            Video video = new Video(Name, Description, image, user, serverfilepath, maxDuration);
+                                context.Save();
 
-                            context.Videos.Create(video);
+                            });
 
-                            context.Save();
+                            IsVisibleProgressBar = false;
                         }
-                    }));
+                    },
+                    (x)=> !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(PathVideo)));
             }
         }
 
@@ -191,8 +207,18 @@ namespace Borto_v1
         public UploadViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
-            PathImage = new BitmapImage(new Uri("/Assets/camera.jpg",UriKind.RelativeOrAbsolute));
-            PathVideo = "Choose Video";
+            if (!IsVisibleProgressBar)
+            {
+                Image img = System.Drawing.Image.FromFile(new Uri("../../Assets/camera.jpg", UriKind.RelativeOrAbsolute).OriginalString);
+
+                image = (byte[])(new ImageConverter()).ConvertTo(img, typeof(byte[]));
+
+                PathVideo = "Choose Video";
+
+                Name = String.Empty;
+
+                Description = String.Empty;
+            }
         }
         #endregion
     }

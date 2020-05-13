@@ -5,10 +5,7 @@ using GalaSoft.MvvmLight.Messaging;
 using MediaToolkit;
 using MediaToolkit.Model;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Borto_v1
 {
@@ -78,15 +75,7 @@ namespace Borto_v1
                     return;
                 }
                 selectedVideo = value;
-                string temp = selectedVideo.OriginalString.Split('\\').Last();
-                isClickable = true;
-                Name = selectedVideo.OriginalString.Substring(selectedVideo.OriginalString.LastIndexOf('\\') + 1);
-                var inputFile = new MediaFile {Filename = selectedVideo.OriginalString };
-                using (var engine = new Engine())
-                {
-                    engine.GetMetadata(inputFile);            
-                }
-                MaxDuration = inputFile.Metadata.Duration.TotalSeconds;
+               
                 RaisePropertyChanged();
             }
         }
@@ -174,6 +163,15 @@ namespace Borto_v1
                     () =>
                     {
                         Messenger.Default.Send<NotificationMessage>(new NotificationMessage(this,"Choose"));
+                        string temp = selectedVideo.OriginalString.Split('\\').Last();
+                        isClickable = true;
+                        Name = selectedVideo.OriginalString.Substring(selectedVideo.OriginalString.LastIndexOf('\\') + 1);
+                        var inputFile = new MediaFile { Filename = selectedVideo.OriginalString };
+                        using (var engine = new Engine())
+                        {
+                            engine.GetMetadata(inputFile);
+                        }
+                        MaxDuration = inputFile.Metadata.Duration.TotalSeconds;
                     }));
             }
         }

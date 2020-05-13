@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Borto_v1
 {
@@ -54,8 +50,11 @@ namespace Borto_v1
 
         public void Dispose()
         {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
             Dispose(true);
-            GC.SuppressFinalize(this);
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
     }

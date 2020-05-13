@@ -3,13 +3,10 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
+using System.Drawing;
+using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace Borto_v1
 {
@@ -26,6 +23,8 @@ namespace Borto_v1
         private string login;
 
         private string password;
+
+        private byte[] image;
 
         private string message;
         /// <summary>
@@ -210,7 +209,7 @@ namespace Borto_v1
                     ?? (_registerCommand = new RelayCommandParametr(
                     (x) =>
                     {
-                        
+
                         IsVisibleProgressBar = true;
                         ThreadPool.QueueUserWorkItem(
                             o =>
@@ -225,7 +224,7 @@ namespace Borto_v1
                                 else if (Login != null && Password != null && Name != null)
                                 {
                                     string hashPass = User.getHash(Password);
-                                    User user = new User(Name, Login, hashPass);
+                                    User user = new User(Name,Login,Name, hashPass, image);
                                     context.Users.Create(user);
                                     context.Save();
                                     DispatcherHelper.CheckBeginInvokeOnUI(
@@ -258,6 +257,9 @@ namespace Borto_v1
             _navigationService = navigationService;
             IsVisibleProgressBar = false;
             IsCheck = false;
+            Image img = System.Drawing.Image.FromFile(new Uri("../../Assets/camera.jpg", UriKind.RelativeOrAbsolute).OriginalString);
+
+            image = (byte[])(new ImageConverter()).ConvertTo(img, typeof(byte[]));
         }
 
         #endregion

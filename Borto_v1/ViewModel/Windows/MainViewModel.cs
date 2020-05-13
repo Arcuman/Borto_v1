@@ -1,13 +1,6 @@
 ﻿
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
-using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Borto_v1
 {
@@ -15,8 +8,14 @@ namespace Borto_v1
     {
         #region Private Members
         private User user;
+
+        private string test;
+
         private IFrameNavigationService _navigationService;
 
+        private bool isOpenDialog;
+
+        private string message;
         #endregion
 
         #region Public members
@@ -36,6 +35,61 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+        public string Test
+        {
+            get
+            {
+                return test;
+            }
+            set
+            {
+                if (test == value)
+                {
+                    return;
+                }
+                test = value;
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
+        /// Is Open Dialog 
+        /// </summary>
+        public bool IsOpenDialog
+        {
+            get
+            {
+                return isOpenDialog;
+            }
+            set
+            {
+                if (isOpenDialog == value)
+                {
+                    return;
+                }
+                isOpenDialog = value;
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
+        /// Message for the dialog  
+        /// </summary>
+        public string Message
+        {
+            get
+            {
+                return message;
+            }
+            set
+            {
+                if (message == value)
+                {
+                    return;
+                }
+                message = value;
+                RaisePropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -128,6 +182,19 @@ namespace Borto_v1
                     () =>
                     {
                         _navigationService.NavigateTo("Player");
+                    }));
+            }
+        }
+        private RelayCommand closeDialodCommand;
+        public RelayCommand CloseDialodCommand
+        {
+            get
+            {
+                return closeDialodCommand
+                    ?? (closeDialodCommand = new RelayCommand(
+                    () =>
+                    {
+                        IsOpenDialog = false;
                     }));
             }
         }
