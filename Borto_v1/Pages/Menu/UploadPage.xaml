@@ -14,7 +14,7 @@
         <local:ParametrizedBooleanToVisibilityConverter x:Key="ParametrizedBooleanToVisibilityConverter"/>
         <local:ByteToBitmapImageConverter x:Key="ByteToBitmapImageConverter"/>
     </Page.Resources>
-    <Grid Background="{StaticResource ForegroundColorLight}">
+    <Grid Background="#f0f8ff">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

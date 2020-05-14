@@ -8,7 +8,7 @@ namespace Borto_v1
 {
     public class VideoRepository : IRepository<Video>
     {
-        private PlayerContext db;
+        private  PlayerContext db;
 
         public VideoRepository(PlayerContext context)
         {

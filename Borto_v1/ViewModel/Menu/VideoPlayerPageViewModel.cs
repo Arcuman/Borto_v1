@@ -163,15 +163,18 @@ namespace Borto_v1
                     () =>
                     {
                         Messenger.Default.Send<NotificationMessage>(new NotificationMessage(this,"Choose"));
-                        string temp = selectedVideo.OriginalString.Split('\\').Last();
-                        isClickable = true;
-                        Name = selectedVideo.OriginalString.Substring(selectedVideo.OriginalString.LastIndexOf('\\') + 1);
-                        var inputFile = new MediaFile { Filename = selectedVideo.OriginalString };
-                        using (var engine = new Engine())
+                        if (selectedVideo.OriginalString != null)
                         {
-                            engine.GetMetadata(inputFile);
+                            string temp = selectedVideo.OriginalString.Split('\\').Last();
+                            isClickable = true;
+                            Name = selectedVideo.OriginalString.Substring(selectedVideo.OriginalString.LastIndexOf('\\') + 1);
+                            var inputFile = new MediaFile { Filename = selectedVideo.OriginalString };
+                            using (var engine = new Engine())
+                            {
+                                engine.GetMetadata(inputFile);
+                            }
+                            MaxDuration = inputFile.Metadata.Duration.TotalSeconds;
                         }
-                        MaxDuration = inputFile.Metadata.Duration.TotalSeconds;
                     }));
             }
         }

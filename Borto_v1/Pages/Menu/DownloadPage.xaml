@@ -19,7 +19,7 @@
             <i:InvokeCommandAction Command="{Binding LoadedPageCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid Background="{StaticResource ForegroundColorLight}" >
+    <Grid Background="#f0f8ff" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

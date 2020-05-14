@@ -13,8 +13,6 @@ namespace Borto_v1
                 HasColumnName("IdUser").
                 HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).
                 IsRequired();
-
-
         }
 
     }

@@ -10,6 +10,10 @@ namespace Borto_v1
 
         private VideoRepository videoRepository;
 
+        private MarkRepository markRepository;
+
+        private CommentRepostiroty commentRepostiroty;
+
         public UserRepository Users
         {
             get
@@ -26,6 +30,24 @@ namespace Borto_v1
                 if (videoRepository == null)
                     videoRepository = new VideoRepository(db);
                 return videoRepository;
+            }
+        }
+         public MarkRepository Marks
+        {
+            get
+            {
+                if (markRepository == null)
+                    markRepository = new MarkRepository(db);
+                return markRepository;
+            }
+        }
+         public CommentRepostiroty Comments
+        {
+            get
+            {
+                if (commentRepostiroty == null)
+                    commentRepostiroty = new CommentRepostiroty(db);
+                return commentRepostiroty;
             }
         }
 

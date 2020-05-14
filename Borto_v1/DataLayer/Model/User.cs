@@ -22,7 +22,12 @@ namespace Borto_v1
 
         public byte[] Image { get; set; }
 
-        public ObservableCollection<Video> Videos { get; set; }
+        public UserRole Role { get; set; }
+
+        public virtual List<Video> Videos { get; set; }
+
+        public virtual List<Mark> Marks { get; set; }
+
 
         public User()
         { }
@@ -34,6 +39,7 @@ namespace Borto_v1
             Login = login;
             Password = password;
             Image = image;
+            Role = UserRole.User;
         }
 
         public static string getHash(string password)
@@ -48,26 +54,6 @@ namespace Borto_v1
                 var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(password));
                 return Convert.ToBase64String(hash);
             }
-        }
-        /// <summary>
-        /// Convert BitmapImage to byte Array via MemoryStream
-        /// </summary>
-        /// <param name="image"></param>
-        /// <returns></returns>
-        public static byte[] BitMapToByteArray(BitmapImage image)
-        {
-            byte[] data;
-
-            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-
-            encoder.Frames.Add(BitmapFrame.Create(image));
-
-            using (MemoryStream ms = new MemoryStream())
-            {
-                encoder.Save(ms);
-                data = ms.ToArray();
-            }
-            return data;
         }
     }
 }

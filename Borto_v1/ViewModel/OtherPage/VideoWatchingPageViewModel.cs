@@ -1,15 +1,22 @@
 ﻿
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Ioc;
+using System.Linq;
 
 namespace Borto_v1
 {
     public class VideoWatchingPageViewModel : ViewModelBase
     {
         #region Private members
+
+        EFUnitOfWork context = new EFUnitOfWork();
+
         private IFrameNavigationService _navigationService;
 
         private Video video { get; set; }
+
+        private User user;
 
         private byte[] videoImage;
 
@@ -22,6 +29,12 @@ namespace Borto_v1
         private string userName;
 
         private string userNickName;
+
+        private int countPositiveMark;
+
+        private int countNegativeMark;
+
+        private LikeState likeState;
         #endregion
 
         #region Public members
@@ -41,7 +54,7 @@ namespace Borto_v1
                 video = value;
                 RaisePropertyChanged();
             }
-        } 
+        }
         public byte[] UserImage
         {
             get
@@ -138,10 +151,111 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+        public int CountPositiveMark
+        {
+            get
+            {
+                return countPositiveMark;
+            }
+            set
+            {
+                if (countPositiveMark == value)
+                {
+                    return;
+                }
+                countPositiveMark = value;
+                RaisePropertyChanged();
+            }
+        }
+        public int CountNegativeMark
+        {
+            get
+            {
+                return countNegativeMark;
+            }
+            set
+            {
+                if (countNegativeMark == value)
+                {
+                    return;
+                }
+                countNegativeMark = value;
+                RaisePropertyChanged();
+            }
+        }
 
         #endregion
 
         #region Commands 
+
+        private RelayCommandParametr likeVideoCommand;
+        public RelayCommandParametr LikeVideoCommand
+        {
+            get
+            {
+                return likeVideoCommand
+                    ?? (likeVideoCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        if (likeState == LikeState.None)
+                        {
+                            Mark mark = new Mark()
+                            {
+                                VideoId = Video.IdVideo,
+                                UserId = SimpleIoc.Default.GetInstance<MainViewModel>().User.IdUser,
+                                TypeMark = TypeMark.Positive
+                            };
+                            context.Marks.Create(mark);
+                            context.Save();
+                            CountPositiveMark++;
+                            likeState = LikeState.Like;
+                        }
+                        else
+                        {
+                            context.Marks.DeleteByUserId(SimpleIoc.Default.GetInstance<MainViewModel>().User.IdUser, Video.IdVideo);
+                            context.Save();
+                            CountPositiveMark--;
+                            likeState = LikeState.None;
+                        }
+                    },
+                    (x) => 
+                    likeState==LikeState.Like||likeState==LikeState.None));
+            }
+        }
+        private RelayCommandParametr dislikeVideoCommand;
+        public RelayCommandParametr DislikeVideoCommand
+        {
+            get
+            {
+                return dislikeVideoCommand
+                    ?? (dislikeVideoCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        if (likeState == LikeState.None)
+                        {
+                            Mark mark = new Mark()
+                            {
+                                VideoId = Video.IdVideo,
+                                UserId = user.IdUser,
+                                TypeMark = TypeMark.Negative
+                            };
+                            context.Marks.Create(mark);
+                            context.Save();
+                            CountNegativeMark++;
+                            likeState = LikeState.Dislike;
+                        }
+                        else
+                        {
+                            context.Marks.DeleteByUserId(user.IdUser, Video.IdVideo);
+                            context.Save();
+                            CountNegativeMark--;
+                            likeState = LikeState.None;
+                        }
+                    },
+                    (x) =>
+                    likeState == LikeState.Dislike || likeState == LikeState.None));
+            }
+        }
 
         #endregion
 
@@ -150,6 +264,7 @@ namespace Borto_v1
         {
             _navigationService = navigationService;
             Video = navigationService.Parameter as Video;
+            user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
             Initialize();
         }
         #endregion
@@ -170,6 +285,22 @@ namespace Borto_v1
 
             UserImage = Video.User.Image;
 
+            CountNegativeMark = context.Marks.CountMarkByType(TypeMark.Negative, Video.IdVideo);
+
+            CountPositiveMark = context.Marks.CountMarkByType(TypeMark.Positive, Video.IdVideo);
+
+            Mark mark = context.Marks.FindMarkByUserId(user.IdUser, Video.IdVideo);
+            if (mark == null)
+            {
+                likeState = LikeState.None;
+            }
+            else {
+                if (mark.TypeMark == TypeMark.Positive)
+                    likeState = LikeState.Like;
+                else
+                    likeState = LikeState.Dislike;
+            }
+            
         }
 
         #endregion

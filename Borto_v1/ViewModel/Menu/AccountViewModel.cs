@@ -268,6 +268,8 @@ namespace Borto_v1
                             context.Users.Update(User);
                             context.Save();
                             IsVisibleEditPasswrodIcon = true;
+                            OldPassword = string.Empty;
+                            NewPassword = string.Empty;
                         }
                         else {
                             SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Incorrect old password";
@@ -286,6 +288,7 @@ namespace Borto_v1
                     (obj) =>
                     {
                         SelectedVideo = obj as Video;
+                        SelectedVideo.User = user;
                         _navigationService.NavigateTo("VideoWatching", SelectedVideo);
                     }));
             }

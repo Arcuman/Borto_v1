@@ -24,7 +24,7 @@
                     Key="I"
                     /> 
     </Page.InputBindings>
-    <Grid Background="White">
+    <Grid Background="#f0f8ff">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

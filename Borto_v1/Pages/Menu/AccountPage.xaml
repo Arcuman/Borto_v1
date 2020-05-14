@@ -14,7 +14,7 @@
         <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
         <local:ByteToBitmapImageConverter x:Key="ByteToBitmapImageConverter"/>
     </Page.Resources>
-    <Grid Background="{StaticResource ForegroundColorLight}">
+    <Grid Background="#f0f8ff">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -272,7 +272,7 @@
                     <Border Height="Auto" BorderBrush="{StaticResource BackgroundLightBlueBrush}" BorderThickness="1" Margin="3" >
                         <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled"
               PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-                            <ListBox  x:Name="ListViewProduct" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="{StaticResource ForegroundColorLight}" ItemsSource="{Binding Videos}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
+                            <ListBox  x:Name="ListViewProduct" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#f0f8ff" ItemsSource="{Binding Videos}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
                                 <ListBox.ItemTemplate>
                                     <DataTemplate >
                                         <Border   Name="border" Margin="20 5 20 5" Width="160" Height="150">

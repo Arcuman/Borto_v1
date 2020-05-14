@@ -135,10 +135,18 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Business Logic\AzureHelper.cs" />
+    <Compile Include="DataLayer\Configuration\CommentConfiguration.cs" />
+    <Compile Include="DataLayer\Configuration\MarkConfiguration.cs" />
     <Compile Include="DataLayer\Configuration\VideoConfiguration.cs" />
     <Compile Include="DataLayer\Configuration\UserConfiguration.cs" />
+    <Compile Include="DataLayer\Enum\TypeMark.cs" />
+    <Compile Include="DataLayer\Enum\UserRole.cs" />
     <Compile Include="DataLayer\Interfaces\IRepository.cs" />
     <Compile Include="DataLayer\Interfaces\UnitOfWork.cs" />
+    <Compile Include="DataLayer\Model\Comment.cs" />
+    <Compile Include="DataLayer\Model\Mark.cs" />
+    <Compile Include="DataLayer\Repositories\CommentRepostiroty.cs" />
+    <Compile Include="DataLayer\Repositories\MarkRepository.cs" />
     <Compile Include="DataLayer\Repositories\EFUnitOfWork.cs" />
     <Compile Include="DataLayer\Repositories\UserRepository.cs" />
     <Compile Include="DataLayer\Repositories\VideoRepository.cs" />
@@ -149,6 +157,7 @@
     <Compile Include="Helpers\Converters\InverseBooleanConverter.cs" />
     <Compile Include="Helpers\Converters\ParametrizedBooleanToVisibilityConverter.cs" />
     <Compile Include="DataLayer\EF\PlayerContext.cs" />
+    <Compile Include="Helpers\Enum\LikeState.cs" />
     <Compile Include="Helpers\MessageWindow\OpenWindowMessage.cs" />
     <Compile Include="Helpers\Command\RelayCommandParametr.cs" />
     <Compile Include="Helpers\MessageWindow\WindowType.cs" />

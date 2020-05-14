@@ -15,7 +15,7 @@
             <i:InvokeCommandAction Command="{Binding UnloadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid Background="{StaticResource ForegroundColorLight}" >
+    <Grid Background="#f0f8ff" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -32,7 +32,7 @@
             </Grid>
             <materialDesign:TransitioningContent Grid.Row="1" x:Name="TransitioningContentSlide"
 OpeningEffect="{materialDesign:TransitionEffect FadeIn, Duration=0:0:1}">
-                <ListBox    x:Name="ListViewProduct" Background="{StaticResource ForegroundColorLight}" ItemsSource="{Binding Videos}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
+            <ListBox    x:Name="ListViewProduct" Background="#f0f8ff" ItemsSource="{Binding Videos}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
 
                     <ListBox.ItemTemplate>
                         <!-- FIX Ripple-->
