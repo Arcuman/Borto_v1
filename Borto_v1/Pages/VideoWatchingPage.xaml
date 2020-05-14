@@ -7,14 +7,133 @@
       mc:Ignorable="d" 
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DesignHeight="600" d:DesignWidth="1060"
-      DataContext="{Binding VideoWatchingPageViewModel, Source={StaticResource Locator}}"
       Title="VideoWatchingPage">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedPageCommand}" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
-    <Grid Background="White">
-        <TextBlock Text="{Binding Video.Name}"/>
+    <Page.Resources>
+        <local:ParametrizedBooleanToVisibilityConverter x:Key="ParametrizedBooleanToVisibilityConverter"/>
+        <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        <local:ByteToBitmapImageConverter x:Key="ByteToBitmapImageConverter"/>
+    </Page.Resources>
+    <Grid Background="{StaticResource ForegroundColorLight}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="PrimaryMid" >
+            <StackPanel Background="{StaticResource BackgroundLightBlueBrush}" Orientation="Horizontal">
+                <TextBlock 
+                    Text="Video Page" Margin="10" FontSize="22" 
+                    FontWeight="Medium" FontFamily="Franklin Gothic Medium"
+                    Foreground="{StaticResource ForegroundColorLight}"/>
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+              PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.05*"/>
+                    <ColumnDefinition  Width="2*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.ColumnSpan="4">
+                    <TextBlock Height="50" Text="{Binding VideoName}" FontSize="30"
+                               FontWeight="Light" MaxWidth="500"
+                               TextTrimming="CharacterEllipsis"
+                               HorizontalAlignment="Left"
+                               FontFamily="Franklin Gothic Medium" Margin="40 10 0 0"/>
+                </Grid>
+                <Grid Visibility="{Binding IsVisibleEditNameIcon,
+                                        Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
+                      Grid.Column="4" >
+                    <Button  Width="35" Height="35" Padding="0"
+                                        Command="{Binding ChangeNameCommand}"
+                                        >
+                        <materialDesign:PackIcon Width="30" Height="30" Kind="Edit"  Foreground="{StaticResource ForegroundColorLight}"/>
+                    </Button>
+                </Grid>
+                <Border  Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2"
+                         Width="Auto" Height="Auto"
+                         MaxWidth="600" MaxHeight="400" CornerRadius="5" Margin="10 10">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="5"/>
+                    </Border.Effect>
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding VideoImage, Mode=OneTime}"/>
+                    </Border.Background>
+                </Border>
+                
+                <Grid Grid.Row="1" Grid.Column="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Border HorizontalAlignment="Left"  Width="70" Height="70" CornerRadius="35" >
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="5"/>
+                        </Border.Effect>
+                        <Border.Background>
+                            <ImageBrush x:Name="AccountImage" ImageSource="{Binding UserImage,Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}"/>
+                        </Border.Background>
+                    </Border>
+                    <TextBlock FontFamily="Franklin Gothic Medium" 
+                               Grid.Column="1" VerticalAlignment="Center"
+                               Margin="15 0" Text="{Binding UserName}" 
+                               MaxWidth="130"
+                               HorizontalAlignment="Left"
+                               TextTrimming="CharacterEllipsis" FontSize="28"/>
+                    <TextBlock FontFamily="Franklin Gothic Medium"
+                               Grid.Column="2" VerticalAlignment="Center"
+                               Margin="15 0" Text="{Binding UserNickName}" 
+                               MaxWidth="150"
+                               HorizontalAlignment="Left"
+                               TextTrimming="CharacterEllipsis" FontSize="28"/>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Button Margin="15 0"  Width="45" Height="45" Padding="0" 
+                                  Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                        Command="{Binding ChangeNameCommand}"
+                                        >
+                        <materialDesign:PackIcon Width="30" Height="30" Kind="EmoticonHappy"  Foreground="{StaticResource ForegroundColorLight}"/>
+                        </Button>
+                        <TextBlock Text="34" Margin="5 0" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Button   Width="45" Height="45" Padding="0" 
+                                  Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                        Command="{Binding ChangeNameCommand}"
+                                        >
+                        <materialDesign:PackIcon Width="30" Height="30" Kind="EmoticonSad"  Foreground="{StaticResource ForegroundColorLight}"/>
+                        </Button>
+                        <TextBlock Text="34" Margin="5 0" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    
+                </Grid>
+                <Grid Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock FontFamily="Franklin Gothic Medium" Text="Description:" FontSize="30" />
+                    <Border BorderThickness="0 1 0 0" BorderBrush="{StaticResource BackgroundDarkBlueBrush}" Grid.Row="1" MinWidth="400">
+                        <TextBlock 
+                            Text="{Binding VideoDescription}"
+                            TextWrapping="Wrap"  FontSize="20" />
+                    </Border>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

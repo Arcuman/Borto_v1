@@ -72,7 +72,7 @@ namespace Borto_v1
         /// <returns></returns>
         public bool IsUser(string login, string password)
         {
-            User tmp = db.Users.FirstOrDefault(x => x.Login == login && x.Password == password);
+            User tmp = db.Users.AsNoTracking().FirstOrDefault(x => x.Login == login && x.Password == password);
             return tmp != null ? true : false;
         }
         /// <summary>

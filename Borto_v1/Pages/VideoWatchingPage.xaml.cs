@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using GalaSoft.MvvmLight.Ioc;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Borto_v1
 {
@@ -10,6 +12,22 @@ namespace Borto_v1
         public VideoWatchingPage()
         {
             InitializeComponent();
+
+            this.DataContext = new VideoWatchingPageViewModel(SimpleIoc.Default.GetInstance<IFrameNavigationService>());
+        }
+
+        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scrollViewer = (ScrollViewer)sender;
+            if (e.Delta < 0)
+            {
+                scrollViewer.LineRight();
+            }
+            else
+            {
+                scrollViewer.LineLeft();
+            }
+            e.Handled = true;
         }
     }
 }

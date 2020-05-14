@@ -33,6 +33,8 @@ namespace Borto_v1
 
         private ObservableCollection<Video> videos;
 
+        private Video selectedVideo;
+
         #endregion
 
         #region Public Fields
@@ -167,10 +169,39 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
-        string Password { get; set; }
+        public User User
+        {
+            get
+            {
+                return user;
+            }
+            set
+            {
+                if (user == value)
+                {
+                    return;
+                }
+                user = value;
+                RaisePropertyChanged();
+            }
+        }
+        public Video SelectedVideo
+        {
+            get
+            {
+                return selectedVideo;
+            }
+            set
+            {
+                if (selectedVideo == value)
+                {
+                    return;
+                }
 
-        string ConfirmPassword { get; set; }
-
+                selectedVideo = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region Command
@@ -212,11 +243,11 @@ namespace Borto_v1
                     ?? (saveChangeNameCommand = new RelayCommandParametr(
                     (x) =>
                     {
-                        user.Name = Name;
+                        User.Name = Name;
 
-                        user.Image = Image;
-                        user.NickName = NickName;
-                        context.Users.Update(user);
+                        User.Image = Image;
+                        User.NickName = NickName;
+                        context.Users.Update(User);
                         context.Save();
                         IsVisibleEditNameIcon = true;
                     }));
@@ -231,21 +262,34 @@ namespace Borto_v1
                     ?? (saveChangePasswordCommand = new RelayCommandParametr(
                     (x) =>
                     {
-                        if (context.Users.IsUser(user.Login, User.getHash(OldPassword)))
+                        if (context.Users.IsUser(User.Login, User.getHash(OldPassword)))
                         {
                             user.Password = User.getHash(NewPassword);
-                            context.Users.Update(user);
+                            context.Users.Update(User);
                             context.Save();
+                            IsVisibleEditPasswrodIcon = true;
                         }
                         else {
                             SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Incorrect old password";
                             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         }
-                        IsVisibleEditNameIcon = true;
                     }));
             }
         }
-
+        private RelayCommandParametr _viewWatchingPageCommand;
+        public RelayCommandParametr ViewWatchingPageCommand
+        {
+            get
+            {
+                return _viewWatchingPageCommand
+                    ?? (_viewWatchingPageCommand = new RelayCommandParametr(
+                    (obj) =>
+                    {
+                        SelectedVideo = obj as Video;
+                        _navigationService.NavigateTo("VideoWatching", SelectedVideo);
+                    }));
+            }
+        }
         private RelayCommandParametr setPathtoImageCommand;
         public RelayCommandParametr SetPathtoImageCommand
         {
@@ -259,6 +303,37 @@ namespace Borto_v1
                     }));
             }
         }
+        private RelayCommandParametr cancelNameCommand;
+        public RelayCommandParametr CancelNameCommand
+        {
+            get
+            {
+                return cancelNameCommand
+                    ?? (cancelNameCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        Name = User.Name;
+                        NickName = User.NickName;
+                        Image = User.Image;
+                        IsVisibleEditNameIcon = true;
+                    }));
+            }
+        }
+        private RelayCommandParametr cancelPasswordCommand;
+        public RelayCommandParametr CancelPasswordCommand
+        {
+            get
+            {
+                return cancelPasswordCommand
+                    ?? (cancelPasswordCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        OldPassword = string.Empty;
+                        NewPassword = string.Empty;
+                        IsVisibleEditPasswrodIcon = true;
+                    }));
+            }
+        }
 
         #endregion
 
@@ -268,14 +343,14 @@ namespace Borto_v1
         {
             _navigationService = navigationService;
 
-            user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
-            Name = user.Name;
+            User = SimpleIoc.Default.GetInstance<MainViewModel>().User;
+            Name = User.Name;
             
-            Image = user.Image;
+            Image = User.Image;
             
-            NickName = user.NickName;
+            NickName = User.NickName;
             
-            Videos = new ObservableCollection<Video>(context.Videos.FindByUserId(user.IdUser));
+            Videos = new ObservableCollection<Video>(context.Videos.FindByUserId(User.IdUser));
 
             IsVisibleEditNameIcon = true;
 

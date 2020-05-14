@@ -193,9 +193,12 @@ namespace Borto_v1
 
                                 context.Save();
 
+                                IsVisibleProgressBar = false;
+
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Your video upload!";
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             });
 
-                            IsVisibleProgressBar = false;
                         }
                     },
                     (x)=> !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(PathVideo)));

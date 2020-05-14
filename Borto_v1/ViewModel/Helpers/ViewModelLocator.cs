@@ -15,7 +15,6 @@ namespace Borto_v1
             SimpleIoc.Default.Register<DownloadViewModel>();
             SimpleIoc.Default.Register<UploadViewModel>();
             SimpleIoc.Default.Register<VideoWatchingPageViewModel>();
-            SimpleIoc.Default.Register<AccountViewModel>();
             SimpleIoc.Default.Register<LoginWindowViewModel>();
             SetupNavigation();
         }
@@ -60,13 +59,6 @@ namespace Borto_v1
             get
             {
                 return ServiceLocator.Current.GetInstance<UploadViewModel>();
-            }
-        }
-        public AccountViewModel AccountViewModel
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<AccountViewModel>();
             }
         }
         public VideoWatchingPageViewModel VideoWatchingPageViewModel

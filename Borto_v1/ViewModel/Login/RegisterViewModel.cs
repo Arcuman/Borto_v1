@@ -257,7 +257,7 @@ namespace Borto_v1
             _navigationService = navigationService;
             IsVisibleProgressBar = false;
             IsCheck = false;
-            Image img = System.Drawing.Image.FromFile(new Uri("../../Assets/camera.jpg", UriKind.RelativeOrAbsolute).OriginalString);
+            Image img = System.Drawing.Image.FromFile(new Uri("../../Assets/default_user.png", UriKind.RelativeOrAbsolute).OriginalString);
 
             image = (byte[])(new ImageConverter()).ConvertTo(img, typeof(byte[]));
         }

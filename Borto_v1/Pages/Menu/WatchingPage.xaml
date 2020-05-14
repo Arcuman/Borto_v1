@@ -24,7 +24,9 @@
                 <materialDesign:ColorZone Height="50" materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" DockPanel.Dock="Top">
                     <StackPanel  Background="{StaticResource BackgroundLightBlueBrush}" Orientation="Horizontal">
-                        <TextBlock  Text="Watch the video" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
+                        <TextBlock  Text="Watch the video" Margin="10" 
+                                    FontFamily="Franklin Gothic Medium"
+                                    FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
                     </StackPanel>
                 </materialDesign:ColorZone>
             </Grid>
