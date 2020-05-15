@@ -29,7 +29,7 @@
 OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:1}">
 
                 <Grid Width="300" Height="400" Margin="0 0 0 30">
-                    <Border CornerRadius="5" HorizontalAlignment="Center" Width="290" Height="370" VerticalAlignment="Center" Background="#f0f8ff" Margin="0 35 0 0">
+                    <Border CornerRadius="5" HorizontalAlignment="Center" Width="290" Height="370" VerticalAlignment="Center" Background="White" Margin="0 35 0 0">
                         <StackPanel Margin="0 50 0 0">
                             <TextBlock Text="Sign in to your account" HorizontalAlignment="Center" Foreground="Gray" Margin="30" FontSize="21" FontFamily="Champagne &amp; Limousines" FontWeight="SemiBold"/>
 

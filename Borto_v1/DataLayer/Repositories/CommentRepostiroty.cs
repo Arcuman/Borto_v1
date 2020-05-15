@@ -43,6 +43,11 @@ namespace Borto_v1
             return db.Comments.AsNoTracking().Include(c => c.User).ToList();
         }
 
+        public IEnumerable<Comment> GetAllByVideo(int VideoID)
+        {
+            return db.Comments.AsNoTracking().Include(c => c.User).Where(x=>x.VideoId==VideoID).OrderByDescending(x => x.PostDate).ToList();
+        }
+
         public void Update(Comment item)
         {
             db.Entry(item).State = EntityState.Modified;

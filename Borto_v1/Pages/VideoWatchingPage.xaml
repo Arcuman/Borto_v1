@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Borto_v1"
       mc:Ignorable="d" 
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      d:DesignHeight="600" d:DesignWidth="1060"
+      d:DesignHeight="800" d:DesignWidth="1060"
       Title="VideoWatchingPage">
     <Page.Resources>
         <local:ParametrizedBooleanToVisibilityConverter x:Key="ParametrizedBooleanToVisibilityConverter"/>
@@ -18,7 +18,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" >
             <StackPanel Background="{StaticResource BackgroundLightBlueBrush}" Orientation="Horizontal">
@@ -30,108 +30,186 @@
         </materialDesign:ColorZone>
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
               PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="0.05*"/>
-                    <ColumnDefinition  Width="2*"/>
-                    <ColumnDefinition Width="0.5*"/>
-                </Grid.ColumnDefinitions>
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.ColumnSpan="4">
-                    <TextBlock Height="50" Text="{Binding VideoName}" FontSize="30"
+                <Grid Height="500" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="0.05*"/>
+                        <ColumnDefinition  Width="2*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.ColumnSpan="4">
+                        <TextBlock Height="50" Text="{Binding VideoName}" FontSize="30"
                                FontWeight="Light" MaxWidth="500"
                                TextTrimming="CharacterEllipsis"
                                HorizontalAlignment="Left"
                                FontFamily="Franklin Gothic Medium" Margin="40 10 0 0"/>
-                </Grid>
-                <Grid Visibility="{Binding IsVisibleEditNameIcon,
-                                        Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
-                      Grid.Column="4" >
-                    <Button  Width="35" Height="35" Padding="0"
-                                        Command="{Binding ChangeNameCommand}"
-                                        >
-                        <materialDesign:PackIcon Width="30" Height="30" Kind="Edit"  Foreground="{StaticResource ForegroundColorLight}"/>
-                    </Button>
-                </Grid>
-                <Border  Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2"
+                    </Grid>
+                    <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2"
                          Width="Auto" Height="Auto"
                          MaxWidth="600" MaxHeight="400" CornerRadius="5" Margin="10 10">
-                    <Border.Effect>
-                        <DropShadowEffect ShadowDepth="5"/>
-                    </Border.Effect>
-                    <Border.Background>
-                        <ImageBrush ImageSource="{Binding VideoImage, Mode=OneTime}"/>
-                    </Border.Background>
-                </Border>
-                
-                <Grid Grid.Row="1" Grid.Column="3">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Border HorizontalAlignment="Left"  Width="70" Height="70" CornerRadius="35" >
                         <Border.Effect>
-                            <DropShadowEffect ShadowDepth="5"/>
+                            <DropShadowEffect ShadowDepth="2"/>
                         </Border.Effect>
                         <Border.Background>
-                            <ImageBrush x:Name="AccountImage" ImageSource="{Binding UserImage,Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}"/>
+                            <ImageBrush ImageSource="{Binding VideoImage, Mode=OneTime}" Stretch="Fill"/>
                         </Border.Background>
                     </Border>
-                    <TextBlock FontFamily="Franklin Gothic Medium" 
+
+                    <Grid Grid.Row="1" Grid.Column="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.ColumnSpan="3" BorderThickness="0 0 0 1" BorderBrush="{StaticResource BackgroundDarkBlueBrush}" />
+                        <Border HorizontalAlignment="Left"  Width="70" Height="70" CornerRadius="35" >
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="5"/>
+                            </Border.Effect>
+                            <Border.Background>
+                                <ImageBrush x:Name="AccountImage" ImageSource="{Binding UserImage,Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}"/>
+                            </Border.Background>
+                        </Border>
+                        <TextBlock FontFamily="Franklin Gothic Medium" 
                                Grid.Column="1" VerticalAlignment="Center"
                                Margin="15 0" Text="{Binding UserName}" 
                                MaxWidth="130"
                                HorizontalAlignment="Left"
                                TextTrimming="CharacterEllipsis" FontSize="28"/>
-                    <TextBlock FontFamily="Franklin Gothic Medium"
+                        <TextBlock FontFamily="Franklin Gothic Medium"
                                Grid.Column="2" VerticalAlignment="Center"
                                Margin="15 0" Text="{Binding UserNickName}" 
                                MaxWidth="150"
                                HorizontalAlignment="Left"
                                TextTrimming="CharacterEllipsis" FontSize="28"/>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <Button Margin="15 0 0 0"  Width="45" Height="45" Padding="0" 
+                        <StackPanel VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+                            <TextBlock 
+                            FontFamily="Franklin Gothic Medium"
+                            FontSize="20" Margin="3 0" Text="Date Upload:"/>
+                            <TextBlock 
+                            FontFamily="Franklin Gothic Medium"
+                            FontSize="18" Text="{Binding UploadDate}"/>
+                        </StackPanel>
+
+                    </Grid>
+                    <Grid Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontFamily="Franklin Gothic Medium" Text="Description:" FontSize="30" />
+                        <Border BorderThickness="0 1 0 0" BorderBrush="{StaticResource BackgroundDarkBlueBrush}" Grid.Row="1" MinWidth="400">
+                            <TextBlock 
+                            Text="{Binding VideoDescription}"
+                            TextWrapping="Wrap"  FontSize="20" />
+                        </Border>
+                    </Grid>
+                    <Border Margin="10 0" Grid.Row="3" Grid.ColumnSpan="5" VerticalAlignment="Bottom" BorderThickness=" 0 0 0 1" BorderBrush="{StaticResource BackgroundDarkBlueBrush}"/>
+                    <Grid Grid.Row="3" Grid.ColumnSpan="2">
+                        <Grid  >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.3*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="15 0 0 5" Width="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2"  Orientation="Horizontal">
+                                <TextBlock FontFamily="Franklin Gothic Medium"
+                                       FontSize="20" Text="Duration:"/>
+                                <TextBlock FontFamily="Franklin Gothic Medium"
+                                       FontSize="20" Margin="3 0" Text="{Binding MaxDuration}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="5 5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button Margin="15 0 0 0"  Width="45" Height="45" Padding="0" 
                                   Style="{StaticResource MaterialDesignFloatingActionButton}"
                                         Command="{Binding LikeVideoCommand}"
                                         >
-                        <materialDesign:PackIcon Width="30" Height="30" Kind="EmoticonHappy"  Foreground="{StaticResource ForegroundColorLight}"/>
-                        </Button>
-                        <TextBlock Margin="5 0" Text="{Binding CountPositiveMark}" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Button   Width="45" Height="45" Padding="0" 
+                                    <materialDesign:PackIcon Width="30" Height="30" Kind="EmoticonHappy"  Foreground="{StaticResource ForegroundColorLight}"/>
+                                </Button>
+                                <TextBlock Margin="5 0" Text="{Binding CountPositiveMark}" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Margin="5 5" Orientation="Horizontal"   VerticalAlignment="Center">
+                                <Button   Width="45" Height="45" Padding="0" 
                                   Style="{StaticResource MaterialDesignFloatingActionButton}"
                                         Command="{Binding DislikeVideoCommand}"
                                         >
-                        <materialDesign:PackIcon Width="30" Height="30" Kind="EmoticonSad"  Foreground="{StaticResource ForegroundColorLight}"/>
-                        </Button>
-                        <TextBlock Text="{Binding CountNegativeMark}" Margin="5 0" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                    
+                                    <materialDesign:PackIcon Width="30" Height="30" Kind="EmoticonSad"  Foreground="{StaticResource ForegroundColorLight}"/>
+                                </Button>
+                                <TextBlock Text="{Binding CountNegativeMark}" Margin="5 0" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="4" Grid.ColumnSpan="5" Height="40">
+
+                    </Grid>
                 </Grid>
-                <Grid Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <TextBlock FontFamily="Franklin Gothic Medium" Text="Description:" FontSize="30" />
-                    <Border BorderThickness="0 1 0 0" BorderBrush="{StaticResource BackgroundDarkBlueBrush}" Grid.Row="1" MinWidth="400">
-                        <TextBlock 
-                            Text="{Binding VideoDescription}"
-                            TextWrapping="Wrap"  FontSize="20" />
-                    </Border>
+                <Grid Grid.Row="1">
+                    <StackPanel>
+                        <TextBlock Text="Comments" FontSize="30" HorizontalAlignment="Center"/>
+                        <StackPanel Margin="15" HorizontalAlignment="Center" Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Comment" VerticalAlignment="Center"
+                                                     Foreground="{StaticResource BackgroundDarkBlueBrush}" Width="35" Height="35"/>
+                            <TextBox 
+                             Margin="10 0" 
+                             Width="450" FontSize="16"
+                                Text="{Binding Comment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             materialDesign:HintAssist.Hint="Insert your comment here" />
+                            <Button Content="Send"
+                                    Command="{Binding SendCommentCommand}"
+                                    Style="{StaticResource MaterialDesignFlatLightBgButton}"/>
+                        </StackPanel>
+                        <ListBox HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding Comments}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Margin="5 0 0 5" Width="540" BorderThickness="0 0 0 1" BorderBrush="{StaticResource BackgroundDarkBlueBrush}">
+                                        <Grid  >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="2*"/>
+                                            </Grid.RowDefinitions>
+                                            <Border Margin="5" Grid.RowSpan="2" HorizontalAlignment="Left"  Width="50" Height="50" VerticalAlignment="Top" CornerRadius="25" >
+                                                <Border.Effect>
+                                                    <DropShadowEffect ShadowDepth="5"/>
+                                                </Border.Effect>
+                                                <Border.Background>
+                                                    <ImageBrush x:Name="AccountImage" ImageSource="{Binding User.Image,Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}"/>
+                                                </Border.Background>
+                                            </Border>
+                                            <TextBlock Grid.Column="1"
+                                                   Margin="15 5"
+                                                   TextWrapping="Wrap"
+                                                   Text="{Binding User.NickName, Mode=OneTime}"
+                                                   FontSize="16" FontFamily="Franklin Gothic Medium" />
+                                            <TextBlock Grid.Row="1" Grid.Column="1" Margin="15 5" 
+                                                   TextWrapping="Wrap"
+                                                   Text="{Binding CommentMessage, Mode=OneTime}" FontSize="16" 
+                                                   FontFamily="Franklin Gothic Medium" />
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
                 </Grid>
             </Grid>
         </ScrollViewer>

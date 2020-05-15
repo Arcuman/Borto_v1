@@ -2,6 +2,8 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Ioc;
+using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Borto_v1
@@ -34,7 +36,17 @@ namespace Borto_v1
 
         private int countNegativeMark;
 
+        private string maxDuration;
+
+        private string uploadDate;
+
         private LikeState likeState;
+
+        private ObservableCollection<Comment> comments;
+
+        private bool isOwner;
+
+        private string comment;
         #endregion
 
         #region Public members
@@ -183,7 +195,90 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+        public string MaxDuration
+        {
+            get
+            {
+                return maxDuration;
+            }
+            set
+            {
+                if (maxDuration == value)
+                {
+                    return;
+                }
+                maxDuration = value;
+                RaisePropertyChanged();
+            }
+        }
+         public string UploadDate
+        {
+            get
+            {
+                return uploadDate;
+            }
+            set
+            {
+                if (uploadDate == value)
+                {
+                    return;
+                }
+                uploadDate = value;
+                RaisePropertyChanged();
+            }
+        }
+        public bool IsOwner
+        {
+            get
+            {
+                return isOwner;
+            }
+            set
+            {
+                if (isOwner == value)
+                {
+                    return;
+                }
+                isOwner = value;
+                RaisePropertyChanged();
+            }
+        }
+        public ObservableCollection<Comment> Comments
+        {
+            get
+            {
+                return comments;
+            }
 
+            set
+            {
+                if (comments == value)
+                {
+                    return;
+                }
+
+                comments = value;
+                RaisePropertyChanged();
+            }
+        } 
+        public string Comment
+        {
+            get
+            {
+                return comment;
+            }
+
+            set
+            {
+                if (comment == value)
+                {
+                    return;
+                }
+
+                comment = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region Commands 
@@ -256,6 +351,29 @@ namespace Borto_v1
                     likeState == LikeState.Dislike || likeState == LikeState.None));
             }
         }
+        private RelayCommandParametr sendCommentCommand;
+        public RelayCommandParametr SendCommentCommand
+        {
+            get
+            {
+                return sendCommentCommand
+                    ?? (sendCommentCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        Comment comment = new Comment() 
+                        { CommentMessage= Comment,
+                          VideoId = Video.IdVideo,
+                          PostDate = DateTime.Now,
+                          UserId = user.IdUser
+                        };
+                        context.Comments.Create(comment);
+                        context.Save();
+                        Comments = new ObservableCollection<Comment>(context.Comments.GetAllByVideo(Video.IdVideo));
+                    },
+                    (x) =>
+                    !String.IsNullOrWhiteSpace(Comment)));
+            }
+        }
 
         #endregion
 
@@ -300,9 +418,15 @@ namespace Borto_v1
                 else
                     likeState = LikeState.Dislike;
             }
-            
-        }
 
+            MaxDuration = TimeSpan.FromSeconds(Video.MaxDuration).ToString(@"hh\:mm\:ss");
+
+            UploadDate = Video.UploadDate.ToShortDateString();
+
+            IsOwner = Video.UserId == user.IdUser;
+
+            Comments = new ObservableCollection<Comment>(context.Comments.GetAllByVideo(Video.IdVideo));
+        }
         #endregion
     }
 }

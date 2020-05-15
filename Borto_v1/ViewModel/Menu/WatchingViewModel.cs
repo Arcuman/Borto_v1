@@ -15,6 +15,7 @@ namespace Borto_v1
 
         private Video selectedVideo;
 
+        private string searchField;
         #endregion
 
         #region Public members
@@ -50,6 +51,23 @@ namespace Borto_v1
                 }
 
                 selectedVideo = value;
+                RaisePropertyChanged();
+            }
+        }
+        public string SearchField
+        {
+            get
+            {
+                return searchField;
+            }
+            set
+            {
+                if (searchField == value)
+                {
+                    return;
+                }
+
+                searchField = value;
                 RaisePropertyChanged();
             }
         }
@@ -95,6 +113,20 @@ namespace Borto_v1
                     {
                         SelectedVideo = obj as Video;
                         _navigationService.NavigateTo("VideoWatching",SelectedVideo);
+                    }));
+            }
+        } 
+        
+        private RelayCommandParametr searchCommand;
+        public RelayCommandParametr SearchCommand
+        {
+            get
+            {
+                return searchCommand
+                    ?? (searchCommand = new RelayCommandParametr(
+                    (obj) =>
+                    {
+                        Videos = new ObservableCollection<Video>(context.Videos.SearchByName(SearchField));
                     }));
             }
         } 

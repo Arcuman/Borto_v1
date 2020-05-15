@@ -15,17 +15,17 @@ namespace Borto_v1
 
             this.DataContext = new VideoWatchingPageViewModel(SimpleIoc.Default.GetInstance<IFrameNavigationService>());
         }
-
+        
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             ScrollViewer scrollViewer = (ScrollViewer)sender;
             if (e.Delta < 0)
             {
-                scrollViewer.LineRight();
+                scrollViewer.LineDown();
             }
             else
             {
-                scrollViewer.LineLeft();
+                scrollViewer.LineUp();
             }
             e.Handled = true;
         }

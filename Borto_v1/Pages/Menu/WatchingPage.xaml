@@ -18,25 +18,41 @@
     <Grid Background="#f0f8ff" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid Height="55">
                 <materialDesign:ColorZone Height="50" materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" DockPanel.Dock="Top">
-                    <StackPanel  Background="{StaticResource BackgroundLightBlueBrush}" Orientation="Horizontal">
+                    <Grid  Background="{StaticResource BackgroundLightBlueBrush}">
                         <TextBlock  Text="Watch the video" Margin="10" 
                                     FontFamily="Franklin Gothic Medium"
                                     FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
-                    </StackPanel>
+                    
+                </Grid>
                 </materialDesign:ColorZone>
             </Grid>
-            <materialDesign:TransitioningContent Grid.Row="1" x:Name="TransitioningContentSlide"
+        <Border Margin="5 0" Grid.Row="1" BorderBrush="{StaticResource BackgroundDarkBlueBrush}" BorderThickness="0 0 0 1">
+        <StackPanel Margin="5"  Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBox Width="300" Foreground="{StaticResource BackgroundDarkBlueBrush}" Height="40" 
+                                 Text="{Binding SearchField}"
+                                 materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.Foreground="{StaticResource ForegroundColorLight}"
+                                 materialDesign:HintAssist.HintOpacity="0.9" Style="{StaticResource MaterialDesignTextBox}"
+                                 FontFamily="Franklin Gothic Medium" FontSize="20"/>
+            <Button Height="30"
+                    Width="30" Padding="1" 
+                    Command="{Binding SearchCommand}"
+                    BorderBrush="{StaticResource BackgroundLightBlueBrush}" Background="{StaticResource BackgroundLightBlueBrush}" Margin="5 0">
+                <materialDesign:PackIcon Kind="Magnify" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="{StaticResource ForegroundColorLight}"/>
+            </Button>
+        </StackPanel>
+        </Border>
+        <materialDesign:TransitioningContent Grid.Row="2" x:Name="TransitioningContentSlide"
 OpeningEffect="{materialDesign:TransitionEffect FadeIn, Duration=0:0:1}">
             <ListBox    x:Name="ListViewProduct" Background="#f0f8ff" ItemsSource="{Binding Videos}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
 
-                    <ListBox.ItemTemplate>
-                        <!-- FIX Ripple-->
-                        <DataTemplate >
+                <ListBox.ItemTemplate>
+                    <DataTemplate >
                             <Border   Name="border" Margin="50 10 50 10" Width="310" Height="260">
                                 <StackPanel >
                                     <Border  Width="300" Height="200" CornerRadius="5" Margin="5">

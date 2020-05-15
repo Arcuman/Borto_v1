@@ -30,7 +30,7 @@
             <materialDesign:TransitioningContent Grid.Row="1" x:Name="TransitioningContentSlide"
 OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:1}" >
                 <Grid Width="300" Height="420" Margin="0 0 0 20">
-                    <Border CornerRadius="3" HorizontalAlignment="Center" Width="290" Height="370" VerticalAlignment="Center" Background="#f0f8ff" Margin="0 35 0 0">
+                    <Border CornerRadius="3" HorizontalAlignment="Center" Width="290" Height="370" VerticalAlignment="Center" Background="White" Margin="0 35 0 0">
                         <StackPanel Margin="0 30 0 0">
                             <TextBlock Text="Sign up" HorizontalAlignment="Center" Foreground="Gray" Margin="30 10 30 10" FontSize="21" FontFamily="Champagne &amp; Limousines" FontWeight="SemiBold"/>
 

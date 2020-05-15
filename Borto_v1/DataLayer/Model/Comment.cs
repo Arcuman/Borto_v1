@@ -12,19 +12,20 @@ namespace Borto_v1
     {
         public int IdComment { get; set; }
 
-        public string TypeMark { get; set; }
+        [Required]
+        public string CommentMessage { get; set; }
+
+        public DateTime PostDate { get; set; }
 
         [Required]
         public int UserId { get; set; }
 
-        [Required]
         [ForeignKey("UserId")]
         public User User { get; set; }
 
         [Required]
         public int VideoId { get; set; }
 
-        [Required]
         [ForeignKey("VideoId")]
         public Video Video { get; set; }
 

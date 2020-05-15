@@ -46,11 +46,15 @@ namespace Borto_v1
             return db.Videos.AsNoTracking().Include(c => c.User).ToList();
         }
 
+        public IEnumerable<Video> SearchByName(string name)
+        {
+            return db.Videos.AsNoTracking().Include(c => c.User).Where(x=> x.Name.Contains(name)).ToList();
+        }
+
         public void Update(Video item)
         {
             db.Entry(item).State = EntityState.Modified;
         }
-       
 
     }
 }
