@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Windows.Media.Imaging;
 
 namespace Borto_v1
@@ -34,6 +35,10 @@ namespace Borto_v1
         private ObservableCollection<Video> videos;
 
         private Video selectedVideo;
+
+        private Thread loadedThread;
+
+        private bool isVisibleProgressBar;
 
         #endregion
 
@@ -202,6 +207,22 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+        public bool IsVisibleProgressBar
+        {
+            get
+            {
+                return isVisibleProgressBar;
+            }
+            set
+            {
+                if (isVisibleProgressBar == value)
+                {
+                    return;
+                }
+                isVisibleProgressBar = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region Command
@@ -337,7 +358,54 @@ namespace Borto_v1
                     }));
             }
         }
+         private RelayCommandParametr exitCommand;
+        public RelayCommandParametr ExitCommand
+        {
+            get
+            {
+                return exitCommand
+                    ?? (exitCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        Messenger.Default.Send<NotificationMessage>(new NotificationMessage(this, "OpenLoginWindow"));
+                    }));
+            }
+        }
+        private RelayCommandParametr loadedCommand;
+        public RelayCommandParametr LoadedCommand
+        {
+            get
+            {
+                return loadedCommand
+                    ?? (loadedCommand = new RelayCommandParametr(
+                    obj =>
+                    {
+                        IsVisibleProgressBar = true;
 
+                        User = SimpleIoc.Default.GetInstance<MainViewModel>().User;
+
+                        Name = User.Name;
+
+                        NickName = User.NickName;
+
+                        IsVisibleEditNameIcon = true;
+
+                        IsVisibleEditPasswrodIcon = true;
+                        loadedThread = new Thread(() =>
+                        {
+                            Image = User.Image;
+
+                            Videos = new ObservableCollection<Video>(context.Videos.FindByUserId(User.IdUser));
+
+                            IsVisibleProgressBar = false;
+
+                        });
+                        loadedThread.IsBackground = true;
+                        loadedThread.Start();
+
+                    }));
+            }
+        }
         #endregion
 
         #region ctor
@@ -345,19 +413,6 @@ namespace Borto_v1
         public AccountViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
-
-            User = SimpleIoc.Default.GetInstance<MainViewModel>().User;
-            Name = User.Name;
-            
-            Image = User.Image;
-            
-            NickName = User.NickName;
-            
-            Videos = new ObservableCollection<Video>(context.Videos.FindByUserId(User.IdUser));
-
-            IsVisibleEditNameIcon = true;
-
-            IsVisibleEditPasswrodIcon = true;
         }
 
         #endregion

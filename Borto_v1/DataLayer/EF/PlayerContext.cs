@@ -5,7 +5,7 @@ namespace Borto_v1
 {
     public class PlayerContext : DbContext
     {
-        public PlayerContext() : base("BortoLocal")
+        public PlayerContext() : base("BortoServer")
         {
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

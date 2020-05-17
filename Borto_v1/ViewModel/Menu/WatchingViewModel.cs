@@ -2,6 +2,8 @@
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading;
 
 namespace Borto_v1
 {
@@ -16,6 +18,12 @@ namespace Borto_v1
         private Video selectedVideo;
 
         private string searchField;
+
+        private SortState isSortedBy;
+
+        private Thread loadedThread;
+
+        private bool isVisibleProgressBar;
         #endregion
 
         #region Public members
@@ -71,6 +79,22 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+        public bool IsVisibleProgressBar
+        {
+            get
+            {
+                return isVisibleProgressBar;
+            }
+            set
+            {
+                if (isVisibleProgressBar == value)
+                {
+                    return;
+                }
+                isVisibleProgressBar = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region Commands
@@ -97,11 +121,36 @@ namespace Borto_v1
                     ?? (unloadedCommand = new RelayCommandParametr(
                     obj =>
                     {
+                        if (loadedThread.IsAlive)
+                            loadedThread.Abort();
                         this.Dispose();
                         videos = null;
                     }));
             }
         }
+        private RelayCommandParametr loadedCommand;
+        public RelayCommandParametr LoadedCommand
+        {
+            get
+            {
+                return loadedCommand
+                    ?? (loadedCommand = new RelayCommandParametr(
+                    obj =>
+                    {
+                        IsVisibleProgressBar = true;
+                        loadedThread = new Thread(() =>
+                        {
+                            Videos = new ObservableCollection<Video>(context.Videos.GetAll());
+                            isSortedBy = SortState.None;
+                            IsVisibleProgressBar = false;
+                        });
+                        loadedThread.IsBackground = true;
+                        loadedThread.Start();
+
+                    }));
+            }
+        }
+
         private RelayCommandParametr _viewWatchingPageCommand;
         public RelayCommandParametr ViewWatchingPageCommand
         {
@@ -126,24 +175,99 @@ namespace Borto_v1
                     ?? (searchCommand = new RelayCommandParametr(
                     (obj) =>
                     {
-                        Videos = new ObservableCollection<Video>(context.Videos.SearchByName(SearchField));
+                        if (!String.IsNullOrWhiteSpace(SearchField))
+                        {
+                            Videos = new ObservableCollection<Video>(Videos.Where(x => x.Name.Contains(SearchField)));
+                        }
+                        else {
+                            Videos = new ObservableCollection<Video>(context.Videos.GetAll());
+                        }
+                        this.Dispose();
                     }));
             }
         } 
+        private RelayCommandParametr sortByLongCommand;
+        public RelayCommandParametr SortByLongCommand
+        {
+            get
+            {
+                return sortByLongCommand
+                    ?? (sortByLongCommand = new RelayCommandParametr(
+                    (obj) =>
+                    {
+                        
+                        Videos = new ObservableCollection<Video>(Videos.OrderByDescending(x => x.MaxDuration));
+                        this.Dispose();
+                        isSortedBy = SortState.Long;
+                    },
+                    x=> isSortedBy != SortState.Long));
+            }
+        } 
+
+        private RelayCommandParametr sortByShortCommand;
+        public RelayCommandParametr SortByShortCommand
+        {
+            get
+            {
+                return sortByShortCommand
+                    ?? (sortByShortCommand = new RelayCommandParametr(
+                    (obj) =>
+                    {
+                        Videos = new ObservableCollection<Video>(Videos.OrderBy(x => x.MaxDuration));
+                        this.Dispose();
+                        isSortedBy = SortState.Short;
+                    },
+                    x=> isSortedBy != SortState.Short));
+            }
+        } 
+
+        private RelayCommandParametr sortByNewCommand;
+        public RelayCommandParametr SortByNewCommand
+        {
+            get
+            {
+                return sortByNewCommand
+                    ?? (sortByNewCommand = new RelayCommandParametr(
+                    (obj) =>
+                    {
+                        Videos = new ObservableCollection<Video>(Videos.OrderByDescending(x => x.UploadDate));
+                        this.Dispose();
+                        isSortedBy = SortState.New;
+                    },
+                    x=> isSortedBy != SortState.New));
+            }
+        } 
+        private RelayCommandParametr sortByOldCommand;
+        public RelayCommandParametr SortByOldCommand
+        {
+            get
+            {
+                return sortByOldCommand
+                    ?? (sortByOldCommand = new RelayCommandParametr(
+                    (obj) =>
+                    {
+                        Videos = new ObservableCollection<Video>(Videos.OrderBy(x => x.UploadDate));
+                        this.Dispose();
+                        isSortedBy = SortState.Old;
+                    },
+                    x=> isSortedBy != SortState.Old));
+            }
+        } 
+
+
         #endregion
 
         #region ctor
         public WatchingViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
-            videos = new ObservableCollection<Video>(context.Videos.GetAll());
+            IsVisibleProgressBar = true;
         }
 
         public void Dispose()
         {
             GC.Collect();
             GC.WaitForPendingFinalizers();
-            context.Dispose();
         }
         #endregion
     }

@@ -1,6 +1,9 @@
 ﻿
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System;
+using System.Net;
+using System.Threading;
 
 namespace Borto_v1
 {
@@ -15,7 +18,11 @@ namespace Borto_v1
 
         private bool isOpenDialog;
 
+        private bool isNoInternetConnection;
+
         private string message;
+
+        private bool isAdmin;
         #endregion
 
         #region Public members
@@ -71,6 +78,25 @@ namespace Borto_v1
             }
         }
         /// <summary>
+        /// Is Open Dialog 
+        /// </summary>
+        public bool IsNoInternetConnection
+        {
+            get
+            {
+                return isNoInternetConnection;
+            }
+            set
+            {
+                if (isNoInternetConnection == value)
+                {
+                    return;
+                }
+                isNoInternetConnection = value;
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
         /// Message for the dialog  
         /// </summary>
         public string Message
@@ -86,6 +112,22 @@ namespace Borto_v1
                     return;
                 }
                 message = value;
+                RaisePropertyChanged();
+            }
+        }
+        public bool IsAdmin
+        {
+            get
+            {
+                return isAdmin;
+            }
+            set
+            {
+                if (isAdmin == value)
+                {
+                    return;
+                }
+                isAdmin = value;
                 RaisePropertyChanged();
             }
         }
@@ -105,7 +147,7 @@ namespace Borto_v1
                         _navigationService.NavigateTo("Download");
                     }));
             }
-        } 
+        }
         private RelayCommand _loginpageCommand;
         public RelayCommand LoginPageCommand
         {
@@ -158,13 +200,13 @@ namespace Borto_v1
                     }));
             }
         }
-        private RelayCommand _settingspageCommand;
-        public RelayCommand SettingspageCommand
+        private RelayCommand adminpageCommand;
+        public RelayCommand AdminpageCommand
         {
             get
             {
-                return _settingspageCommand
-                    ?? (_settingspageCommand = new RelayCommand(
+                return adminpageCommand
+                    ?? (adminpageCommand = new RelayCommand(
                     () =>
                     {
                         _navigationService.NavigateTo("Settings");
@@ -181,6 +223,30 @@ namespace Borto_v1
                     ?? (_viewWatchingPageCommand = new RelayCommand(
                     () =>
                     {
+                        var thread = new Thread(() =>
+                        {
+                            while (true)
+                            {
+                                Thread.Sleep(2000);
+                                bool result = IsInternetConnection();
+                                if (result == true)
+                                {
+                                    if (IsNoInternetConnection == true)
+                                    {
+                                        IsNoInternetConnection = false;
+                                        IsOpenDialog = false;
+                                    }
+                                }
+                                else
+                                {
+                                    IsOpenDialog = true;
+                                    Message = "Where Internet man or Error Hah";
+                                    IsNoInternetConnection = true;
+                                }
+                            }
+                        });
+                        thread.IsBackground = true;
+                        thread.Start();
                         _navigationService.NavigateTo("Player");
                     }));
             }
@@ -205,7 +271,31 @@ namespace Borto_v1
         public MainViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
+            
         }
+
+        #endregion
+
+        #region Helpers
+
+        public static bool IsInternetConnection()
+        {
+            WebRequest req = WebRequest.Create("https://www.google.co.in/");
+            WebResponse resp;
+            try
+            {
+                resp = req.GetResponse();
+                resp.Close();
+                req = null;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                req = null;
+                return false;
+            }
+        }
+
 
         #endregion
     }

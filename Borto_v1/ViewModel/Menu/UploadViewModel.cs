@@ -18,6 +18,8 @@ namespace Borto_v1
 
         private string name;
 
+        private Thread uploadThread;
+
         private User user;
 
         private string description;
@@ -176,8 +178,7 @@ namespace Borto_v1
                         if (PathVideo != "Choose Video" && !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(Description))
                         {
                             IsVisibleProgressBar = true;
-                            ThreadPool.QueueUserWorkItem(
-                            (o) =>
+                            uploadThread = new Thread(() =>
                             {
                                 maxDuration = Video.GetMaxDuration(PathVideo);
 
@@ -195,15 +196,34 @@ namespace Borto_v1
 
                                 IsVisibleProgressBar = false;
 
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Your video upload!";
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Your video uploaded!";
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             });
+                            uploadThread.IsBackground = true;
+                            uploadThread.Start();
 
                         }
                     },
                     (x)=> !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(PathVideo)));
             }
         }
+        private RelayCommandParametr cancelUploadCommand;
+        public RelayCommandParametr CancelUploadCommand
+        {
+            get
+            {
+
+
+                return cancelUploadCommand
+                    ?? (cancelUploadCommand = new RelayCommandParametr(
+                    (o) =>
+                    {
+                        uploadThread.Abort();
+                        IsVisibleProgressBar = false;
+                    }));
+            }
+        }
+
 
         #endregion
         #region ctor

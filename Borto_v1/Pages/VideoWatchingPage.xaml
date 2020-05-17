@@ -8,6 +8,11 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DesignHeight="800" d:DesignWidth="1060"
       Title="VideoWatchingPage">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Page.Resources>
         <local:ParametrizedBooleanToVisibilityConverter x:Key="ParametrizedBooleanToVisibilityConverter"/>
         <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
@@ -57,7 +62,7 @@
                                HorizontalAlignment="Left"
                                FontFamily="Franklin Gothic Medium" Margin="40 10 0 0"/>
                     </Grid>
-                    <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2"
+                    <Border Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2"
                          Width="Auto" Height="Auto"
                          MaxWidth="600" MaxHeight="400" CornerRadius="5" Margin="10 10">
                         <Border.Effect>

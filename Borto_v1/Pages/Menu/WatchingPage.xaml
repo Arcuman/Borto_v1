@@ -11,85 +11,120 @@
       Title="WatchingPage"
       >
     <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
         <i:EventTrigger EventName="Unloaded">
             <i:InvokeCommandAction Command="{Binding UnloadedCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    <Page.Resources>
+        <local:ParametrizedBooleanToVisibilityConverter x:Key="ParametrizedBooleanToVisibilityConverter"/>
+    </Page.Resources>
     <Grid Background="#f0f8ff" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid Height="55">
-                <materialDesign:ColorZone Height="50" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Height="55">
+            <materialDesign:ColorZone Height="50" materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" DockPanel.Dock="Top">
-                    <Grid  Background="{StaticResource BackgroundLightBlueBrush}">
-                        <TextBlock  Text="Watch the video" Margin="10" 
+                <Grid  Background="{StaticResource BackgroundLightBlueBrush}">
+                    <TextBlock  Text="Watch the video" Margin="10" 
                                     FontFamily="Franklin Gothic Medium"
                                     FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
-                    
+
                 </Grid>
-                </materialDesign:ColorZone>
-            </Grid>
+            </materialDesign:ColorZone>
+        </Grid>
         <Border Margin="5 0" Grid.Row="1" BorderBrush="{StaticResource BackgroundDarkBlueBrush}" BorderThickness="0 0 0 1">
-        <StackPanel Margin="5"  Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBox Width="300" Foreground="{StaticResource BackgroundDarkBlueBrush}" Height="40" 
+            <Grid>
+                <StackPanel Margin="5"  Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBox Width="300" Foreground="{StaticResource BackgroundDarkBlueBrush}" Height="40" 
                                  Text="{Binding SearchField}"
                                  materialDesign:HintAssist.Hint="Search" materialDesign:HintAssist.Foreground="{StaticResource ForegroundColorLight}"
                                  materialDesign:HintAssist.HintOpacity="0.9" Style="{StaticResource MaterialDesignTextBox}"
                                  FontFamily="Franklin Gothic Medium" FontSize="20"/>
-            <Button Height="30"
+                    <Button Height="30"
                     Width="30" Padding="1" 
                     Command="{Binding SearchCommand}"
                     BorderBrush="{StaticResource BackgroundLightBlueBrush}" Background="{StaticResource BackgroundLightBlueBrush}" Margin="5 0">
-                <materialDesign:PackIcon Kind="Magnify" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="{StaticResource ForegroundColorLight}"/>
-            </Button>
-        </StackPanel>
+                        <materialDesign:PackIcon Kind="Magnify" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="{StaticResource ForegroundColorLight}"/>
+                    </Button>
+                </StackPanel>
+                <materialDesign:PackIcon Margin="5 0" Foreground="{StaticResource BackgroundDarkBlueBrush}" Kind="Sort" HorizontalAlignment="Left" Height="50" Width="35" VerticalAlignment="Center"/>
+                <materialDesign:PopupBox Margin="5 0" Name="sd" Foreground="Transparent" HorizontalAlignment="Left"  DockPanel.Dock="Right" PlacementMode="BottomAndAlignLeftEdges" StaysOpen="True">
+                    <StackPanel   MinWidth="150">
+                        <Button HorizontalContentAlignment="Center" Width="150" 
+                                 Command="{Binding SortByLongCommand}" CommandParameter="Long"
+                                Content="Long first" />
+                        <Button
+                            Command="{Binding SortByShortCommand}"  CommandParameter="Short"
+                            HorizontalContentAlignment="Center" Width="150" Content="Short first" />
+                        <Button Command="{Binding SortByNewCommand}"  CommandParameter="New"
+                            HorizontalContentAlignment="Center" Width="150" Content="New first"/>
+                        <Button 
+                            Command="{Binding SortByOldCommand}"  CommandParameter="Old"
+                            HorizontalContentAlignment="Center" Width="150" Content="Old first"/>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </Grid>
         </Border>
         <materialDesign:TransitioningContent Grid.Row="2" x:Name="TransitioningContentSlide"
 OpeningEffect="{materialDesign:TransitionEffect FadeIn, Duration=0:0:1}">
-            <ListBox    x:Name="ListViewProduct" Background="#f0f8ff" ItemsSource="{Binding Videos}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
+            <Grid>
+                <ProgressBar 
+                                Panel.ZIndex="1"
+                                Visibility="{Binding IsVisibleProgressBar,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    FallbackValue=Visible}"
+                                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                Value="45"  Width="150"  Height="150"
+                                Margin="10 10" 
+                                IsIndeterminate="{Binding IsVisibleProgressBar}" />
+                <ListBox    x:Name="ListViewProduct" Background="#f0f8ff" ItemsSource="{Binding Videos}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
 
                 <ListBox.ItemTemplate>
                     <DataTemplate >
-                            <Border   Name="border" Margin="50 10 50 10" Width="310" Height="260">
-                                <StackPanel >
-                                    <Border  Width="300" Height="200" CornerRadius="5" Margin="5">
+                        <Border   Name="border" Margin="50 10 50 10" Width="310" Height="260">
+                            <StackPanel >
+                                <Border  Width="300" Height="200" CornerRadius="5" Margin="5">
                                     <Border.Effect>
                                         <DropShadowEffect ShadowDepth="5"/>
                                     </Border.Effect>
                                     <Border.Background>
                                         <ImageBrush ImageSource="{Binding Image, Mode=OneTime}"/>
-                                        </Border.Background>
-                                    </Border>
-                                    <Grid>
-                                        <StackPanel>
-                                            <TextBlock Margin="5" Text="{Binding Name, Mode=OneTime}" FontSize="14" FontFamily="Franklin Gothic Medium" />
+                                    </Border.Background>
+                                </Border>
+                                <Grid>
+                                    <StackPanel>
+                                        <TextBlock Margin="5" Text="{Binding Name, Mode=OneTime}" FontSize="14" FontFamily="Franklin Gothic Medium" />
                                         <TextBlock Margin="5 0" Text="{Binding User.NickName, Mode=OneTime}" FontSize="13" />
-                                        </StackPanel>
-                                        <Button  HorizontalAlignment="Right" Margin="0 0 10 0"
+                                    </StackPanel>
+                                    <Button  HorizontalAlignment="Right" Margin="0 0 10 0"
                                         Command="{Binding ElementName= ListViewProduct,Path=DataContext.DownloadPageCommand}" 
                                         CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}">
-                                            <materialDesign:PackIcon Width="25" Height="25" Kind="Download"  Foreground="{StaticResource ForegroundColorLight}"/>
-                                        </Button>
-                                    </Grid>
-                                </StackPanel>
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="MouseLeftButtonUp">
-                                        <i:InvokeCommandAction Command="{Binding ElementName= ListViewProduct,Path=DataContext.ViewWatchingPageCommand}" 
+                                        <materialDesign:PackIcon Width="25" Height="25" Kind="Download"  Foreground="{StaticResource ForegroundColorLight}"/>
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseLeftButtonUp">
+                                    <i:InvokeCommandAction Command="{Binding ElementName= ListViewProduct,Path=DataContext.ViewWatchingPageCommand}" 
                                                        CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </Border>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel/>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                </ListBox>
-            </materialDesign:TransitioningContent>
-        </Grid>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+           </Grid>
+        </materialDesign:TransitioningContent>
+    </Grid>
 </Page>

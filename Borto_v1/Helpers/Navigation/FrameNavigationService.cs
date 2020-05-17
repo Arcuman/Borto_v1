@@ -64,13 +64,15 @@ namespace Borto_v1
                 {
                     throw new ArgumentException(string.Format("No such page: {0} ", pageKey), "pageKey");
                 }
-                Frame frame = GetDescendantFromName(Application.Current.Windows[0], "MainFrame") as Frame;
-                if (Application.Current.Windows.Count > 2)
+               
+                if (Application.Current.Windows.Count > 1)
                 {
-                    if(Application.Current.Windows[2].Name == "BortoWindow")
-                    frame = GetDescendantFromName(Application.Current.Windows[2], "MainFrame") as Frame;
+                    if(!string.IsNullOrWhiteSpace(Application.Current.Windows[1].Name))
+                        Application.Current.Windows[0].Close();
                 }
-                    
+
+                Frame frame = GetDescendantFromName(Application.Current.Windows[0], "MainFrame") as Frame;
+                
 
                 if (frame != null)
                 {

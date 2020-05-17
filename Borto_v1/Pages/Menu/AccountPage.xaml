@@ -9,6 +9,11 @@
       Title="AccountPage"
       Unloaded="AccountPage_Unloaded"
      >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Page.Resources>
         <local:ParametrizedBooleanToVisibilityConverter x:Key="ParametrizedBooleanToVisibilityConverter"/>
         <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
@@ -22,9 +27,16 @@
 
         <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" >
-            <StackPanel Background="{StaticResource BackgroundLightBlueBrush}" Orientation="Horizontal">
+            <Grid Background="{StaticResource BackgroundLightBlueBrush}" >
                 <TextBlock  Text="Account Page" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
-            </StackPanel>
+                <Button Width="35" Height="35" Padding="0" HorizontalAlignment="Right"
+                                        Margin="0 0 20 0" Background="{StaticResource BackgroundDarkBlueBrush}"
+                        BorderBrush="{StaticResource BackgroundDarkBlueBrush}"
+                                        Command="{Binding ExitCommand}" ToolTip="Log out">
+                    <materialDesign:PackIcon Width="15" Height="15" Kind="Logout"  Foreground="{StaticResource ForegroundColorLight}"/>
+                </Button>
+            </Grid>
+
         </materialDesign:ColorZone>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -33,9 +45,10 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="16*"/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid Margin="5">
+            <Grid Margin="5,5,5.4,5.4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -60,7 +73,7 @@
                     </Button>
                 </StackPanel>
             </Grid>
-            <Grid Margin="0 20" Grid.Row="0" Grid.Column="1">
+            <Grid Margin="322,20,0,20.4" Grid.Row="0" Grid.ColumnSpan="3">
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -265,11 +278,20 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid Grid.Row="1" Grid.ColumnSpan="2"  VerticalAlignment="Bottom">
+            <Grid Grid.Row="1" Grid.ColumnSpan="3"  VerticalAlignment="Bottom" Margin="0,0,0,0.4">
                 <StackPanel>
                     <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
                            Text="My Videos"/>
-                    <Border Height="Auto" BorderBrush="{StaticResource BackgroundLightBlueBrush}" BorderThickness="1" Margin="3" >
+                    <Grid Height="Auto"  Margin="3" >
+                        <ProgressBar 
+                                Panel.ZIndex="1"
+                                Visibility="{Binding IsVisibleProgressBar,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    FallbackValue=Collapsed}"
+                                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                Value="35"  Width="35"  Height="35"
+                                Margin="10 10"
+                                IsIndeterminate="{Binding IsVisibleProgressBar}" />
                         <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled"
               PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
                             <ListBox  x:Name="ListViewProduct" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#f0f8ff" ItemsSource="{Binding Videos}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
@@ -316,7 +338,7 @@
                                 </ListBox.ItemsPanel>
                             </ListBox>
                         </ScrollViewer>
-                    </Border>
+                    </Grid>
                 </StackPanel>
             </Grid>
         </Grid>

@@ -37,15 +37,28 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value ="200"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <local:ParametrizedBooleanToVisibilityConverter x:Key="ParametrizedBooleanToVisibilityConverter"/>
+           
     </Window.Resources>
     <materialDesign:DialogHost 
-        IsOpen="{Binding IsOpenDialog,FallbackValue=False}">
+        IsOpen="{Binding IsOpenDialog}">
         <materialDesign:DialogHost.DialogContent>
             <Border Height="Auto" Width="Auto">
                 <StackPanel Margin="16">
                     <TextBlock Text="{Binding Message,FallbackValue=The login is already exist}"/>
-                    <Button Margin="0 10 0 0" Style="{StaticResource MaterialDesignFlatAccentButton}"
+                    <Grid>
+                        <ProgressBar 
+                                Visibility="{Binding IsNoInternetConnection,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
+                                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                Value="35" 
+                                Margin="0 10 0 0"
+                                IsIndeterminate="{Binding IsNoInternetConnection}" />
+                        <Button Margin="0 10 0 0" Style="{StaticResource MaterialDesignFlatAccentButton}"
+                                 Visibility="{Binding IsNoInternetConnection,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},ConverterParameter=false}"
                                 Content="CLose" Width="70" Height="30" Command="{Binding CloseDialodCommand}"/>
+                    </Grid>
                 </StackPanel>
             </Border>
         </materialDesign:DialogHost.DialogContent>
@@ -120,27 +133,23 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListViewItem>
-                    <ListViewItem>
+                    <ListViewItem Visibility="{Binding IsAdmin,Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}">
                         <StackPanel  Margin="18" Height="30" Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Settings" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                            <TextBlock Text="Settings" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                            <materialDesign:PackIcon Kind="Cogs"  Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                            <TextBlock Text="Admin" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
                                 <i:InvokeCommandAction
-                                                      Command="{Binding SettingspageCommand}"/>
+                                                      Command="{Binding AdminpageCommand}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListViewItem>
                 </ListView>
-                <StackPanel Grid.Row="2" >
-                    <TextBlock Text="{Binding User.Login}"/>
-                    <TextBlock Text="{Binding Test}" FontSize="14"/>
-                </StackPanel>
             </Grid>
             <!-- Content-->
             <Grid  Name="content"  Background="{StaticResource BackgroundDarkBlueBrush}" Grid.Column="1">
-                <Frame Focusable="False" x:Name="MainFrame" NavigationUIVisibility="Hidden"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Frame Focusable="False" x:Name="MainFrame" NavigationUIVisibility="Hidden"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
             </Grid>
         </Grid>
     </materialDesign:DialogHost>

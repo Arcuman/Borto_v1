@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 
 namespace Borto_v1
 {
@@ -47,6 +48,8 @@ namespace Borto_v1
         private bool isOwner;
 
         private string comment;
+
+        private Thread loadedThread;
         #endregion
 
         #region Public members
@@ -374,7 +377,49 @@ namespace Borto_v1
                     !String.IsNullOrWhiteSpace(Comment)));
             }
         }
+        private RelayCommandParametr loadedCommand;
+        public RelayCommandParametr LoadedCommand
+        {
+            get
+            {
+                return loadedCommand
+                    ?? (loadedCommand = new RelayCommandParametr(
+                    obj =>
+                    {
+                        user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
 
+                        Initialize();
+
+                        loadedThread = new Thread(() =>
+                        {
+                           
+
+                            CountNegativeMark = context.Marks.CountMarkByType(TypeMark.Negative, Video.IdVideo);
+
+                            CountPositiveMark = context.Marks.CountMarkByType(TypeMark.Positive, Video.IdVideo);
+
+                            Mark mark = context.Marks.FindMarkByUserId(user.IdUser, Video.IdVideo);
+                            if (mark == null)
+                            {
+                                likeState = LikeState.None;
+                            }
+                            else
+                            {
+                                if (mark.TypeMark == TypeMark.Positive)
+                                    likeState = LikeState.Like;
+                                else
+                                    likeState = LikeState.Dislike;
+                            }
+
+                            Comments = new ObservableCollection<Comment>(context.Comments.GetAllByVideo(Video.IdVideo));
+
+                        });
+                        loadedThread.IsBackground = true;
+                        loadedThread.Start();
+
+                    }));
+            }
+        }
         #endregion
 
         #region ctor
@@ -382,8 +427,7 @@ namespace Borto_v1
         {
             _navigationService = navigationService;
             Video = navigationService.Parameter as Video;
-            user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
-            Initialize();
+            VideoImage = Video.Image;
         }
         #endregion
 
@@ -391,8 +435,6 @@ namespace Borto_v1
 
         public void Initialize()
         {
-            VideoImage = Video.Image;
-
             VideoName = Video.Name;
 
             VideoDescription = Video.Description;
@@ -403,29 +445,13 @@ namespace Borto_v1
 
             UserImage = Video.User.Image;
 
-            CountNegativeMark = context.Marks.CountMarkByType(TypeMark.Negative, Video.IdVideo);
-
-            CountPositiveMark = context.Marks.CountMarkByType(TypeMark.Positive, Video.IdVideo);
-
-            Mark mark = context.Marks.FindMarkByUserId(user.IdUser, Video.IdVideo);
-            if (mark == null)
-            {
-                likeState = LikeState.None;
-            }
-            else {
-                if (mark.TypeMark == TypeMark.Positive)
-                    likeState = LikeState.Like;
-                else
-                    likeState = LikeState.Dislike;
-            }
-
             MaxDuration = TimeSpan.FromSeconds(Video.MaxDuration).ToString(@"hh\:mm\:ss");
 
             UploadDate = Video.UploadDate.ToShortDateString();
 
             IsOwner = Video.UserId == user.IdUser;
 
-            Comments = new ObservableCollection<Comment>(context.Comments.GetAllByVideo(Video.IdVideo));
+           
         }
         #endregion
     }

@@ -1,4 +1,5 @@
 ﻿using Borto_v1;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -35,6 +36,13 @@ namespace Borto_v1
              {
                  switch (message.Notification)
                  {
+                     case "OpenLoginWindow":
+                         {
+                             var loginwindow = new LoginWindow();
+                             loginwindow.Show();
+                             this.Close();
+                             break;
+                         }
                      case "FullScreen":
                          {
                              this.WindowStyle = WindowStyle.None;

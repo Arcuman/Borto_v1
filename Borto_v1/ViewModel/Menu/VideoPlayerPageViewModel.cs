@@ -163,7 +163,7 @@ namespace Borto_v1
                     () =>
                     {
                         Messenger.Default.Send<NotificationMessage>(new NotificationMessage(this,"Choose"));
-                        if (selectedVideo.OriginalString != null)
+                        if (selectedVideo != null)
                         {
                             string temp = selectedVideo.OriginalString.Split('\\').Last();
                             isClickable = true;

@@ -124,11 +124,11 @@
                         </Border>
                     </StackPanel>
                     
-                    <StackPanel Grid.Row="3" >
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
                         <ProgressBar 
                                 Visibility="{Binding IsVisibleProgressBar,
                                     Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
-                                    FallbackValue=Collapsed}"
+                                    FallbackValue=Visible}"
                                 Style="{StaticResource MaterialDesignCircularProgressBar}"
                                 Value="35" 
                                 Margin="20 20 20 10"
@@ -136,11 +136,18 @@
                         <Button
                          Visibility="{Binding IsVisibleProgressBar,
                                     Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
-                                    ConverterParameter=False}"
+                                    ConverterParameter=False,FallbackValue=Collapsed}"
                         
                          Style="{StaticResource MaterialDesignRaisedLightButton}"
                          Width="100"  Content="Upload" 
                          Command="{Binding UploadCommand}"/>
+                        <Button
+                        Visibility="{Binding IsVisibleProgressBar,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    FallbackValue=Visible}"
+                         Style="{StaticResource MaterialDesignRaisedLightButton}"
+                         Width="100"  Content="Cancel" 
+                         Command="{Binding CancelUploadCommand}"/>
                     </StackPanel>
                 </Grid>
             </Grid>

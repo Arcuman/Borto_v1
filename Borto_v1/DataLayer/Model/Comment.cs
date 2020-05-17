@@ -32,6 +32,9 @@ namespace Borto_v1
         public Comment()
         {
         }
-
+        public string GetShortDate()
+        {
+            return PostDate.ToShortDateString();
+        }
     }
 }

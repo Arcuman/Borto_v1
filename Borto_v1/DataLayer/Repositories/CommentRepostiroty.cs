@@ -40,9 +40,8 @@ namespace Borto_v1
 
         public IEnumerable<Comment> GetAll()
         {
-            return db.Comments.AsNoTracking().Include(c => c.User).ToList();
+            return db.Comments.AsNoTracking().Include(c => c.User).Include(x=>x.Video).ToList();
         }
-
         public IEnumerable<Comment> GetAllByVideo(int VideoID)
         {
             return db.Comments.AsNoTracking().Include(c => c.User).Where(x=>x.VideoId==VideoID).OrderByDescending(x => x.PostDate).ToList();

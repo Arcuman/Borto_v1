@@ -78,7 +78,7 @@
                                 Command="{Binding ChooseFolderToSaveVideo}"
                                 Foreground="{StaticResource ForegroundColorLight}"/>
                     </StackPanel>
-                    <StackPanel >
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                         <ProgressBar 
                                 Visibility="{Binding IsVisibleProgressBar,
                                     Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
@@ -87,13 +87,20 @@
                                 Value="35" 
                                 Margin="20 20 20 10"
                                 IsIndeterminate="{Binding IsVisibleProgressBar}" />
-                        <Button Content="Download"
+                        <Button Content="Download" Width="200"
                             Visibility="{Binding IsVisibleProgressBar,
                                     Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
                                     ConverterParameter=False}"
                         
                             Command="{Binding DownloadVideoCommand}"
                             Foreground="{StaticResource ForegroundColorLight}" Margin="20 20 20 20 "/>
+                        <Button
+                        Visibility="{Binding IsVisibleProgressBar,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    FallbackValue=Visible}"
+                         Style="{StaticResource MaterialDesignRaisedLightButton}"
+                         Width="100"  Content="Cancel" 
+                         Command="{Binding CancelUploadCommand}"/>
                     </StackPanel>
                 </StackPanel>
             </materialDesign:ColorZone>

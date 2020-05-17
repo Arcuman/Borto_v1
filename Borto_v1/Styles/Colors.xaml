@@ -13,12 +13,12 @@
     
     <!--Primary-->
     <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#49C3F8" />
-    <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#FF333333" />
-    
-    <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#FFDDDDDD" />
+    <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#1A3447" />
+
+    <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#1A3447" />
 
     <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#056E9C" />
-    <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#1A3447" />
     <!--Accent-->
     <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#056E9C" />
     <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#FFFFFF" />

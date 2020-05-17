@@ -34,6 +34,7 @@ namespace Borto_v1
                   {
                       var modalWindowVM = SimpleIoc.Default.GetInstance<MainViewModel>();
                       modalWindowVM.User = message.Argument;
+                      modalWindowVM.IsAdmin = modalWindowVM.User.Role == UserRole.Admin;
                       var mainWindow = new MainWindow();
                       mainWindow.Show();
                       this.Close();

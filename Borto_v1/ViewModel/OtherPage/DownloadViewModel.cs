@@ -1,6 +1,7 @@
 ﻿
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.IO;
@@ -20,6 +21,8 @@ namespace Borto_v1
         private string pathFolder;
 
         private bool isVisibleProgressBar;
+
+        private Thread downloadThread;
         #endregion
 
         #region Public members
@@ -99,8 +102,7 @@ namespace Borto_v1
                     (obj) =>
                     {
                         IsVisibleProgressBar = true;
-                        ThreadPool.QueueUserWorkItem(
-                        (o) =>
+                        downloadThread = new Thread(() =>
                         {
                             AzureHelper helper = new AzureHelper();
                             string NameToSave = Video.Name;
@@ -116,12 +118,30 @@ namespace Borto_v1
                             }
                             helper.download_FromBlob(Video.Path, NameToSave, PathFolder);
                             IsVisibleProgressBar = false;
+
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Your video downloaded!";
+                            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         });
+                        downloadThread.IsBackground = true;
+                        downloadThread.Start();
                     },
                     (x)=> !String.IsNullOrWhiteSpace(PathFolder)));
             }
         }
-
+        private RelayCommandParametr cancelUploadCommand;
+        public RelayCommandParametr CancelUploadCommand
+        {
+            get
+            {
+                return cancelUploadCommand
+                    ?? (cancelUploadCommand = new RelayCommandParametr(
+                    (o) =>
+                    {
+                        downloadThread.Abort();
+                        IsVisibleProgressBar = false;
+                    }));
+            }
+        }
         private RelayCommand _loadedpageCommand;
         public RelayCommand LoadedPageCommand
         {
@@ -144,6 +164,10 @@ namespace Borto_v1
         {
             _navigationService = navigationService;
             Video = navigationService.Parameter as Video;
+            if (!isVisibleProgressBar)
+            {
+                PathFolder = string.Empty;
+            }
         }
 
         #endregion

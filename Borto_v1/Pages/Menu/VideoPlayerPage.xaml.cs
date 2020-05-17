@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
 using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -15,6 +16,7 @@ namespace Borto_v1
     public partial class VideoPlayerPage : Page
     {
         bool userIsDraggingSlider = false;
+        DispatcherTimer timer;
         public VideoPlayerPage()
         {
 
@@ -22,7 +24,7 @@ namespace Borto_v1
             if (this.DataContext == null)
             this.DataContext = new VideoPlayerPageViewModel();
 
-            DispatcherTimer timer = new DispatcherTimer();
+             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
             timer.Start();
@@ -81,6 +83,7 @@ namespace Borto_v1
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             Messenger.Default.Unregister(this);
+            timer = null;
         }
 
         private void sliProgress_DragStarted(object sender, DragStartedEventArgs e)
