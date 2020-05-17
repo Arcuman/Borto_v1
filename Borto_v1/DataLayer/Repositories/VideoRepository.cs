@@ -10,6 +10,8 @@ namespace Borto_v1
     {
         private  PlayerContext db;
 
+        private  PlayerContext temp_db_context;
+
         public VideoRepository(PlayerContext context)
         {
             this.db = context;
@@ -31,6 +33,22 @@ namespace Borto_v1
         {
             return db.Videos.Where(predicate).ToList();
         }
+        /// <summary>
+        /// Checks if there is video in the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool IsExist(int id)
+        {
+            temp_db_context = new PlayerContext();
+            Video test = temp_db_context.Videos.Find(id);
+            temp_db_context.Dispose();
+            if (test != null)
+                return true;
+            return false;
+
+        }
+
         public IEnumerable<Video> FindByUserId(int UserId)
         {
             return db.Set<Video>().AsNoTracking().Where(c => c.UserId == UserId).ToList();

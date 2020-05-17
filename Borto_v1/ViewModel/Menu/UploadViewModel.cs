@@ -180,24 +180,7 @@ namespace Borto_v1
                             IsVisibleProgressBar = true;
                             uploadThread = new Thread(() =>
                             {
-                                maxDuration = Video.GetMaxDuration(PathVideo);
-
-                                AzureHelper helper = new AzureHelper();
-
-                                serverfilepath = helper.upload_ToBlob(PathVideo, Name);
-
-                                user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
-
-                                Video video = new Video(Name, Description, image, user, serverfilepath, maxDuration);
-
-                                context.Videos.Create(video);
-
-                                context.Save();
-
-                                IsVisibleProgressBar = false;
-
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Your video uploaded!";
-                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                                Upload();
                             });
                             uploadThread.IsBackground = true;
                             uploadThread.Start();
@@ -243,6 +226,36 @@ namespace Borto_v1
                 Description = String.Empty;
             }
         }
+        #endregion
+
+        #region Helpers
+
+        private void Upload()
+        {
+            maxDuration = Video.GetMaxDuration(PathVideo);
+
+            AzureHelper helper = new AzureHelper();
+
+            serverfilepath = helper.upload_ToBlob(PathVideo, Name);
+
+            user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
+
+            Video video = new Video(Name, Description, image, user, serverfilepath, maxDuration);
+
+            context.Videos.Create(video);
+
+            context.Save();
+
+            IsVisibleProgressBar = false;
+
+            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Your video uploaded!";
+            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+
+            Name = Description = PathVideo = string.Empty;
+
+            Image img = System.Drawing.Image.FromFile(new Uri("../../Assets/camera.jpg", UriKind.RelativeOrAbsolute).OriginalString);
+        }
+
         #endregion
     }
 

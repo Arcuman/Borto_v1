@@ -28,7 +28,7 @@
         <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" >
             <Grid Background="{StaticResource BackgroundLightBlueBrush}" >
-                <TextBlock  Text="Account Page" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
+                <TextBlock HorizontalAlignment="Center"  Text="Account Page" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
                 <Button Width="35" Height="35" Padding="0" HorizontalAlignment="Right"
                                         Margin="0 0 20 0" Background="{StaticResource BackgroundDarkBlueBrush}"
                         BorderBrush="{StaticResource BackgroundDarkBlueBrush}"

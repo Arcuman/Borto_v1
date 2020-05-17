@@ -31,7 +31,7 @@
             <materialDesign:ColorZone Height="50" materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" DockPanel.Dock="Top">
                 <Grid  Background="{StaticResource BackgroundLightBlueBrush}">
-                    <TextBlock  Text="Watch the video" Margin="10" 
+                    <TextBlock HorizontalAlignment="Center" Text="Watch the video" Margin="10" 
                                     FontFamily="Franklin Gothic Medium"
                                     FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
 
@@ -85,46 +85,58 @@ OpeningEffect="{materialDesign:TransitionEffect FadeIn, Duration=0:0:1}">
                                 IsIndeterminate="{Binding IsVisibleProgressBar}" />
                 <ListBox    x:Name="ListViewProduct" Background="#f0f8ff" ItemsSource="{Binding Videos}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
 
-                <ListBox.ItemTemplate>
-                    <DataTemplate >
-                        <Border   Name="border" Margin="50 10 50 10" Width="310" Height="260">
-                            <StackPanel >
-                                <Border  Width="300" Height="200" CornerRadius="5" Margin="5">
-                                    <Border.Effect>
-                                        <DropShadowEffect ShadowDepth="5"/>
-                                    </Border.Effect>
-                                    <Border.Background>
-                                        <ImageBrush ImageSource="{Binding Image, Mode=OneTime}"/>
-                                    </Border.Background>
-                                </Border>
-                                <Grid>
-                                    <StackPanel>
-                                        <TextBlock Margin="5" Text="{Binding Name, Mode=OneTime}" FontSize="14" FontFamily="Franklin Gothic Medium" />
-                                        <TextBlock Margin="5 0" Text="{Binding User.NickName, Mode=OneTime}" FontSize="13" />
-                                    </StackPanel>
-                                    <Button  HorizontalAlignment="Right" Margin="0 0 10 0"
+                    <ListBox.ItemTemplate>
+                        <DataTemplate >
+                            <Border   Name="border" Margin="50 10 50 10" Width="310" Height="280">
+                                <StackPanel >
+                                    <Border  Width="300" Height="200" CornerRadius="5" Margin="5">
+                                        <Border.Effect>
+                                            <DropShadowEffect ShadowDepth="5"/>
+                                        </Border.Effect>
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding Image, Mode=OneTime}"/>
+                                        </Border.Background>
+                                        <TextBlock  TextTrimming="CharacterEllipsis"
+                                                   Text="{Binding Duration, Mode=OneTime}" Foreground="{StaticResource ForegroundColorLight}"
+                                                   FontSize="13" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Black"/>
+                                    </Border>
+                                    <Grid>
+                                        <StackPanel Margin="5 0">
+                                            <TextBlock HorizontalAlignment="Left" TextTrimming="CharacterEllipsis"
+                                                   Text="{Binding Name, Mode=OneTime}" FontSize="14"
+                                                   Width="200"
+                                                   FontFamily="Franklin Gothic Medium" />
+                                            <TextBlock  HorizontalAlignment="Left"  TextTrimming="CharacterEllipsis"
+                                                   Text="{Binding UploadDate, Mode=OneTime}" 
+                                                   FontSize="13" />
+                                            <TextBlock HorizontalAlignment="Left" TextTrimming="CharacterEllipsis"
+                                                   Text="{Binding User.NickName, Mode=OneTime}" 
+                                                   Width="200"
+                                                   FontSize="13" />
+                                        </StackPanel>
+                                        <Button  HorizontalAlignment="Right" Margin="0 0 10 0"
                                         Command="{Binding ElementName= ListViewProduct,Path=DataContext.DownloadPageCommand}" 
                                         CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}">
-                                        <materialDesign:PackIcon Width="25" Height="25" Kind="Download"  Foreground="{StaticResource ForegroundColorLight}"/>
-                                    </Button>
-                                </Grid>
-                            </StackPanel>
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseLeftButtonUp">
-                                    <i:InvokeCommandAction Command="{Binding ElementName= ListViewProduct,Path=DataContext.ViewWatchingPageCommand}" 
+                                            <materialDesign:PackIcon Width="25" Height="25" Kind="Download"  Foreground="{StaticResource ForegroundColorLight}"/>
+                                        </Button>
+                                    </Grid>
+                                </StackPanel>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp">
+                                        <i:InvokeCommandAction Command="{Binding ElementName= ListViewProduct,Path=DataContext.ViewWatchingPageCommand}" 
                                                        CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </Border>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-            </ListBox>
-           </Grid>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </Grid>
         </materialDesign:TransitioningContent>
     </Grid>
 </Page>

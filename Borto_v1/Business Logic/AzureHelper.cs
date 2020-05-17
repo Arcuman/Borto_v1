@@ -47,7 +47,7 @@ namespace Borto_v1
                 container.SetPermissionsAsync(new BlobContainerPermissions
                 {
                     PublicAccess =
-                  BlobContainerPublicAccessType.Blob
+                  BlobContainerPublicAccessType.Container
                 });
             }
             CloudBlockBlob cloudBlockBlob = container.GetBlockBlobReference(filename);
@@ -83,6 +83,23 @@ namespace Borto_v1
             cloudBlockBlob.DownloadToStream(file);
             file.Close();
         }
+         /// <summary>
+        /// Delete file from Azure 
+        /// </summary>
+        /// <param name="filetoDelete"></param>
+        public  void delete_FromBlob(string filetoDelete)
+        {
+            CloudStorageAccount mycloudStorageAccount = CloudStorageAccount.Parse(connectionString);
+            CloudBlobClient blobClient = mycloudStorageAccount.CreateCloudBlobClient();
+
+            CloudBlobContainer container = blobClient.GetContainerReference("borto");
+            CloudBlockBlob cloudBlockBlob = container.GetBlockBlobReference(filetoDelete);
+
+            cloudBlockBlob.DeleteIfExists();
+        }
+
+
+
         #endregion
     }
 }

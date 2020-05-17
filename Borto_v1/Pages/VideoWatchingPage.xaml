@@ -26,12 +26,12 @@
 
         <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" >
-            <StackPanel Background="{StaticResource BackgroundLightBlueBrush}" Orientation="Horizontal">
-                <TextBlock 
+            <Grid  HorizontalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center"
                     Text="Video Page" Margin="10" FontSize="22" 
                     FontWeight="Medium" FontFamily="Franklin Gothic Medium"
                     Foreground="{StaticResource ForegroundColorLight}"/>
-            </StackPanel>
+            </Grid>
         </materialDesign:ColorZone>
         <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
               PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
@@ -60,7 +60,63 @@
                                FontWeight="Light" MaxWidth="500"
                                TextTrimming="CharacterEllipsis"
                                HorizontalAlignment="Left"
+                                     Visibility="{Binding IsVisibleEditNameIcon,
+                                        Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
                                FontFamily="Franklin Gothic Medium" Margin="40 10 0 0"/>
+                        <TextBox Height="50" Text="{Binding VideoName}" FontSize="30"
+                                 Name="NameTextBox"
+                               FontWeight="Light" MaxWidth="500"
+                               Visibility="{Binding IsVisibleEditNameIcon,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    ConverterParameter=False}"
+                               HorizontalAlignment="Left"
+                               FontFamily="Franklin Gothic Medium" Margin="40 10 0 0"/>
+                    </Grid>
+                    <Grid Grid.Column="5" 
+                           Visibility="{Binding IsUserOwner,
+                                        Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}">
+                        <Button     Margin="0 0 10 0" Width="35" Height="35" Padding="0"
+                                        Command="{Binding ChangeNameCommand}"
+                                        Visibility="{Binding IsVisibleEditNameIcon,
+                                        Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
+                                        >
+                            <materialDesign:PackIcon Width="15" Height="15" Kind="Edit"  Foreground="{StaticResource ForegroundColorLight}"/>
+                        </Button>
+                        <StackPanel HorizontalAlignment="Center"  Visibility="{Binding IsVisibleEditNameIcon,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    ConverterParameter=False}"  Orientation="Horizontal">
+                            <Button Command="{Binding SaveChangeNameCommand}" 
+                                    Height="35" Padding="0" Width="35"
+                                    Foreground="{StaticResource ForegroundColorLight}"
+                                     >
+                                <Button.Content>
+                                    <Grid>
+                                        <materialDesign:PackIcon 
+                                    Width="15" Height="15" Kind="Check"  Foreground="{StaticResource ForegroundColorLight}"/>
+
+                                    </Grid>
+                                </Button.Content>
+                                <Button.Style >
+                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedLightButton}">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NameTextBox}" Value="False"/>
+                                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=DiscriptionTextBox}" Value="False"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="IsEnabled" Value="True"/>
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                            <Button Width="35" Height="35" Padding="0"
+                                        Margin="20 0 0 0"
+                                        Command="{Binding CancelNameCommand}">
+                                <materialDesign:PackIcon Width="15" Height="15" Kind="Cancel"  Foreground="{StaticResource ForegroundColorLight}"/>
+                            </Button>
+                        </StackPanel>
                     </Grid>
                     <Border Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2"
                          Width="Auto" Height="Auto"
@@ -121,9 +177,19 @@
                         </Grid.RowDefinitions>
                         <TextBlock FontFamily="Franklin Gothic Medium" Text="Description:" FontSize="30" />
                         <Border BorderThickness="0 1 0 0" BorderBrush="{StaticResource BackgroundDarkBlueBrush}" Grid.Row="1" MinWidth="400">
-                            <TextBlock 
-                            Text="{Binding VideoDescription}"
-                            TextWrapping="Wrap"  FontSize="20" />
+                            <Grid>
+                                <TextBlock 
+                                    Text="{Binding VideoDescription}"
+                                     Visibility="{Binding IsVisibleEditNameIcon,
+                                        Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
+                                    TextWrapping="Wrap"  FontSize="20" />
+                                <TextBox Margin="0 0 10 0" Name ="DiscriptionTextBox" MinWidth="380"
+                                          Visibility="{Binding IsVisibleEditNameIcon,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    ConverterParameter=False}"
+                                    Text="{Binding VideoDescription}"
+                                    TextWrapping="Wrap"  FontSize="20" />
+                            </Grid>
                         </Border>
                     </Grid>
                     <Border Margin="10 0" Grid.Row="3" Grid.ColumnSpan="5" VerticalAlignment="Bottom" BorderThickness=" 0 0 0 1" BorderBrush="{StaticResource BackgroundDarkBlueBrush}"/>
@@ -174,7 +240,8 @@
                              Margin="10 0" 
                              Width="450" FontSize="16"
                                 Text="{Binding Comment,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             materialDesign:HintAssist.Hint="Insert your comment here" />
+                             materialDesign:HintAssist.Hint="Insert your comment here"
+                              IsEnabled="{Binding IsVisibleEditNameIcon}"/>
                             <Button Content="Send"
                                     Command="{Binding SendCommentCommand}"
                                     Style="{StaticResource MaterialDesignFlatLightBgButton}"/>

@@ -19,7 +19,7 @@
             <i:InvokeCommandAction Command="{Binding LoadedPageCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid Background="#f0f8ff" >
+    <Grid  >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -27,14 +27,14 @@
         <Grid Height="55">
             <materialDesign:ColorZone Height="50" materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" DockPanel.Dock="Top">
-                <StackPanel  Background="{StaticResource BackgroundLightBlueBrush}" Orientation="Horizontal">
-                    <TextBlock  Text="Download the video" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
-                </StackPanel>
+                <Grid  Background="{StaticResource BackgroundLightBlueBrush}" >
+                    <TextBlock HorizontalAlignment="Center"  Text="Download the video" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
+                </Grid>
             </materialDesign:ColorZone>
         </Grid>
 
         
-            <Border  Grid.Row="1" HorizontalAlignment="Center"
+            <Border  Background="Transparent" Grid.Row="1" HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Width="350" 
                 Height="Auto"

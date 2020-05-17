@@ -203,6 +203,15 @@
     </Compile>
     <Compile Include="DataLayer\Model\User.cs" />
     <Compile Include="DataLayer\Model\Video.cs" />
+    <Compile Include="Pages\AdminPages\AdminUsersPage.xaml.cs">
+      <DependentUpon>AdminUsersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdminPages\AdminVideosPage.xaml.cs">
+      <DependentUpon>AdminVideosPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdminPages\CommentsPage.xaml.cs">
+      <DependentUpon>CommentsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -231,6 +240,8 @@
       <DependentUpon>WatchingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Test\Test.cs" />
+    <Compile Include="ViewModel\AdminPages\AdminCommentsViewModel.cs" />
+    <Compile Include="ViewModel\AdminPages\AdminVideosViewModel.cs" />
     <Compile Include="ViewModel\Menu\AccountViewModel.cs" />
     <Compile Include="ViewModel\OtherPage\DownloadViewModel.cs" />
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
@@ -265,6 +276,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\AdminPages\AdminUsersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdminPages\AdminVideosPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdminPages\CommentsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Login\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

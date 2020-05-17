@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using GalaSoft.MvvmLight.Ioc;
+using System.Windows.Controls;
 
 namespace Borto_v1
 {
@@ -11,7 +12,7 @@ namespace Borto_v1
         {
             InitializeComponent();
 
-            this.DataContext = new AdminViewModel();
+            this.DataContext = new AdminViewModel(SimpleIoc.Default.GetInstance<IFrameNavigationService>());
         }
     }
 }

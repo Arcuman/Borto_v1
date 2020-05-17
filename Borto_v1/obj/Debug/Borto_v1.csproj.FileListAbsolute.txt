@@ -215,3 +215,9 @@ D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Squirrel.dll
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\NuGet.Squirrel.pdb
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Splat.pdb
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Squirrel.pdb
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\AdminPages\CommentsPage.g.cs
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\AdminPages\CommentsPage.baml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\AdminPages\AdminVideosPage.g.cs
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\AdminPages\AdminVideosPage.baml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\AdminPages\AdminUsersPage.g.cs
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\AdminPages\AdminUsersPage.baml

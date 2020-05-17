@@ -12,7 +12,9 @@ namespace Borto_v1
     {
         #region Private members 
         EFUnitOfWork context = new EFUnitOfWork();
+
         private ObservableCollection<Video> videos;
+
         private IFrameNavigationService _navigationService;
 
         private Video selectedVideo;
@@ -141,7 +143,7 @@ namespace Borto_v1
                         loadedThread = new Thread(() =>
                         {
                             Videos = new ObservableCollection<Video>(context.Videos.GetAll());
-                            isSortedBy = SortState.None;
+                            isSortedBy = SortState.New;
                             IsVisibleProgressBar = false;
                         });
                         loadedThread.IsBackground = true;

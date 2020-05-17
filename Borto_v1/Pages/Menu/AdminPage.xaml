@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Borto_v1" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450"
-      Title="SettingsPage" Width="920">
+      Title="SettingsPage">
 
     <Grid Background="#f0f8ff">
         <Grid.RowDefinitions>
@@ -16,58 +16,20 @@
         <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" >
             <Grid Background="{StaticResource BackgroundLightBlueBrush}" >
-                <TextBlock  Text="Admin Page" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
+                <TextBlock HorizontalAlignment="Center"  Text="Admin Page" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
             </Grid>
 
         </materialDesign:ColorZone>
         <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <StackPanel Margin="5"  Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
-                <TextBox Width="150" Foreground="{StaticResource BackgroundDarkBlueBrush}" Height="40" 
-                                 Text="{Binding CommentSearch}" Margin="15 0" materialDesign:HintAssist.IsFloating="True"
-                                 materialDesign:HintAssist.Hint="Comment" 
-                                 materialDesign:HintAssist.HintOpacity="0.9" Style="{StaticResource MaterialDesignTextBox}"
-                                 FontFamily="Franklin Gothic Medium" FontSize="20"/>
-                <DatePicker Width="150"  Height="40" 
-                                 Text="{Binding DateSearch,Mode=TwoWay}" Margin="15 0 15 0"  materialDesign:HintAssist.IsFloating="True"
-                                 materialDesign:HintAssist.Hint="Date"
-                                 materialDesign:HintAssist.HintOpacity="0.9" 
-                                 FontFamily="Franklin Gothic Medium" FontSize="20" />
-                <TextBox Width="150" Foreground="{StaticResource BackgroundDarkBlueBrush}" Height="40" 
-                                 Text="{Binding VideoSearch}" Margin="15 0" materialDesign:HintAssist.IsFloating="True"
-                                 materialDesign:HintAssist.Hint="Video" 
-                                 materialDesign:HintAssist.HintOpacity="0.9" Style="{StaticResource MaterialDesignTextBox}"
-                                 FontFamily="Franklin Gothic Medium" FontSize="20"/>
-                <TextBox Width="150" Foreground="{StaticResource BackgroundDarkBlueBrush}" Height="40" 
-                                 Text="{Binding UserSearch}" Margin="15 0" materialDesign:HintAssist.IsFloating="True"
-                                 materialDesign:HintAssist.Hint="User Nickname" 
-                                 materialDesign:HintAssist.HintOpacity="0.9" Style="{StaticResource MaterialDesignTextBox}"
-                                 FontFamily="Franklin Gothic Medium" FontSize="20"/>
-
-                <Button Height="30"
-                    Width="30" Padding="1" 
-                    Command="{Binding SearchCommand}"
-                    BorderBrush="{StaticResource BackgroundLightBlueBrush}" Background="{StaticResource BackgroundLightBlueBrush}" Margin="5 0">
-                    <materialDesign:PackIcon Kind="Magnify" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="{StaticResource ForegroundColorLight}"/>
-                </Button>
-                <Button Height="30"
-                    Width="120" Padding="1" 
-                    Content="Delete" Foreground="{StaticResource ForegroundColorLight}"
-                    Command="{Binding DeleteCommentCommand}"
-                    BorderBrush="{StaticResource BackgroundLightBlueBrush}" Background="{StaticResource BackgroundLightBlueBrush}" Margin="5 0"/>
+            <StackPanel VerticalAlignment="Center" >
+                <Button Margin="20 20" Content="Users" Width="120" HorizontalAlignment="Center" 
+                      Command="{Binding AdminCommentsCommand}"/>
+                <Button Margin="20 20" Content="Videos" Width="120" HorizontalAlignment="Center" 
+                      Command="{Binding AdminVideosCommand}"/>
+                <Button Margin="20 20" Content="Comments" Width="120" HorizontalAlignment="Center" 
+                      Command="{Binding AdminCommentsCommand}"/>
 
             </StackPanel>
-            <DataGrid SelectedItem="{Binding SelectedComment}" Margin="15 0" AutoGenerateColumns="False" AreRowDetailsFrozen="True"   CanUserAddRows="False" Background="Transparent" CanUserDeleteRows="False" IsReadOnly="True" ItemsSource="{Binding Comments}" Grid.Row="1" Height="Auto" Width="Auto">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding CommentMessage}" Header="Comment" Width="200"/>
-                    <DataGridTextColumn Binding="{Binding PostDate}" Header="Post date" Width="200"/>
-                    <DataGridTextColumn Binding="{Binding Video.Name}" Header="Video" Width="150"/>
-                    <DataGridTextColumn Binding="{Binding User.NickName}" Header="User Nickname" Width="150"/>
-                </DataGrid.Columns>
-            </DataGrid>
         </Grid>
     </Grid>
 </Page>

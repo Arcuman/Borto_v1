@@ -6,6 +6,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
+using System.Windows.Data;
 
 namespace Borto_v1
 {
@@ -50,6 +51,10 @@ namespace Borto_v1
         private string comment;
 
         private Thread loadedThread;
+
+        private bool isVisibleEditNameIcon;
+
+        private bool isUserOwner;
         #endregion
 
         #region Public members
@@ -282,6 +287,39 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+        public bool IsVisibleEditNameIcon
+        {
+            get
+            {
+                return isVisibleEditNameIcon;
+            }
+            set
+            {
+                if (isVisibleEditNameIcon == value)
+                {
+                    return;
+                }
+                isVisibleEditNameIcon = value;
+                RaisePropertyChanged();
+            }
+        }
+        public bool IsUserOwner
+        {
+            get
+            {
+                return isUserOwner;
+            }
+            set
+            {
+                if (isUserOwner == value)
+                {
+                    return;
+                }
+                isUserOwner = value;
+                RaisePropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Commands 
@@ -354,6 +392,10 @@ namespace Borto_v1
                     likeState == LikeState.Dislike || likeState == LikeState.None));
             }
         }
+
+        /// <summary>
+        /// Leave comment
+        /// </summary>
         private RelayCommandParametr sendCommentCommand;
         public RelayCommandParametr SendCommentCommand
         {
@@ -374,7 +416,7 @@ namespace Borto_v1
                         Comments = new ObservableCollection<Comment>(context.Comments.GetAllByVideo(Video.IdVideo));
                     },
                     (x) =>
-                    !String.IsNullOrWhiteSpace(Comment)));
+                    !String.IsNullOrWhiteSpace(Comment) && IsVisibleEditNameIcon));
             }
         }
         private RelayCommandParametr loadedCommand;
@@ -386,37 +428,65 @@ namespace Borto_v1
                     ?? (loadedCommand = new RelayCommandParametr(
                     obj =>
                     {
-                        user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
-
+                        
                         Initialize();
 
                         loadedThread = new Thread(() =>
                         {
-                           
-
-                            CountNegativeMark = context.Marks.CountMarkByType(TypeMark.Negative, Video.IdVideo);
-
-                            CountPositiveMark = context.Marks.CountMarkByType(TypeMark.Positive, Video.IdVideo);
-
-                            Mark mark = context.Marks.FindMarkByUserId(user.IdUser, Video.IdVideo);
-                            if (mark == null)
-                            {
-                                likeState = LikeState.None;
-                            }
-                            else
-                            {
-                                if (mark.TypeMark == TypeMark.Positive)
-                                    likeState = LikeState.Like;
-                                else
-                                    likeState = LikeState.Dislike;
-                            }
-
-                            Comments = new ObservableCollection<Comment>(context.Comments.GetAllByVideo(Video.IdVideo));
-
+                            Loaded();
                         });
                         loadedThread.IsBackground = true;
                         loadedThread.Start();
 
+                    }));
+            }
+        }
+
+        private RelayCommandParametr changeNameCommand;
+        public RelayCommandParametr ChangeNameCommand
+        {
+            get
+            {
+                return changeNameCommand
+                    ?? (changeNameCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        IsVisibleEditNameIcon = false;
+
+                    }));
+            }
+        }
+        private RelayCommandParametr saveChangeNameCommand;
+        public RelayCommandParametr SaveChangeNameCommand
+        {
+            get
+            {
+                return saveChangeNameCommand
+                    ?? (saveChangeNameCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        Video.Name = VideoName;
+
+                        Video.Description = VideoDescription;
+
+                        context.Videos.Update(Video);
+                        context.Save();
+                        IsVisibleEditNameIcon = true;
+                    }));
+            }
+        }
+        private RelayCommandParametr cancelNameCommand;
+        public RelayCommandParametr CancelNameCommand
+        {
+            get
+            {
+                return cancelNameCommand
+                    ?? (cancelNameCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        VideoName = Video.Name;
+                        VideoDescription = Video.Description;
+                        IsVisibleEditNameIcon = true;
                     }));
             }
         }
@@ -432,10 +502,18 @@ namespace Borto_v1
         #endregion
 
         #region Helpers
-
+        /// <summary>
+        /// Not async load info 
+        /// </summary>
         public void Initialize()
         {
+            user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
+
+            IsVisibleEditNameIcon = true;
+
             VideoName = Video.Name;
+
+            IsUserOwner = Video.UserId == user.IdUser;
 
             VideoDescription = Video.Description;
 
@@ -445,14 +523,38 @@ namespace Borto_v1
 
             UserImage = Video.User.Image;
 
-            MaxDuration = TimeSpan.FromSeconds(Video.MaxDuration).ToString(@"hh\:mm\:ss");
+            MaxDuration = Video.Duration;
 
             UploadDate = Video.UploadDate.ToShortDateString();
 
             IsOwner = Video.UserId == user.IdUser;
-
-           
         }
+        /// <summary>
+        /// Async load info about comment and other...
+        /// </summary>
+        public void Loaded()
+        {
+
+            CountNegativeMark = context.Marks.CountMarkByType(TypeMark.Negative, Video.IdVideo);
+
+            CountPositiveMark = context.Marks.CountMarkByType(TypeMark.Positive, Video.IdVideo);
+
+            Mark mark = context.Marks.FindMarkByUserId(user.IdUser, Video.IdVideo);
+            if (mark == null)
+            {
+                likeState = LikeState.None;
+            }
+            else
+            {
+                if (mark.TypeMark == TypeMark.Positive)
+                    likeState = LikeState.Like;
+                else
+                    likeState = LikeState.Dislike;
+            }
+
+            Comments = new ObservableCollection<Comment>(context.Comments.GetAllByVideo(Video.IdVideo));
+        }
+
         #endregion
     }
 }

@@ -31,11 +31,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Height="55">
-            <StackPanel  Background="{StaticResource BackgroundLightBlueBrush}" Orientation="Horizontal">
+        <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="PrimaryMid" >
+            <Grid  HorizontalAlignment="Center" >
                 <TextBlock  Text="Video Player" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
-            </StackPanel>
-        </Grid>
+            </Grid>
+        </materialDesign:ColorZone>
 
         <Grid Panel.ZIndex="10" Name="grid_content" Grid.Row="1">
             <Grid>

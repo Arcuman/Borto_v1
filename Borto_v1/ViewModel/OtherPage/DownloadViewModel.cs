@@ -13,6 +13,7 @@ namespace Borto_v1
     {
 
         #region Private members
+        private EFUnitOfWork context = new EFUnitOfWork();
 
         private IFrameNavigationService _navigationService;
 
@@ -23,6 +24,11 @@ namespace Borto_v1
         private bool isVisibleProgressBar;
 
         private Thread downloadThread;
+
+        /// <summary>
+        /// Checks if video has been deleted
+        /// </summary>
+        private Thread checkingVideoThread;
         #endregion
 
         #region Public members
@@ -102,28 +108,19 @@ namespace Borto_v1
                     (obj) =>
                     {
                         IsVisibleProgressBar = true;
+                        
                         downloadThread = new Thread(() =>
                         {
-                            AzureHelper helper = new AzureHelper();
-                            string NameToSave = Video.Name;
-                            if (!string.IsNullOrWhiteSpace(PathFolder))
-                            {
-                                string[] files = Directory.GetFiles(PathFolder);
-                                foreach (var file in files)
-                                {
-                                    string filename = file.Substring(file.LastIndexOf('\\') + 1);
-                                    if (filename == (Video.Name + ".mp4"))
-                                        NameToSave += Guid.NewGuid().ToString("N");
-                                }
-                            }
-                            helper.download_FromBlob(Video.Path, NameToSave, PathFolder);
-                            IsVisibleProgressBar = false;
-
-                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Your video downloaded!";
-                            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                            Download();
+                        });
+                        checkingVideoThread = new Thread(() =>
+                        {
+                            CheckIsVideoExist();
                         });
                         downloadThread.IsBackground = true;
                         downloadThread.Start();
+                        checkingVideoThread.IsBackground = true;
+                        checkingVideoThread.Start();
                     },
                     (x)=> !String.IsNullOrWhiteSpace(PathFolder)));
             }
@@ -170,6 +167,52 @@ namespace Borto_v1
             }
         }
 
+        #endregion
+
+        #region Helpers
+        /// <summary>
+        /// Start download video from Azure with file name like in database,
+        /// if this name is already taken , than add Guid.NewGuid().ToString("N")
+        /// </summary>
+        private void Download()
+        {
+            AzureHelper helper = new AzureHelper();
+            string NameToSave = Video.Name;
+            if (!string.IsNullOrWhiteSpace(PathFolder))
+            {
+                string[] files = Directory.GetFiles(PathFolder);
+                foreach (var file in files)
+                {
+                    string filename = file.Substring(file.LastIndexOf('\\') + 1);
+                    if (filename == (Video.Name + ".mp4"))
+                        NameToSave += Guid.NewGuid().ToString("N");
+                }
+            }
+            helper.download_FromBlob(Video.Path, NameToSave, PathFolder);
+            IsVisibleProgressBar = false;
+            
+            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Your video downloaded!";
+            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+        }
+
+        private void CheckIsVideoExist()
+        {
+            while (IsVisibleProgressBar)
+            {
+                AzureHelper helper = new AzureHelper();
+                if (context.Videos.IsExist(Video.IdVideo))
+                {
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    downloadThread.Abort();
+                    IsVisibleProgressBar = false;
+                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Video was deleted from server!";
+                    SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                }
+            }
+        }
         #endregion
     }
 }

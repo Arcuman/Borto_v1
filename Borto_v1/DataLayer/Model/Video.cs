@@ -35,6 +35,14 @@ namespace Borto_v1
 
         public virtual List<Mark> Marks { get; set; }
 
+        [NotMapped]
+        public string Duration {
+            get
+            {
+                return TimeSpan.FromSeconds(MaxDuration).ToString(@"hh\:mm\:ss");
+            } 
+        }
+
         public Video()
         {
         }

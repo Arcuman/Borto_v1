@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -8,197 +9,54 @@ namespace Borto_v1
     public class AdminViewModel : ViewModelBase
     {
         #region Private Fields
-        EFUnitOfWork context = new EFUnitOfWork();
 
-        private ObservableCollection<Comment> comments;
-
-        private Comment selectedComment;
-
-        private string commentSearch;
-
-        private string dateSearch;
-
-        private string videoSearch;
-
-        private string userSearch;
-
-        #endregion
-
-        #region Public Fields
-
-        public ObservableCollection<Comment> Comments
-        {
-            get
-            {
-                return comments;
-            }
-
-            set
-            {
-                if (comments == value)
-                {
-                    return;
-                }
-
-                comments = value;
-                RaisePropertyChanged();
-            }
-        } 
-        public Comment SelectedComment
-        {
-            get
-            {
-                return selectedComment;
-            }
-
-            set
-            {
-                if (selectedComment == value)
-                {
-                    return;
-                }
-
-                selectedComment = value;
-                RaisePropertyChanged();
-            }
-        }
-        public string CommentSearch
-        {
-            get
-            {
-                return commentSearch;
-            }
-
-            set
-            {
-                if (commentSearch == value)
-                {
-                    return;
-                }
-
-                commentSearch = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public string DateSearch
-        {
-            get
-            {
-                return dateSearch;
-            }
-
-            set
-            {
-                if (dateSearch == value)
-                {
-                    return;
-                }
-
-                dateSearch = value;
-                RaisePropertyChanged();
-            }
-        }
-        public string VideoSearch
-        {
-            get
-            {
-                return videoSearch;
-            }
-
-            set
-            {
-                if (videoSearch == value)
-                {
-                    return;
-                }
-
-                videoSearch = value;
-                RaisePropertyChanged();
-            }
-        }
-        public string UserSearch
-        {
-            get
-            {
-                return userSearch;
-            }
-
-            set
-            {
-                if (userSearch == value)
-                {
-                    return;
-                }
-
-                userSearch = value;
-                RaisePropertyChanged();
-            }
-        }
+        private IFrameNavigationService _navigationService;
 
         #endregion
 
 
-        #region
-        private RelayCommandParametr searchCommand;
-        public RelayCommandParametr SearchCommand
+        #region Public Members
+
+
+        #endregion
+
+        #region Commands
+
+        private RelayCommand adminCommentsCommand;
+        public RelayCommand AdminCommentsCommand
         {
             get
             {
-                return searchCommand
-                    ?? (searchCommand = new RelayCommandParametr(
-                    (o) =>
+                return adminCommentsCommand
+                    ?? (adminCommentsCommand = new RelayCommand(
+                    () =>
                     {
-                        if (String.IsNullOrWhiteSpace(CommentSearch)
-                                && String.IsNullOrWhiteSpace(DateSearch)
-                                && String.IsNullOrWhiteSpace(VideoSearch)
-                                && String.IsNullOrWhiteSpace(UserSearch))
-                        {
-                            Comments = new ObservableCollection<Comment>(context.Comments.GetAll());
-                        }
-                        else if (!String.IsNullOrWhiteSpace(DateSearch))
-                        {
-                            Comments = new ObservableCollection<Comment>(Comments.Where(x => x.CommentMessage.Contains(CommentSearch)
-                                                          && x.PostDate.ToShortDateString() == DateSearch
-                                                          && x.Video.Name.Contains(VideoSearch)
-                                                          && x.User.NickName.Contains(UserSearch)).ToList());
-                        }
-                        else
-                        {
-                            Comments = new ObservableCollection<Comment>(Comments.Where(x => x.CommentMessage.Contains(CommentSearch)
-                                                          && x.Video.Name.Contains(VideoSearch)
-                                                          && x.User.NickName.Contains(UserSearch)).ToList());
-                        }
+                        _navigationService.NavigateTo("AdminComments");
                     }));
             }
         }
-         private RelayCommandParametr deleteCommentCommand;
-        public RelayCommandParametr DeleteCommentCommand
+         private RelayCommand adminVideosCommand;
+        public RelayCommand AdminVideosCommand
         {
             get
             {
-                return deleteCommentCommand
-                    ?? (deleteCommentCommand = new RelayCommandParametr(
-                    (o) =>
+                return adminVideosCommand
+                    ?? (adminVideosCommand = new RelayCommand(
+                    () =>
                     {
-                        
-                        context.Comments.Delete(SelectedComment.IdComment);
-                        context.Save();
-                        Comments.Remove(SelectedComment);
-                    },
-                    x => SelectedComment != null));
+                        _navigationService.NavigateTo("AdminVideos");
+                    }));
             }
         }
 
         #endregion
 
-        #region
 
-        public AdminViewModel()
+        #region ctor
+
+        public AdminViewModel(IFrameNavigationService navigationService)
         {
-            Comments = new ObservableCollection<Comment>(context.Comments.GetAll());
-
-            DateSearch = CommentSearch = VideoSearch = UserSearch =String.Empty;
+            _navigationService = navigationService;
         }
 
         #endregion

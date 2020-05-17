@@ -22,9 +22,9 @@
 
         <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" >
-            <StackPanel Background="{StaticResource BackgroundLightBlueBrush}" Orientation="Horizontal">
+            <Grid  HorizontalAlignment="Center" >
                 <TextBlock  Text="Upload the video" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
-            </StackPanel>
+            </Grid>
         </materialDesign:ColorZone>
 
         <Grid Grid.Row="1">
