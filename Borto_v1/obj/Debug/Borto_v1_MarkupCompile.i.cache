@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\App.xaml
-19-1958777513
+19-1275977691
 
-68-140584146
+781141500087
 158-2121489807
-Animation\MenuAnimation.xaml;LoginWindow.xaml;MainWindow.xaml;Pages\AdminPages\AdminUsersPage.xaml;Pages\AdminPages\AdminVideosPage.xaml;Pages\AdminPages\CommentsPage.xaml;Pages\Login\Login.xaml;Pages\Login\RegisterPage.xaml;Pages\Menu\AccountPage.xaml;Pages\Menu\DownloadPage.xaml;Pages\Menu\AdminPage.xaml;Pages\Menu\UploadPage.xaml;Pages\Menu\VideoPlayerPage.xaml;Pages\VideoWatchingPage.xaml;Pages\Menu\WatchingPage.xaml;Styles\ListBox.xaml;Styles\Buttons.xaml;Styles\Colors.xaml;Styles\Texts.xaml;
+Animation\MenuAnimation.xaml;LoginWindow.xaml;MainWindow.xaml;Pages\AdminPages\AdminVideosPage.xaml;Pages\AdminPages\CommentsPage.xaml;Pages\Login\Login.xaml;Pages\Login\RegisterPage.xaml;Pages\Menu\AccountPage.xaml;Pages\Menu\DownloadPage.xaml;Pages\Menu\AdminPage.xaml;Pages\Menu\FavoriteVideosPage.xaml;Pages\Menu\UploadPage.xaml;Pages\Menu\VideoPlayerPage.xaml;Pages\VideoWatchingPage.xaml;Pages\Menu\WatchingPage.xaml;Styles\ListBox.xaml;Styles\Buttons.xaml;Styles\Colors.xaml;Styles\Texts.xaml;
 
 True
 

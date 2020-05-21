@@ -279,7 +279,6 @@ namespace Borto_v1
         #region ctor
         public VideoPlayerPageViewModel()
         {
-            Name = "Test Name";
         }
 
         #endregion

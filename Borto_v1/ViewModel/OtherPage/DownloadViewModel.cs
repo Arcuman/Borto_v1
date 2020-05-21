@@ -111,11 +111,27 @@ namespace Borto_v1
                         
                         downloadThread = new Thread(() =>
                         {
-                            Download();
+                            try
+                            {
+                                Download();
+                            }
+                            catch (Exception ex)
+                            {
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                            }
                         });
                         checkingVideoThread = new Thread(() =>
                         {
-                            CheckIsVideoExist();
+                            try
+                            {
+                                CheckIsVideoExist();
+                            }
+                            catch (Exception ex)
+                            {
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                            }
                         });
                         downloadThread.IsBackground = true;
                         downloadThread.Start();

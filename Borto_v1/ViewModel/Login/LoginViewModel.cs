@@ -1,8 +1,10 @@
 ﻿
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
+using System;
 using System.Threading;
 
 namespace Borto_v1
@@ -120,7 +122,7 @@ namespace Borto_v1
 
         #region Commands
         private RelayCommandParametr _registerCommand;
-        public RelayCommandParametr RedisterCommand
+        public RelayCommandParametr RegisterCommand
         {
             get
             {
@@ -164,24 +166,33 @@ namespace Borto_v1
                         ThreadPool.QueueUserWorkItem(
                         o =>
                         {
-                            if (context.Users.IsUser(Login, User.getHash(Password)))
+                            try
                             {
+                                if (context.Users.IsUser(Login, User.getHash(Password)))
+                                {
 
-                                User user = context.Users.GetUsersByLogin(Login);
-                                DispatcherHelper.CheckBeginInvokeOnUI(
-                                    () =>
-                                    {
-                                        Messenger.Default.Send<OpenWindowMessage>(
-                                        new OpenWindowMessage() { Type = WindowType.kMain, Argument = user });
-                                    }
-                                );
+                                    User user = context.Users.GetUsersByLogin(Login);
+                                    DispatcherHelper.CheckBeginInvokeOnUI(
+                                        () =>
+                                        {
+                                            Messenger.Default.Send<OpenWindowMessage>(
+                                            new OpenWindowMessage() { Type = WindowType.kMain, Argument = user });
+                                        }
+                                    );
+                                }
+                                else
+                                {
+                                    IsVisibleProgressBar = false;
+                                    Message = "Incorrect data!";
+                                    IsOpenDialog = true;
+                                }
                             }
-                            else
+                            catch (Exception ex)
                             {
-                                IsVisibleProgressBar = false;
-                                Message = "Incorrect data!";
-                                IsOpenDialog = true;
+                                SimpleIoc.Default.GetInstance<LoginWindowViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<LoginWindowViewModel>().IsOpenDialog = true;
                             }
+
                         }
                     );
                     },

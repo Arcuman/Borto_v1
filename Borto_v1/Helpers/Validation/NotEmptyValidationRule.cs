@@ -9,7 +9,7 @@ namespace Borto_v1
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             return string.IsNullOrWhiteSpace((value ?? "").ToString())
-                ? new ValidationResult(false, "Field is required.")
+                ? new ValidationResult(false, "Field is required and must be not empty")
                 : ValidationResult.ValidResult;
         }
     }

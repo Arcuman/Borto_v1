@@ -1,5 +1,6 @@
 ﻿
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -8,8 +9,14 @@ using System.Threading;
 namespace Borto_v1
 {
 
-    public class WatchingViewModel : ViewModelBase,IDisposable
+    public class WatchingViewModel : ViewModelBase, IDisposable
     {
+        #region Consts
+
+        private const int videoOnThePage = 6;
+
+        #endregion
+
         #region Private members 
         EFUnitOfWork context = new EFUnitOfWork();
 
@@ -25,7 +32,14 @@ namespace Borto_v1
 
         private Thread loadedThread;
 
+        private Thread searchedThread;
+
         private bool isVisibleProgressBar;
+
+        private int pageCount;
+
+        private int videosCount;
+
         #endregion
 
         #region Public members
@@ -46,7 +60,7 @@ namespace Borto_v1
                 videos = value;
                 RaisePropertyChanged();
             }
-        } 
+        }
         public Video SelectedVideo
         {
             get
@@ -97,6 +111,22 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+        public int PageCount
+        {
+            get
+            {
+                return pageCount;
+            }
+            set
+            {
+                if (pageCount == value)
+                {
+                    return;
+                }
+                pageCount = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region Commands
@@ -110,26 +140,11 @@ namespace Borto_v1
                     obj =>
                     {
                         SelectedVideo = obj as Video;
-                        _navigationService.NavigateTo("Download",obj);
+                        _navigationService.NavigateTo("Download", obj);
                     }));
             }
         }
-        private RelayCommandParametr unloadedCommand;
-        public RelayCommandParametr UnloadedCommand
-        {
-            get
-            {
-                return unloadedCommand
-                    ?? (unloadedCommand = new RelayCommandParametr(
-                    obj =>
-                    {
-                        if (loadedThread.IsAlive)
-                            loadedThread.Abort();
-                        this.Dispose();
-                        videos = null;
-                    }));
-            }
-        }
+
         private RelayCommandParametr loadedCommand;
         public RelayCommandParametr LoadedCommand
         {
@@ -140,11 +155,21 @@ namespace Borto_v1
                     obj =>
                     {
                         IsVisibleProgressBar = true;
+                        PageCount = 1;
+                        SearchField = string.Empty;
                         loadedThread = new Thread(() =>
                         {
-                            Videos = new ObservableCollection<Video>(context.Videos.GetAll());
-                            isSortedBy = SortState.New;
-                            IsVisibleProgressBar = false;
+                            try
+                            {
+                                Videos = new ObservableCollection<Video>(context.Videos.GetVideoByRange(PageCount, videoOnThePage, SortState.New, SearchField, out videosCount));
+                                isSortedBy = SortState.New;
+                                IsVisibleProgressBar = false;
+                            }
+                            catch (Exception ex)
+                            {
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                            }
                         });
                         loadedThread.IsBackground = true;
                         loadedThread.Start();
@@ -163,11 +188,11 @@ namespace Borto_v1
                     (obj) =>
                     {
                         SelectedVideo = obj as Video;
-                        _navigationService.NavigateTo("VideoWatching",SelectedVideo);
+                        _navigationService.NavigateTo("VideoWatching", SelectedVideo);
                     }));
             }
-        } 
-        
+        }
+
         private RelayCommandParametr searchCommand;
         public RelayCommandParametr SearchCommand
         {
@@ -177,17 +202,27 @@ namespace Borto_v1
                     ?? (searchCommand = new RelayCommandParametr(
                     (obj) =>
                     {
-                        if (!String.IsNullOrWhiteSpace(SearchField))
+                        PageCount = 1;
+                        IsVisibleProgressBar = true;
+                        searchedThread = new Thread(() =>
                         {
-                            Videos = new ObservableCollection<Video>(Videos.Where(x => x.Name.Contains(SearchField)));
-                        }
-                        else {
-                            Videos = new ObservableCollection<Video>(context.Videos.GetAll());
-                        }
+                            try
+                            {
+                                Videos = new ObservableCollection<Video>(context.Videos.GetVideoByRange(PageCount, videoOnThePage, isSortedBy, SearchField, out videosCount));
+                                IsVisibleProgressBar = false;
+                            }
+                            catch (Exception ex)
+                            {
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                            }
+                        });
+                        searchedThread.IsBackground = true;
+                        searchedThread.Start();
                         this.Dispose();
                     }));
             }
-        } 
+        }
         private RelayCommandParametr sortByLongCommand;
         public RelayCommandParametr SortByLongCommand
         {
@@ -197,14 +232,29 @@ namespace Borto_v1
                     ?? (sortByLongCommand = new RelayCommandParametr(
                     (obj) =>
                     {
-                        
-                        Videos = new ObservableCollection<Video>(Videos.OrderByDescending(x => x.MaxDuration));
+                        PageCount = 1;
+                        IsVisibleProgressBar = true;
+                        Thread sort = new Thread(() =>
+                          {
+                              try
+                              {
+                                  Videos = new ObservableCollection<Video>(context.Videos.GetVideoByRange(PageCount, videoOnThePage, SortState.Long, SearchField, out videosCount));
+                                  IsVisibleProgressBar = false;
+                              }
+                              catch (Exception ex)
+                              {
+                                  SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                  SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                              }
+                          });
+                        sort.IsBackground = true;
+                        sort.Start();
                         this.Dispose();
                         isSortedBy = SortState.Long;
                     },
-                    x=> isSortedBy != SortState.Long));
+                    x => isSortedBy != SortState.Long));
             }
-        } 
+        }
 
         private RelayCommandParametr sortByShortCommand;
         public RelayCommandParametr SortByShortCommand
@@ -215,13 +265,29 @@ namespace Borto_v1
                     ?? (sortByShortCommand = new RelayCommandParametr(
                     (obj) =>
                     {
-                        Videos = new ObservableCollection<Video>(Videos.OrderBy(x => x.MaxDuration));
+                        PageCount = 1;
+                        IsVisibleProgressBar = true;
+                        Thread sort = new Thread(() =>
+                        {
+                            try
+                            {
+                                Videos = new ObservableCollection<Video>(context.Videos.GetVideoByRange(PageCount, videoOnThePage, SortState.Short, SearchField, out videosCount));
+                                IsVisibleProgressBar = false;
+                            }
+                            catch (Exception ex)
+                            {
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                            }
+                        });
+                        sort.IsBackground = true;
+                        sort.Start();
                         this.Dispose();
                         isSortedBy = SortState.Short;
                     },
-                    x=> isSortedBy != SortState.Short));
+                    x => isSortedBy != SortState.Short));
             }
-        } 
+        }
 
         private RelayCommandParametr sortByNewCommand;
         public RelayCommandParametr SortByNewCommand
@@ -232,13 +298,29 @@ namespace Borto_v1
                     ?? (sortByNewCommand = new RelayCommandParametr(
                     (obj) =>
                     {
-                        Videos = new ObservableCollection<Video>(Videos.OrderByDescending(x => x.UploadDate));
+                        PageCount = 1;
+                        IsVisibleProgressBar = true;
+                        Thread sort = new Thread(() =>
+                        {
+                            try
+                            {
+                                Videos = new ObservableCollection<Video>(context.Videos.GetVideoByRange(PageCount, videoOnThePage, SortState.New, SearchField, out videosCount));
+                                IsVisibleProgressBar = false;
+                            }
+                            catch (Exception ex)
+                            {
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                            }
+                        });
+                        sort.IsBackground = true;
+                        sort.Start();
                         this.Dispose();
                         isSortedBy = SortState.New;
                     },
-                    x=> isSortedBy != SortState.New));
+                    x => isSortedBy != SortState.New));
             }
-        } 
+        }
         private RelayCommandParametr sortByOldCommand;
         public RelayCommandParametr SortByOldCommand
         {
@@ -248,13 +330,89 @@ namespace Borto_v1
                     ?? (sortByOldCommand = new RelayCommandParametr(
                     (obj) =>
                     {
-                        Videos = new ObservableCollection<Video>(Videos.OrderBy(x => x.UploadDate));
+                        PageCount = 1;
+                        IsVisibleProgressBar = true;
+                        Thread sort = new Thread(() =>
+                        {
+                            try
+                            {
+                                Videos = new ObservableCollection<Video>(context.Videos.GetVideoByRange(PageCount, videoOnThePage, SortState.Old, SearchField, out videosCount));
+                                IsVisibleProgressBar = false;
+                            }
+                            catch (Exception ex)
+                            {
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                            }
+                        });
+                        sort.IsBackground = true;
+                        sort.Start();
                         this.Dispose();
                         isSortedBy = SortState.Old;
                     },
-                    x=> isSortedBy != SortState.Old));
+                    x => isSortedBy != SortState.Old));
             }
-        } 
+        }
+        private RelayCommandParametr nextPageCommand;
+        public RelayCommandParametr NextPageCommand
+        {
+            get
+            {
+                return nextPageCommand
+                    ?? (nextPageCommand = new RelayCommandParametr(
+                    (obj) =>
+                    {
+                        PageCount++;
+                        IsVisibleProgressBar = true;
+                        Thread sort = new Thread(() =>
+                        {
+                            try
+                            {
+                                Videos = new ObservableCollection<Video>(context.Videos.GetVideoByRange(PageCount, videoOnThePage, isSortedBy, SearchField, out videosCount));
+                                IsVisibleProgressBar = false;
+                            }
+                            catch (Exception ex)
+                            {
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                            }
+                        });
+                        sort.IsBackground = true;
+                        sort.Start();
+                    },
+                    x => PageCount * 6 < videosCount));
+            }
+        }
+        private RelayCommandParametr backPageCommand;
+        public RelayCommandParametr BackPageCommand
+        {
+            get
+            {
+                return backPageCommand
+                    ?? (backPageCommand = new RelayCommandParametr(
+                    (obj) =>
+                    {
+                        PageCount--;
+                        IsVisibleProgressBar = true;
+                        Thread sort = new Thread(() =>
+                        {
+                            try
+                            {
+                                Videos = new ObservableCollection<Video>(context.Videos.GetVideoByRange(PageCount, videoOnThePage, isSortedBy, SearchField, out videosCount));
+                                IsVisibleProgressBar = false;
+                            }
+                            catch (Exception ex)
+                            {
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                            }
+                        });
+                        sort.IsBackground = true;
+                        sort.Start();
+                    },
+                    x => PageCount > 1));
+            }
+        }
 
 
         #endregion

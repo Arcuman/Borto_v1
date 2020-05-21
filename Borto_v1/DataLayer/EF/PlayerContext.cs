@@ -7,6 +7,7 @@ namespace Borto_v1
     {
         public PlayerContext() : base("BortoServer")
         {
+
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -15,6 +16,7 @@ namespace Borto_v1
             modelBuilder.Configurations.Add(new VideoConfiguration());
             modelBuilder.Configurations.Add(new MarkConfiguration());
             modelBuilder.Configurations.Add(new CommentConfiguration());
+            modelBuilder.Configurations.Add(new FavoriteVideoConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -25,5 +27,7 @@ namespace Borto_v1
         public DbSet<Mark> Marks { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<FavoriteVideo> FavoriteVideos { get; set; }
     }
 }

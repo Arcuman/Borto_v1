@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using System;
@@ -211,35 +212,45 @@ namespace Borto_v1
                     {
 
                         IsVisibleProgressBar = true;
+                        SetImage();
+
                         ThreadPool.QueueUserWorkItem(
                             o =>
                             {
-                                if (context.Users.IsExist(Login))
+                                try
                                 {
-                                    IsVisibleProgressBar = false;
-                                    Message = "This login is already exist";
-                                    IsOpenDialog = true;
+                                    if (context.Users.IsExist(Login))
+                                    {
+                                        IsVisibleProgressBar = false;
+                                        Message = "This login is already exist";
+                                        IsOpenDialog = true;
+                                    }
+                                    //ADD VALIDATION HERE
+                                    else if (Login != null && Password != null && Name != null)
+                                    {
+                                        string hashPass = User.getHash(Password);
+                                        User user = new User(Name, Login, Name, hashPass, image);
+                                        context.Users.Create(user);
+                                        context.Save();
+                                        DispatcherHelper.CheckBeginInvokeOnUI(
+                                            () =>
+                                            {
+                                                Messenger.Default.Send<OpenWindowMessage>(
+                                               new OpenWindowMessage() { Type = WindowType.kMain, Argument = user });
+                                            }
+                                            );
+                                    }
+                                    else
+                                    {
+                                        IsVisibleProgressBar = false;
+                                        Message = "Incorrect data!";
+                                        IsOpenDialog = true;
+                                    }
                                 }
-                                //ADD VALIDATION HERE
-                                else if (Login != null && Password != null && Name != null)
+                                catch (Exception ex)
                                 {
-                                    string hashPass = User.getHash(Password);
-                                    User user = new User(Name,Login,Name, hashPass, image);
-                                    context.Users.Create(user);
-                                    context.Save();
-                                    DispatcherHelper.CheckBeginInvokeOnUI(
-                                        () =>
-                                        {
-                                            Messenger.Default.Send<OpenWindowMessage>(
-                                           new OpenWindowMessage() { Type = WindowType.kMain, Argument = user });
-                                        }
-                                        );
-                                }
-                                else
-                                {
-                                    IsVisibleProgressBar = false;
-                                    Message = "Incorrect data!";
-                                    IsOpenDialog = true;
+                                    SimpleIoc.Default.GetInstance<LoginWindowViewModel>().Message = "Server error: " + ex.Message;
+                                    SimpleIoc.Default.GetInstance<LoginWindowViewModel>().IsOpenDialog = true;
                                 }
                             }
                             );
@@ -257,12 +268,29 @@ namespace Borto_v1
             _navigationService = navigationService;
             IsVisibleProgressBar = false;
             IsCheck = false;
-            Image img = System.Drawing.Image.FromFile(new Uri("../../Assets/default_user.png", UriKind.RelativeOrAbsolute).OriginalString);
-
-            image = (byte[])(new ImageConverter()).ConvertTo(img, typeof(byte[]));
         }
 
         #endregion
 
+
+        #region Helpers
+
+        private void SetImage()
+        {
+
+            BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/Assets/default_user.png"));
+
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+
+            encoder.Frames.Add(BitmapFrame.Create(img));
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+                image = ms.ToArray();
+            }
+        }
+
+        #endregion
     }
 }

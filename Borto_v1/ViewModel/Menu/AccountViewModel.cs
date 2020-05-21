@@ -1,9 +1,11 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace Borto_v1
@@ -270,6 +272,8 @@ namespace Borto_v1
                         User.NickName = NickName;
                         context.Users.Update(User);
                         context.Save();
+                        SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Data saved successfully";
+                        SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         IsVisibleEditNameIcon = true;
                     }));
             }
@@ -283,17 +287,28 @@ namespace Borto_v1
                     ?? (saveChangePasswordCommand = new RelayCommandParametr(
                     (x) =>
                     {
-                        if (context.Users.IsUser(User.Login, User.getHash(OldPassword)))
+                        try
                         {
-                            user.Password = User.getHash(NewPassword);
-                            context.Users.Update(User);
-                            context.Save();
-                            IsVisibleEditPasswrodIcon = true;
-                            OldPassword = string.Empty;
-                            NewPassword = string.Empty;
+                            if (context.Users.IsUser(User.Login, User.getHash(OldPassword)))
+                            {
+                                user.Password = User.getHash(NewPassword);
+                                context.Users.Update(User);
+                                context.Save();
+                                IsVisibleEditPasswrodIcon = true;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Password changed";
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                                OldPassword = string.Empty;
+                                NewPassword = string.Empty;
+                            }
+                            else
+                            {
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Incorrect old password";
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                            }
                         }
-                        else {
-                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Incorrect old password";
+                        catch (Exception ex)
+                        {
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
                             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         }
                     }));
@@ -393,13 +408,22 @@ namespace Borto_v1
                         IsVisibleEditPasswrodIcon = true;
                         loadedThread = new Thread(() =>
                         {
-                            Image = User.Image;
+                            try
+                            {
+                                Image = User.Image;
 
-                            Videos = new ObservableCollection<Video>(context.Videos.FindByUserId(User.IdUser));
+                                Videos = new ObservableCollection<Video>(context.Videos.FindByUserId(User.IdUser));
 
-                            IsVisibleProgressBar = false;
+                                IsVisibleProgressBar = false;
+                            }
+                            catch (Exception ex)
+                        {
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
 
-                        });
+                        }
+
+                    });
                         loadedThread.IsBackground = true;
                         loadedThread.Start();
 

@@ -47,11 +47,11 @@ namespace Borto_v1
             ScrollViewer scrollViewer = (ScrollViewer)sender;
             if (e.Delta < 0)
             {
-                scrollViewer.LineRight();
+                scrollViewer.LineDown();
             }
             else
             {
-                scrollViewer.LineLeft();
+                scrollViewer.LineUp();
             }
             e.Handled = true;
         }

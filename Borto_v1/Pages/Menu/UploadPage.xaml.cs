@@ -35,7 +35,7 @@ namespace Borto_v1
                           case "ChooseVideo":
                               {
                                   OpenFileDialog openFileDialog = new OpenFileDialog();
-                                  openFileDialog.Filter = "Media files (*.mp3;*.mp4;*.mpg;*.mpeg)|*.mp3;*.mp4;*.mpg;*.mpeg|All files (*.*)|*.*";
+                                  openFileDialog.Filter = "Media files (*.mp4;*.mpg;*.mpeg)|*.mp4;*.mpg;*.mpeg|All files (*.*)|*.*";
                                   if (openFileDialog.ShowDialog() == true)
                                       pathVideo.Text = new Uri(openFileDialog.FileName).OriginalString;
                                   break;

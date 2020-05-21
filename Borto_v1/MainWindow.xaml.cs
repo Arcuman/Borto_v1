@@ -53,7 +53,7 @@ namespace Borto_v1
                          }
                      case "NotFullScreen":
                          {
-                             this.WindowState = WindowState.Normal;
+                             this.WindowState = WindowState.Maximized;
                              this.WindowStyle = WindowStyle.SingleBorderWindow;
                              content.SetValue(Grid.ColumnProperty, 1);
                              content.SetValue(Grid.ColumnSpanProperty, 1);

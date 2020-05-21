@@ -1,9 +1,11 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Borto_v1
@@ -25,6 +27,12 @@ namespace Borto_v1
         private string videoSearch;
 
         private string userSearch;
+
+        private Thread loadedThread;
+
+        private Thread seacrhThread;
+
+        private bool isVisibleProgressBar;
 
         #endregion
 
@@ -139,6 +147,22 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+        public bool IsVisibleProgressBar
+        {
+            get
+            {
+                return isVisibleProgressBar;
+            }
+            set
+            {
+                if (isVisibleProgressBar == value)
+                {
+                    return;
+                }
+                isVisibleProgressBar = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region Commands
@@ -151,26 +175,23 @@ namespace Borto_v1
                     ?? (searchCommand = new RelayCommandParametr(
                     (o) =>
                     {
-                        if (String.IsNullOrWhiteSpace(CommentSearch)
-                                && String.IsNullOrWhiteSpace(DateSearch)
-                                && String.IsNullOrWhiteSpace(VideoSearch)
-                                && String.IsNullOrWhiteSpace(UserSearch))
-                        {
-                            Comments = new ObservableCollection<Comment>(context.Comments.GetAll());
-                        }
-                        else if (!String.IsNullOrWhiteSpace(DateSearch))
-                        {
-                            Comments = new ObservableCollection<Comment>(Comments.Where(x => x.CommentMessage.Contains(CommentSearch)
-                                                          && x.PostDate.ToShortDateString() == DateSearch
-                                                          && x.Video.Name.Contains(VideoSearch)
-                                                          && x.User.NickName.Contains(UserSearch)).ToList());
-                        }
-                        else
-                        {
-                            Comments = new ObservableCollection<Comment>(Comments.Where(x => x.CommentMessage.Contains(CommentSearch)
-                                                          && x.Video.Name.Contains(VideoSearch)
-                                                          && x.User.NickName.Contains(UserSearch)).ToList());
-                        }
+                        IsVisibleProgressBar = true;
+                        seacrhThread = new Thread(
+                            () =>
+                            {
+                                try
+                                {
+                                    Search();
+                                    IsVisibleProgressBar = false;
+                                }
+                                catch (Exception ex)
+                                {
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                                }
+                            });
+                        seacrhThread.IsBackground = true;
+                        seacrhThread.Start();
                     }));
             }
         }
@@ -183,12 +204,50 @@ namespace Borto_v1
                     ?? (deleteCommentCommand = new RelayCommandParametr(
                     (o) =>
                     {
-
-                        context.Comments.Delete(SelectedComment.IdComment);
-                        context.Save();
-                        Comments.Remove(SelectedComment);
+                        try
+                        {
+                            context.Comments.Delete(SelectedComment.IdComment);
+                            context.Save();
+                            Comments.Remove(SelectedComment);
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Comment Deleted";
+                            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                        }
                     },
                     x => SelectedComment != null));
+            }
+        }
+        private RelayCommandParametr loadedCommand;
+        public RelayCommandParametr LoadedCommand
+        {
+            get
+            {
+                return loadedCommand
+                    ?? (loadedCommand = new RelayCommandParametr(
+                    (o) =>
+                    {
+                        IsVisibleProgressBar = true;
+                        loadedThread = new Thread(() =>
+                        {
+                            try
+                            {
+                                Comments = new ObservableCollection<Comment>(context.Comments.GetAll());
+
+                                IsVisibleProgressBar = false;
+                            }
+                            catch (Exception ex)
+                            {
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                            }
+                        });
+                        loadedThread.IsBackground = true;
+                        loadedThread.Start();
+                    }));
             }
         }
 
@@ -198,12 +257,40 @@ namespace Borto_v1
 
         public AdminCommentsViewModel()
         {
-            Comments = new ObservableCollection<Comment>(context.Comments.GetAll());
 
             DateSearch = CommentSearch = VideoSearch = UserSearch = String.Empty;
         }
 
         #endregion
 
+
+        #region Helpers
+
+        public void Search()
+        {
+            if (String.IsNullOrWhiteSpace(CommentSearch)
+                                   && String.IsNullOrWhiteSpace(DateSearch)
+                                   && String.IsNullOrWhiteSpace(VideoSearch)
+                                   && String.IsNullOrWhiteSpace(UserSearch))
+            {
+                Comments = new ObservableCollection<Comment>(context.Comments.GetAll());
+            }
+            else if (!String.IsNullOrWhiteSpace(DateSearch))
+            {
+                Comments = new ObservableCollection<Comment>(Comments.Where(x => x.CommentMessage.Contains(CommentSearch)
+                                              && x.PostDate.ToShortDateString() == DateSearch
+                                              && x.Video.Name.Contains(VideoSearch)
+                                              && x.User.NickName.Contains(UserSearch)).ToList());
+            }
+            else
+            {
+                Comments = new ObservableCollection<Comment>(Comments.Where(x => x.CommentMessage.Contains(CommentSearch)
+                                              && x.Video.Name.Contains(VideoSearch)
+                                              && x.User.NickName.Contains(UserSearch)).ToList());
+            }
+
+        }
+
+        #endregion
     }
 }

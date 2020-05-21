@@ -9,13 +9,14 @@ namespace Borto_v1
     /// </summary>
     public partial class VideoWatchingPage : Page
     {
+
         public VideoWatchingPage()
         {
             this.DataContext = new VideoWatchingPageViewModel(SimpleIoc.Default.GetInstance<IFrameNavigationService>());
             InitializeComponent();
 
         }
-        
+
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
             ScrollViewer scrollViewer = (ScrollViewer)sender;

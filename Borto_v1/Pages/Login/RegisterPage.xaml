@@ -34,29 +34,34 @@ OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:
                         <StackPanel Margin="0 30 0 0">
                             <TextBlock Text="Sign up" HorizontalAlignment="Center" Foreground="Gray" Margin="30 10 30 10" FontSize="21" FontFamily="Champagne &amp; Limousines" FontWeight="SemiBold"/>
 
-                            <TextBox Margin="20 10" x:Name="nameTextBox" materialDesign:HintAssist.Hint="Name"  MaxLength="20">
+                            <TextBox Margin="20 10" x:Name="nameTextBox" materialDesign:HintAssist.Hint="Name"  MaxLength="41">
                                 <TextBox.Text>
                                     <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
                                             <local:NotEmptyValidationRule  />
-                                            <local:MinimumCharacterRule MinimumCharacters="5" />
+                                            <local:MinimumCharacterRule MinimumCharacters="2" />
+                                            <local:OnlyLettersRule  />
+                                            <local:MaximumCharacterRule MaximumCharacters="40" />
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
 
-                            <TextBox Margin="20 10" x:Name="loginTextBox" materialDesign:HintAssist.Hint="Login"  MaxLength="20">
+                            <TextBox Margin="20 10" x:Name="loginTextBox" materialDesign:HintAssist.Hint="Login"  MaxLength="41">
                                 <TextBox.Text>
                                     <Binding Path="Login" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
                                             <local:NotEmptyValidationRule  />
                                             <local:MinimumCharacterRule MinimumCharacters="5" />
+                                            <local:NotContainSpaceRuse />
+                                            <local:LoginRule />
+                                            <local:MaximumCharacterRule MaximumCharacters="40" />
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
 
-                            <PasswordBox Margin="20 10" Padding="0" x:Name="passwordBox" materialDesign:HintAssist.Hint="Password"  MaxLength="20">
+                            <PasswordBox Margin="20 10 20 20" Padding="0" x:Name="passwordBox" materialDesign:HintAssist.Hint="Password"  MaxLength="41">
                                 <PasswordBox.Style>
                                     <Style TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignFloatingHintPasswordBox}">
                                         <Style.Setters>
@@ -66,7 +71,10 @@ OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:
                                                     <Binding Path="Password" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                                         <Binding.ValidationRules>
                                                             <local:NotEmptyValidationRule  />
-                                                            <local:MinimumCharacterRule MinimumCharacters="5" />
+                                                            <local:MinimumCharacterRule MinimumCharacters="8" />
+                                                            <local:NotContainSpaceRuse  />
+                                                            <local:PasswordRule  />
+                                                            <local:MaximumCharacterRule MaximumCharacters="40" />
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </Setter.Value>
@@ -119,11 +127,11 @@ OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:
                             Foreground="{StaticResource ForegroundColorLight}"/>
                         </StackPanel>
                     </Border>
-                    <Border Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Top" Background="{StaticResource BackgroundLightBlueBrush}" CornerRadius="50">
+                    <Border Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Top" Background="{StaticResource ForegroundColorLight}" CornerRadius="50">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="15" ShadowDepth="0"/>
                         </Border.Effect>
-                        <materialDesign:PackIcon Kind="Email" Foreground="{StaticResource ForegroundColorLight }" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25"/>
+                        <Image Width="45" Height="45" Margin="5 0 0 0" Source="pack://application:,,,/Assets/BORTO.png"/>
                     </Border>
 
 

@@ -12,8 +12,6 @@ namespace Borto_v1
         #region Private Members
         private User user;
 
-        private string test;
-
         private IFrameNavigationService _navigationService;
 
         private bool isOpenDialog;
@@ -39,22 +37,6 @@ namespace Borto_v1
                     return;
                 }
                 user = value;
-                RaisePropertyChanged();
-            }
-        }
-        public string Test
-        {
-            get
-            {
-                return test;
-            }
-            set
-            {
-                if (test == value)
-                {
-                    return;
-                }
-                test = value;
                 RaisePropertyChanged();
             }
         }
@@ -183,6 +165,30 @@ namespace Borto_v1
                     ?? (_watchingpageCommand = new RelayCommand(
                     () =>
                     {
+                        var thread = new Thread(() =>
+                        {
+                            while (true)
+                            {
+                                Thread.Sleep(2000);
+                                bool result = IsInternetConnection();
+                                if (result == true)
+                                {
+                                    if (IsNoInternetConnection == true)
+                                    {
+                                        IsNoInternetConnection = false;
+                                        IsOpenDialog = false;
+                                    }
+                                }
+                                else
+                                {
+                                    IsOpenDialog = true;
+                                    Message = "No internet connection";
+                                    IsNoInternetConnection = true;
+                                }
+                            }
+                        });
+                        thread.IsBackground = true;
+                        thread.Start();
                         _navigationService.NavigateTo("Watching");
                     }));
             }
@@ -223,31 +229,20 @@ namespace Borto_v1
                     ?? (_viewWatchingPageCommand = new RelayCommand(
                     () =>
                     {
-                        var thread = new Thread(() =>
-                        {
-                            while (true)
-                            {
-                                Thread.Sleep(2000);
-                                bool result = IsInternetConnection();
-                                if (result == true)
-                                {
-                                    if (IsNoInternetConnection == true)
-                                    {
-                                        IsNoInternetConnection = false;
-                                        IsOpenDialog = false;
-                                    }
-                                }
-                                else
-                                {
-                                    IsOpenDialog = true;
-                                    Message = "Where Internet man or Error Hah";
-                                    IsNoInternetConnection = true;
-                                }
-                            }
-                        });
-                        thread.IsBackground = true;
-                        thread.Start();
                         _navigationService.NavigateTo("Player");
+                    }));
+            }
+        }
+        private RelayCommand favoriteVideosPageCommand;
+        public RelayCommand FavoriteVideosPageCommand
+        {
+            get
+            {
+                return favoriteVideosPageCommand
+                    ?? (favoriteVideosPageCommand = new RelayCommand(
+                    () =>
+                    {
+                        _navigationService.NavigateTo("FavoriteVideos");
                     }));
             }
         }

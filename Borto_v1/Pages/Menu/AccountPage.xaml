@@ -28,7 +28,7 @@
         <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" >
             <Grid Background="{StaticResource BackgroundLightBlueBrush}" >
-                <TextBlock HorizontalAlignment="Center"  Text="Account Page" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
+                <TextBlock HorizontalAlignment="Center"  Text="Account Page" Margin="5"  FontSize="28" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
                 <Button Width="35" Height="35" Padding="0" HorizontalAlignment="Right"
                                         Margin="0 0 20 0" Background="{StaticResource BackgroundDarkBlueBrush}"
                         BorderBrush="{StaticResource BackgroundDarkBlueBrush}"
@@ -38,211 +38,117 @@
             </Grid>
 
         </materialDesign:ColorZone>
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="16*"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid Margin="5,5,5.4,5.4">
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+              PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+            <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Border  Width="250" Height="250" CornerRadius="125" Margin="20 20 20 0">
-                    <Border.Effect>
-                        <DropShadowEffect ShadowDepth="5"/>
-                    </Border.Effect>
-                    <Border.Background>
-                        <ImageBrush x:Name="AccountImage" ImageSource="{Binding Image,Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}"/>
-                    </Border.Background>
-                </Border>
-                <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="1" Margin="20 5 20 10">
-                    <Label  Content="Select a picture for your icon" FontSize="16" FontWeight="Medium" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <Button 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="16*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Margin="5,5,5.4,5.4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border  Width="250" Height="250" CornerRadius="125" Margin="20 20 20 0">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="5"/>
+                        </Border.Effect>
+                        <Border.Background>
+                            <ImageBrush x:Name="AccountImage" ImageSource="{Binding Image,Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}"/>
+                        </Border.Background>
+                    </Border>
+                    <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Row="1" Margin="20 5 20 10">
+                        <Label  Content="Select a picture for your icon" FontSize="18" FontWeight="Medium" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <Button 
+                        Foreground="{StaticResource ForegroundColorLight}"
                         IsEnabled="{Binding IsVisibleEditNameIcon, Converter={StaticResource InverseBooleanConverter}}"
                         Grid.Column="1" HorizontalAlignment="Right" 
                         Command="{Binding SetPathtoImageCommand}"
                                 Style="{StaticResource MaterialDesignFloatingActionLightButton}"
                                 >
-                        <materialDesign:PackIcon Kind="Add" Height="35" Width="35" />
-                    </Button>
-                </StackPanel>
-            </Grid>
-            <Grid Margin="322,20,0,20.4" Grid.Row="0" Grid.ColumnSpan="3">
-                <Grid >
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition Height="0.8*"/>
-                        <RowDefinition Height="2.2*"/>
-                    </Grid.RowDefinitions>
-                    <Grid   Height="40" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1.3*"/>
-                            <ColumnDefinition Width="1.5*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="Add" Height="35" Width="35" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <Grid Margin="322,20,0,20.4" Grid.Row="0" Grid.ColumnSpan="3">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="0.8*"/>
+                            <RowDefinition Height="2.3*"/>
+                        </Grid.RowDefinitions>
+                        <Grid   Height="40" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.3*"/>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <TextBlock Width="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Name: " FontSize="20" />
-                        <TextBox  Grid.Column="1" 
-                                  x:Name="NameTextBox"
+                            <TextBlock Width="Auto" VerticalAlignment="Center"
+                                       HorizontalAlignment="Center" Text="Name: "
+                                       FontSize="22" />
+                            <TextBox  Grid.Column="1" 
+                                  x:Name="NameTextBox" MaxLength="41"
+                                      Foreground="{StaticResource BackgroundLightBlueBrush}"
                                    VerticalAlignment="Center" 
-                                  FontSize="20" MaxLength="20"
+                                  FontSize="22" 
                                   IsReadOnly="{Binding IsVisibleEditNameIcon}" >
-                            <TextBox.Text>
-                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <local:NotEmptyValidationRule  />
-                                        <local:MinimumCharacterRule MinimumCharacters="5" />
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-                    </Grid>
-                    <Grid Grid.Row="1"  Height="40" >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1.3*"/>
-                            <ColumnDefinition Width="1.5*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Nickname: " FontSize="20" />
-                        <TextBox  Grid.Column="1" 
+                                <TextBox.Text>
+                                    <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <local:NotEmptyValidationRule  />
+                                            <local:MinimumCharacterRule MinimumCharacters="2" />
+                                            <local:OnlyLettersRule  />
+                                            <local:MaximumCharacterRule MaximumCharacters="40" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </Grid>
+                        <Grid Grid.Row="1"  Height="40" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.3*"/>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Nickname: " FontSize="22" />
+                            <TextBox  Grid.Column="1" 
                                   x:Name="NickNameTextBox"
+                                      Foreground="{StaticResource BackgroundLightBlueBrush}"
                                    VerticalAlignment="Center" 
-                                  FontSize="20" MaxLength="20"
+                                  FontSize="22" MaxLength="41"
                                    IsReadOnly="{Binding IsVisibleEditNameIcon}" >
-                            <TextBox.Text>
-                                <Binding Path="NickName" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <local:NotEmptyValidationRule  />
-                                        <local:MinimumCharacterRule MinimumCharacters="5" />
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-                    </Grid>
-                    <Grid Grid.Row="2">
-                        <Button     Margin="0 0 10 0" Width="35" Height="35" Padding="0"
+                                <TextBox.Text>
+                                    <Binding Path="NickName" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <local:NotEmptyValidationRule  />
+                                            <local:MinimumCharacterRule MinimumCharacters="2" />
+                                            <local:NickNameRule  />
+                                            <local:MaximumCharacterRule MaximumCharacters="40" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Button     Margin="0 0 10 0" Width="35" Height="35" Padding="0"
                                         Command="{Binding ChangeNameCommand}"
                                         Visibility="{Binding IsVisibleEditNameIcon,
                                         Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
                                         >
-                            <materialDesign:PackIcon Width="15" Height="15" Kind="Edit"  Foreground="{StaticResource ForegroundColorLight}"/>
-                        </Button>
-                        <StackPanel HorizontalAlignment="Center"  Visibility="{Binding IsVisibleEditNameIcon,
+                                <materialDesign:PackIcon Width="15" Height="15" Kind="Edit"  Foreground="{StaticResource ForegroundColorLight}"/>
+                            </Button>
+                            <StackPanel HorizontalAlignment="Center"  Visibility="{Binding IsVisibleEditNameIcon,
                                     Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
                                     ConverterParameter=False}"  Orientation="Horizontal">
-                            <Button Command="{Binding SaveChangeNameCommand}" 
-                                    Height="35" Padding="0" Width="35"
-                                    Foreground="{StaticResource ForegroundColorLight}"
-                                     >
-                                <Button.Content>
-                                    <Grid>
-                                        <materialDesign:PackIcon 
-                                    Width="15" Height="15" Kind="Check"  Foreground="{StaticResource ForegroundColorLight}"/>
-
-                                    </Grid>
-                                </Button.Content>
-                                <Button.Style >
-                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedLightButton}">
-                                        <Setter Property="IsEnabled" Value="False"/>
-                                        <Style.Triggers>
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NameTextBox}" Value="False"/>
-                                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NickNameTextBox}" Value="False"/>
-                                                </MultiDataTrigger.Conditions>
-                                                <Setter Property="IsEnabled" Value="True"/>
-                                            </MultiDataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
-                            <Button Width="35" Height="35" Padding="0"
-                                        Margin="20 0 0 0"
-                                        Command="{Binding CancelNameCommand}">
-                                <materialDesign:PackIcon Width="15" Height="15" Kind="Cancel"  Foreground="{StaticResource ForegroundColorLight}"/>
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                    <Grid  Grid.Row="3">
-                        <Button VerticalAlignment="Top"
-                                HorizontalAlignment="Center"
-                                Content="Change Password" 
-                                Command="{Binding ChangePasswordCommand}"
-                                Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                                Visibility="{Binding IsVisibleEditPasswrodIcon,
-                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
-                                />
-                        <Grid  Visibility="{Binding IsVisibleEditPasswrodIcon,
-                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},ConverterParameter=False}"
-                               >
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid   Height="40" >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1.3*"/>
-                                    <ColumnDefinition Width="1.5*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" Text="Old Password: " FontSize="20" />
-                                <PasswordBox  Grid.Column="1" Name="OldPassword"  VerticalAlignment="Center" Padding="0"  MaxLength="20">
-                                    <PasswordBox.Style>
-                                        <Style TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignFloatingHintPasswordBox}">
-                                            <Style.Setters>
-                                                <Setter Property="local:PasswordBoxAssistant.BindPassword" Value="True"/>
-                                                <Setter Property="local:PasswordBoxAssistant.BoundPassword">
-                                                    <Setter.Value>
-                                                        <Binding Path="OldPassword" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                                            <Binding.ValidationRules>
-                                                                <local:NotEmptyValidationRule  />
-                                                                <local:MinimumCharacterRule MinimumCharacters="5" />
-                                                            </Binding.ValidationRules>
-                                                        </Binding>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Style.Setters>
-                                        </Style>
-                                    </PasswordBox.Style>
-                                </PasswordBox>
-                            </Grid>
-                            <Grid  Grid.Row="1"  Height="40" >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1.3*"/>
-                                    <ColumnDefinition Width="1.5*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="New Password: " FontSize="20" />
-                                <PasswordBox  Grid.Column="1" x:Name="NewPassword"  VerticalAlignment="Center" Padding="0"  MaxLength="20">
-                                    <PasswordBox.Style>
-                                        <Style TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignFloatingHintPasswordBox}">
-                                            <Style.Setters>
-                                                <Setter Property="local:PasswordBoxAssistant.BindPassword" Value="True"/>
-                                                <Setter Property="local:PasswordBoxAssistant.BoundPassword">
-                                                    <Setter.Value>
-                                                        <Binding Path="NewPassword" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                                            <Binding.ValidationRules>
-                                                                <local:NotEmptyValidationRule  />
-                                                                <local:MinimumCharacterRule MinimumCharacters="5" />
-                                                            </Binding.ValidationRules>
-                                                        </Binding>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Style.Setters>
-                                        </Style>
-                                    </PasswordBox.Style>
-                                </PasswordBox>
-                            </Grid>
-                            <StackPanel Margin="0 15 0 0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2">
-                                <Button Command="{Binding SaveChangePasswordCommand}" 
+                                <Button Command="{Binding SaveChangeNameCommand}" 
                                     Height="35" Padding="0" Width="35"
                                     Foreground="{StaticResource ForegroundColorLight}"
                                      >
@@ -259,8 +165,8 @@
                                             <Style.Triggers>
                                                 <MultiDataTrigger>
                                                     <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=OldPassword}" Value="False"/>
-                                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NewPassword}" Value="False"/>
+                                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NameTextBox}" Value="False"/>
+                                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NickNameTextBox}" Value="False"/>
                                                     </MultiDataTrigger.Conditions>
                                                     <Setter Property="IsEnabled" Value="True"/>
                                                 </MultiDataTrigger>
@@ -270,19 +176,133 @@
                                 </Button>
                                 <Button Width="35" Height="35" Padding="0"
                                         Margin="20 0 0 0"
-                                        Command="{Binding CancelPasswordCommand}">
+                                        Command="{Binding CancelNameCommand}">
                                     <materialDesign:PackIcon Width="15" Height="15" Kind="Cancel"  Foreground="{StaticResource ForegroundColorLight}"/>
                                 </Button>
                             </StackPanel>
                         </Grid>
+                        <Grid  Grid.Row="3">
+                            <Button VerticalAlignment="Top"
+                                HorizontalAlignment="Center"
+                                Content="Change Password" 
+                                Foreground="{StaticResource ForegroundColorLight}"
+                                Command="{Binding ChangePasswordCommand}"
+                                Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                                Visibility="{Binding IsVisibleEditPasswrodIcon,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
+                                />
+                            <Grid  Visibility="{Binding IsVisibleEditPasswrodIcon,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},ConverterParameter=False}"
+                               >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid   Height="40" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.3*"/>
+                                        <ColumnDefinition Width="1.5*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" 
+                                           Text="Old Password: " FontSize="22" />
+                                    <PasswordBox  Grid.Column="1" Name="OldPassword" Foreground="{StaticResource BackgroundLightBlueBrush}" 
+                                                  VerticalAlignment="Center" Padding="0"  
+                                                  MaxLength="41">
+                                        <PasswordBox.Style>
+                                            <Style TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                                                <Style.Setters>
+                                                    <Setter Property="local:PasswordBoxAssistant.BindPassword" Value="True"/>
+                                                    <Setter Property="local:PasswordBoxAssistant.BoundPassword">
+                                                        <Setter.Value>
+                                                            <Binding Path="OldPassword" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                                                <Binding.ValidationRules>
+                                                                    <local:NotEmptyValidationRule  />
+                                                                    <local:MinimumCharacterRule MinimumCharacters="8" />
+                                                                    <local:MaximumCharacterRule MaximumCharacters="40" />
+                                                                </Binding.ValidationRules>
+                                                            </Binding>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style.Setters>
+                                            </Style>
+                                        </PasswordBox.Style>
+                                    </PasswordBox>
+                                </Grid>
+                                <Grid  Grid.Row="1"  Height="40" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.3*"/>
+                                        <ColumnDefinition Width="1.5*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="New Password: " FontSize="22" />
+                                    <PasswordBox  Grid.Column="1" x:Name="NewPassword"
+                                                  Foreground="{StaticResource BackgroundLightBlueBrush}" VerticalAlignment="Center" 
+                                                  Padding="0"  MaxLength="41">
+                                        <PasswordBox.Style>
+                                            <Style TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                                                <Style.Setters>
+                                                    <Setter Property="local:PasswordBoxAssistant.BindPassword" Value="True"/>
+                                                    <Setter Property="local:PasswordBoxAssistant.BoundPassword">
+                                                        <Setter.Value>
+                                                            <Binding Path="NewPassword" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                                                <Binding.ValidationRules>
+                                                                    <local:NotEmptyValidationRule  />
+                                                                    <local:MinimumCharacterRule MinimumCharacters="8" />
+                                                                    <local:NotContainSpaceRuse  />
+                                                                    <local:PasswordRule  />
+                                                                    <local:MaximumCharacterRule MaximumCharacters="40" />
+                                                                </Binding.ValidationRules>
+                                                            </Binding>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style.Setters>
+                                            </Style>
+                                        </PasswordBox.Style>
+                                    </PasswordBox>
+                                </Grid>
+                                <StackPanel Margin="0 25 0 0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2">
+                                    <Button Command="{Binding SaveChangePasswordCommand}" 
+                                    Height="35" Padding="0" Width="35"
+                                    Foreground="{StaticResource ForegroundColorLight}"
+                                     >
+                                        <Button.Content>
+                                            <Grid>
+                                                <materialDesign:PackIcon 
+                                    Width="15" Height="15" Kind="Check"  Foreground="{StaticResource ForegroundColorLight}"/>
+
+                                            </Grid>
+                                        </Button.Content>
+                                        <Button.Style >
+                                            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedLightButton}">
+                                                <Setter Property="IsEnabled" Value="False"/>
+                                                <Style.Triggers>
+                                                    <MultiDataTrigger>
+                                                        <MultiDataTrigger.Conditions>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=OldPassword}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NewPassword}" Value="False"/>
+                                                        </MultiDataTrigger.Conditions>
+                                                        <Setter Property="IsEnabled" Value="True"/>
+                                                    </MultiDataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                    <Button Width="35" Height="35" Padding="0"
+                                        Margin="20 0 0 0"
+                                        Command="{Binding CancelPasswordCommand}">
+                                        <materialDesign:PackIcon Width="15" Height="15" Kind="Cancel"  Foreground="{StaticResource ForegroundColorLight}"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-            <Grid Grid.Row="1" Grid.ColumnSpan="3"  VerticalAlignment="Bottom" Margin="0,0,0,0.4">
-                <StackPanel>
-                    <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
-                           Text="My Videos"/>
-                    <Grid Height="Auto"  Margin="3" >
+                <Grid Grid.Row="1" Grid.ColumnSpan="3"  VerticalAlignment="Bottom" Margin="0,0,0,0.4">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"
+                           Text="My Videos" HorizontalAlignment="Center"/>
                         <ProgressBar 
                                 Panel.ZIndex="1"
                                 Visibility="{Binding IsVisibleProgressBar,
@@ -290,27 +310,25 @@
                                     FallbackValue=Collapsed}"
                                 Style="{StaticResource MaterialDesignCircularProgressBar}"
                                 Value="35"  Width="35"  Height="35"
-                                Margin="10 10"
-                                IsIndeterminate="{Binding IsVisibleProgressBar}" />
-                        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled"
-              PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
-                            <ListBox  x:Name="ListViewProduct" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#f0f8ff" ItemsSource="{Binding Videos}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
+                                IsIndeterminate="{Binding IsVisibleProgressBar}"/>
+                        <Grid Height="Auto"  Margin="3" >
+                            <ListBox HorizontalAlignment="Center" x:Name="ListViewProduct" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#f0f8ff" ItemsSource="{Binding Videos}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" Grid.ColumnSpan="2" Margin="0,0,0,0.4" >
                                 <ListBox.ItemTemplate>
                                     <DataTemplate >
-                                        <Border   Name="border" Margin="20 5 20 5" Width="160" Height="150">
+                                        <Border   Name="border" Margin="50 10 50 10" Width="300" Height="250">
                                             <StackPanel >
-                                                <Border  Width="150" Height="90" CornerRadius="5" Margin="5">
+                                                <Border  Width="280" Height="190" CornerRadius="5" Margin="5">
                                                     <Border.Effect>
                                                         <DropShadowEffect ShadowDepth="5"/>
                                                     </Border.Effect>
                                                     <Border.Background>
-                                                        <ImageBrush ImageSource="{Binding Image, Mode=OneTime}"/>
+                                                        <ImageBrush ImageSource="{Binding Image, Mode=OneTime}" Stretch="Fill"/>
                                                     </Border.Background>
                                                 </Border>
                                                 <Grid>
                                                     <StackPanel Margin="3">
                                                         <TextBlock Margin="5" Text="{Binding Name, Mode=OneTime}" 
-                                                           FontSize="14"
+                                                           FontSize="18"
                                                            TextTrimming="CharacterEllipsis"
                                                            FontFamily="Franklin Gothic Medium" 
                                                            Width="100" HorizontalAlignment="Left" />
@@ -318,7 +336,7 @@
                                                     <Button  HorizontalAlignment="Right" Margin="0 0 5 0" Padding="5"
                                         Command="{Binding ElementName= ListViewProduct,Path=DataContext.ViewWatchingPageCommand}" 
                                         CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}">
-                                                        <materialDesign:PackIcon Width="12" Height="10" Kind="Edit" Foreground="{StaticResource ForegroundColorLight}"/>
+                                                        <materialDesign:PackIcon Width="25" Height="25" Kind="Edit" Foreground="{StaticResource ForegroundColorLight}"/>
                                                     </Button>
                                                 </Grid>
                                             </StackPanel>
@@ -333,14 +351,14 @@
                                 </ListBox.ItemTemplate>
                                 <ListBox.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <WrapPanel Orientation="Horizontal" />
+                                        <WrapPanel/>
                                     </ItemsPanelTemplate>
                                 </ListBox.ItemsPanel>
                             </ListBox>
-                        </ScrollViewer>
-                    </Grid>
-                </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
             </Grid>
-        </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

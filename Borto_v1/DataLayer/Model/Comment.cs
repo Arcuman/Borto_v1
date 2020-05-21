@@ -13,6 +13,7 @@ namespace Borto_v1
         public int IdComment { get; set; }
 
         [Required]
+        [MaxLength(210)]
         public string CommentMessage { get; set; }
 
         public DateTime PostDate { get; set; }

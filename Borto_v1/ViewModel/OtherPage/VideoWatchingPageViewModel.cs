@@ -46,7 +46,10 @@ namespace Borto_v1
 
         private ObservableCollection<Comment> comments;
 
-        private bool isOwner;
+        /// <summary>
+        /// Is Owner Video 
+        /// </summary>
+        private bool isUserOwner;
 
         private string comment;
 
@@ -54,7 +57,7 @@ namespace Borto_v1
 
         private bool isVisibleEditNameIcon;
 
-        private bool isUserOwner;
+        private bool isFavorite;
         #endregion
 
         #region Public members
@@ -219,7 +222,7 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
-         public string UploadDate
+        public string UploadDate
         {
             get
             {
@@ -235,19 +238,19 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
-        public bool IsOwner
+        public bool IsFavorite
         {
             get
             {
-                return isOwner;
+                return isFavorite;
             }
             set
             {
-                if (isOwner == value)
+                if (isFavorite == value)
                 {
                     return;
                 }
-                isOwner = value;
+                isFavorite = value;
                 RaisePropertyChanged();
             }
         }
@@ -268,7 +271,7 @@ namespace Borto_v1
                 comments = value;
                 RaisePropertyChanged();
             }
-        } 
+        }
         public string Comment
         {
             get
@@ -333,29 +336,38 @@ namespace Borto_v1
                     ?? (likeVideoCommand = new RelayCommandParametr(
                     (x) =>
                     {
-                        if (likeState == LikeState.None)
+                        try
                         {
-                            Mark mark = new Mark()
+                            if (likeState == LikeState.None)
                             {
-                                VideoId = Video.IdVideo,
-                                UserId = SimpleIoc.Default.GetInstance<MainViewModel>().User.IdUser,
-                                TypeMark = TypeMark.Positive
-                            };
-                            context.Marks.Create(mark);
-                            context.Save();
-                            CountPositiveMark++;
-                            likeState = LikeState.Like;
+
+                                Mark mark = new Mark()
+                                {
+                                    VideoId = Video.IdVideo,
+                                    UserId = SimpleIoc.Default.GetInstance<MainViewModel>().User.IdUser,
+                                    TypeMark = TypeMark.Positive
+                                };
+                                context.Marks.Create(mark);
+                                context.Save();
+                                CountPositiveMark++;
+                                likeState = LikeState.Like;
+                            }
+                            else
+                            {
+                                context.Marks.DeleteByUserId(SimpleIoc.Default.GetInstance<MainViewModel>().User.IdUser, Video.IdVideo);
+                                context.Save();
+                                CountPositiveMark--;
+                                likeState = LikeState.None;
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            context.Marks.DeleteByUserId(SimpleIoc.Default.GetInstance<MainViewModel>().User.IdUser, Video.IdVideo);
-                            context.Save();
-                            CountPositiveMark--;
-                            likeState = LikeState.None;
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         }
                     },
-                    (x) => 
-                    likeState==LikeState.Like||likeState==LikeState.None));
+                    (x) =>
+                    likeState == LikeState.Like || likeState == LikeState.None));
             }
         }
         private RelayCommandParametr dislikeVideoCommand;
@@ -367,25 +379,33 @@ namespace Borto_v1
                     ?? (dislikeVideoCommand = new RelayCommandParametr(
                     (x) =>
                     {
-                        if (likeState == LikeState.None)
+                        try
                         {
-                            Mark mark = new Mark()
+                            if (likeState == LikeState.None)
                             {
-                                VideoId = Video.IdVideo,
-                                UserId = user.IdUser,
-                                TypeMark = TypeMark.Negative
-                            };
-                            context.Marks.Create(mark);
-                            context.Save();
-                            CountNegativeMark++;
-                            likeState = LikeState.Dislike;
+                                Mark mark = new Mark()
+                                {
+                                    VideoId = Video.IdVideo,
+                                    UserId = user.IdUser,
+                                    TypeMark = TypeMark.Negative
+                                };
+                                context.Marks.Create(mark);
+                                context.Save();
+                                CountNegativeMark++;
+                                likeState = LikeState.Dislike;
+                            }
+                            else
+                            {
+                                context.Marks.DeleteByUserId(user.IdUser, Video.IdVideo);
+                                context.Save();
+                                CountNegativeMark--;
+                                likeState = LikeState.None;
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            context.Marks.DeleteByUserId(user.IdUser, Video.IdVideo);
-                            context.Save();
-                            CountNegativeMark--;
-                            likeState = LikeState.None;
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         }
                     },
                     (x) =>
@@ -405,15 +425,28 @@ namespace Borto_v1
                     ?? (sendCommentCommand = new RelayCommandParametr(
                     (x) =>
                     {
-                        Comment comment = new Comment() 
-                        { CommentMessage= Comment,
-                          VideoId = Video.IdVideo,
-                          PostDate = DateTime.Now,
-                          UserId = user.IdUser
-                        };
-                        context.Comments.Create(comment);
-                        context.Save();
-                        Comments = new ObservableCollection<Comment>(context.Comments.GetAllByVideo(Video.IdVideo));
+                        try
+                        {
+                            Comment comment = new Comment()
+                            {
+                                CommentMessage = Comment,
+                                VideoId = Video.IdVideo,
+                                PostDate = DateTime.Now,
+                                UserId = user.IdUser
+                            };
+                            context.Comments.Create(comment);
+
+                            context.Save();
+
+                            Comments = new ObservableCollection<Comment>(context.Comments.GetAllByVideo(Video.IdVideo));
+
+                            Comment = string.Empty;
+                        }
+                        catch (Exception ex)
+                        {
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                        }
                     },
                     (x) =>
                     !String.IsNullOrWhiteSpace(Comment) && IsVisibleEditNameIcon));
@@ -428,12 +461,20 @@ namespace Borto_v1
                     ?? (loadedCommand = new RelayCommandParametr(
                     obj =>
                     {
-                        
+
                         Initialize();
 
                         loadedThread = new Thread(() =>
                         {
-                            Loaded();
+                            try
+                            {
+                                Loaded();
+                            }
+                            catch (Exception ex)
+                            {
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                            }
                         });
                         loadedThread.IsBackground = true;
                         loadedThread.Start();
@@ -465,12 +506,22 @@ namespace Borto_v1
                     ?? (saveChangeNameCommand = new RelayCommandParametr(
                     (x) =>
                     {
-                        Video.Name = VideoName;
+                        try
+                        {
+                            Video.Name = VideoName;
 
-                        Video.Description = VideoDescription;
+                            Video.Description = VideoDescription;
 
-                        context.Videos.Update(Video);
-                        context.Save();
+                            context.Videos.Update(Video);
+                            context.Save();
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Data saved successfully ";
+                            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                        }
                         IsVisibleEditNameIcon = true;
                     }));
             }
@@ -490,6 +541,66 @@ namespace Borto_v1
                     }));
             }
         }
+        private RelayCommandParametr addToFavoriteCommand;
+        public RelayCommandParametr AddToFavoriteCommand
+        {
+            get
+            {
+                return addToFavoriteCommand
+                    ?? (addToFavoriteCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        Thread temp;
+                        if (!IsFavorite)
+                        {
+                            FavoriteVideo favorite = new FavoriteVideo()
+                            {
+                                UserId = user.IdUser,
+                                VideoId = Video.IdVideo
+                            };
+                            temp = new Thread(() =>
+                             {
+                                 try
+                                 {
+                                     context.FavoriteVideos.Create(favorite);
+                                     context.Save();
+                                     SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Added to favorites!";
+                                     SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                                     IsFavorite = true;
+                                 }
+                                 catch (Exception ex)
+                                 {
+                                     SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                     SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                                 }
+                             });
+
+                        }
+                        else
+                        {
+                            temp = new Thread(() =>
+                            {
+                                try
+                                {
+                                    context.FavoriteVideos.DeleteByUserId(user.IdUser, Video.IdVideo);
+                                    context.Save();
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Removed from favorite!";
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                                    IsFavorite = false;
+                                }
+                                catch (Exception ex)
+                                {
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                                }
+                            });
+                        }
+                        temp.IsBackground = true;
+                        temp.Start();
+                    }));
+            }
+        }
+
         #endregion
 
         #region ctor
@@ -527,13 +638,15 @@ namespace Borto_v1
 
             UploadDate = Video.UploadDate.ToShortDateString();
 
-            IsOwner = Video.UserId == user.IdUser;
         }
         /// <summary>
         /// Async load info about comment and other...
         /// </summary>
         public void Loaded()
         {
+            FavoriteVideo favvideo = context.FavoriteVideos.FindMarkByUserId(user.IdUser, Video.IdVideo);
+
+            IsFavorite = favvideo != null ? true : false;
 
             CountNegativeMark = context.Marks.CountMarkByType(TypeMark.Negative, Video.IdVideo);
 

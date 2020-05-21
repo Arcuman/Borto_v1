@@ -9,6 +9,12 @@ namespace Borto_v1
 
         VideoRepository Videos { get; }
 
+        MarkRepository Marks { get; }
+
+        CommentRepostiroty Comments { get; }
+
+        FavoriteVideoRepository FavoriteVideos { get; }
+
         void Save();
     }
 }

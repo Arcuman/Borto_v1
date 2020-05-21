@@ -33,17 +33,18 @@ OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:
                         <StackPanel Margin="0 50 0 0">
                             <TextBlock Text="Sign in to your account" HorizontalAlignment="Center" Foreground="Gray" Margin="30" FontSize="21" FontFamily="Champagne &amp; Limousines" FontWeight="SemiBold"/>
 
-                            <TextBox Margin="20 10" x:Name="loginTextBox" materialDesign:HintAssist.Hint="Login"  MaxLength="20">
+                            <TextBox Margin="20 10" x:Name="loginTextBox" materialDesign:HintAssist.Hint="Login"  MaxLength="41">
                                 <TextBox.Text>
                                     <Binding Path="Login" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
                                             <local:NotEmptyValidationRule  />
                                             <local:MinimumCharacterRule MinimumCharacters="5" />
+                                            <local:MaximumCharacterRule MaximumCharacters="40" />
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <PasswordBox Margin="20 5" x:Name="passwordBox" materialDesign:HintAssist.Hint="Password"  MaxLength="20">
+                            <PasswordBox Margin="20 5" x:Name="passwordBox" materialDesign:HintAssist.Hint="Password"  MaxLength="41">
                                 <PasswordBox.Style>
                                     <Style TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignFloatingHintPasswordBox}">
                                         <Style.Setters>
@@ -53,7 +54,8 @@ OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:
                                                     <Binding Path="Password" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                                                         <Binding.ValidationRules>
                                                             <local:NotEmptyValidationRule  />
-                                                            <local:MinimumCharacterRule MinimumCharacters="5" />
+                                                            <local:MinimumCharacterRule MinimumCharacters="8" />
+                                                            <local:MaximumCharacterRule MaximumCharacters="40" />
                                                         </Binding.ValidationRules>
                                                     </Binding>
                                                 </Setter.Value>
@@ -94,14 +96,14 @@ OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:
                                 </Button>
 
                             </StackPanel>
-                            <Button Command="{Binding RedisterCommand}" Content="SIGN UP" Margin="30 10 30 10" Foreground="{StaticResource ForegroundColorLight}"/>
+                            <Button Command="{Binding RegisterCommand}" Content="SIGN UP" Margin="30 10 30 10" Foreground="{StaticResource ForegroundColorLight}"/>
                         </StackPanel>
                     </Border>
-                    <Border Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Top" Background="{StaticResource BackgroundLightBlueBrush}" CornerRadius="50">
+                    <Border Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Top" Background="{StaticResource ForegroundColorLight}" CornerRadius="50">
                         <Border.Effect>
                             <DropShadowEffect BlurRadius="15" ShadowDepth="0"/>
                         </Border.Effect>
-                        <materialDesign:PackIcon Kind="Email" Foreground="{StaticResource ForegroundColorLight }" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25"/>
+                        <Image Width="45" Height="45" Margin="5 0 0 0" Source="pack://application:,,,/Assets/BORTO.png"/>
                     </Border>
                 </Grid>
             </materialDesign:TransitioningContent>

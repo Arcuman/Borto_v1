@@ -28,7 +28,9 @@
             <materialDesign:ColorZone Height="50" materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" DockPanel.Dock="Top">
                 <Grid  Background="{StaticResource BackgroundLightBlueBrush}" >
-                    <TextBlock HorizontalAlignment="Center"  Text="Download the video" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
+                    <TextBlock HorizontalAlignment="Center"  Text="Download the video" Margin="5" 
+                               FontSize="28" FontWeight="Medium" 
+                               Foreground="{StaticResource ForegroundColorLight}"/>
                 </Grid>
             </materialDesign:ColorZone>
         </Grid>
@@ -73,7 +75,7 @@
                                TextWrapping="Wrap"
                                Text="{Binding PathFolder,Mode=TwoWay}" FontSize="20" 
                                Foreground="{StaticResource ForegroundColorLight}"/>
-                        <Button Width="100" Height="30" Content="Choose"
+                        <Button Width="100" Height="30" Content="Folder"
                                 Margin="20 10"
                                 Command="{Binding ChooseFolderToSaveVideo}"
                                 Foreground="{StaticResource ForegroundColorLight}"/>

@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Windows.Media.Imaging;
 
@@ -180,7 +181,15 @@ namespace Borto_v1
                             IsVisibleProgressBar = true;
                             uploadThread = new Thread(() =>
                             {
-                                Upload();
+                                try
+                                {
+                                    Upload();
+                                }
+                                catch (Exception ex)
+                                {
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                                }
                             });
                             uploadThread.IsBackground = true;
                             uploadThread.Start();
@@ -213,11 +222,10 @@ namespace Borto_v1
         public UploadViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
+            IsVisibleProgressBar = false;
             if (!IsVisibleProgressBar)
             {
-                Image img = System.Drawing.Image.FromFile(new Uri("../../Assets/camera.jpg", UriKind.RelativeOrAbsolute).OriginalString);
-
-                image = (byte[])(new ImageConverter()).ConvertTo(img, typeof(byte[]));
+                SetImage();
 
                 PathVideo = "Choose Video";
 
@@ -252,8 +260,22 @@ namespace Borto_v1
             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
 
             Name = Description = PathVideo = string.Empty;
+        }
 
-            Image img = System.Drawing.Image.FromFile(new Uri("../../Assets/camera.jpg", UriKind.RelativeOrAbsolute).OriginalString);
+        private void SetImage()
+        {
+
+            BitmapImage img = new BitmapImage(new Uri("pack://application:,,,/Assets/camera.jpg"));
+
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+
+            encoder.Frames.Add(BitmapFrame.Create(img));
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+                image = ms.ToArray();
+            }
         }
 
         #endregion

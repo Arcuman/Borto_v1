@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Windows;
 
 namespace Borto_v1
 {
-    public class EFUnitOfWork: IUnitOfWork
+    public class EFUnitOfWork : IUnitOfWork
     {
         private PlayerContext db = new PlayerContext();
 
@@ -14,25 +15,29 @@ namespace Borto_v1
 
         private CommentRepostiroty commentRepostiroty;
 
+        private FavoriteVideoRepository favoriteVideoRepostiroty;
+
         public UserRepository Users
         {
             get
             {
+
                 if (userRepository == null)
                     userRepository = new UserRepository(db);
                 return userRepository;
             }
         }
-         public VideoRepository Videos
+        public VideoRepository Videos
         {
             get
             {
                 if (videoRepository == null)
                     videoRepository = new VideoRepository(db);
+
                 return videoRepository;
             }
         }
-         public MarkRepository Marks
+        public MarkRepository Marks
         {
             get
             {
@@ -41,13 +46,22 @@ namespace Borto_v1
                 return markRepository;
             }
         }
-         public CommentRepostiroty Comments
+        public CommentRepostiroty Comments
         {
             get
             {
                 if (commentRepostiroty == null)
                     commentRepostiroty = new CommentRepostiroty(db);
                 return commentRepostiroty;
+            }
+        }
+        public FavoriteVideoRepository FavoriteVideos
+        {
+            get
+            {
+                if (favoriteVideoRepostiroty == null)
+                    favoriteVideoRepostiroty = new FavoriteVideoRepository(db);
+                return favoriteVideoRepostiroty;
             }
         }
 

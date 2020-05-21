@@ -28,7 +28,6 @@ D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\MaterialDesi
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\MaterialDesignColors.pdb
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\MaterialDesignThemes.Wpf.pdb
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\MaterialDesignThemes.Wpf.xml
-D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Borto_v1.csprojAssemblyReference.cache
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\MainWindow.g.cs
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\App.g.cs
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Borto_v1_MarkupCompile.cache
@@ -219,5 +218,10 @@ D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\AdminP
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\AdminPages\CommentsPage.baml
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\AdminPages\AdminVideosPage.g.cs
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\AdminPages\AdminVideosPage.baml
-D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\AdminPages\AdminUsersPage.g.cs
-D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\AdminPages\AdminUsersPage.baml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\Menu\FavoriteVideosPage.g.cs
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Pages\Menu\FavoriteVideosPage.baml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Borto_v1.exe.manifest
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\bin\Debug\Borto_v1.application
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Borto_v1.exe.manifest
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Borto_v1.application
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\obj\Debug\Borto_v1.csprojAssemblyReference.cache

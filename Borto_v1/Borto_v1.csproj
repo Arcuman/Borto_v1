@@ -18,9 +18,25 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Deploy\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -37,6 +53,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>0AA157051DBC442C369FB413F7E5051ED9A1669E</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Borto_v1_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Azure.Core, Version=1.2.1.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
@@ -170,6 +198,7 @@
     </ApplicationDefinition>
     <Compile Include="Business Logic\AzureHelper.cs" />
     <Compile Include="DataLayer\Configuration\CommentConfiguration.cs" />
+    <Compile Include="DataLayer\Configuration\FavoriteVideoConfiguration.cs" />
     <Compile Include="DataLayer\Configuration\MarkConfiguration.cs" />
     <Compile Include="DataLayer\Configuration\VideoConfiguration.cs" />
     <Compile Include="DataLayer\Configuration\UserConfiguration.cs" />
@@ -178,8 +207,10 @@
     <Compile Include="DataLayer\Interfaces\IRepository.cs" />
     <Compile Include="DataLayer\Interfaces\UnitOfWork.cs" />
     <Compile Include="DataLayer\Model\Comment.cs" />
+    <Compile Include="DataLayer\Model\FavoriteVideo.cs" />
     <Compile Include="DataLayer\Model\Mark.cs" />
     <Compile Include="DataLayer\Repositories\CommentRepostiroty.cs" />
+    <Compile Include="DataLayer\Repositories\FavoriteVideoRepository.cs" />
     <Compile Include="DataLayer\Repositories\MarkRepository.cs" />
     <Compile Include="DataLayer\Repositories\EFUnitOfWork.cs" />
     <Compile Include="DataLayer\Repositories\UserRepository.cs" />
@@ -196,16 +227,19 @@
     <Compile Include="Helpers\MessageWindow\OpenWindowMessage.cs" />
     <Compile Include="Helpers\Command\RelayCommandParametr.cs" />
     <Compile Include="Helpers\MessageWindow\WindowType.cs" />
+    <Compile Include="Helpers\Validation\MaximumCharacterRule.cs" />
     <Compile Include="Helpers\Validation\MinimumCharacterRule.cs" />
+    <Compile Include="Helpers\Validation\NickNameRule.cs" />
+    <Compile Include="Helpers\Validation\NotContainSpaceRuse.cs" />
     <Compile Include="Helpers\Validation\NotEmptyValidationRule.cs" />
+    <Compile Include="Helpers\Validation\LoginRule.cs" />
+    <Compile Include="Helpers\Validation\OnlyLettersRule.cs" />
+    <Compile Include="Helpers\Validation\PasswordRule.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Model\User.cs" />
     <Compile Include="DataLayer\Model\Video.cs" />
-    <Compile Include="Pages\AdminPages\AdminUsersPage.xaml.cs">
-      <DependentUpon>AdminUsersPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\AdminPages\AdminVideosPage.xaml.cs">
       <DependentUpon>AdminVideosPage.xaml</DependentUpon>
     </Compile>
@@ -227,6 +261,9 @@
     <Compile Include="Pages\Menu\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Menu\FavoriteVideosPage.xaml.cs">
+      <DependentUpon>FavoriteVideosPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Menu\UploadPage.xaml.cs">
       <DependentUpon>UploadPage.xaml</DependentUpon>
     </Compile>
@@ -243,6 +280,7 @@
     <Compile Include="ViewModel\AdminPages\AdminCommentsViewModel.cs" />
     <Compile Include="ViewModel\AdminPages\AdminVideosViewModel.cs" />
     <Compile Include="ViewModel\Menu\AccountViewModel.cs" />
+    <Compile Include="ViewModel\Menu\FavoriteVideosViewModel.cs" />
     <Compile Include="ViewModel\OtherPage\DownloadViewModel.cs" />
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
     <Compile Include="ViewModel\Windows\LoginWindowViewModel.cs" />
@@ -276,10 +314,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\AdminPages\AdminUsersPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\AdminPages\AdminVideosPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -305,6 +339,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Menu\AdminPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Menu\FavoriteVideosPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -359,6 +397,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Borto_v1_TemporaryKey.pfx" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -373,6 +413,25 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\default_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\BORTO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\white.png" />
+    <Resource Include="Assets\white_no_shadow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets')" />

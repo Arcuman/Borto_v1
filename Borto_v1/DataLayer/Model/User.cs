@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,12 +13,14 @@ namespace Borto_v1
     {
         public int IdUser { get; set; }
 
+        [Required]
+        [MaxLength(40)]
         public string Name { get; set; }
-
+        [MaxLength(50)]
         public string NickName { get; set; }
-
+        [MaxLength(40)]
         public string Login { get; set; }
-
+        [MaxLength(50)]
         public string Password { get; set; }
 
         public byte[] Image { get; set; }
@@ -27,6 +30,8 @@ namespace Borto_v1
         public virtual List<Video> Videos { get; set; }
 
         public virtual List<Mark> Marks { get; set; }
+
+        public virtual List<FavoriteVideo> FavoriteVideos { get; set; }
 
 
         public User()

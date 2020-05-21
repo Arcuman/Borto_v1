@@ -13,9 +13,9 @@ namespace Borto_v1
     public class Video
     {
         public int IdVideo { get; set; }
-
+        [MaxLength(50)]
         public string Name { get; set; }
-
+        [MaxLength(200)]
         public string Description { get; set; }
 
         public byte[] Image { get; set; }
@@ -34,6 +34,8 @@ namespace Borto_v1
         public User User { get; set; }
 
         public virtual List<Mark> Marks { get; set; }
+
+        public virtual List<FavoriteVideo> FavoriteVideos { get; set; }
 
         [NotMapped]
         public string Duration {

@@ -33,8 +33,8 @@
 
         <materialDesign:ColorZone materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                             Mode="PrimaryMid" >
-            <Grid  HorizontalAlignment="Center" >
-                <TextBlock  Text="Video Player" Margin="10" FontSize="22" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
+            <Grid Background="{StaticResource BackgroundLightBlueBrush}"    >
+                <TextBlock HorizontalAlignment="Center" Text="Video Player" Margin="5"  FontSize="28" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
             </Grid>
         </materialDesign:ColorZone>
 
@@ -126,11 +126,14 @@
                         </StackPanel>
                     </Grid>
                 </Grid>
-                <StackPanel Margin="0 20 0 0" Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Grid Margin="0 10 0 10" Grid.Row="1" VerticalAlignment="Center" >
                     <Button local:EventFocusAttachment.ElementToFocus="{Binding ElementName=focuselement}"
-                            Focusable="False" Command="{Binding ChooseVideoCommand}" Foreground="{StaticResource ForegroundColorLight}" Width="100" Height="35" Content="Source"/>
-                    <TextBlock Text="to show/hide interface use key 'I'"/>
-                </StackPanel>
+                            Focusable="False" Command="{Binding ChooseVideoCommand}" Foreground="{StaticResource ForegroundColorLight}"
+                            VerticalAlignment="Center" Width="100" Height="35" Content="Source"/>
+                    <TextBlock Margin="0 0 45 0" Opacity="0.6" HorizontalAlignment="Right" 
+                               VerticalAlignment="Center"
+                               FontSize="24" Text="to show/hide interface use key 'I'"/>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

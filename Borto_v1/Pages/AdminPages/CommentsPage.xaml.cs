@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Borto_v1.Pages.AdminPages
+namespace Borto_v1
 {
     /// <summary>
     /// Interaction logic for CommentsPage.xaml

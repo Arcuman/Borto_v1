@@ -1,9 +1,11 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Borto_v1
@@ -24,6 +26,11 @@ namespace Borto_v1
 
         private string userSearch;
 
+        private Thread loadedThread;
+
+        private Thread seacrhThread;
+
+        private bool isVisibleProgressBar;
         #endregion
 
         #region Public Fields
@@ -120,6 +127,23 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+
+        public bool IsVisibleProgressBar
+        {
+            get
+            {
+                return isVisibleProgressBar;
+            }
+            set
+            {
+                if (isVisibleProgressBar == value)
+                {
+                    return;
+                }
+                isVisibleProgressBar = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
 
@@ -133,55 +157,121 @@ namespace Borto_v1
                     ?? (searchCommand = new RelayCommandParametr(
                     (o) =>
                     {
-                        if (String.IsNullOrWhiteSpace(TitleSearch)
-                                && String.IsNullOrWhiteSpace(DateSearch)
-                                && String.IsNullOrWhiteSpace(UserSearch))
-                        {
-                            Videos = new ObservableCollection<Video>(context.Videos.GetAll());
-                        }
-                        else if (!String.IsNullOrWhiteSpace(DateSearch))
-                        {
-                            Videos = new ObservableCollection<Video>(Videos.Where(x => x.Name.Contains(TitleSearch)
-                                                          && x.UploadDate.ToShortDateString() == DateSearch
-                                                          && x.User.NickName.Contains(UserSearch)).ToList());
-                        }
-                        else
-                        {
-                            Videos = new ObservableCollection<Video>(Videos.Where(x => x.Name.Contains(TitleSearch)
-                                                         && x.User.NickName.Contains(UserSearch)).ToList());
-                        }
+
+                        IsVisibleProgressBar = true;
+                        seacrhThread = new Thread(
+                            () =>
+                            {
+                                try
+                                {
+                                    Search();
+                                    IsVisibleProgressBar = false;
+                                }
+                                catch (Exception ex)
+                                {
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                                }
+                            });
+                        seacrhThread.IsBackground = true;
+                        seacrhThread.Start();
                     }));
             }
         }
 
-        private RelayCommandParametr deleteCommentCommand;
-        public RelayCommandParametr DeleteCommentCommand
+        private RelayCommandParametr deleteVideoCommand;
+        public RelayCommandParametr DeleteVideoCommand
         {
             get
             {
-                return deleteCommentCommand
-                    ?? (deleteCommentCommand = new RelayCommandParametr(
+                return deleteVideoCommand
+                    ?? (deleteVideoCommand = new RelayCommandParametr(
                     (o) =>
                     {
-                        AzureHelper azureHelper = new AzureHelper();
-                        azureHelper.delete_FromBlob(SelectedVideo.Path);
-                        context.Videos.Delete(SelectedVideo.IdVideo);
-                        context.Save();
-                        Videos.Remove(SelectedVideo);
+                        try
+                        {
+                            AzureHelper azureHelper = new AzureHelper();
+                            azureHelper.delete_FromBlob(SelectedVideo.Path);
+                            context.Videos.Delete(SelectedVideo.IdVideo);
+                            context.Save();
+                            Videos.Remove(SelectedVideo);
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Video Deleted";
+                            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                        }
                     },
                     x => SelectedVideo != null));
             }
         }
+        private RelayCommandParametr loadedCommand;
+        public RelayCommandParametr LoadedCommand
+        {
+            get
+            {
+                return loadedCommand
+                    ?? (loadedCommand = new RelayCommandParametr(
+                    (o) =>
+                    {
+
+                        IsVisibleProgressBar = true;
+                        loadedThread = new Thread(() =>
+                        {
+                            try
+                            {
+                                Videos = new ObservableCollection<Video>(context.Videos.GetAll());
+
+                                IsVisibleProgressBar = false;
+                            }
+                            catch (Exception ex)
+                            {
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                            }
+                        });
+                        loadedThread.IsBackground = true;
+                        loadedThread.Start();
+                    }));
+            }
+        }
+
         #endregion
 
         #region ctor
 
         public AdminVideosViewModel()
         {
-            Videos = new ObservableCollection<Video>(context.Videos.GetAll());
 
-            DateSearch = TitleSearch  = UserSearch = String.Empty;
+            DateSearch = TitleSearch = UserSearch = String.Empty;
+        }
 
+        #endregion
+
+        #region Helpers
+
+
+        public void Search()
+        {
+            if (String.IsNullOrWhiteSpace(TitleSearch)
+                                   && String.IsNullOrWhiteSpace(DateSearch)
+                                   && String.IsNullOrWhiteSpace(UserSearch))
+            {
+                Videos = new ObservableCollection<Video>(context.Videos.GetAll());
+            }
+            else if (!String.IsNullOrWhiteSpace(DateSearch))
+            {
+                Videos = new ObservableCollection<Video>(Videos.Where(x => x.Name.Contains(TitleSearch)
+                                              && x.UploadDate.ToShortDateString() == DateSearch
+                                              && x.User.NickName.Contains(UserSearch)).ToList());
+            }
+            else
+            {
+                Videos = new ObservableCollection<Video>(Videos.Where(x => x.Name.Contains(TitleSearch)
+                                             && x.User.NickName.Contains(UserSearch)).ToList());
+            }
         }
 
         #endregion

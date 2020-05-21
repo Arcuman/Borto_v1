@@ -12,6 +12,7 @@
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         MinHeight="650"
         Title="Borto"
+        Icon="pack://application:,,,/Assets/BORTO.png"
         Name="BortoWindow"
         Unloaded="BortoWindow_Unloaded"
         Background="{StaticResource BackgroundDarkBlueBrush}"
@@ -20,7 +21,7 @@
          >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding ViewWatchingPageCommand}" />
+            <i:InvokeCommandAction Command="{Binding WatchingpageCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Window.Resources>
@@ -57,7 +58,7 @@
                         <Button Margin="0 10 0 0" Style="{StaticResource MaterialDesignFlatAccentButton}"
                                  Visibility="{Binding IsNoInternetConnection,
                                     Converter={StaticResource ParametrizedBooleanToVisibilityConverter},ConverterParameter=false}"
-                                Content="CLose" Width="70" Height="30" Command="{Binding CloseDialodCommand}"/>
+                                Content="Close" Width="70" Height="30" Command="{Binding CloseDialodCommand}"/>
                     </Grid>
                 </StackPanel>
             </Border>
@@ -82,13 +83,15 @@
                      Style="{StaticResource MaterialDesignFlatButton}" 
                      
                      Click="button_Click">
-                    <materialDesign:PackIcon Width="25" Height="25" Kind="Menu" Foreground="{StaticResource ForegroundColorLight}"/>
+                    <materialDesign:PackIcon Width="25" Height="25" Kind="Menu"
+                                             
+                                             Foreground="{StaticResource ForegroundColorLight}"/>
                 </Button>
                 <ListView  Grid.Row="1" x:Name="ListViewMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
                     <ListViewItem>
                         <StackPanel  Margin="18" Height="30" Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Tv" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                            <TextBlock Foreground="{StaticResource ForegroundColorLight}" Text="Watching" Margin="25 0" FontSize="20" VerticalAlignment="Center"/>
+                            <TextBlock Foreground="{StaticResource ForegroundColorLight}" Text="Home" Margin="25 0" FontSize="20" VerticalAlignment="Center"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
@@ -118,6 +121,18 @@
                             <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
                                 <i:InvokeCommandAction
                                                       Command="{Binding ViewWatchingPageCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListViewItem> 
+                    <ListViewItem >
+                        <StackPanel Margin="18" Height="30" Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Favorite"  Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                            <TextBlock Text="Favorite" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                        </StackPanel>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction
+                                                      Command="{Binding FavoriteVideosPageCommand}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListViewItem>
