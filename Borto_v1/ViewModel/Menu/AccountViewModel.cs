@@ -272,7 +272,7 @@ namespace Borto_v1
                         User.NickName = NickName;
                         context.Users.Update(User);
                         context.Save();
-                        SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Data saved successfully";
+                        SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Data_saved_successfully;
                         SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         IsVisibleEditNameIcon = true;
                     }));
@@ -295,20 +295,20 @@ namespace Borto_v1
                                 context.Users.Update(User);
                                 context.Save();
                                 IsVisibleEditPasswrodIcon = true;
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Password changed";
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Password_changed;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                                 OldPassword = string.Empty;
                                 NewPassword = string.Empty;
                             }
                             else
                             {
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Incorrect old password";
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Incorrect_old_password;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             }
                         }
                         catch (Exception ex)
                         {
-                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         }
                     }));

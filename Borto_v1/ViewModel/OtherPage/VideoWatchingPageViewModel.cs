@@ -362,7 +362,7 @@ namespace Borto_v1
                         }
                         catch (Exception ex)
                         {
-                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         }
                     },
@@ -404,7 +404,7 @@ namespace Borto_v1
                         }
                         catch (Exception ex)
                         {
-                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         }
                     },
@@ -444,7 +444,7 @@ namespace Borto_v1
                         }
                         catch (Exception ex)
                         {
-                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         }
                     },
@@ -472,7 +472,7 @@ namespace Borto_v1
                             }
                             catch (Exception ex)
                             {
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             }
                         });
@@ -514,12 +514,12 @@ namespace Borto_v1
 
                             context.Videos.Update(Video);
                             context.Save();
-                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Data saved successfully ";
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Data_saved_successfully;
                             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         }
                         catch (Exception ex)
                         {
-                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         }
                         IsVisibleEditNameIcon = true;
@@ -564,13 +564,13 @@ namespace Borto_v1
                                  {
                                      context.FavoriteVideos.Create(favorite);
                                      context.Save();
-                                     SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Added to favorites!";
+                                     SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Added_to_favorites;
                                      SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                                      IsFavorite = true;
                                  }
                                  catch (Exception ex)
                                  {
-                                     SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                     SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                      SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                                  }
                              });
@@ -584,13 +584,13 @@ namespace Borto_v1
                                 {
                                     context.FavoriteVideos.DeleteByUserId(user.IdUser, Video.IdVideo);
                                     context.Save();
-                                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Removed from favorite!";
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Removed_from_favorite;
                                     SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                                     IsFavorite = false;
                                 }
                                 catch (Exception ex)
                                 {
-                                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                     SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                                 }
                             });

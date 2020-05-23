@@ -14,10 +14,13 @@ namespace Borto_v1
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             string charString = value as string;
-
+            cultureInfo = CultureInfo.CurrentCulture;
             if (!Regex.Match(charString, @"(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9@#!^&*.]{8,})$").Success)
             {
-                return new ValidationResult(false, $"Password must contains only english letter and at least one digit and one letter.(can contain @#!^&*.)");
+                if (cultureInfo.Name == "en-US")
+                    return new ValidationResult(false, $"Password must contains only english letter and at least one digit and one letter.(can contain @#!^&*.)");
+                else
+                    return new ValidationResult(false, $"Пароль должен содержать только латинские буквы, минимум 1 букву и цифру.(может включать @#!^&*.)");
             }
             return ValidationResult.ValidResult;
         }

@@ -1,8 +1,10 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
+using System.Globalization;
 using System.Net;
 using System.Threading;
+using WPFLocalizeExtension.Engine;
 
 namespace Borto_v1
 {
@@ -16,6 +18,8 @@ namespace Borto_v1
         private bool isNoInternetConnection;
 
         private string message;
+
+        private bool cultureInfoEn;
         #endregion
 
         #region Public Fields
@@ -77,6 +81,22 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+        public bool CultureInfoEn
+        {
+            get
+            {
+                return cultureInfoEn;
+            }
+            set
+            {
+                if (cultureInfoEn == value)
+                {
+                    return;
+                }
+                cultureInfoEn = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region Commands
@@ -90,6 +110,10 @@ namespace Borto_v1
                     ?? (_loadedpageCommand = new RelayCommand(
                     () =>
                     {
+                        CultureInfoEn = true;
+                        var culture = new CultureInfo("en-US");
+                        Thread.CurrentThread.CurrentCulture = culture;
+                        Thread.CurrentThread.CurrentUICulture = culture;
                         var thread = new Thread(() =>
                         {
                             while (true)
@@ -107,7 +131,7 @@ namespace Borto_v1
                                 else
                                 {
                                     IsOpenDialog = true;
-                                    Message = "No internet connection";
+                                    Message = Properties.Resources.No_internet_connection;
                                     IsNoInternetConnection = true;
                                 }
                             }
@@ -131,6 +155,37 @@ namespace Borto_v1
                     }));
             }
         }
+          private RelayCommand switchLanguageCommand;
+        public RelayCommand SwitchLanguageCommand
+        {
+            get
+            {
+                return switchLanguageCommand
+                    ?? (switchLanguageCommand = new RelayCommand(
+                    () =>
+                    {
+                        if (LocalizeDictionary.CurrentCulture.Name == "")
+                        {
+                            LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+                            LocalizeDictionary.Instance.Culture = new CultureInfo("ru-RU");
+                            var culture = new CultureInfo("ru-RU");
+                            Thread.CurrentThread.CurrentCulture = culture;
+                            Thread.CurrentThread.CurrentUICulture = culture;
+                            CultureInfoEn = false;
+                        }
+                        else
+                        {
+                            LocalizeDictionary.Instance.SetCurrentThreadCulture = true;
+                            LocalizeDictionary.Instance.Culture = new CultureInfo("");
+                            var culture = new CultureInfo("en-US");
+                            Thread.CurrentThread.CurrentCulture = culture;
+                            Thread.CurrentThread.CurrentUICulture = culture;
+                            CultureInfoEn = true;
+                        }
+                    }));
+            }
+        }
+
         #endregion
 
 

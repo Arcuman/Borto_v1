@@ -19,7 +19,6 @@ namespace Borto_v1
         {
             connectionString = ConfigurationManager.ConnectionStrings["StorageAccount"].ConnectionString;
         }
-
         #endregion
 
         #region Public Methods
@@ -61,7 +60,6 @@ namespace Borto_v1
             return filename;
 
         }
-
         /// <summary>
         /// Download file to Azure 
         /// </summary>
@@ -97,9 +95,6 @@ namespace Borto_v1
 
             cloudBlockBlob.DeleteIfExists();
         }
-
-
-
         #endregion
     }
 }

@@ -8,7 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/white.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("assets/white_no_shadow.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("properties/resources.resx")]
 
 

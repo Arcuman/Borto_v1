@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\squirrel.windows.1.9.1\build\squirrel.windows.props" Condition="Exists('..\packages\squirrel.windows.1.9.1\build\squirrel.windows.props')" />
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -138,17 +137,11 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NuGet.Squirrel, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\squirrel.windows.1.9.1\lib\Net45\NuGet.Squirrel.dll</HintPath>
-    </Reference>
     <Reference Include="SharpCompress, Version=0.17.1.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpCompress.0.17.1\lib\net45\SharpCompress.dll</HintPath>
     </Reference>
     <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
-    </Reference>
-    <Reference Include="Squirrel, Version=1.9.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\squirrel.windows.1.9.1\lib\Net45\Squirrel.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -161,6 +154,7 @@
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.6.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
@@ -190,6 +184,12 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFLocalizeExtension, Version=3.6.1.0, Culture=neutral, PublicKeyToken=c726e0262981a1eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFLocalizeExtension.3.6.1\lib\net452\WPFLocalizeExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="XAMLMarkupExtensions, Version=1.9.0.0, Culture=neutral, PublicKeyToken=c726e0262981a1eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\XAMLMarkupExtensions.1.9.0\lib\net48\XAMLMarkupExtensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -205,7 +205,6 @@
     <Compile Include="DataLayer\Enum\TypeMark.cs" />
     <Compile Include="DataLayer\Enum\UserRole.cs" />
     <Compile Include="DataLayer\Interfaces\IRepository.cs" />
-    <Compile Include="DataLayer\Interfaces\UnitOfWork.cs" />
     <Compile Include="DataLayer\Model\Comment.cs" />
     <Compile Include="DataLayer\Model\FavoriteVideo.cs" />
     <Compile Include="DataLayer\Model\Mark.cs" />
@@ -226,7 +225,7 @@
     <Compile Include="Helpers\Enum\SortState.cs" />
     <Compile Include="Helpers\MessageWindow\OpenWindowMessage.cs" />
     <Compile Include="Helpers\Command\RelayCommandParametr.cs" />
-    <Compile Include="Helpers\MessageWindow\WindowType.cs" />
+    <Compile Include="Helpers\Enum\WindowType.cs" />
     <Compile Include="Helpers\Validation\MaximumCharacterRule.cs" />
     <Compile Include="Helpers\Validation\MinimumCharacterRule.cs" />
     <Compile Include="Helpers\Validation\NickNameRule.cs" />
@@ -235,48 +234,52 @@
     <Compile Include="Helpers\Validation\LoginRule.cs" />
     <Compile Include="Helpers\Validation\OnlyLettersRule.cs" />
     <Compile Include="Helpers\Validation\PasswordRule.cs" />
-    <Compile Include="LoginWindow.xaml.cs">
+    <Compile Include="Views\Window\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataLayer\Model\User.cs" />
     <Compile Include="DataLayer\Model\Video.cs" />
-    <Compile Include="Pages\AdminPages\AdminVideosPage.xaml.cs">
+    <Compile Include="Views\Pages\AdminPages\AdminVideosPage.xaml.cs">
       <DependentUpon>AdminVideosPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\AdminPages\CommentsPage.xaml.cs">
+    <Compile Include="Views\Pages\AdminPages\CommentsPage.xaml.cs">
       <DependentUpon>CommentsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Login\Login.xaml.cs">
+    <Compile Include="Views\Pages\Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Login\RegisterPage.xaml.cs">
+    <Compile Include="Views\Pages\Login\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Menu\AccountPage.xaml.cs">
+    <Compile Include="Views\Pages\Menu\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Menu\DownloadPage.xaml.cs">
+    <Compile Include="Views\Pages\Menu\DownloadPage.xaml.cs">
       <DependentUpon>DownloadPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Menu\AdminPage.xaml.cs">
+    <Compile Include="Views\Pages\Menu\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Menu\FavoriteVideosPage.xaml.cs">
+    <Compile Include="Views\Pages\Menu\FavoriteVideosPage.xaml.cs">
       <DependentUpon>FavoriteVideosPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Menu\UploadPage.xaml.cs">
+    <Compile Include="Views\Pages\Menu\UploadPage.xaml.cs">
       <DependentUpon>UploadPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Menu\VideoPlayerPage.xaml.cs">
+    <Compile Include="Views\Pages\Menu\VideoPlayerPage.xaml.cs">
       <DependentUpon>VideoPlayerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\VideoWatchingPage.xaml.cs">
+    <Compile Include="Views\Pages\VideoWatchingPage.xaml.cs">
       <DependentUpon>VideoWatchingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Menu\WatchingPage.xaml.cs">
+    <Compile Include="Views\Pages\Menu\WatchingPage.xaml.cs">
       <DependentUpon>WatchingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Test\Test.cs" />
+    <Compile Include="Properties\Resources.ru-RU.Designer.cs">
+      <DependentUpon>Resources.ru-RU.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="ViewModel\AdminPages\AdminCommentsViewModel.cs" />
     <Compile Include="ViewModel\AdminPages\AdminVideosViewModel.cs" />
     <Compile Include="ViewModel\Menu\AccountViewModel.cs" />
@@ -292,15 +295,11 @@
     <Compile Include="ViewModel\OtherPage\VideoWatchingPageViewModel.cs" />
     <Compile Include="ViewModel\Helpers\ViewModelLocator.cs" />
     <Compile Include="ViewModel\Menu\WatchingViewModel.cs" />
-    <Page Include="Animation\MenuAnimation.xaml">
+    <Page Include="Views\Window\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\Window\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -310,65 +309,61 @@
     </Compile>
     <Compile Include="Helpers\Navigation\IFrameNavigationService.cs" />
     <Compile Include="Helpers\Navigation\FrameNavigationService.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\Window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\AdminPages\AdminVideosPage.xaml">
+    <Page Include="Views\Pages\AdminPages\AdminVideosPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\AdminPages\CommentsPage.xaml">
+    <Page Include="Views\Pages\AdminPages\CommentsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Login\Login.xaml">
+    <Page Include="Views\Pages\Login\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Login\RegisterPage.xaml">
+    <Page Include="Views\Pages\Login\RegisterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Menu\AccountPage.xaml">
+    <Page Include="Views\Pages\Menu\AccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Menu\DownloadPage.xaml">
+    <Page Include="Views\Pages\Menu\DownloadPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Menu\AdminPage.xaml">
+    <Page Include="Views\Pages\Menu\AdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Menu\FavoriteVideosPage.xaml">
+    <Page Include="Views\Pages\Menu\FavoriteVideosPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Menu\UploadPage.xaml">
+    <Page Include="Views\Pages\Menu\UploadPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Menu\VideoPlayerPage.xaml">
+    <Page Include="Views\Pages\Menu\VideoPlayerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\VideoWatchingPage.xaml">
+    <Page Include="Views\Pages\VideoWatchingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Menu\WatchingPage.xaml">
+    <Page Include="Views\Pages\Menu\WatchingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\ListBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Styles\Buttons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Colors.xaml">
       <SubType>Designer</SubType>
@@ -393,8 +388,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.ru-RU.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.ru-RU.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Borto_v1_TemporaryKey.pfx" />
@@ -442,9 +441,6 @@
     <Error Condition="!Exists('..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\squirrel.windows.1.9.1\build\squirrel.windows.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\squirrel.windows.1.9.1\build\squirrel.windows.props'))" />
-    <Error Condition="!Exists('..\packages\squirrel.windows.1.9.1\build\squirrel.windows.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\squirrel.windows.1.9.1\build\squirrel.windows.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
-  <Import Project="..\packages\squirrel.windows.1.9.1\build\squirrel.windows.targets" Condition="Exists('..\packages\squirrel.windows.1.9.1\build\squirrel.windows.targets')" />
 </Project>

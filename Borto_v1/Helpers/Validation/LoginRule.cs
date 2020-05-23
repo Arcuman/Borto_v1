@@ -14,13 +14,21 @@ namespace Borto_v1
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             string charString = value as string;
+            cultureInfo = CultureInfo.CurrentCulture;
             if (char.IsDigit(charString[0]))
             {
-                return new ValidationResult(false, $"Field cannot begin with a digit");
+                if (cultureInfo.Name == "en-US")
+                    return new ValidationResult(false, $"Field cannot begin with a digit");
+                else
+                    return new ValidationResult(false, $"Поле не может начинаться с цифры");
             }
-            if (!Regex.Match(charString, "^[a-z][a-z\\d]*$").Success)
+            if (!Regex.Match(charString, "^[a-zA-Z][a-zA-Z._\\d]*$").Success)
             {
-                return new ValidationResult(false, $"Field can only contain only english lower case letters and digits");
+                if (cultureInfo.Name == "en-US")
+                    return new ValidationResult(false, $"Field can only contain only english letters and digits and ._");
+                else
+                    return new ValidationResult(false, $"Поле может содержать только латинские буквы и цифры и ._");
+
             }
 
             return ValidationResult.ValidResult;

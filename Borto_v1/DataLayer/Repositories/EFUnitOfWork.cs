@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace Borto_v1
 {
-    public class EFUnitOfWork : IUnitOfWork
+    public class EFUnitOfWork 
     {
         private PlayerContext db = new PlayerContext();
 
@@ -87,9 +87,7 @@ namespace Borto_v1
         public void Dispose()
         {
             GC.Collect();
-            GC.WaitForPendingFinalizers();
             Dispose(true);
-            GC.Collect();
             GC.WaitForPendingFinalizers();
         }
 

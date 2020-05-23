@@ -12,8 +12,12 @@ namespace Borto_v1
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            return value.ToString().Contains(" ")
-                ? new ValidationResult(false, "Spaces are not allowed in this field")
+            cultureInfo = CultureInfo.CurrentCulture;
+            if (cultureInfo.Name == "en-US")
+                return value.ToString().Contains(" ") ? new ValidationResult(false, "Spaces are not allowed in this field")
+                : ValidationResult.ValidResult;
+            else
+                return value.ToString().Contains(" ") ? new ValidationResult(false, "Пробелы не разрешены в этом поле")
                 : ValidationResult.ValidResult;
         }
     }

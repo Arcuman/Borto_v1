@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Account" xml:space="preserve">
+    <value>Аккаунт</value>
+  </data>
+  <data name="Account_Page" xml:space="preserve">
+    <value>Страница профиля</value>
+  </data>
+  <data name="Added_to_favorites" xml:space="preserve">
+    <value>Добавлено в избранное</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Админ</value>
+  </data>
+  <data name="Admin_Page" xml:space="preserve">
+    <value>Админ панель</value>
+  </data>
+  <data name="AgreementTermOfUse" xml:space="preserve">
+    <value>Я согласен с условиями пользования</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="Change_Password" xml:space="preserve">
+    <value>Сменить пароль</value>
+  </data>
+  <data name="Choose" xml:space="preserve">
+    <value>Выбрать</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Комментарий</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Комментарии</value>
+  </data>
+  <data name="Comment_Deleted" xml:space="preserve">
+    <value>Комментарий удален</value>
+  </data>
+  <data name="Data_saved_successfully" xml:space="preserve">
+    <value>Данные успешно сохранены</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="DateUpload" xml:space="preserve">
+    <value>Дата загрузки:</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Скачать</value>
+  </data>
+  <data name="Download_Page" xml:space="preserve">
+    <value>Страница скачивания</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Длительность:</value>
+  </data>
+  <data name="Favorite" xml:space="preserve">
+    <value>Избранное</value>
+  </data>
+  <data name="Favorite_Videos" xml:space="preserve">
+    <value>Избранные видео</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Путь</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Главная</value>
+  </data>
+  <data name="Home_Page" xml:space="preserve">
+    <value>Главная</value>
+  </data>
+  <data name="IncorrectData" xml:space="preserve">
+    <value>Неправильный ввод</value>
+  </data>
+  <data name="Incorrect_old_password" xml:space="preserve">
+    <value>Неверный старый пароль</value>
+  </data>
+  <data name="Insert_your_comment_here" xml:space="preserve">
+    <value>Оставте ваш комментарий</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="Long_first" xml:space="preserve">
+    <value>Сначало длинные</value>
+  </data>
+  <data name="MyVideos" xml:space="preserve">
+    <value>Мои видео</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Name_required" xml:space="preserve">
+    <value>Название(обязательно)</value>
+  </data>
+  <data name="New_first" xml:space="preserve">
+    <value>Сначало новые</value>
+  </data>
+  <data name="New_Password" xml:space="preserve">
+    <value>Новый пароль</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>След</value>
+  </data>
+  <data name="NickName" xml:space="preserve">
+    <value>Никнейм</value>
+  </data>
+  <data name="No_internet_connection" xml:space="preserve">
+    <value>Нет соединения с интернетом</value>
+  </data>
+  <data name="Old_first" xml:space="preserve">
+    <value>Сначало старые</value>
+  </data>
+  <data name="Old_Password" xml:space="preserve">
+    <value>Старый пароль</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="Password_changed" xml:space="preserve">
+    <value>Пароль изменен</value>
+  </data>
+  <data name="Player" xml:space="preserve">
+    <value>Плеер</value>
+  </data>
+  <data name="Post_Date" xml:space="preserve">
+    <value>Дата публикации</value>
+  </data>
+  <data name="Removed_from_favorite" xml:space="preserve">
+    <value>Удалено из избраных</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="Select_A_Picture" xml:space="preserve">
+    <value>Выберите картинку для аватара</value>
+  </data>
+  <data name="Select_a_picture_for_your_video" xml:space="preserve">
+    <value>Выберите заставку видео</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>Ошибка сервера:</value>
+  </data>
+  <data name="Short_first" xml:space="preserve">
+    <value>Сначало коротки</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>ВХОД</value>
+  </data>
+  <data name="SignInTitle" xml:space="preserve">
+    <value>Войдите в ваш аккаунт</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>РЕГИСТРАЦИЯ</value>
+  </data>
+  <data name="SignUpTitle" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Источник</value>
+  </data>
+  <data name="This_login_is_already_exist" xml:space="preserve">
+    <value>Такой логин уже существует</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="to_show_hide_interface_use_key" xml:space="preserve">
+    <value>Чтобы показать/спрятать интерфейс нажмите i</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Загрузка</value>
+  </data>
+  <data name="UploadDate" xml:space="preserve">
+    <value>Дата загрузки</value>
+  </data>
+  <data name="Upload_Page" xml:space="preserve">
+    <value>Страница загрузки</value>
+  </data>
+  <data name="User_NickName" xml:space="preserve">
+    <value>Никнейм</value>
+  </data>
+  <data name="Video" xml:space="preserve">
+    <value>Видео</value>
+  </data>
+  <data name="Videos" xml:space="preserve">
+    <value>Видео</value>
+  </data>
+  <data name="Video_Deleted" xml:space="preserve">
+    <value>Видео удалено</value>
+  </data>
+  <data name="Video_Page" xml:space="preserve">
+    <value>Информация о видео</value>
+  </data>
+  <data name="Video_Player" xml:space="preserve">
+    <value>Видео плеер</value>
+  </data>
+  <data name="Video_was_deleted_from_server" xml:space="preserve">
+    <value>Видео удалено с сервера!</value>
+  </data>
+  <data name="View_comments_left" xml:space="preserve">
+    <value>Посмотреть оставленные комментарии</value>
+  </data>
+  <data name="View_search_and_delete_comments" xml:space="preserve">
+    <value>Просмотр, поиск и удаление комментариев</value>
+  </data>
+  <data name="View_search_and_delete_videos" xml:space="preserve">
+    <value>Просмотр, поиск и удаление видео</value>
+  </data>
+  <data name="View_uploaded_videos" xml:space="preserve">
+    <value>Посмотреть загруженные видео</value>
+  </data>
+  <data name="Your_video_downloaded" xml:space="preserve">
+    <value>Видео скачено</value>
+  </data>
+  <data name="Your_video_uploaded" xml:space="preserve">
+    <value>Ваше видео загружено</value>
+  </data>
+</root>

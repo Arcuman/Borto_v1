@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,240 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="Account_Page" xml:space="preserve">
+    <value>Account_Page</value>
+  </data>
+  <data name="Added_to_favorites" xml:space="preserve">
+    <value>Added to favorites!</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Admin</value>
+  </data>
+  <data name="Admin_Page" xml:space="preserve">
+    <value>Admin Page</value>
+  </data>
+  <data name="AgreementTermOfUse" xml:space="preserve">
+    <value>I agree with terms of use of the application</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Change_Password" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="Choose" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="Comment_Deleted" xml:space="preserve">
+    <value>Comment Deleted</value>
+  </data>
+  <data name="Data_saved_successfully" xml:space="preserve">
+    <value>Data saved successfully</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DateUpload" xml:space="preserve">
+    <value>Date Upload:</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="Download_Page" xml:space="preserve">
+    <value>Download Page</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duration:</value>
+  </data>
+  <data name="Favorite" xml:space="preserve">
+    <value>Favorite</value>
+  </data>
+  <data name="Favorite_Videos" xml:space="preserve">
+    <value>Favorite Videos</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Home_Page" xml:space="preserve">
+    <value>Home Page</value>
+  </data>
+  <data name="IncorrectData" xml:space="preserve">
+    <value>IncorrectData</value>
+  </data>
+  <data name="Incorrect_old_password" xml:space="preserve">
+    <value>Incorrect old password</value>
+  </data>
+  <data name="Insert_your_comment_here" xml:space="preserve">
+    <value>Insert your comment here</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Long_first" xml:space="preserve">
+    <value>Long first</value>
+  </data>
+  <data name="MyVideos" xml:space="preserve">
+    <value>My Videos</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Name_required" xml:space="preserve">
+    <value>Name (required)</value>
+  </data>
+  <data name="New_first" xml:space="preserve">
+    <value>New first</value>
+  </data>
+  <data name="New_Password" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="NickName" xml:space="preserve">
+    <value>Nickname</value>
+  </data>
+  <data name="No_internet_connection" xml:space="preserve">
+    <value>No internet connection</value>
+  </data>
+  <data name="Old_first" xml:space="preserve">
+    <value>Old first</value>
+  </data>
+  <data name="Old_Password" xml:space="preserve">
+    <value>Old Password</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Password_changed" xml:space="preserve">
+    <value>Password changed</value>
+  </data>
+  <data name="Player" xml:space="preserve">
+    <value>Player</value>
+  </data>
+  <data name="Post_Date" xml:space="preserve">
+    <value>Post date</value>
+  </data>
+  <data name="Removed_from_favorite" xml:space="preserve">
+    <value>Removed from favorite!</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Select_A_Picture" xml:space="preserve">
+    <value>Select a picture for your icon</value>
+  </data>
+  <data name="Select_a_picture_for_your_video" xml:space="preserve">
+    <value>Select a picture for your video</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="ServerError" xml:space="preserve">
+    <value>Server Error: </value>
+  </data>
+  <data name="Short_first" xml:space="preserve">
+    <value>Short first</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>SIGN IN</value>
+  </data>
+  <data name="SignInTitle" xml:space="preserve">
+    <value>Sign in to your account</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>SIGN UP</value>
+  </data>
+  <data name="SignUpTitle" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Source</value>
+  </data>
+  <data name="This_login_is_already_exist" xml:space="preserve">
+    <value>This login is already exist</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="to_show_hide_interface_use_key" xml:space="preserve">
+    <value>to show/hide interface use key 'I'</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="UploadDate" xml:space="preserve">
+    <value>Upload Date</value>
+  </data>
+  <data name="Upload_Page" xml:space="preserve">
+    <value>Upload Page</value>
+  </data>
+  <data name="User_NickName" xml:space="preserve">
+    <value>User Nickname</value>
+  </data>
+  <data name="Video" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="Videos" xml:space="preserve">
+    <value>Videos</value>
+  </data>
+  <data name="Video_Deleted" xml:space="preserve">
+    <value>Video Deleted</value>
+  </data>
+  <data name="Video_Page" xml:space="preserve">
+    <value>Video Page</value>
+  </data>
+  <data name="Video_Player" xml:space="preserve">
+    <value>Video Player</value>
+  </data>
+  <data name="Video_was_deleted_from_server" xml:space="preserve">
+    <value>Video_was_deleted_from_server!</value>
+  </data>
+  <data name="View_comments_left" xml:space="preserve">
+    <value>View comments left</value>
+  </data>
+  <data name="View_search_and_delete_comments" xml:space="preserve">
+    <value>View, search and delete comments</value>
+  </data>
+  <data name="View_search_and_delete_videos" xml:space="preserve">
+    <value>View, search and delete videos</value>
+  </data>
+  <data name="View_uploaded_videos" xml:space="preserve">
+    <value>View uploaded videos</value>
+  </data>
+  <data name="Your_video_downloaded" xml:space="preserve">
+    <value>Video downloaded</value>
+  </data>
+  <data name="Your_video_uploaded" xml:space="preserve">
+    <value>Your video uploaded</value>
+  </data>
 </root>

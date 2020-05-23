@@ -37,14 +37,35 @@ namespace Borto_v1
         {
             return db.Comments.Find(id);
         }
+        public IEnumerable<Comment> GetBySearch(string DateSearch, string VideoSearch, string UserSearch, string CommentSearch)
+        {
 
+            if (!String.IsNullOrWhiteSpace(DateSearch))
+            {
+                DateTime searchFrom = Convert.ToDateTime(DateSearch);
+                DateTime searchTo = searchFrom.AddDays(1);
+                return db.Comments.AsNoTracking().Include(x=>x.User).Where(x =>
+                                              x.PostDate >= searchFrom && x.PostDate <= searchTo
+                                              && x.CommentMessage.Contains(CommentSearch)
+                                              && x.Video.Name.Contains(VideoSearch)
+                                              && x.User.NickName.Contains(UserSearch)).ToList();
+            }
+            else
+            {
+                DateTime searchFrom = Convert.ToDateTime(DateSearch);
+                DateTime searchTo = searchFrom.AddDays(1);
+                return db.Comments.AsNoTracking().Include(x => x.User).Where(x => x.CommentMessage.Contains(CommentSearch)
+                                              && x.Video.Name.Contains(VideoSearch)
+                                              && x.User.NickName.Contains(UserSearch)).ToList();
+            }
+        }
         public IEnumerable<Comment> GetAll()
         {
-            return db.Comments.AsNoTracking().Include(c => c.User).Include(x=>x.Video).ToList();
+            return db.Comments.AsNoTracking().Include(c => c.User).Include(x => x.Video).ToList();
         }
         public IEnumerable<Comment> GetAllByVideo(int VideoID)
         {
-            return db.Comments.AsNoTracking().Include(c => c.User).Where(x=>x.VideoId==VideoID).OrderByDescending(x => x.PostDate).ToList();
+            return db.Comments.AsNoTracking().Include(c => c.User).Where(x => x.VideoId == VideoID).OrderByDescending(x => x.PostDate).ToList();
         }
 
         public void Update(Comment item)

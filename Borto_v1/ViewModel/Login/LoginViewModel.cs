@@ -5,7 +5,9 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using System;
+using System.Resources;
 using System.Threading;
+using WPFLocalizeExtension.Engine;
 
 namespace Borto_v1
 {
@@ -183,13 +185,13 @@ namespace Borto_v1
                                 else
                                 {
                                     IsVisibleProgressBar = false;
-                                    Message = "Incorrect data!";
+                                    Message = Properties.Resources.IncorrectData;
                                     IsOpenDialog = true;
                                 }
                             }
                             catch (Exception ex)
                             {
-                                SimpleIoc.Default.GetInstance<LoginWindowViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<LoginWindowViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                 SimpleIoc.Default.GetInstance<LoginWindowViewModel>().IsOpenDialog = true;
                             }
 

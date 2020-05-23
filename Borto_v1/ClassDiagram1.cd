@@ -1,2 +1,546 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Borto_v1.App" Collapsed="true">
+    <Position X="19.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.AzureHelper" Collapsed="true">
+    <Position X="21" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAQgAAAAAEAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Business Logic\AzureHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.CommentConfiguration" Collapsed="true">
+    <Position X="12.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataLayer\Configuration\CommentConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.FavoriteVideoConfiguration" Collapsed="true">
+    <Position X="10.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataLayer\Configuration\FavoriteVideoConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.MarkConfiguration" Collapsed="true">
+    <Position X="19.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataLayer\Configuration\MarkConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.UserConfiguration" Collapsed="true">
+    <Position X="8.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataLayer\Configuration\UserConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.VideoConfiguration" Collapsed="true">
+    <Position X="14" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataLayer\Configuration\VideoConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.PlayerContext" Collapsed="true">
+    <Position X="8.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAQAAAAAAAAAEAAAAAAAAAQAAAAAIAg=</HashCode>
+      <FileName>DataLayer\EF\PlayerContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.Comment" Collapsed="true">
+    <Position X="10.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABBAAAAAAAAABAAAAAAAAgAAIAAAAEAAAACAAAAAAg=</HashCode>
+      <FileName>DataLayer\Model\Comment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.FavoriteVideo" Collapsed="true">
+    <Position X="8.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgABAAAAAAAAAAAAAAAAAAgAAIAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>DataLayer\Model\FavoriteVideo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.Mark" Collapsed="true">
+    <Position X="17.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAgAAIAAAAAAAAAAAAAAEAk=</HashCode>
+      <FileName>DataLayer\Model\Mark.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.User" Collapsed="true">
+    <Position X="7" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAQAEAAAAAQAAAIAABECAAQQAAAAAAg=</HashCode>
+      <FileName>DataLayer\Model\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.Video" Collapsed="true">
+    <Position X="12.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAABAAAAAAAiCAYAAAAAAAwAAACAABAgAAQAAAAAAAA=</HashCode>
+      <FileName>DataLayer\Model\Video.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.CommentRepostiroty" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAAAAQAABAAAAAAAAAAAEIAEAAAgBAAAAAAAA=</HashCode>
+      <FileName>DataLayer\Repositories\CommentRepostiroty.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.EFUnitOfWork" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABIAAKAAACAQAQQAAAAAAAAAAAAAAAAAAAQAAIAAoIg=</HashCode>
+      <FileName>DataLayer\Repositories\EFUnitOfWork.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.FavoriteVideoRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAQAABAAAAAAAAAAAEIQEAAAgAAACABAAA=</HashCode>
+      <FileName>DataLayer\Repositories\FavoriteVideoRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.MarkRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAIAAAQAABAAAAAAAAAAAEIQEAAAgAAAAABAAA=</HashCode>
+      <FileName>DataLayer\Repositories\MarkRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.UserRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAAAAQAABAAAAACAAAAAEIAEAAAgAAAAAQAAA=</HashCode>
+      <FileName>DataLayer\Repositories\UserRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.VideoRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAgAAQAABAIAAACAAAAAEIAEAAEgBAACAAAAA=</HashCode>
+      <FileName>DataLayer\Repositories\VideoRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.BindingPositionAttachment" Collapsed="true">
+    <Position X="7" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAACABAAgBAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\AttachedProperty\BindingPositionAttachment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.EventFocusAttachment" Collapsed="true">
+    <Position X="7" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAIAAAAEAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Helpers\AttachedProperty\EventFocusAttachment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.PasswordBoxAssistant" Collapsed="true">
+    <Position X="21" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBABAAAAAAAAAAEAAAAAAACoABAgAAAAAAAAAICAAAg=</HashCode>
+      <FileName>Helpers\AttachedProperty\PasswordBoxAssistant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.RelayCommandParametr" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAEAEAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Command\RelayCommandParametr.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.ByteToBitmapImageConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Converters\ByteToBitmapImageConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.InverseBooleanConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Converters\InverseBooleanConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.ParametrizedBooleanToVisibilityConverter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Converters\ParametrizedBooleanToVisibilityConverter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.OpenWindowMessage" Collapsed="true">
+    <Position X="17.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIQAAAAAAAAA=</HashCode>
+      <FileName>Helpers\MessageWindow\OpenWindowMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.FrameNavigationService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAEAAIATAAAAAgAAQCAFAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Navigation\FrameNavigationService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.LoginRule" Collapsed="true">
+    <Position X="7" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validation\LoginRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.MaximumCharacterRule" Collapsed="true">
+    <Position X="7" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validation\MaximumCharacterRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.MinimumCharacterRule" Collapsed="true">
+    <Position X="8.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validation\MinimumCharacterRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.NickNameRule" Collapsed="true">
+    <Position X="10.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validation\NickNameRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.NotContainSpaceRuse" Collapsed="true">
+    <Position X="12.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validation\NotContainSpaceRuse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.NotEmptyValidationRule" Collapsed="true">
+    <Position X="14" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validation\NotEmptyValidationRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.OnlyLettersRule" Collapsed="true">
+    <Position X="15.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validation\OnlyLettersRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.PasswordRule" Collapsed="true">
+    <Position X="7" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Validation\PasswordRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.LoginWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Window\LoginWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAQAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Window\MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.AdminVideosPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\AdminPages\AdminVideosPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.CommentsPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\AdminPages\CommentsPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.Login" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Login\Login.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.RegisterPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Login\RegisterPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.AccountPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Pages\Menu\AccountPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.AdminPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Menu\AdminPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.DownloadPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Menu\DownloadPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.FavoriteVideosPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Menu\FavoriteVideosPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.UploadPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Menu\UploadPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.VideoPlayerPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAEoAAAAAAAAAAAAAEABAAAAABBAAAAAAAAAQAA=</HashCode>
+      <FileName>Pages\Menu\VideoPlayerPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.WatchingPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\Menu\WatchingPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.VideoWatchingPage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Pages\VideoWatchingPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.AdminCommentsViewModel" Collapsed="true">
+    <Position X="10.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABiQAIAAFAAgAAQAIABwAAAEUAAADAAQAAAAEAgYAA=</HashCode>
+      <FileName>ViewModel\AdminPages\AdminCommentsViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.AdminVideosViewModel" Collapsed="true">
+    <Position X="15.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABCAAAAAAAAgAAIAIAESAAAEEAAADAAQAAAiEBgQIg=</HashCode>
+      <FileName>ViewModel\AdminPages\AdminVideosViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.ViewModelLocator" Collapsed="true">
+    <Position X="8.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAACAAAAAAAAAAAAAAAAAAABEAABCA=</HashCode>
+      <FileName>ViewModel\Helpers\ViewModelLocator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.LoginViewModel" Collapsed="true">
+    <Position X="8.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CABCAAgAAgAIEAAAIAAAAAAAAAAAAACCAAAQIgCAUCA=</HashCode>
+      <FileName>ViewModel\Login\LoginViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.RegisterViewModel" Collapsed="true">
+    <Position X="12.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CABCAAgABgAIEAQAIAAAAAUAEAAEAACCAAAQIgCAUCA=</HashCode>
+      <FileName>ViewModel\Login\RegisterViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.AccountViewModel" Collapsed="true">
+    <Position X="8.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBBDBAAAAAiAAEAIoRBAAAQAEcAMABNAZgAAmASAQZg=</HashCode>
+      <FileName>ViewModel\Menu\AccountViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.AdminViewModel" Collapsed="true">
+    <Position X="17.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAQAAAIAAAAGAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModel\Menu\AdminViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.FavoriteVideosViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQhCAAgICDAAiBAQIcAQAABAEIAIABCA0AAAihEgQYg=</HashCode>
+      <FileName>ViewModel\Menu\FavoriteVideosViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.UploadViewModel" Collapsed="true">
+    <Position X="21" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AADiAIAAABBoABAAIACQCA0AEAAEADCAAAAAEAAAQQA=</HashCode>
+      <FileName>ViewModel\Menu\UploadViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.VideoPlayerPageViewModel" Collapsed="true">
+    <Position X="17.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAKYAAAgBEAAkAFAAKAQAAAEEAAAAEQACgAEAAoA=</HashCode>
+      <FileName>ViewModel\Menu\VideoPlayerPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.WatchingViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQhCAAgICDAAiBAQIcAQAABAEIAIABCA0AAAihEgQIg=</HashCode>
+      <FileName>ViewModel\Menu\WatchingViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Borto_v1.DownloadViewModel" Collapsed="true">
+    <Position X="19.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgBiAAIAAgAAAAACIgAAAIIAIAAAACAAAAEAGAAAQDg=</HashCode>
+      <FileName>ViewModel\OtherPage\DownloadViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.VideoWatchingPageViewModel" Collapsed="true">
+    <Position X="7" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kASiEoAEAAmICQAooECQYAAEEMCIFBQYYwEgCAEBIRo=</HashCode>
+      <FileName>ViewModel\OtherPage\VideoWatchingPageViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.LoginWindowViewModel" Collapsed="true">
+    <Position X="12.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAACAAgAAgBAAAAEIAAAAAAAAAAAAAAAAAAAIAAgACA=</HashCode>
+      <FileName>ViewModel\Windows\LoginWindowViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.MainViewModel" Collapsed="true">
+    <Position X="14" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQDAAwAGgBAAABEIQAgAAAASAgYAAgAAABAIBAgATA=</HashCode>
+      <FileName>ViewModel\Windows\MainViewModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.Properties.Resources" Collapsed="true">
+    <Position X="15.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAACwAAAAABEAQgAQQAAAACAAAQAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.Properties.Settings" Collapsed="true">
+    <Position X="17.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Borto_v1.IRepository&lt;T&gt;" Collapsed="true">
+    <Position X="8.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAABAAAAAAAAAAAEIAEAAAgAAAAAAAAA=</HashCode>
+      <FileName>DataLayer\Interfaces\IRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Borto_v1.IFrameNavigationService" Collapsed="true">
+    <Position X="7" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Helpers\Navigation\IFrameNavigationService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="Borto_v1.TypeMark">
+    <Position X="9.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>DataLayer\Enum\TypeMark.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Borto_v1.UserRole">
+    <Position X="12.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataLayer\Enum\UserRole.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Borto_v1.LikeState" Collapsed="true">
+    <Position X="7" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAAA=</HashCode>
+      <FileName>Helpers\Enum\LikeState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Borto_v1.SortState" Collapsed="true">
+    <Position X="8.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAACCAAAAAAAAAAAAAAAAAAAIAAAEAAAA=</HashCode>
+      <FileName>Helpers\Enum\SortState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Borto_v1.WindowType" Collapsed="true">
+    <Position X="14" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Helpers\MessageWindow\WindowType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

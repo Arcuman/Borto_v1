@@ -8,8 +8,7 @@ namespace Borto_v1
     {
         static ViewModelLocator()
         {
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
+            ServiceLocator.SetLocatorProvider(()=> SimpleIoc.Default);
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DownloadViewModel>();

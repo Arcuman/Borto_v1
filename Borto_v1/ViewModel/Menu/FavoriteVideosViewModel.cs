@@ -170,7 +170,7 @@ namespace Borto_v1
                             }
                             catch (Exception ex)
                             {
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             }
                         });
@@ -216,7 +216,7 @@ namespace Borto_v1
                             }
                             catch (Exception ex)
                             {
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             }
                         });
@@ -246,7 +246,7 @@ namespace Borto_v1
                             }
                             catch (Exception ex)
                             {
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             }
                         });
@@ -279,7 +279,7 @@ namespace Borto_v1
                             }
                             catch (Exception ex)
                             {
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             }
                         });
@@ -312,7 +312,7 @@ namespace Borto_v1
                             }
                             catch (Exception ex)
                             {
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             }
                         });
@@ -344,7 +344,7 @@ namespace Borto_v1
                             }
                             catch (Exception ex)
                             {
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             }
                         });
@@ -376,7 +376,7 @@ namespace Borto_v1
                             }
                             catch (Exception ex)
                             {
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             }
                         });
@@ -406,7 +406,7 @@ namespace Borto_v1
                             }
                             catch (Exception ex)
                             {
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             }
                         });

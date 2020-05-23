@@ -176,7 +176,7 @@ namespace Borto_v1
                     ?? (uploadCommand = new RelayCommandParametr(
                     (obj) =>
                     {
-                        if (PathVideo != "Choose Video" && !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(Description))
+                        if (!String.IsNullOrWhiteSpace(PathVideo) && !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(Description))
                         {
                             IsVisibleProgressBar = true;
                             uploadThread = new Thread(() =>
@@ -187,7 +187,7 @@ namespace Borto_v1
                                 }
                                 catch (Exception ex)
                                 {
-                                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                     SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                                 }
                             });
@@ -227,7 +227,7 @@ namespace Borto_v1
             {
                 SetImage();
 
-                PathVideo = "Choose Video";
+                PathVideo = null;
 
                 Name = String.Empty;
 
@@ -256,7 +256,7 @@ namespace Borto_v1
 
             IsVisibleProgressBar = false;
 
-            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Your video uploaded!";
+            SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Your_video_uploaded;
             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
 
             Name = Description = PathVideo = string.Empty;

@@ -50,7 +50,7 @@ namespace Borto_v1
             return false;
 
         }
-
+        
         public IEnumerable<Video> FindByUserId(int UserId)
         {
                 var Videos = db.Set<Video>().AsNoTracking().Where(c => c.UserId == UserId).ToList();
@@ -66,6 +66,27 @@ namespace Borto_v1
         {
             return db.Videos.AsNoTracking().Include(c => c.User).ToList();
         }
+
+        public IEnumerable<Video> GetBySearch(string DateSearch,string TitleSearch, string UserSearch)
+        {
+
+            if (!String.IsNullOrWhiteSpace(DateSearch))
+            {
+                DateTime searchFrom = Convert.ToDateTime(DateSearch);
+                DateTime searchTo = searchFrom.AddDays(1);
+                return db.Videos.AsNoTracking().Include(x=>x.User).Where(x => x.UploadDate >= searchFrom && x.UploadDate <= searchTo
+                                              && x.Name.Contains(TitleSearch)
+                                              && x.User.NickName.Contains(UserSearch)).ToList();
+            }
+            else
+            {
+                DateTime searchFrom = Convert.ToDateTime(DateSearch);
+                DateTime searchTo = searchFrom.AddDays(1);
+                return db.Videos.AsNoTracking().Include(x=>x.User).Where(x =>    x.Name.Contains(TitleSearch)
+                                              && x.User.NickName.Contains(UserSearch)).ToList();
+            }
+        }
+
         public int CountVideos()
         {
             return db.Videos.AsNoTracking().Count();

@@ -16,6 +16,7 @@ namespace Borto_v1
         private readonly List<string> _historic;
         private string _currentPageKey;
         #endregion
+
         #region Properties                                              
         public string CurrentPageKey
         {
@@ -37,6 +38,7 @@ namespace Borto_v1
         }
         public object Parameter { get; private set; }
         #endregion
+
         #region Ctors and Methods
         public FrameNavigationService()
         {

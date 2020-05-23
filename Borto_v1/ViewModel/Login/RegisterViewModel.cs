@@ -222,7 +222,7 @@ namespace Borto_v1
                                     if (context.Users.IsExist(Login))
                                     {
                                         IsVisibleProgressBar = false;
-                                        Message = "This login is already exist";
+                                        Message = Properties.Resources.This_login_is_already_exist;
                                         IsOpenDialog = true;
                                     }
                                     //ADD VALIDATION HERE
@@ -243,13 +243,13 @@ namespace Borto_v1
                                     else
                                     {
                                         IsVisibleProgressBar = false;
-                                        Message = "Incorrect data!";
+                                        Message = Properties.Resources.IncorrectData;
                                         IsOpenDialog = true;
                                     }
                                 }
                                 catch (Exception ex)
                                 {
-                                    SimpleIoc.Default.GetInstance<LoginWindowViewModel>().Message = "Server error: " + ex.Message;
+                                    SimpleIoc.Default.GetInstance<LoginWindowViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                     SimpleIoc.Default.GetInstance<LoginWindowViewModel>().IsOpenDialog = true;
                                 }
                             }

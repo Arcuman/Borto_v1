@@ -14,13 +14,20 @@ namespace Borto_v1
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             string charString = value as string;
+            cultureInfo = CultureInfo.CurrentCulture;
             if (!Regex.Match(charString, "^[a-zA-ZА-Яа-я]").Success)
             {
-                return new ValidationResult(false, $"Field can only begin with a letter ");
+                if (cultureInfo.Name == "en-US")
+                    return new ValidationResult(false, $"Field can only begin with a letter ");
+                else
+                    return new ValidationResult(false, $"Поле может начинаться только с буквы ");
             }
             if (!Regex.Match(charString, "^[a-zA-ZА-Яа-я][a-zA-ZА-Яа-я\\d._$#*!]*$").Success)
             {
-                return new ValidationResult(false, $"Field can contain only letter , digits and ._$#*!");
+                if (cultureInfo.Name == "en-US")
+                    return new ValidationResult(false, $"Field can contain only letter , digits and ._$#*!");
+                else
+                    return new ValidationResult(false, $"Поле может содержать только буквы, цифры и ._$#*!");
             }
 
             return ValidationResult.ValidResult;

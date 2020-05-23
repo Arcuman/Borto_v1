@@ -169,7 +169,7 @@ namespace Borto_v1
                                 }
                                 catch (Exception ex)
                                 {
-                                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                     SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                                 }
                             });
@@ -195,12 +195,12 @@ namespace Borto_v1
                             context.Videos.Delete(SelectedVideo.IdVideo);
                             context.Save();
                             Videos.Remove(SelectedVideo);
-                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Video Deleted";
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Video_Deleted;
                             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         }
                         catch (Exception ex)
                         {
-                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                            SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         }
                     },
@@ -228,7 +228,7 @@ namespace Borto_v1
                             }
                             catch (Exception ex)
                             {
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             }
                         });
@@ -261,16 +261,9 @@ namespace Borto_v1
             {
                 Videos = new ObservableCollection<Video>(context.Videos.GetAll());
             }
-            else if (!String.IsNullOrWhiteSpace(DateSearch))
+            else 
             {
-                Videos = new ObservableCollection<Video>(Videos.Where(x => x.Name.Contains(TitleSearch)
-                                              && x.UploadDate.ToShortDateString() == DateSearch
-                                              && x.User.NickName.Contains(UserSearch)).ToList());
-            }
-            else
-            {
-                Videos = new ObservableCollection<Video>(Videos.Where(x => x.Name.Contains(TitleSearch)
-                                             && x.User.NickName.Contains(UserSearch)).ToList());
+                Videos = new ObservableCollection<Video>(context.Videos.GetBySearch(DateSearch, TitleSearch, UserSearch));
             }
         }
 

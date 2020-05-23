@@ -117,7 +117,7 @@ namespace Borto_v1
                             }
                             catch (Exception ex)
                             {
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             }
                         });
@@ -129,7 +129,7 @@ namespace Borto_v1
                             }
                             catch (Exception ex)
                             {
-                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Server error: " + ex.Message;
+                                SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                             }
                         });
@@ -207,7 +207,7 @@ namespace Borto_v1
             helper.download_FromBlob(Video.Path, NameToSave, PathFolder);
             IsVisibleProgressBar = false;
             
-            SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Your video downloaded!";
+            SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Your_video_downloaded;
             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
         }
 
@@ -224,7 +224,7 @@ namespace Borto_v1
                 {
                     downloadThread.Abort();
                     IsVisibleProgressBar = false;
-                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = "Video was deleted from server!";
+                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Video_was_deleted_from_server;
                     SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                 }
             }
