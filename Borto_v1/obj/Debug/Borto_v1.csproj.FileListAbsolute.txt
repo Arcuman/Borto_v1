@@ -401,5 +401,7 @@ D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Bor
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Borto_v1.csproj.CopyComplete
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Borto_v1.exe
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Borto_v1.pdb
-D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Borto_v1.Migrations.InitialCreate.resources
-D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Borto_v1.Migrations.AddPlaylistVideo4.resources
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Views\Pages\UserAccountPage.g.cs
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Views\Pages\UserAccountPage.baml
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Views\Pages\SubscriptionsPage.g.cs
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Views\Pages\SubscriptionsPage.baml

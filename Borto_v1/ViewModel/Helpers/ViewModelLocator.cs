@@ -29,6 +29,8 @@ namespace Borto_v1
             navigationService.Configure("WatchLaters", new Uri("../Pages/Menu/WatchLaterPage.xaml", UriKind.Relative));
             navigationService.Configure("VideoWatching", new Uri("../Pages/VideoWatchingPage.xaml", UriKind.Relative));
             navigationService.Configure("PlaylistVideos", new Uri("../Pages/PlaylistVideosPage.xaml", UriKind.Relative));
+            navigationService.Configure("Subscriptions", new Uri("../Pages/SubscriptionsPage.xaml", UriKind.Relative));
+            navigationService.Configure("UserAccount", new Uri("../Pages/UserAccountPage.xaml", UriKind.Relative));
             navigationService.Configure("Login", new Uri("../Pages/Login/Login.xaml", UriKind.Relative));
             navigationService.Configure("Register", new Uri("../Pages/Login/RegisterPage.xaml", UriKind.Relative));
             navigationService.Configure("Player", new Uri("../Pages/Menu/VideoPlayerPage.xaml", UriKind.Relative));

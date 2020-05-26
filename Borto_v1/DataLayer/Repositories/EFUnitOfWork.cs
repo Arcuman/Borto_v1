@@ -21,6 +21,9 @@ namespace Borto_v1
 
         private PlaylistVideoRepository playlistVideoRepository;
 
+
+        private SubscriptionRepository subscriptionRepository;
+
         public UserRepository Users
         {
             get
@@ -84,6 +87,15 @@ namespace Borto_v1
                 if (playlistVideoRepository == null)
                     playlistVideoRepository = new PlaylistVideoRepository(db);
                 return playlistVideoRepository;
+            }
+        }
+         public SubscriptionRepository Subscription
+        {
+            get
+            {
+                if (subscriptionRepository == null)
+                    subscriptionRepository = new SubscriptionRepository(db);
+                return subscriptionRepository;
             }
         }
 

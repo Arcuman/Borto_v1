@@ -35,5 +35,7 @@ namespace Borto_v1
         public DbSet<Playlist> Playlists { get; set; }
 
         public DbSet<PlaylistVideo> PlaylistVideos { get; set; }
+
+        public DbSet<Subscription> Subscriptions { get; set; }
     }
 }

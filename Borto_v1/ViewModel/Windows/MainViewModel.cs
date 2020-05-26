@@ -236,7 +236,7 @@ namespace Borto_v1
                     ?? (_accountpageCommand = new RelayCommand(
                     () =>
                     {
-                        _navigationService.NavigateTo("Account");
+                        _navigationService.NavigateTo("Account",User);
                     }));
             }
         }

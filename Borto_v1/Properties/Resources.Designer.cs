@@ -358,7 +358,7 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My Videos.
+        ///   Looks up a localized string similar to Player Videos.
         /// </summary>
         public static string MyVideos {
             get {
@@ -610,6 +610,42 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Subscribe.
+        /// </summary>
+        public static string Subscribe {
+            get {
+                return ResourceManager.GetString("Subscribe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subscribers.
+        /// </summary>
+        public static string Subscriber {
+            get {
+                return ResourceManager.GetString("Subscriber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subscribers.
+        /// </summary>
+        public static string Subscribers {
+            get {
+                return ResourceManager.GetString("Subscribers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subscriptions.
+        /// </summary>
+        public static string Subscriptions {
+            get {
+                return ResourceManager.GetString("Subscriptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This login is already exist.
         /// </summary>
         public static string This_login_is_already_exist {
@@ -769,6 +805,15 @@ namespace Borto_v1.Properties {
         public static string View_uploaded_videos {
             get {
                 return ResourceManager.GetString("View_uploaded_videos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are not following anyone.
+        /// </summary>
+        public static string You_are_not_following_anyone {
+            get {
+                return ResourceManager.GetString("You_are_not_following_anyone", resourceCulture);
             }
         }
         

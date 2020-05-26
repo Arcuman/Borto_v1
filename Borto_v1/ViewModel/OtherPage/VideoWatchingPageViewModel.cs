@@ -578,6 +578,27 @@ namespace Borto_v1
                     }));
             }
         }
+        private RelayCommand _accountpageCommand;
+        public RelayCommand AccountpageCommand
+        {
+            get
+            {
+                return _accountpageCommand
+                    ?? (_accountpageCommand = new RelayCommand(
+                    () =>
+                    {
+                        if (Video.UserId == user.IdUser)
+                        {
+                            _navigationService.NavigateTo("Account", Video.User);
+                        }
+                        else
+                        {
+                            _navigationService.NavigateTo("UserAccount", Video.User);
+                        }
+
+                    }));
+            }
+        }
         private RelayCommandParametr openPlayListCommand;
         public RelayCommandParametr OpenPlayListCommand
         {
@@ -587,6 +608,7 @@ namespace Borto_v1
                     ?? (openPlayListCommand = new RelayCommandParametr(
                     (x) =>
                     {
+                        
                         IsOpenDialog = true;
                     }));
             }

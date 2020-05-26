@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -29,13 +30,17 @@ namespace Borto_v1
 
         public virtual List<Video> Videos { get; set; }
 
+        public virtual List<Subscription> Subscriptions { get; set; }
+
         public virtual List<Mark> Marks { get; set; }
 
         public virtual List<WatchLater> WatchLaters { get; set; }
 
         public virtual List<Comment> Comment { get; set; }
+
         public User()
-        { }
+        { 
+        }
 
         public User(string name, string login, string nickName, string password,byte[] image)
         {

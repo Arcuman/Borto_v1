@@ -50,10 +50,12 @@
                     <ColumnDefinition Width="16*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid Margin="5,5,5.4,5.4">
+                <Grid Margin="5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Border  Width="250" Height="250" CornerRadius="125" Margin="20 20 20 0">
                         <Border.Effect>
@@ -75,8 +77,26 @@
                             <materialDesign:PackIcon Kind="Add" Height="35" Width="35" />
                         </Button>
                     </StackPanel>
+                    <Grid Grid.Row="2" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock  Text="{lex:Loc Subscribers}" VerticalAlignment="Center" FontSize="22"
+                                           HorizontalAlignment="Right" Foreground="{StaticResource BackgroundLightBlueBrush}"/>
+                        <TextBlock Grid.Column="1" Text= "{Binding CountSubscribers}" VerticalAlignment="Center" Margin="5 0"
+                                           HorizontalAlignment="Left"  FontSize="22" Foreground="{StaticResource BackgroundLightBlueBrush}"/>
+                    </Grid>
+                    <Grid Grid.Row="3" Margin="15" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Content="{lex:Loc Subscriptions}" VerticalAlignment="Center"
+                                Foreground="{StaticResource ForegroundColorLight}" Command="{Binding SubscriptionsCommand}"/>
+                    </Grid>
                 </Grid>
-                <Grid Margin="322,20,0,20.4" Grid.Row="0" Grid.ColumnSpan="3">
+                <Grid Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3">
                     <Grid >
                         <Grid.RowDefinitions>
                             <RowDefinition/>

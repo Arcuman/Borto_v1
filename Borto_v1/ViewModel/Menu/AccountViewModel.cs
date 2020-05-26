@@ -42,6 +42,8 @@ namespace Borto_v1
 
         private bool isVisibleProgressBar;
 
+        private int countSubscribers;
+
         #endregion
 
         #region Public Fields
@@ -62,6 +64,23 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+        public int CountSubscribers
+        {
+            get
+            {
+                return countSubscribers;
+            }
+            set
+            {
+                if (countSubscribers == value)
+                {
+                    return;
+                }
+                countSubscribers = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public string NickName
         {
             get
@@ -325,6 +344,7 @@ namespace Borto_v1
                     {
                         SelectedVideo = obj as Video;
                         _navigationService.NavigateTo("VideoWatching", SelectedVideo);
+                        
                     }));
             }
         }
@@ -386,6 +406,20 @@ namespace Borto_v1
                     }));
             }
         }
+        private RelayCommandParametr subscriptionsCommand;
+        public RelayCommandParametr SubscriptionsCommand
+        {
+            get
+            {
+                return subscriptionsCommand
+                    ?? (subscriptionsCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        _navigationService.NavigateTo("Subscriptions");
+                    }));
+            }
+        }
+
         private RelayCommandParametr loadedCommand;
         public RelayCommandParametr LoadedCommand
         {
@@ -397,7 +431,7 @@ namespace Borto_v1
                     {
                         IsVisibleProgressBar = true;
 
-                        User = SimpleIoc.Default.GetInstance<MainViewModel>().User;
+                        
 
                         Name = User.Name;
 
@@ -410,6 +444,8 @@ namespace Borto_v1
                         {
                             try
                             {
+                                CountSubscribers = context.Subscription.Count(User.IdUser);
+
                                 Image = User.Image;
 
                                 Videos = new ObservableCollection<Video>(context.Videos.FindByUserId(User.IdUser));
@@ -437,6 +473,8 @@ namespace Borto_v1
         public AccountViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
+
+            User = navigationService.Parameter as User;
         }
 
         #endregion
