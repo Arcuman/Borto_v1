@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Borto_v1
 {
-    public class FavoriteVideo
+    public class WatchLater
     {
-        public int IdFavoriteVideo { get; set; }
+        public int IdWatchLater { get; set; }
 
         [Required]
         public int UserId { get; set; }
@@ -22,8 +22,9 @@ namespace Borto_v1
         [ForeignKey("VideoId")]
         public Video Video { get; set; }
 
-        public FavoriteVideo()
+        public WatchLater()
         {
+
         }
     }
 }

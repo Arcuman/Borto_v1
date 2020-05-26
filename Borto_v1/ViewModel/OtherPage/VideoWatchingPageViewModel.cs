@@ -2,11 +2,13 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Threading;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Windows.Data;
+using System.Windows.Forms;
 
 namespace Borto_v1
 {
@@ -21,6 +23,10 @@ namespace Borto_v1
         private Video video { get; set; }
 
         private User user;
+
+        private ObservableCollection<Playlist> playlist;
+
+        private ObservableCollection<CheckingPlaylist> checkingPlaylist;
 
         private byte[] videoImage;
 
@@ -44,6 +50,8 @@ namespace Borto_v1
 
         private LikeState likeState;
 
+        private Playlist selectedPlaylist;
+
         private ObservableCollection<Comment> comments;
 
         /// <summary>
@@ -57,11 +65,84 @@ namespace Borto_v1
 
         private bool isVisibleEditNameIcon;
 
+        private ObservableCollection<CheckingPlaylist> tempPlaylists;
+
         private bool isFavorite;
+
+        private bool isOpenDialog;
+
+        private bool isLoading;
         #endregion
 
         #region Public members
 
+        public ObservableCollection<CheckingPlaylist> Playlists
+        {
+            get
+            {
+                return checkingPlaylist;
+            }
+            set
+            {
+                if (checkingPlaylist == value)
+                {
+                    return;
+                }
+                checkingPlaylist = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public bool IsOpenDialog
+        {
+            get
+            {
+                return isOpenDialog;
+            }
+            set
+            {
+                if (isOpenDialog == value)
+                {
+                    return;
+                }
+                isOpenDialog = value;
+                RaisePropertyChanged();
+            }
+        }
+         public bool IsLoading
+        {
+            get
+            {
+                return isLoading;
+            }
+            set
+            {
+                if (isLoading == value)
+                {
+                    return;
+                }
+                isLoading = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public Playlist SelectedPlaylist
+        {
+            get
+            {
+                return selectedPlaylist;
+            }
+            set
+            {
+                if (selectedPlaylist == value)
+                {
+                    return;
+                }
+
+                selectedPlaylist = value;
+                RaisePropertyChanged();
+            }
+        }
         public Video Video
         {
             get
@@ -497,6 +578,36 @@ namespace Borto_v1
                     }));
             }
         }
+        private RelayCommandParametr openPlayListCommand;
+        public RelayCommandParametr OpenPlayListCommand
+        {
+            get
+            {
+                return openPlayListCommand
+                    ?? (openPlayListCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        IsOpenDialog = true;
+                    }));
+            }
+        }
+
+        private RelayCommandParametr closeDialogCommand;
+        public RelayCommandParametr CloseDialogCommand
+        {
+            get
+            {
+                return closeDialogCommand
+                    ?? (closeDialogCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        Playlists = tempPlaylists;
+                        IsOpenDialog = false;
+
+                    }));
+            }
+        }
+
         private RelayCommandParametr saveChangeNameCommand;
         public RelayCommandParametr SaveChangeNameCommand
         {
@@ -540,6 +651,20 @@ namespace Borto_v1
                     }));
             }
         }
+        private RelayCommandParametr savePlayListCommand;
+        public RelayCommandParametr SavePlayListCommand
+        {
+            get
+            {
+                return savePlayListCommand
+                    ?? (savePlayListCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        AddToPlaylist();
+                    }));
+            }
+        }
+
         private RelayCommandParametr addToFavoriteCommand;
         public RelayCommandParametr AddToFavoriteCommand
         {
@@ -552,7 +677,7 @@ namespace Borto_v1
                         Thread temp;
                         if (!IsFavorite)
                         {
-                            FavoriteVideo favorite = new FavoriteVideo()
+                            WatchLater favorite = new WatchLater()
                             {
                                 UserId = user.IdUser,
                                 VideoId = Video.IdVideo
@@ -561,7 +686,7 @@ namespace Borto_v1
                              {
                                  try
                                  {
-                                     context.FavoriteVideos.Create(favorite);
+                                     context.WatchLaters.Create(favorite);
                                      context.Save();
                                      SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Added_to_favorites;
                                      SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
@@ -581,7 +706,7 @@ namespace Borto_v1
                             {
                                 try
                                 {
-                                    context.FavoriteVideos.DeleteByUserId(user.IdUser, Video.IdVideo);
+                                    context.WatchLaters.DeleteByUserId(user.IdUser, Video.IdVideo);
                                     context.Save();
                                     SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Removed_from_favorite;
                                     SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
@@ -617,7 +742,8 @@ namespace Borto_v1
         /// </summary>
         public void Initialize()
         {
-            user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
+            IsLoading = false;
+           user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
 
             IsVisibleEditNameIcon = true;
 
@@ -656,7 +782,12 @@ namespace Borto_v1
         /// </summary>
         public void Loaded()
         {
-            FavoriteVideo favvideo = context.FavoriteVideos.FindMarkByUserId(user.IdUser, Video.IdVideo);
+            playlist = new ObservableCollection<Playlist>(context.Playlist.FindByUserId(user.IdUser));
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+                SetCheckboxCollection();
+            });
+            WatchLater favvideo = context.WatchLaters.FindMarkByUserId(user.IdUser, Video.IdVideo);
 
             IsFavorite = favvideo != null ? true : false;
 
@@ -665,8 +796,70 @@ namespace Borto_v1
             CountPositiveMark = context.Marks.CountMarkByType(TypeMark.Positive, Video.IdVideo);
 
             Comments = new ObservableCollection<Comment>(context.Comments.GetAllByVideo(Video.IdVideo));
+            IsLoading = true;
         }
-
+        public void SetCheckboxCollection()
+        {
+           
+            Playlists = new ObservableCollection<CheckingPlaylist>();
+            tempPlaylists = new ObservableCollection<CheckingPlaylist>();
+            foreach (var item in playlist)
+            {
+                bool isCheck = IsInPlaylist(item);
+                CheckingPlaylist temp = new CheckingPlaylist(item, isCheck);
+                CheckingPlaylist temp1 = new CheckingPlaylist(item, isCheck);
+                Playlists.Add(temp);
+                tempPlaylists.Add(temp1);
+            }
+        }
+        public bool IsInPlaylist(Playlist playlist)
+        {
+            if (context.PlaylistVideo.GetIfExist(playlist.IdPlaylist, Video.IdVideo) != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public void AddToPlaylist()
+        {
+            foreach (var newPlaylist in Playlists)
+            {
+                foreach (var oldPlayList in tempPlaylists)
+                {
+                    if (newPlaylist.playlist.IdPlaylist == oldPlayList.playlist.IdPlaylist)
+                    {
+                        if (newPlaylist.isChecked == oldPlayList.isChecked)
+                            break;
+                        else if (newPlaylist.isChecked == false)
+                        {
+                            int id = context.PlaylistVideo.GetIfExist(newPlaylist.playlist.IdPlaylist,Video.IdVideo).IdPlaylistVideo;
+                            context.PlaylistVideo.Delete(id);
+                        }
+                        else
+                        {
+                            PlaylistVideo playlistvideo = new PlaylistVideo()
+                            {
+                                PlaylistId = newPlaylist.playlist.IdPlaylist,
+                                VideoId = Video.IdVideo
+                            };
+                            context.PlaylistVideo.Create(playlistvideo);
+                        }
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+            }
+            tempPlaylists = new ObservableCollection<CheckingPlaylist>();
+            foreach (var item in Playlists)
+            {
+                CheckingPlaylist check = new CheckingPlaylist(item.playlist, item.isChecked);
+                tempPlaylists.Add(check);
+            }
+            IsOpenDialog = false;
+        }
         #endregion
     }
 }

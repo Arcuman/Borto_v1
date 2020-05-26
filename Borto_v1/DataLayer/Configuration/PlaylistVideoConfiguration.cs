@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Borto_v1
 {
-    public class FavoriteVideoConfiguration : EntityTypeConfiguration<FavoriteVideo>
+    public class PlaylistVideoConfiguration : EntityTypeConfiguration<PlaylistVideo>
     {
-        internal FavoriteVideoConfiguration() : base()
+        internal PlaylistVideoConfiguration() : base()
         {
-            this.HasKey(p => p.IdFavoriteVideo);
-            Property(p => p.IdFavoriteVideo).
-                HasColumnName("IdFavoriteVideo").
+            this.HasKey(p => p.IdPlaylistVideo);
+            Property(p => p.IdPlaylistVideo).
+                HasColumnName("IdPlaylistVideo").
                 HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).
                 IsRequired();
         }

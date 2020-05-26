@@ -149,6 +149,20 @@ namespace Borto_v1
                     }));
             }
         }
+        private RelayCommand playlistCommand;
+        public RelayCommand PlaylistCommand
+        {
+            get
+            {
+                return playlistCommand
+                    ?? (playlistCommand = new RelayCommand(
+                    () =>
+                    {
+                        _navigationService.NavigateTo("Playlist");
+                    }));
+            }
+        }
+
         private RelayCommand _loginpageCommand;
         public RelayCommand LoginPageCommand
         {
@@ -253,16 +267,16 @@ namespace Borto_v1
                     }));
             }
         }
-        private RelayCommand favoriteVideosPageCommand;
-        public RelayCommand FavoriteVideosPageCommand
+        private RelayCommand watchLatersPageCommand;
+        public RelayCommand WatchLatersPageCommand
         {
             get
             {
-                return favoriteVideosPageCommand
-                    ?? (favoriteVideosPageCommand = new RelayCommand(
+                return watchLatersPageCommand
+                    ?? (watchLatersPageCommand = new RelayCommand(
                     () =>
                     {
-                        _navigationService.NavigateTo("FavoriteVideos");
+                        _navigationService.NavigateTo("WatchLaters");
                     }));
             }
         }

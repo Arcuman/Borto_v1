@@ -37,8 +37,11 @@ namespace Borto_v1
 
         public virtual List<Mark> Marks { get; set; }
 
-        public virtual List<FavoriteVideo> FavoriteVideos { get; set; }
+        public virtual List<WatchLater> WatchLaters { get; set; }
 
+        public virtual List<PlaylistVideo> PlaylistVideos { get; set; }
+
+        public virtual List<Comment> Comments { get; set; }
         [NotMapped]
         public string Duration {
             get

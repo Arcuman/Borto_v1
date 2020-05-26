@@ -70,8 +70,7 @@ namespace Borto_v1
             {
                 return  db.Videos.AsNoTracking().Include(c => c.User).Where(c => c.UserId == UserId).ToList();
                 
-            }
-            
+            } 
         }
         public Video Get(int id)
         {

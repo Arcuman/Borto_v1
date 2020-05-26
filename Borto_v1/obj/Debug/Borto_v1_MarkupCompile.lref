@@ -1,5 +1,7 @@
-﻿D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\GeneratedInternalTypeHelper.g.cs
+﻿
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\App.xaml;;
+FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\Views\Pages\Menu\PlaylistPage.xaml;;
+FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\Views\Pages\PlaylistVideosPage.xaml;;
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\Views\Window\LoginWindow.xaml;;
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\Views\Window\MainWindow.xaml;;
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\Views\Pages\AdminPages\AdminVideosPage.xaml;;
@@ -9,7 +11,7 @@ FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\Views\Pages\
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\Views\Pages\Menu\AccountPage.xaml;;
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\Views\Pages\Menu\DownloadPage.xaml;;
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\Views\Pages\Menu\AdminPage.xaml;;
-FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\Views\Pages\Menu\FavoriteVideosPage.xaml;;
+FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\Views\Pages\Menu\WatchLaterPage.xaml;;
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\Views\Pages\Menu\UploadPage.xaml;;
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\Views\Pages\Menu\VideoPlayerPage.xaml;;
 FD:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\Views\Pages\VideoWatchingPage.xaml;;

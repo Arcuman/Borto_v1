@@ -124,7 +124,10 @@
     <value>Страница профиля</value>
   </data>
   <data name="Added_to_favorites" xml:space="preserve">
-    <value>Добавлено в избранное</value>
+    <value>Добавлено в смотреть позже</value>
+  </data>
+  <data name="AddPlaylist" xml:space="preserve">
+    <value>Добавить плейлист</value>
   </data>
   <data name="Admin" xml:space="preserve">
     <value>Админ</value>
@@ -184,10 +187,10 @@
     <value>Длительность:</value>
   </data>
   <data name="Favorite" xml:space="preserve">
-    <value>Избранное</value>
+    <value>Смотреть позже</value>
   </data>
   <data name="Favorite_Videos" xml:space="preserve">
-    <value>Избранные видео</value>
+    <value>Смотреть позже</value>
   </data>
   <data name="Folder" xml:space="preserve">
     <value>Путь</value>
@@ -252,11 +255,17 @@
   <data name="Player" xml:space="preserve">
     <value>Плеер</value>
   </data>
+  <data name="Playlist" xml:space="preserve">
+    <value>Плейлист</value>
+  </data>
   <data name="Post_Date" xml:space="preserve">
     <value>Дата публикации</value>
   </data>
   <data name="Removed_from_favorite" xml:space="preserve">
-    <value>Удалено из избраных</value>
+    <value>Удалено из смотреть позже</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Поиск</value>

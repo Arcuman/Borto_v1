@@ -260,8 +260,10 @@
     </ApplicationDefinition>
     <Compile Include="Business Logic\AzureHelper.cs" />
     <Compile Include="DataLayer\Configuration\CommentConfiguration.cs" />
-    <Compile Include="DataLayer\Configuration\FavoriteVideoConfiguration.cs" />
+    <Compile Include="DataLayer\Configuration\PlaylistConfiguration.cs" />
+    <Compile Include="DataLayer\Configuration\WatchLaterConfiguration.cs" />
     <Compile Include="DataLayer\Configuration\MarkConfiguration.cs" />
+    <Compile Include="DataLayer\Configuration\PlaylistVideoConfiguration.cs" />
     <Compile Include="DataLayer\Configuration\VideoConfiguration.cs" />
     <Compile Include="DataLayer\Configuration\UserConfiguration.cs" />
     <Compile Include="DataLayer\Enum\Quality.cs" />
@@ -269,17 +271,22 @@
     <Compile Include="DataLayer\Enum\UserRole.cs" />
     <Compile Include="DataLayer\Interfaces\IRepository.cs" />
     <Compile Include="DataLayer\Model\Comment.cs" />
-    <Compile Include="DataLayer\Model\FavoriteVideo.cs" />
+    <Compile Include="DataLayer\Model\WatchLater.cs" />
     <Compile Include="DataLayer\Model\Mark.cs" />
+    <Compile Include="DataLayer\Model\Playlist.cs" />
+    <Compile Include="DataLayer\Model\PlaylistVideo.cs" />
     <Compile Include="DataLayer\Repositories\CommentRepostiroty.cs" />
-    <Compile Include="DataLayer\Repositories\FavoriteVideoRepository.cs" />
+    <Compile Include="DataLayer\Repositories\WatchLaterRepository.cs" />
     <Compile Include="DataLayer\Repositories\MarkRepository.cs" />
     <Compile Include="DataLayer\Repositories\EFUnitOfWork.cs" />
+    <Compile Include="DataLayer\Repositories\PlaylistRepository.cs" />
+    <Compile Include="DataLayer\Repositories\PlaylistVideoRepository.cs" />
     <Compile Include="DataLayer\Repositories\UserRepository.cs" />
     <Compile Include="DataLayer\Repositories\VideoRepository.cs" />
     <Compile Include="Helpers\AttachedProperty\EventFocusAttachment.cs" />
     <Compile Include="Helpers\AttachedProperty\BindingPositionAttachment.cs" />
     <Compile Include="Helpers\AttachedProperty\PasswordBoxAssistant.cs" />
+    <Compile Include="Helpers\CheckboxItems\CheckingPlaylist.cs" />
     <Compile Include="Helpers\Converters\ByteToBitmapImageConverter.cs" />
     <Compile Include="Helpers\Converters\EnumConverter.cs" />
     <Compile Include="Helpers\Converters\EnumExtension.cs" />
@@ -299,19 +306,23 @@
     <Compile Include="Helpers\Validation\LoginRule.cs" />
     <Compile Include="Helpers\Validation\OnlyLettersRule.cs" />
     <Compile Include="Helpers\Validation\PasswordRule.cs" />
-    <Compile Include="Migrations\202005201214329_InitialCreate.cs" />
-    <Compile Include="Migrations\202005201214329_InitialCreate.designer.cs">
-      <DependentUpon>202005201214329_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202005261315304_InitialCreate.cs" />
+    <Compile Include="Migrations\202005261315304_InitialCreate.designer.cs">
+      <DependentUpon>202005261315304_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202005252144483_Converting.cs" />
-    <Compile Include="Migrations\202005252144483_Converting.designer.cs">
-      <DependentUpon>202005252144483_Converting.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202005260648458_AddCompanyMigration.cs" />
-    <Compile Include="Migrations\202005260648458_AddCompanyMigration.designer.cs">
-      <DependentUpon>202005260648458_AddCompanyMigration.cs</DependentUpon>
+    <Compile Include="Migrations\202005261518272_Add PlaylistVideo4.cs" />
+    <Compile Include="Migrations\202005261518272_Add PlaylistVideo4.designer.cs">
+      <DependentUpon>202005261518272_Add PlaylistVideo4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ViewModel\Menu\PlaylistViewModel.cs" />
+    <Compile Include="ViewModel\OtherPage\PlaylistVideosViewModel.cs" />
+    <Compile Include="Views\Pages\Menu\PlaylistPage.xaml.cs">
+      <DependentUpon>PlaylistPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PlaylistVideosPage.xaml.cs">
+      <DependentUpon>PlaylistVideosPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Window\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -338,8 +349,8 @@
     <Compile Include="Views\Pages\Menu\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\Menu\FavoriteVideosPage.xaml.cs">
-      <DependentUpon>FavoriteVideosPage.xaml</DependentUpon>
+    <Compile Include="Views\Pages\Menu\WatchLaterPage.xaml.cs">
+      <DependentUpon>WatchLaterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\Menu\UploadPage.xaml.cs">
       <DependentUpon>UploadPage.xaml</DependentUpon>
@@ -361,7 +372,7 @@
     <Compile Include="ViewModel\AdminPages\AdminCommentsViewModel.cs" />
     <Compile Include="ViewModel\AdminPages\AdminVideosViewModel.cs" />
     <Compile Include="ViewModel\Menu\AccountViewModel.cs" />
-    <Compile Include="ViewModel\Menu\FavoriteVideosViewModel.cs" />
+    <Compile Include="ViewModel\Menu\WatchLatersViewModel.cs" />
     <Compile Include="ViewModel\OtherPage\DownloadViewModel.cs" />
     <Compile Include="ViewModel\Login\LoginViewModel.cs" />
     <Compile Include="ViewModel\Windows\LoginWindowViewModel.cs" />
@@ -373,6 +384,14 @@
     <Compile Include="ViewModel\OtherPage\VideoWatchingPageViewModel.cs" />
     <Compile Include="ViewModel\Helpers\ViewModelLocator.cs" />
     <Compile Include="ViewModel\Menu\WatchingViewModel.cs" />
+    <Page Include="Views\Pages\Menu\PlaylistPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\PlaylistVideosPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Window\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -419,7 +438,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\Menu\FavoriteVideosPage.xaml">
+    <Page Include="Views\Pages\Menu\WatchLaterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -466,14 +485,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\202005201214329_InitialCreate.resx">
-      <DependentUpon>202005201214329_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005261315304_InitialCreate.resx">
+      <DependentUpon>202005261315304_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005252144483_Converting.resx">
-      <DependentUpon>202005252144483_Converting.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202005260648458_AddCompanyMigration.resx">
-      <DependentUpon>202005260648458_AddCompanyMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202005261518272_Add PlaylistVideo4.resx">
+      <DependentUpon>202005261518272_Add PlaylistVideo4.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru-RU.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

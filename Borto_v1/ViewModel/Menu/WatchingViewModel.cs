@@ -18,6 +18,7 @@ namespace Borto_v1
         #endregion
 
         #region Private members 
+
         EFUnitOfWork context = new EFUnitOfWork();
 
         private ObservableCollection<Video> videos;

@@ -13,9 +13,13 @@ namespace Borto_v1
 
         private MarkRepository markRepository;
 
-        private CommentRepostiroty commentRepostiroty;
+        private CommentRepostiroty commentRepository;
 
-        private FavoriteVideoRepository favoriteVideoRepostiroty;
+        private WatchLaterRepository WatchLaterRepostiroty;
+
+        private PlaylistRepository playlistRepository;
+
+        private PlaylistVideoRepository playlistVideoRepository;
 
         public UserRepository Users
         {
@@ -50,18 +54,36 @@ namespace Borto_v1
         {
             get
             {
-                if (commentRepostiroty == null)
-                    commentRepostiroty = new CommentRepostiroty(db);
-                return commentRepostiroty;
+                if (commentRepository == null)
+                    commentRepository = new CommentRepostiroty(db);
+                return commentRepository;
             }
         }
-        public FavoriteVideoRepository FavoriteVideos
+        public WatchLaterRepository WatchLaters
         {
             get
             {
-                if (favoriteVideoRepostiroty == null)
-                    favoriteVideoRepostiroty = new FavoriteVideoRepository(db);
-                return favoriteVideoRepostiroty;
+                if (WatchLaterRepostiroty == null)
+                    WatchLaterRepostiroty = new WatchLaterRepository(db);
+                return WatchLaterRepostiroty;
+            }
+        }
+         public PlaylistRepository Playlist
+        {
+            get
+            {
+                if (playlistRepository == null)
+                    playlistRepository = new PlaylistRepository(db);
+                return playlistRepository;
+            }
+        }
+         public PlaylistVideoRepository PlaylistVideo
+        {
+            get
+            {
+                if (playlistVideoRepository == null)
+                    playlistVideoRepository = new PlaylistVideoRepository(db);
+                return playlistVideoRepository;
             }
         }
 

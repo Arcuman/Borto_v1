@@ -16,7 +16,9 @@ namespace Borto_v1
             modelBuilder.Configurations.Add(new VideoConfiguration());
             modelBuilder.Configurations.Add(new MarkConfiguration());
             modelBuilder.Configurations.Add(new CommentConfiguration());
-            modelBuilder.Configurations.Add(new FavoriteVideoConfiguration());
+            modelBuilder.Configurations.Add(new PlaylistConfiguration());
+            modelBuilder.Configurations.Add(new WatchLaterConfiguration());
+            modelBuilder.Configurations.Add(new PlaylistVideoConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -28,6 +30,10 @@ namespace Borto_v1
 
         public DbSet<Comment> Comments { get; set; }
 
-        public DbSet<FavoriteVideo> FavoriteVideos { get; set; }
+        public DbSet<WatchLater> WatchLaters { get; set; }
+
+        public DbSet<Playlist> Playlists { get; set; }
+
+        public DbSet<PlaylistVideo> PlaylistVideos { get; set; }
     }
 }

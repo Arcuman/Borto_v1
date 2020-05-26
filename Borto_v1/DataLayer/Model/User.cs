@@ -31,9 +31,9 @@ namespace Borto_v1
 
         public virtual List<Mark> Marks { get; set; }
 
-        public virtual List<FavoriteVideo> FavoriteVideos { get; set; }
+        public virtual List<WatchLater> WatchLaters { get; set; }
 
-
+        public virtual List<Comment> Comment { get; set; }
         public User()
         { }
 

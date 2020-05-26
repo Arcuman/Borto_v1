@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Borto_v1
 {
-    public class FavoriteVideosViewModel : ViewModelBase, IDisposable
+    public class WatchLatersViewModel : ViewModelBase, IDisposable
     {
         #region Consts
 
@@ -163,7 +163,7 @@ namespace Borto_v1
                         {
                             try
                             {
-                                Videos = new ObservableCollection<Video>(context.FavoriteVideos.GetVideoByRange(PageCount, videoOnThePage,
+                                Videos = new ObservableCollection<Video>(context.WatchLaters.GetVideoByRange(PageCount, videoOnThePage,
                                                                                                                 SortState.New, SearchField, user.IdUser, out videosCount));
                                 isSortedBy = SortState.New;
                                 IsVisibleProgressBar = false;
@@ -211,7 +211,7 @@ namespace Borto_v1
                         {
                             try
                             {
-                                Videos = new ObservableCollection<Video>(context.FavoriteVideos.GetVideoByRange(PageCount, videoOnThePage, isSortedBy, SearchField, user.IdUser, out videosCount));
+                                Videos = new ObservableCollection<Video>(context.WatchLaters.GetVideoByRange(PageCount, videoOnThePage, isSortedBy, SearchField, user.IdUser, out videosCount));
                                 IsVisibleProgressBar = false;
                             }
                             catch (Exception ex)
@@ -241,7 +241,7 @@ namespace Borto_v1
                         {
                             try
                             {
-                                Videos = new ObservableCollection<Video>(context.FavoriteVideos.GetVideoByRange(PageCount, videoOnThePage, SortState.Long, SearchField, user.IdUser, out videosCount));
+                                Videos = new ObservableCollection<Video>(context.WatchLaters.GetVideoByRange(PageCount, videoOnThePage, SortState.Long, SearchField, user.IdUser, out videosCount));
                                 IsVisibleProgressBar = false;
                             }
                             catch (Exception ex)
@@ -274,7 +274,7 @@ namespace Borto_v1
                         {
                             try
                             {
-                                Videos = new ObservableCollection<Video>(context.FavoriteVideos.GetVideoByRange(PageCount, videoOnThePage, SortState.Short, SearchField, user.IdUser, out videosCount));
+                                Videos = new ObservableCollection<Video>(context.WatchLaters.GetVideoByRange(PageCount, videoOnThePage, SortState.Short, SearchField, user.IdUser, out videosCount));
                                 IsVisibleProgressBar = false;
                             }
                             catch (Exception ex)
@@ -307,7 +307,7 @@ namespace Borto_v1
                         {
                             try
                             {
-                                Videos = new ObservableCollection<Video>(context.FavoriteVideos.GetVideoByRange(PageCount, videoOnThePage, SortState.New, SearchField, user.IdUser, out videosCount));
+                                Videos = new ObservableCollection<Video>(context.WatchLaters.GetVideoByRange(PageCount, videoOnThePage, SortState.New, SearchField, user.IdUser, out videosCount));
                                 IsVisibleProgressBar = false;
                             }
                             catch (Exception ex)
@@ -339,7 +339,7 @@ namespace Borto_v1
                         {
                             try
                             {
-                                Videos = new ObservableCollection<Video>(context.FavoriteVideos.GetVideoByRange(PageCount, videoOnThePage, SortState.Old, SearchField, user.IdUser, out videosCount));
+                                Videos = new ObservableCollection<Video>(context.WatchLaters.GetVideoByRange(PageCount, videoOnThePage, SortState.Old, SearchField, user.IdUser, out videosCount));
                                 IsVisibleProgressBar = false;
                             }
                             catch (Exception ex)
@@ -371,7 +371,7 @@ namespace Borto_v1
                         {
                             try
                             {
-                                Videos = new ObservableCollection<Video>(context.FavoriteVideos.GetVideoByRange(PageCount, videoOnThePage, isSortedBy, SearchField, user.IdUser, out videosCount));
+                                Videos = new ObservableCollection<Video>(context.WatchLaters.GetVideoByRange(PageCount, videoOnThePage, isSortedBy, SearchField, user.IdUser, out videosCount));
                                 IsVisibleProgressBar = false;
                             }
                             catch (Exception ex)
@@ -401,7 +401,7 @@ namespace Borto_v1
                         {
                             try
                             {
-                                Videos = new ObservableCollection<Video>(context.FavoriteVideos.GetVideoByRange(PageCount, videoOnThePage, isSortedBy, SearchField, user.IdUser, out videosCount));
+                                Videos = new ObservableCollection<Video>(context.WatchLaters.GetVideoByRange(PageCount, videoOnThePage, isSortedBy, SearchField, user.IdUser, out videosCount));
                                 IsVisibleProgressBar = false;
                             }
                             catch (Exception ex)
@@ -421,7 +421,7 @@ namespace Borto_v1
         #endregion
 
         #region ctor
-        public FavoriteVideosViewModel(IFrameNavigationService navigationService)
+        public WatchLatersViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
             IsVisibleProgressBar = true;

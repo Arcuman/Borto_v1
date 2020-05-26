@@ -21,11 +21,11 @@
       <FileName>DataLayer\Configuration\CommentConfiguration.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Borto_v1.FavoriteVideoConfiguration" Collapsed="true">
+  <Class Name="Borto_v1.WatchLaterConfiguration" Collapsed="true">
     <Position X="10.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>DataLayer\Configuration\FavoriteVideoConfiguration.cs</FileName>
+      <FileName>DataLayer\Configuration\WatchLaterConfiguration.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Borto_v1.MarkConfiguration" Collapsed="true">
@@ -63,11 +63,11 @@
       <FileName>DataLayer\Model\Comment.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Borto_v1.FavoriteVideo" Collapsed="true">
+  <Class Name="Borto_v1.WatchLater" Collapsed="true">
     <Position X="8.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgABAAAAAAAAAAAAAAAAAAgAAIAAAAAAAAAAAAAAAAg=</HashCode>
-      <FileName>DataLayer\Model\FavoriteVideo.cs</FileName>
+      <FileName>DataLayer\Model\WatchLater.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Borto_v1.Mark" Collapsed="true">
@@ -106,11 +106,11 @@
       <FileName>DataLayer\Repositories\EFUnitOfWork.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Borto_v1.FavoriteVideoRepository" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Borto_v1.WatchLaterRepository" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="12.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAQAABAAAAAAAAAAAEIQEAAAgAAACABAAA=</HashCode>
-      <FileName>DataLayer\Repositories\FavoriteVideoRepository.cs</FileName>
+      <FileName>DataLayer\Repositories\WatchLaterRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
@@ -334,11 +334,11 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Borto_v1.FavoriteVideosPage" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Borto_v1.WatchLatersPage" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="14" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Pages\Menu\FavoriteVideosPage.xaml.cs</FileName>
+      <FileName>Pages\Menu\WatchLatersPage.xaml.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
@@ -423,11 +423,11 @@
       <FileName>ViewModel\Menu\AdminViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Borto_v1.FavoriteVideosViewModel" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="Borto_v1.WatchLatersViewModel" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="15.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQhCAAgICDAAiBAQIcAQAABAEIAIABCA0AAAihEgQYg=</HashCode>
-      <FileName>ViewModel\Menu\FavoriteVideosViewModel.cs</FileName>
+      <FileName>ViewModel\Menu\WatchLatersViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>

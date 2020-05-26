@@ -7,13 +7,13 @@ namespace Borto_v1.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class AddCompanyMigration : IMigrationMetadata
+    public sealed partial class AddPlaylistVideo4 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddCompanyMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddPlaylistVideo4));
         
         string IMigrationMetadata.Id
         {
-            get { return "202005260648458_AddCompanyMigration"; }
+            get { return "202005261518272_Add PlaylistVideo4"; }
         }
         
         string IMigrationMetadata.Source

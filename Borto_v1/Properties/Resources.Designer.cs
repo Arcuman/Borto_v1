@@ -79,11 +79,20 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Added to favorites!.
+        ///   Looks up a localized string similar to Added to watch later!.
         /// </summary>
         public static string Added_to_favorites {
             get {
                 return ResourceManager.GetString("Added_to_favorites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Playlist.
+        /// </summary>
+        public static string AddPlaylist {
+            get {
+                return ResourceManager.GetString("AddPlaylist", resourceCulture);
             }
         }
         
@@ -259,7 +268,7 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Favorite.
+        ///   Looks up a localized string similar to Watch Later.
         /// </summary>
         public static string Favorite {
             get {
@@ -268,7 +277,7 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Favorite Videos.
+        ///   Looks up a localized string similar to Watch Later.
         /// </summary>
         public static string Favorite_Videos {
             get {
@@ -466,6 +475,15 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Playlist.
+        /// </summary>
+        public static string Playlist {
+            get {
+                return ResourceManager.GetString("Playlist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Post date.
         /// </summary>
         public static string Post_Date {
@@ -475,11 +493,20 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Removed from favorite!.
+        ///   Looks up a localized string similar to Removed from watch later.
         /// </summary>
         public static string Removed_from_favorite {
             get {
                 return ResourceManager.GetString("Removed_from_favorite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         

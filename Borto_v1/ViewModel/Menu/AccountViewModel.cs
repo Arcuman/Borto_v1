@@ -357,6 +357,7 @@ namespace Borto_v1
                     }));
             }
         }
+
         private RelayCommandParametr cancelPasswordCommand;
         public RelayCommandParametr CancelPasswordCommand
         {

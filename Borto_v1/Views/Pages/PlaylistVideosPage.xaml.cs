@@ -17,14 +17,14 @@ using System.Windows.Shapes;
 namespace Borto_v1
 {
     /// <summary>
-    /// Interaction logic for FavoriteVideosPage.xaml
+    /// Interaction logic for PlaylistVideosPage.xaml
     /// </summary>
-    public partial class FavoriteVideosPage : Page
+    public partial class PlaylistVideosPage : Page
     {
-        public FavoriteVideosPage()
+        public PlaylistVideosPage()
         {
+            this.DataContext = new PlaylistVideosViewModel(SimpleIoc.Default.GetInstance<IFrameNavigationService>());
             InitializeComponent();
-            this.DataContext = new FavoriteVideosViewModel(SimpleIoc.Default.GetInstance<IFrameNavigationService>());
         }
         private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {

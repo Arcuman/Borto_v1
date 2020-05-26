@@ -124,7 +124,10 @@
     <value>Account Page</value>
   </data>
   <data name="Added_to_favorites" xml:space="preserve">
-    <value>Added to favorites!</value>
+    <value>Added to watch later!</value>
+  </data>
+  <data name="AddPlaylist" xml:space="preserve">
+    <value>Add Playlist</value>
   </data>
   <data name="Admin" xml:space="preserve">
     <value>Admin</value>
@@ -184,10 +187,10 @@
     <value>Duration:</value>
   </data>
   <data name="Favorite" xml:space="preserve">
-    <value>Favorite</value>
+    <value>Watch Later</value>
   </data>
   <data name="Favorite_Videos" xml:space="preserve">
-    <value>Favorite Videos</value>
+    <value>Watch Later</value>
   </data>
   <data name="Folder" xml:space="preserve">
     <value>Folder</value>
@@ -252,11 +255,17 @@
   <data name="Player" xml:space="preserve">
     <value>Player</value>
   </data>
+  <data name="Playlist" xml:space="preserve">
+    <value>Playlist</value>
+  </data>
   <data name="Post_Date" xml:space="preserve">
     <value>Post date</value>
   </data>
   <data name="Removed_from_favorite" xml:space="preserve">
-    <value>Removed from favorite!</value>
+    <value>Removed from watch later</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>

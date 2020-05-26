@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace Borto_v1
 {
-    public class FavoriteVideoRepository : IRepository<FavoriteVideo>
+    public class WatchLaterRepository : IRepository<WatchLater>
     {
 
-        public FavoriteVideoRepository(PlayerContext context)
+        public WatchLaterRepository(PlayerContext context)
         {
         }
 
-        public void Create(FavoriteVideo item)
+        public void Create(WatchLater item)
         {
             using (var db = new PlayerContext())
             {
-                db.FavoriteVideos.Add(item);
+                db.WatchLaters.Add(item);
                 db.SaveChanges();
             }
         }
@@ -27,10 +27,10 @@ namespace Borto_v1
         {
             using (var db = new PlayerContext())
             {
-                FavoriteVideo favvideo = db.FavoriteVideos.Find(id);
+                WatchLater favvideo = db.WatchLaters.Find(id);
                 if (favvideo != null)
                 {
-                    db.FavoriteVideos.Remove(favvideo);
+                    db.WatchLaters.Remove(favvideo);
                     db.SaveChanges();
                 }
             }
@@ -40,34 +40,34 @@ namespace Borto_v1
         {
             using (var db = new PlayerContext())
             {
-                FavoriteVideo favvideo = db.FavoriteVideos.Where(x => x.UserId == userId && x.VideoId == videoId).First();
+                WatchLater favvideo = db.WatchLaters.Where(x => x.UserId == userId && x.VideoId == videoId).First();
                 if (favvideo != null)
                 {
-                    db.FavoriteVideos.Remove(favvideo);
+                    db.WatchLaters.Remove(favvideo);
                     db.SaveChanges();
                 }
             }
         }
 
-        public IEnumerable<FavoriteVideo> Find(Func<FavoriteVideo, bool> predicate)
+        public IEnumerable<WatchLater> Find(Func<WatchLater, bool> predicate)
         {
             using (var db = new PlayerContext())
             {
-                return db.FavoriteVideos.Where(predicate).ToList();
+                return db.WatchLaters.Where(predicate).ToList();
             }
         }
-        public FavoriteVideo FindMarkByUserId(int userId, int videoId)
+        public WatchLater FindMarkByUserId(int userId, int videoId)
         {
             using (var db = new PlayerContext())
             {
-                return db.FavoriteVideos.AsNoTracking().Where(x => x.UserId == userId && x.VideoId == videoId).FirstOrDefault();
+                return db.WatchLaters.AsNoTracking().Where(x => x.UserId == userId && x.VideoId == videoId).FirstOrDefault();
             }
         }
-        public FavoriteVideo Get(int id)
+        public WatchLater Get(int id)
         {
             using (var db = new PlayerContext())
             {
-                return db.FavoriteVideos.Find(id);
+                return db.WatchLaters.Find(id);
             }
         }
 
@@ -86,12 +86,12 @@ namespace Borto_v1
             {
                     int skip = (pageCount - 1) * numberOfItems;
                     IEnumerable<Video> videos = null;
-                    count = db.FavoriteVideos.AsNoTracking().Include(x => x.Video).Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId).Count();
+                    count = db.WatchLaters.AsNoTracking().Include(x => x.Video).Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId).Count();
                     switch (state)
                     {
                         case SortState.New:
                             {
-                                var temp = db.FavoriteVideos
+                                var temp = db.WatchLaters
                                                      .Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId)
                                                      .OrderByDescending(x => x.Video.UploadDate)
                                                      .Skip(skip).Take(numberOfItems).Select(x => x.Video).ToList();
@@ -104,7 +104,7 @@ namespace Borto_v1
                             }
                         case SortState.Old:
                             {
-                                var temp = db.FavoriteVideos
+                                var temp = db.WatchLaters
                                   .Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId)
                                    .OrderBy(x => x.Video.UploadDate)
                                    .Skip(skip).Take(numberOfItems).Select(x => x.Video).ToList();
@@ -118,7 +118,7 @@ namespace Borto_v1
                         case SortState.Long:
                             {
 
-                                var temp = db.FavoriteVideos
+                                var temp = db.WatchLaters
                                      .Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId)
                                      .OrderByDescending(x => x.Video.MaxDuration)
                                      .Skip(skip).Take(numberOfItems).Select(x => x.Video).ToList();
@@ -131,7 +131,7 @@ namespace Borto_v1
                             }
                         case SortState.Short:
                             {
-                                var temp = db.FavoriteVideos
+                                var temp = db.WatchLaters
                                   .Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId)
                                   .OrderBy(x => x.Video.MaxDuration)
                                   .Skip(skip).Take(numberOfItems).Select(x => x.Video).ToList();
@@ -147,15 +147,15 @@ namespace Borto_v1
             }
         }
 
-        public IEnumerable<FavoriteVideo> GetAll()
+        public IEnumerable<WatchLater> GetAll()
         {
             using (var db = new PlayerContext())
             {
-                return db.FavoriteVideos.AsNoTracking().Include(c => c.User).ToList();
+                return db.WatchLaters.AsNoTracking().Include(c => c.User).ToList();
             }
         }
 
-        public void Update(FavoriteVideo item)
+        public void Update(WatchLater item)
         {
             using (var db = new PlayerContext())
             {
