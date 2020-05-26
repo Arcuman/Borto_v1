@@ -8,45 +8,64 @@ namespace Borto_v1
 {
     public class UserRepository : IRepository<User>
     {
-        private PlayerContext db;
 
         public UserRepository(PlayerContext context)
         {
-            this.db = context;
         }
 
         public void Create(User item)
         {
-            db.Users.Add(item);
+            using (var db = new PlayerContext())
+            {
+                db.Users.Add(item);
+                db.SaveChanges();
+            }
         }
 
         public void Delete(int id)
         {
-            User user = db.Users.Find(id);
-            if (user != null)
-                db.Users.Remove(user);
+            using (var db = new PlayerContext())
+            {
+                User user = db.Users.Find(id);
+                if (user != null)
+                    db.Users.Remove(user);
+                db.SaveChanges();
+            }
         }
 
         public IEnumerable<User> Find(Func<User, bool> predicate)
         {
-            return db.Users.Where(predicate).ToList();
+            using (var db = new PlayerContext())
+            {
+                return db.Users.AsNoTracking().Where(predicate).ToList();
+            }
         }
 
         public User Get(int id)
         {
-            return db.Users.Find(id);
+            using (var db = new PlayerContext())
+            {
+                return db.Users.Find(id);
+            }
         }
 
         public IEnumerable<User> GetAll()
         {
-            return db.Users;
+            using (var db = new PlayerContext())
+            {
+                return db.Users.AsNoTracking();
+            }
         }
 
         public void Update(User item)
         {
             try
             {
-                db.Entry(item).State = EntityState.Modified;
+                using (var db = new PlayerContext())
+                {
+                    db.Entry(item).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
@@ -61,8 +80,11 @@ namespace Borto_v1
         /// <returns></returns>
         public bool IsExist(string login)
         {
-            User tmp = db.Users.AsNoTracking().FirstOrDefault(x => x.Login.Equals(login));
-            return tmp != null ? true : false;
+            using (var db = new PlayerContext())
+            {
+                User tmp = db.Users.AsNoTracking().FirstOrDefault(x => x.Login.Equals(login));
+                return tmp != null ? true : false;
+            }
         }
         /// <summary>
         /// Check there is a user with this login and password
@@ -72,8 +94,11 @@ namespace Borto_v1
         /// <returns></returns>
         public bool IsUser(string login, string password)
         {
-            User tmp = db.Users.AsNoTracking().FirstOrDefault(x => x.Login.Equals(login) && x.Password == password);
-            return tmp != null ? true : false;
+            using (var db = new PlayerContext())
+            {
+                User tmp = db.Users.AsNoTracking().FirstOrDefault(x => x.Login.Equals(login) && x.Password == password);
+                return tmp != null ? true : false;
+            }
         }
         /// <summary>
         /// FInd User by login
@@ -82,7 +107,10 @@ namespace Borto_v1
         /// <returns></returns>
         public User GetUsersByLogin(string login)
         {
-            return db.Users.AsNoTracking().FirstOrDefault(x => x.Login == login);
+            using (var db = new PlayerContext())
+            {
+                return db.Users.AsNoTracking().FirstOrDefault(x => x.Login == login);
+            }
         }
     }
 }

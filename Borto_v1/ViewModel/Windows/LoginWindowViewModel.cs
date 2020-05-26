@@ -20,6 +20,8 @@ namespace Borto_v1
         private string message;
 
         private bool cultureInfoEn;
+
+        private Thread loaded;
         #endregion
 
         #region Public Fields
@@ -114,7 +116,7 @@ namespace Borto_v1
                         var culture = new CultureInfo("en-US");
                         Thread.CurrentThread.CurrentCulture = culture;
                         Thread.CurrentThread.CurrentUICulture = culture;
-                        var thread = new Thread(() =>
+                        loaded  = new Thread(() =>
                         {
                             while (true)
                             {
@@ -136,8 +138,8 @@ namespace Borto_v1
                                 }
                             }
                         });
-                        thread.IsBackground = true;
-                        thread.Start();
+                        loaded.IsBackground = true;
+                        loaded.Start();
                         _navigationService.NavigateTo("Login");
                     }));
             }
@@ -155,6 +157,20 @@ namespace Borto_v1
                     }));
             }
         }
+        private RelayCommand unloadedCommand;
+        public RelayCommand UnloadedCommand
+        {
+            get
+            {
+                return unloadedCommand
+                    ?? (unloadedCommand = new RelayCommand(
+                    () =>
+                    {
+                        loaded.Abort();
+                    }));
+            }
+        }
+
           private RelayCommand switchLanguageCommand;
         public RelayCommand SwitchLanguageCommand
         {
@@ -201,7 +217,7 @@ namespace Borto_v1
 
         public static bool IsInternetConnection()
         {
-            WebRequest req = WebRequest.Create("https://www.google.co.in/");
+            WebRequest req = WebRequest.Create("http://google.com/generate_204");
             WebResponse resp;
             try
             {

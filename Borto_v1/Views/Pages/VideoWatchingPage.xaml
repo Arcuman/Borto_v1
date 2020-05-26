@@ -171,7 +171,7 @@
                         <TextBlock FontFamily="Franklin Gothic Medium"
                                Grid.Column="2" VerticalAlignment="Center"
                                Margin="15 0" Text="{Binding UserNickName}" 
-                               MaxWidth="150"
+                               MaxWidth="200"
                                HorizontalAlignment="Left"
                                TextTrimming="CharacterEllipsis" FontSize="28"/>
                         <StackPanel VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">

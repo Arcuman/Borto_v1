@@ -39,7 +39,6 @@ namespace Borto_v1
         private int pageCount;
 
         private int videosCount;
-
         #endregion
 
         #region Public members
@@ -127,6 +126,7 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+
         #endregion
 
         #region Commands

@@ -70,7 +70,7 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account_Page.
+        ///   Looks up a localized string similar to Account Page.
         /// </summary>
         public static string Account_Page {
             get {
@@ -358,7 +358,7 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title.
+        ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Name {
             get {
@@ -628,6 +628,15 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upload with Convert.
+        /// </summary>
+        public static string UploadConvert {
+            get {
+                return ResourceManager.GetString("UploadConvert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload Date.
         /// </summary>
         public static string UploadDate {
@@ -682,7 +691,8 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Video_was_deleted_from_server!.
+        ///   Looks up a localized string similar to Download stop.
+        ///Video was deleted from server!.
         /// </summary>
         public static string Video_was_deleted_from_server {
             get {

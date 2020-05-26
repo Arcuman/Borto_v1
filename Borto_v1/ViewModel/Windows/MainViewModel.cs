@@ -184,7 +184,7 @@ namespace Borto_v1
                     ?? (_watchingpageCommand = new RelayCommand(
                     () =>
                     {
-                        CultureInfoEn = CultureInfo.CurrentCulture.Name == "en-US";
+                        CultureInfoEn = Thread.CurrentThread.CurrentCulture.Name == "en-US";
                         var thread = new Thread(() =>
                         {
                             while (true)
@@ -326,7 +326,7 @@ namespace Borto_v1
 
         public static bool IsInternetConnection()
         {
-            WebRequest req = WebRequest.Create("https://www.google.co.in/");
+            WebRequest req = WebRequest.Create("http://google.com/generate_204");
             WebResponse resp;
             try
             {

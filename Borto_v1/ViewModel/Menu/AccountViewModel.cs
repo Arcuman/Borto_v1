@@ -324,7 +324,6 @@ namespace Borto_v1
                     (obj) =>
                     {
                         SelectedVideo = obj as Video;
-                        SelectedVideo.User = user;
                         _navigationService.NavigateTo("VideoWatching", SelectedVideo);
                     }));
             }

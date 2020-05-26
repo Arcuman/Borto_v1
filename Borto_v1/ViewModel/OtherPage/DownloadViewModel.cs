@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using LibraryAzure;
 using System;
 using System.IO;
 using System.Threading;
@@ -25,6 +26,7 @@ namespace Borto_v1
 
         private Thread downloadThread;
 
+        private Quality qualityType;
         /// <summary>
         /// Checks if video has been deleted
         /// </summary>
@@ -46,6 +48,23 @@ namespace Borto_v1
                     return;
                 }
                 video = value;
+                RaisePropertyChanged();
+            }
+        }
+        
+        public Quality QualityType
+        {
+            get
+            {
+                return qualityType;
+            }
+            set
+            {
+                if (qualityType == value)
+                {
+                    return;
+                }
+                qualityType = value;
                 RaisePropertyChanged();
             }
         }
@@ -113,8 +132,16 @@ namespace Borto_v1
                         {
                             try
                             {
-                                Download();
+                                if (Video.HasConvertation)
+                                {
+                                    DownloadConvert();
+                                }
+                                else
+                                {
+                                    Download();
+                                }
                             }
+                            catch (ThreadAbortException ex) { }
                             catch (Exception ex)
                             {
                                 SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
@@ -127,6 +154,7 @@ namespace Borto_v1
                             {
                                 CheckIsVideoExist();
                             }
+                            catch (ThreadAbortException ex) { }
                             catch (Exception ex)
                             {
                                 SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
@@ -205,6 +233,26 @@ namespace Borto_v1
                 }
             }
             helper.download_FromBlob(Video.Path, NameToSave, PathFolder);
+            IsVisibleProgressBar = false;
+            
+            SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Your_video_downloaded;
+            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+        }
+           private async void DownloadConvert()
+        {
+            ConverterVideoAzure helper = new ConverterVideoAzure();
+            string NameToSave = Video.Name;
+            if (!string.IsNullOrWhiteSpace(PathFolder))
+            {
+                string[] files = Directory.GetFiles(PathFolder);
+                foreach (var file in files)
+                {
+                    string filename = file.Substring(file.LastIndexOf('\\') + 1);
+                    if (filename == (Video.Name + ".mp4"))
+                        NameToSave += Guid.NewGuid().ToString("N");
+                }
+            }
+            await helper.DownloadConvert(Video.Path, NameToSave, PathFolder, (int)QualityType);
             IsVisibleProgressBar = false;
             
             SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Your_video_downloaded;

@@ -12,6 +12,7 @@
       DataContext="{Binding DownloadViewModel, Source={StaticResource Locator}}"
       Title="DownloadPage">
     <Page.Resources>
+        <local:EnumConverter x:Key="EnumConverter"/>
         <local:ParametrizedBooleanToVisibilityConverter x:Key="ParametrizedBooleanToVisibilityConverter"/>
     </Page.Resources>
     <i:Interaction.Triggers>
@@ -89,13 +90,23 @@
                                 Value="35" 
                                 Margin="20 20 20 10"
                                 IsIndeterminate="{Binding IsVisibleProgressBar}" />
-                        <Button Content="{lex:Loc Download}" Width="200"
-                            Visibility="{Binding IsVisibleProgressBar,
+                        <StackPanel Orientation="Horizontal" Margin="5 0"
+                                    Visibility="{Binding IsVisibleProgressBar,
                                     Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
-                                    ConverterParameter=False}"
-                        
+                                    ConverterParameter=False}">
+                        <Button Content="{lex:Loc Download}" Width="200"
+                            
                             Command="{Binding DownloadVideoCommand}"
                             Foreground="{StaticResource ForegroundColorLight}" Margin="20 20 20 20 "/>
+                        <ComboBox materialDesign:HintAssist.Hint="Quality"
+                                        SelectedValue="{Binding QualityType, Converter={StaticResource EnumConverter}}"
+                                        ItemsSource="{local:Enum local:Quality, Converter={StaticResource EnumConverter}}"
+                                        MaxHeight="60" Visibility="{Binding Video.HasConvertation,Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
+                                        MaxWidth="400"
+                                        materialDesign:HintAssist.Foreground="#696969"
+                                        FontSize="18">
+                        </ComboBox>
+                        </StackPanel>
                         <Button
                         Visibility="{Binding IsVisibleProgressBar,
                                     Converter={StaticResource ParametrizedBooleanToVisibilityConverter},

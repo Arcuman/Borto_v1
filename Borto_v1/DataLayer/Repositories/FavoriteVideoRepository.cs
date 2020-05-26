@@ -9,43 +9,66 @@ namespace Borto_v1
 {
     public class FavoriteVideoRepository : IRepository<FavoriteVideo>
     {
-        private PlayerContext db;
 
         public FavoriteVideoRepository(PlayerContext context)
         {
-            this.db = context;
         }
 
         public void Create(FavoriteVideo item)
         {
-            db.FavoriteVideos.Add(item);
+            using (var db = new PlayerContext())
+            {
+                db.FavoriteVideos.Add(item);
+                db.SaveChanges();
+            }
         }
 
         public void Delete(int id)
         {
-            FavoriteVideo favvideo = db.FavoriteVideos.Find(id);
-            if (favvideo != null)
-                db.FavoriteVideos.Remove(favvideo);
+            using (var db = new PlayerContext())
+            {
+                FavoriteVideo favvideo = db.FavoriteVideos.Find(id);
+                if (favvideo != null)
+                {
+                    db.FavoriteVideos.Remove(favvideo);
+                    db.SaveChanges();
+                }
+            }
         }
 
         public void DeleteByUserId(int userId, int videoId)
         {
-            FavoriteVideo favvideo = db.FavoriteVideos.Where(x => x.UserId == userId && x.VideoId == videoId).First();
-            if (favvideo != null)
-                db.FavoriteVideos.Remove(favvideo);
+            using (var db = new PlayerContext())
+            {
+                FavoriteVideo favvideo = db.FavoriteVideos.Where(x => x.UserId == userId && x.VideoId == videoId).First();
+                if (favvideo != null)
+                {
+                    db.FavoriteVideos.Remove(favvideo);
+                    db.SaveChanges();
+                }
+            }
         }
 
         public IEnumerable<FavoriteVideo> Find(Func<FavoriteVideo, bool> predicate)
         {
-            return db.FavoriteVideos.Where(predicate).ToList();
+            using (var db = new PlayerContext())
+            {
+                return db.FavoriteVideos.Where(predicate).ToList();
+            }
         }
         public FavoriteVideo FindMarkByUserId(int userId, int videoId)
         {
-            return db.FavoriteVideos.AsNoTracking().Where(x => x.UserId == userId && x.VideoId == videoId).FirstOrDefault();
+            using (var db = new PlayerContext())
+            {
+                return db.FavoriteVideos.AsNoTracking().Where(x => x.UserId == userId && x.VideoId == videoId).FirstOrDefault();
+            }
         }
         public FavoriteVideo Get(int id)
         {
-            return db.FavoriteVideos.Find(id);
+            using (var db = new PlayerContext())
+            {
+                return db.FavoriteVideos.Find(id);
+            }
         }
 
         /// <summary>
@@ -61,77 +84,83 @@ namespace Borto_v1
         {
             using (PlayerContext db = new PlayerContext())
             {
-                int skip = (pageCount - 1) * numberOfItems;
-                IEnumerable<Video> videos = null;
-                count = db.FavoriteVideos.Include(x=>x.Video).Where(x => x.Video.Name.Contains(searchString) && x.UserId==UserId).Count();
-                switch (state)
-                {
-                    case SortState.New:
-                        {
-                            var temp = db.FavoriteVideos
-                                                 .Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId)
-                                                 .OrderByDescending(x => x.Video.UploadDate)
-                                                 .Skip(skip).Take(numberOfItems).Select(x => x.Video).ToList();
-                            foreach (var item in temp)
+                    int skip = (pageCount - 1) * numberOfItems;
+                    IEnumerable<Video> videos = null;
+                    count = db.FavoriteVideos.AsNoTracking().Include(x => x.Video).Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId).Count();
+                    switch (state)
+                    {
+                        case SortState.New:
                             {
-                                db.Entry(item).Reference("User").Load();
+                                var temp = db.FavoriteVideos
+                                                     .Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId)
+                                                     .OrderByDescending(x => x.Video.UploadDate)
+                                                     .Skip(skip).Take(numberOfItems).Select(x => x.Video).ToList();
+                                foreach (var item in temp)
+                                {
+                                    db.Entry(item).Reference("User").Load();
+                                }
+                                videos = temp;
+                                break;
                             }
-                            videos = temp;
-                            break;
-                        }
-                    case SortState.Old:
-                        {
-                            var temp = db.FavoriteVideos
-                              .Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId)
-                               .OrderBy(x => x.Video.UploadDate)
-                               .Skip(skip).Take(numberOfItems).Select(x => x.Video).ToList();
-                            foreach (var item in temp)
+                        case SortState.Old:
                             {
-                                db.Entry(item).Reference("User").Load();
+                                var temp = db.FavoriteVideos
+                                  .Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId)
+                                   .OrderBy(x => x.Video.UploadDate)
+                                   .Skip(skip).Take(numberOfItems).Select(x => x.Video).ToList();
+                                foreach (var item in temp)
+                                {
+                                    db.Entry(item).Reference("User").Load();
+                                }
+                                videos = temp;
+                                break;
                             }
-                            videos = temp;
-                            break;
-                        }
-                    case SortState.Long:
-                        {
+                        case SortState.Long:
+                            {
 
-                            var temp = db.FavoriteVideos
-                                 .Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId)
-                                 .OrderByDescending(x => x.Video.MaxDuration)
-                                 .Skip(skip).Take(numberOfItems).Select(x => x.Video).ToList();
-                            foreach (var item in temp)
-                            {
-                                db.Entry(item).Reference("User").Load();
+                                var temp = db.FavoriteVideos
+                                     .Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId)
+                                     .OrderByDescending(x => x.Video.MaxDuration)
+                                     .Skip(skip).Take(numberOfItems).Select(x => x.Video).ToList();
+                                foreach (var item in temp)
+                                {
+                                    db.Entry(item).Reference("User").Load();
+                                }
+                                videos = temp;
+                                break;
                             }
-                            videos = temp;
-                            break;
-                        }
-                    case SortState.Short:
-                        {
-                            var temp = db.FavoriteVideos
-                              .Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId)
-                              .OrderBy(x => x.Video.MaxDuration)
-                              .Skip(skip).Take(numberOfItems).Select(x => x.Video).ToList();
-                            foreach (var item in temp)
+                        case SortState.Short:
                             {
-                                db.Entry(item).Reference("User").Load();
+                                var temp = db.FavoriteVideos
+                                  .Where(x => x.Video.Name.Contains(searchString) && x.UserId == UserId)
+                                  .OrderBy(x => x.Video.MaxDuration)
+                                  .Skip(skip).Take(numberOfItems).Select(x => x.Video).ToList();
+                                foreach (var item in temp)
+                                {
+                                    db.Entry(item).Reference("User").Load();
+                                }
+                                videos = temp;
+                                break;
                             }
-                            videos = temp;
-                            break;
-                        }
-                }
-                return videos;
+                    }
+                    return videos;
             }
         }
 
         public IEnumerable<FavoriteVideo> GetAll()
         {
-            return db.FavoriteVideos.AsNoTracking().Include(c => c.User).ToList();
+            using (var db = new PlayerContext())
+            {
+                return db.FavoriteVideos.AsNoTracking().Include(c => c.User).ToList();
+            }
         }
 
         public void Update(FavoriteVideo item)
         {
-            db.Entry(item).State = EntityState.Modified;
+            using (var db = new PlayerContext())
+            {
+                db.Entry(item).State = EntityState.Modified;
+            }
         }
     }
 }

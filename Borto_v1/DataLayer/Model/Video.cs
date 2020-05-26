@@ -27,6 +27,8 @@ namespace Borto_v1
 
         public double MaxDuration { get; set; }
 
+        public bool HasConvertation { get; set; }
+
         public DateTime UploadDate { get; set; }
 
         public int UserId { get; set; }
@@ -49,12 +51,12 @@ namespace Borto_v1
         {
         }
 
-        public Video(string name, string description, byte[] image, User user, string path, double maxDuration = 0)
+        public Video(string name, string description, byte[] image, int userId, string path, double maxDuration = 0)
         {
             Name = name;
             Description = description;
             Image = image;
-            UserId = user.IdUser;
+            UserId = userId;
             Path = path;
             MaxDuration = maxDuration;
             UploadDate = DateTime.Now;

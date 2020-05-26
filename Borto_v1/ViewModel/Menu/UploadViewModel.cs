@@ -176,7 +176,7 @@ namespace Borto_v1
                     ?? (uploadCommand = new RelayCommandParametr(
                     (obj) =>
                     {
-                        if (!String.IsNullOrWhiteSpace(PathVideo) && !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(Description))
+                        if (!String.IsNullOrWhiteSpace(PathVideo) && !String.IsNullOrWhiteSpace(Name))
                         {
                             IsVisibleProgressBar = true;
                             uploadThread = new Thread(() =>
@@ -185,6 +185,7 @@ namespace Borto_v1
                                 {
                                     Upload();
                                 }
+                                catch (ThreadAbortException ex) { }
                                 catch (Exception ex)
                                 {
                                     SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
@@ -199,6 +200,41 @@ namespace Borto_v1
                     (x)=> !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(PathVideo)));
             }
         }
+        private RelayCommandParametr uploadConverterCommand;
+        public RelayCommandParametr UploadConverterCommand
+        {
+            get
+            {
+                return uploadConverterCommand
+                    ?? (uploadConverterCommand = new RelayCommandParametr(
+                    (obj) =>
+                    {
+                        if (!String.IsNullOrWhiteSpace(PathVideo) && !String.IsNullOrWhiteSpace(Name))
+                        {
+                            IsVisibleProgressBar = true;
+                            uploadThread = new Thread(() =>
+                            {
+                                try
+                                {
+                                    UploadConvert();
+                                }
+                                catch (ThreadAbortException ex) { }
+                                catch (Exception ex)
+                                {
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.ServerError + ex.Message;
+                                    SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+                                }
+                            });
+                            uploadThread.IsBackground = true;
+                            uploadThread.Start();
+
+                        }
+                    },
+                    (x)=> !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(PathVideo)));
+            }
+        }
+
+
         private RelayCommandParametr cancelUploadCommand;
         public RelayCommandParametr CancelUploadCommand
         {
@@ -248,8 +284,34 @@ namespace Borto_v1
 
             user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
 
-            Video video = new Video(Name, Description, image, user, serverfilepath, maxDuration);
+            Video video = new Video(Name, Description, image, user.IdUser, serverfilepath, maxDuration);
 
+            context.Videos.Create(video);
+
+            context.Save();
+
+            IsVisibleProgressBar = false;
+
+            SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Your_video_uploaded;
+            SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+
+            Name = Description = PathVideo = string.Empty;
+        }
+        private async void UploadConvert()
+        {
+            maxDuration = Video.GetMaxDuration(PathVideo);
+
+            LibraryAzure.ConverterVideoAzure  helper = new LibraryAzure.ConverterVideoAzure();
+
+            string uniqueness = Guid.NewGuid().ToString("N");
+            serverfilepath = Name + uniqueness;
+
+            await helper.UploadConvert(serverfilepath,PathVideo);
+
+            user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
+            
+            Video video = new Video(Name, Description, image, user.IdUser, serverfilepath, maxDuration);
+            video.HasConvertation = true;
             context.Videos.Create(video);
 
             context.Save();

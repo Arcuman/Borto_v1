@@ -59,7 +59,7 @@
                         <Button Margin="0 10 0 0" Style="{StaticResource MaterialDesignFlatAccentButton}"
                                  Visibility="{Binding IsNoInternetConnection,
                                     Converter={StaticResource ParametrizedBooleanToVisibilityConverter},ConverterParameter=false}"
-                                Content="{lex:Loc Close}" Width="70" Height="30" Command="{Binding CloseDialodCommand}"/>
+                                Content="{lex:Loc Close}" Width="Auto" Height="30" Command="{Binding CloseDialodCommand}"/>
                     </Grid>
                 </StackPanel>
             </Border>
@@ -167,11 +167,11 @@
                     <Button VerticalAlignment="Top" Margin="0 0 2 0" Content="EN"
                             Background="{StaticResource BackgroundDarkBlueBrush}" 
                             Foreground="{StaticResource ForegroundColorLight}" Command="{Binding SwitchLanguageCommand}"
-                            Visibility="{Binding CultureInfoEn,Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"/>
+                            Visibility="{Binding CultureInfoEn,Converter={StaticResource ParametrizedBooleanToVisibilityConverter},ConverterParameter=False}"/>
                     <Button VerticalAlignment="Top" Margin="0 0 2 0" Content="РУС"
                            Background="{StaticResource BackgroundDarkBlueBrush}" 
                             Foreground="{StaticResource ForegroundColorLight}" Command="{Binding SwitchLanguageCommand}"
-                            Visibility="{Binding CultureInfoEn,Converter={StaticResource ParametrizedBooleanToVisibilityConverter},ConverterParameter=False}"/>
+                            Visibility="{Binding CultureInfoEn,Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"/>
                 </StackPanel>
             </Grid>
             <!-- Content-->

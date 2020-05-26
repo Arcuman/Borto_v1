@@ -199,7 +199,7 @@
     <value>Главная</value>
   </data>
   <data name="IncorrectData" xml:space="preserve">
-    <value>Неправильный ввод</value>
+    <value>Некорректо введеные данные</value>
   </data>
   <data name="Incorrect_old_password" xml:space="preserve">
     <value>Неверный старый пароль</value>
@@ -211,7 +211,7 @@
     <value>Логин</value>
   </data>
   <data name="Long_first" xml:space="preserve">
-    <value>Сначало длинные</value>
+    <value>Сначала длинные</value>
   </data>
   <data name="MyVideos" xml:space="preserve">
     <value>Мои видео</value>
@@ -223,7 +223,7 @@
     <value>Название(обязательно)</value>
   </data>
   <data name="New_first" xml:space="preserve">
-    <value>Сначало новые</value>
+    <value>Сначала новые</value>
   </data>
   <data name="New_Password" xml:space="preserve">
     <value>Новый пароль</value>
@@ -238,7 +238,7 @@
     <value>Нет соединения с интернетом</value>
   </data>
   <data name="Old_first" xml:space="preserve">
-    <value>Сначало старые</value>
+    <value>Сначала старые</value>
   </data>
   <data name="Old_Password" xml:space="preserve">
     <value>Старый пароль</value>
@@ -274,7 +274,7 @@
     <value>Ошибка сервера:</value>
   </data>
   <data name="Short_first" xml:space="preserve">
-    <value>Сначало коротки</value>
+    <value>Сначала короткие</value>
   </data>
   <data name="SignIn" xml:space="preserve">
     <value>ВХОД</value>
@@ -303,6 +303,9 @@
   <data name="Upload" xml:space="preserve">
     <value>Загрузка</value>
   </data>
+  <data name="UploadConvert" xml:space="preserve">
+    <value>Загрузка с конвертацией</value>
+  </data>
   <data name="UploadDate" xml:space="preserve">
     <value>Дата загрузки</value>
   </data>
@@ -328,7 +331,8 @@
     <value>Видео плеер</value>
   </data>
   <data name="Video_was_deleted_from_server" xml:space="preserve">
-    <value>Видео удалено с сервера!</value>
+    <value>Загрузка прервана.
+Видео удалено с сервера!</value>
   </data>
   <data name="View_comments_left" xml:space="preserve">
     <value>Посмотреть оставленные комментарии</value>
@@ -343,7 +347,7 @@
     <value>Посмотреть загруженные видео</value>
   </data>
   <data name="Your_video_downloaded" xml:space="preserve">
-    <value>Видео скачено</value>
+    <value>Видео скачано</value>
   </data>
   <data name="Your_video_uploaded" xml:space="preserve">
     <value>Ваше видео загружено</value>

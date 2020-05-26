@@ -21,7 +21,7 @@
                 <StackPanel Margin="16">
                     <TextBlock Text="{Binding Message,FallbackValue=The login is already exist}"/>
                     <Button Margin="0 10 0 0" Style="{StaticResource MaterialDesignFlatAccentButton}"
-                                Content="{lex:Loc Close}" Width="70" Height="30" Command="{Binding CloseDialodCommand}"/>
+                                Content="{lex:Loc Close}" Width="Auto" Height="30" Command="{Binding CloseDialodCommand}"/>
                 </StackPanel>
             </Border>
         </materialDesign:DialogHost.DialogContent>

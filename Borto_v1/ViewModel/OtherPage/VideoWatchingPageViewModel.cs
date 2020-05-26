@@ -513,7 +513,6 @@ namespace Borto_v1
                             Video.Description = VideoDescription;
 
                             context.Videos.Update(Video);
-                            context.Save();
                             SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Data_saved_successfully;
                             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
                         }
@@ -622,6 +621,19 @@ namespace Borto_v1
 
             IsVisibleEditNameIcon = true;
 
+            Mark mark = context.Marks.FindMarkByUserId(user.IdUser, Video.IdVideo);
+            if (mark == null)
+            {
+                likeState = LikeState.None;
+            }
+            else
+            {
+                if (mark.TypeMark == TypeMark.Positive)
+                    likeState = LikeState.Like;
+                else
+                    likeState = LikeState.Dislike;
+            }
+
             VideoName = Video.Name;
 
             IsUserOwner = Video.UserId == user.IdUser;
@@ -651,19 +663,6 @@ namespace Borto_v1
             CountNegativeMark = context.Marks.CountMarkByType(TypeMark.Negative, Video.IdVideo);
 
             CountPositiveMark = context.Marks.CountMarkByType(TypeMark.Positive, Video.IdVideo);
-
-            Mark mark = context.Marks.FindMarkByUserId(user.IdUser, Video.IdVideo);
-            if (mark == null)
-            {
-                likeState = LikeState.None;
-            }
-            else
-            {
-                if (mark.TypeMark == TypeMark.Positive)
-                    likeState = LikeState.Like;
-                else
-                    likeState = LikeState.Dislike;
-            }
 
             Comments = new ObservableCollection<Comment>(context.Comments.GetAllByVideo(Video.IdVideo));
         }

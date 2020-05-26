@@ -1,0 +1,111 @@
+﻿namespace Borto_v1.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class InitialCreate : DbMigration
+    {
+        public override void Up()
+        {
+            CreateTable(
+                "dbo.Comments",
+                c => new
+                    {
+                        IdComment = c.Int(nullable: false, identity: true),
+                        CommentMessage = c.String(nullable: false, maxLength: 210),
+                        PostDate = c.DateTime(nullable: false),
+                        UserId = c.Int(nullable: false),
+                        VideoId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.IdComment)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Videos", t => t.VideoId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.VideoId);
+            
+            CreateTable(
+                "dbo.Users",
+                c => new
+                    {
+                        IdUser = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 40),
+                        NickName = c.String(maxLength: 50),
+                        Login = c.String(maxLength: 40),
+                        Password = c.String(maxLength: 50),
+                        Image = c.Binary(),
+                        Role = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.IdUser);
+            
+            CreateTable(
+                "dbo.FavoriteVideos",
+                c => new
+                    {
+                        IdFavoriteVideo = c.Int(nullable: false, identity: true),
+                        UserId = c.Int(nullable: false),
+                        VideoId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.IdFavoriteVideo)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Videos", t => t.VideoId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.VideoId);
+            
+            CreateTable(
+                "dbo.Videos",
+                c => new
+                    {
+                        IdVideo = c.Int(nullable: false, identity: true),
+                        Name = c.String(maxLength: 50),
+                        Description = c.String(maxLength: 200),
+                        Image = c.Binary(),
+                        Path = c.String(),
+                        MaxDuration = c.Double(nullable: false),
+                        UploadDate = c.DateTime(nullable: false),
+                        UserId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.IdVideo)
+                .ForeignKey("dbo.Users", t => t.UserId)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.Marks",
+                c => new
+                    {
+                        IdMark = c.Int(nullable: false, identity: true),
+                        TypeMark = c.Int(nullable: false),
+                        UserId = c.Int(nullable: false),
+                        VideoId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.IdMark)
+                .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.Videos", t => t.VideoId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.VideoId);
+            
+        }
+        
+        public override void Down()
+        {
+            DropForeignKey("dbo.Comments", "VideoId", "dbo.Videos");
+            DropForeignKey("dbo.Comments", "UserId", "dbo.Users");
+            DropForeignKey("dbo.Videos", "UserId", "dbo.Users");
+            DropForeignKey("dbo.Marks", "VideoId", "dbo.Videos");
+            DropForeignKey("dbo.Marks", "UserId", "dbo.Users");
+            DropForeignKey("dbo.FavoriteVideos", "VideoId", "dbo.Videos");
+            DropForeignKey("dbo.FavoriteVideos", "UserId", "dbo.Users");
+            DropIndex("dbo.Marks", new[] { "VideoId" });
+            DropIndex("dbo.Marks", new[] { "UserId" });
+            DropIndex("dbo.Videos", new[] { "UserId" });
+            DropIndex("dbo.FavoriteVideos", new[] { "VideoId" });
+            DropIndex("dbo.FavoriteVideos", new[] { "UserId" });
+            DropIndex("dbo.Comments", new[] { "VideoId" });
+            DropIndex("dbo.Comments", new[] { "UserId" });
+            DropTable("dbo.Marks");
+            DropTable("dbo.Videos");
+            DropTable("dbo.FavoriteVideos");
+            DropTable("dbo.Users");
+            DropTable("dbo.Comments");
+        }
+    }
+}

@@ -16,24 +16,36 @@ namespace Borto_v1
 
         public VideoRepository(PlayerContext context)
         {
-            this.db = context;
         }
 
         public void Create(Video item)
         {
-            db.Videos.Add(item);
+            using (var db = new PlayerContext())
+            {
+                db.Videos.Add(item);
+                db.SaveChanges();
+            }
         }
 
         public void Delete(int id)
         {
-            Video video = db.Videos.Find(id);
-            if (video != null)
-                db.Videos.Remove(video);
+            using (var db = new PlayerContext())
+            {
+                Video video = db.Videos.Find(id);
+                if (video != null)
+                {
+                    db.Videos.Remove(video);
+                    db.SaveChanges();
+                }
+            }
         }
 
         public IEnumerable<Video> Find(Func<Video, bool> predicate)
         {
-            return db.Videos.Where(predicate).ToList();
+            using (var db = new PlayerContext())
+            {
+                return db.Videos.Where(predicate).ToList();
+            }
         }
         /// <summary>
         /// Checks if there is video in the database
@@ -42,48 +54,60 @@ namespace Borto_v1
         /// <returns></returns>
         public bool IsExist(int id)
         {
-            temp_db_context = new PlayerContext();
-            Video test = temp_db_context.Videos.Find(id);
-            temp_db_context.Dispose();
-            if (test != null)
-                return true;
-            return false;
+            using (var db = new PlayerContext())
+            {
+                Video test = db.Videos.Find(id);
+                if (test != null)
+                    return true;
+                return false;
+            }
 
         }
         
         public IEnumerable<Video> FindByUserId(int UserId)
         {
-                var Videos = db.Set<Video>().AsNoTracking().Where(c => c.UserId == UserId).ToList();
-                return Videos;
+            using (var db = new PlayerContext())
+            {
+                return  db.Videos.AsNoTracking().Include(c => c.User).Where(c => c.UserId == UserId).ToList();
+                
+            }
             
         }
         public Video Get(int id)
         {
-            return db.Videos.Find(id);
+            using (var db = new PlayerContext())
+            {
+                return db.Videos.Find(id);
+            }
         }
 
         public IEnumerable<Video> GetAll()
         {
-            return db.Videos.AsNoTracking().Include(c => c.User).ToList();
+            using (var db = new PlayerContext())
+            {
+                return db.Videos.AsNoTracking().Include(c => c.User).ToList();
+            }
         }
 
         public IEnumerable<Video> GetBySearch(string DateSearch,string TitleSearch, string UserSearch)
         {
-
-            if (!String.IsNullOrWhiteSpace(DateSearch))
+            using (var db = new PlayerContext())
             {
-                DateTime searchFrom = Convert.ToDateTime(DateSearch);
-                DateTime searchTo = searchFrom.AddDays(1);
-                return db.Videos.AsNoTracking().Include(x=>x.User).Where(x => x.UploadDate >= searchFrom && x.UploadDate <= searchTo
-                                              && x.Name.Contains(TitleSearch)
-                                              && x.User.NickName.Contains(UserSearch)).ToList();
-            }
-            else
-            {
-                DateTime searchFrom = Convert.ToDateTime(DateSearch);
-                DateTime searchTo = searchFrom.AddDays(1);
-                return db.Videos.AsNoTracking().Include(x=>x.User).Where(x =>    x.Name.Contains(TitleSearch)
-                                              && x.User.NickName.Contains(UserSearch)).ToList();
+                if (!String.IsNullOrWhiteSpace(DateSearch))
+                {
+                    DateTime searchFrom = Convert.ToDateTime(DateSearch);
+                    DateTime searchTo = searchFrom.AddDays(1);
+                    return db.Videos.AsNoTracking().Include(x => x.User).Where(x => x.UploadDate >= searchFrom && x.UploadDate <= searchTo
+                                                    && x.Name.Contains(TitleSearch)
+                                                    && x.User.NickName.Contains(UserSearch)).ToList();
+                }
+                else
+                {
+                    DateTime searchFrom = Convert.ToDateTime(DateSearch);
+                    DateTime searchTo = searchFrom.AddDays(1);
+                    return db.Videos.AsNoTracking().Include(x => x.User).Where(x => x.Name.Contains(TitleSearch)
+                                                    && x.User.NickName.Contains(UserSearch)).ToList();
+                }
             }
         }
 
@@ -102,44 +126,47 @@ namespace Borto_v1
         /// <returns></returns>
         public IEnumerable<Video> GetVideoByRange(int pageCount, int numberOfItems, SortState state, string searchString, out int count)
         {
-            int skip = (pageCount - 1) * numberOfItems;
-            IEnumerable<Video> videos = null;
-            count = db.Videos.Where(x => x.Name.Contains(searchString)).Count();
-            switch (state)
+            using (var db = new PlayerContext())
             {
-                case SortState.New:
-                    {
-                        videos = db.Videos.AsNoTracking().Include(c => c.User)
-                           .Where(x => x.Name.Contains(searchString))
-                           .OrderByDescending(x => x.UploadDate)
-                           .Skip(skip).Take(numberOfItems).ToList();
-                        break;
-                    }
-                case SortState.Old:
-                    {
-                        videos = db.Videos.AsNoTracking().Include(c => c.User)
-                            .Where(x => x.Name.Contains(searchString))
-                            .OrderBy(x => x.UploadDate)
-                            .Skip(skip).Take(numberOfItems).ToList();
-                        break;
-                    }
-                case SortState.Long:
-                    {
-                        videos = db.Videos.AsNoTracking().Include(c => c.User)
-                            .Where(x => x.Name.Contains(searchString))
-                            .OrderByDescending(x => x.MaxDuration)
-                            .Skip(skip).Take(numberOfItems).ToList();
-                        break;
-                    }
-                case SortState.Short:
-                    {
-                        videos = db.Videos.AsNoTracking().Include(c => c.User)
-                            .Where(x => x.Name.Contains(searchString))
-                            .OrderBy(x => x.MaxDuration).Skip(skip).Take(numberOfItems).ToList();
-                        break;
-                    }
+                int skip = (pageCount - 1) * numberOfItems;
+                IEnumerable<Video> videos = null;
+                count = db.Videos.AsNoTracking().Where(x => x.Name.Contains(searchString)).Count();
+                switch (state)
+                {
+                    case SortState.New:
+                        {
+                            videos = db.Videos.AsNoTracking().Include(c => c.User)
+                               .Where(x => x.Name.Contains(searchString))
+                               .OrderByDescending(x => x.UploadDate)
+                               .Skip(skip).Take(numberOfItems).ToList();
+                            break;
+                        }
+                    case SortState.Old:
+                        {
+                            videos = db.Videos.AsNoTracking().Include(c => c.User)
+                                .Where(x => x.Name.Contains(searchString))
+                                .OrderBy(x => x.UploadDate)
+                                .Skip(skip).Take(numberOfItems).ToList();
+                            break;
+                        }
+                    case SortState.Long:
+                        {
+                            videos = db.Videos.AsNoTracking().Include(c => c.User)
+                                .Where(x => x.Name.Contains(searchString))
+                                .OrderByDescending(x => x.MaxDuration)
+                                .Skip(skip).Take(numberOfItems).ToList();
+                            break;
+                        }
+                    case SortState.Short:
+                        {
+                            videos = db.Videos.AsNoTracking().Include(c => c.User)
+                                .Where(x => x.Name.Contains(searchString))
+                                .OrderBy(x => x.MaxDuration).Skip(skip).Take(numberOfItems).ToList();
+                            break;
+                        }
+                }
+                return videos;
             }
-            return videos;
         }
 
 
@@ -147,7 +174,11 @@ namespace Borto_v1
         {
             try
             {
-                db.Entry(item).State = EntityState.Modified;
+                using (var db = new PlayerContext())
+                {
+                    db.Entry(item).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
             }
             catch (Exception ex)
             {

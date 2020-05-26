@@ -121,7 +121,7 @@
     <value>Account</value>
   </data>
   <data name="Account_Page" xml:space="preserve">
-    <value>Account_Page</value>
+    <value>Account Page</value>
   </data>
   <data name="Added_to_favorites" xml:space="preserve">
     <value>Added to favorites!</value>
@@ -217,7 +217,7 @@
     <value>My Videos</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Title</value>
+    <value>Name</value>
   </data>
   <data name="Name_required" xml:space="preserve">
     <value>Name (required)</value>
@@ -303,6 +303,9 @@
   <data name="Upload" xml:space="preserve">
     <value>Upload</value>
   </data>
+  <data name="UploadConvert" xml:space="preserve">
+    <value>Upload with Convert</value>
+  </data>
   <data name="UploadDate" xml:space="preserve">
     <value>Upload Date</value>
   </data>
@@ -328,7 +331,8 @@
     <value>Video Player</value>
   </data>
   <data name="Video_was_deleted_from_server" xml:space="preserve">
-    <value>Video_was_deleted_from_server!</value>
+    <value>Download stop.
+Video was deleted from server!</value>
   </data>
   <data name="View_comments_left" xml:space="preserve">
     <value>View comments left</value>

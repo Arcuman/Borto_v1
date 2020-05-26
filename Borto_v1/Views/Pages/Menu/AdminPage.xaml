@@ -40,7 +40,7 @@
                 <TextBlock Grid.ColumnSpan="2" Grid.Row="1" 
                            Text="{lex:Loc View_uploaded_videos}" FontSize="28" Height="50"
                            Foreground="{StaticResource BackgroundLightBlueBrush}" HorizontalAlignment="Center"/>
-                <TextBlock Grid.Row="2" HorizontalAlignment="Right" 
+                <TextBlock Grid.Row="2" HorizontalAlignment="Center" Grid.ColumnSpan="2"
                            Text="{lex:Loc View_search_and_delete_videos}" FontSize="24" Margin="20 0" Foreground="{StaticResource BackgroundDarkBlueBrush}" />
                 <Button 
                     FontSize="21"
@@ -49,8 +49,8 @@
                 <TextBlock Grid.ColumnSpan="2" Grid.Row="5" 
                            Text="{lex:Loc View_comments_left}" FontSize="28" Foreground="{StaticResource BackgroundLightBlueBrush}"
                            HorizontalAlignment="Center" Height="30" Margin="20"/>
-                <TextBlock Grid.Row="6"
-                           Text="{lex:Loc View_search_and_delete_comments}" Height="30" FontSize="24" Margin="20 0" Foreground="{StaticResource BackgroundDarkBlueBrush}" HorizontalAlignment="Right"/>
+                <TextBlock Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                           Text="{lex:Loc View_search_and_delete_comments}" Height="30" FontSize="24" Margin="20 0" Foreground="{StaticResource BackgroundDarkBlueBrush}" />
                 <Button Grid.ColumnSpan="2" Grid.Row="7" Margin="10"  Content="{lex:Loc Comments}" Width="170" Height="Auto" FontSize="21" HorizontalAlignment="Center" 
                         Foreground="{StaticResource ForegroundColorLight}"
                       Command="{Binding AdminCommentsCommand}"/>

@@ -128,10 +128,21 @@ OpeningEffect="{materialDesign:TransitionEffect FadeIn, Duration=0:0:1}">
                                                    Width="200"
                                                    FontSize="13" />
                                                 </StackPanel>
-                                                <Button  HorizontalAlignment="Right" Margin="0 0 10 0"
+                                                <Button Visibility="{Binding HasConvertation,
+                                                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                                                     ConverterParameter=false}"
+                                                        HorizontalAlignment="Right" Margin="0 0 10 0"
                                         Command="{Binding ElementName= ListViewProduct,Path=DataContext.DownloadPageCommand}" 
                                         CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}">
                                                     <materialDesign:PackIcon Width="25" Height="25" Kind="Download"  Foreground="{StaticResource ForegroundColorLight}"/>
+                                                </Button>
+                                                <Button
+                                                    Visibility="{Binding HasConvertation,
+                                                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
+                                                    HorizontalAlignment="Right" Margin="0 0 10 0"
+                                        Command="{Binding ElementName= ListViewProduct,Path=DataContext.DownloadPageCommand}" 
+                                        CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}">
+                                                    <materialDesign:PackIcon Width="25" Height="25" Kind="Download"  Foreground="{StaticResource BackgroundDarkBlueBrush}"/>
                                                 </Button>
                                             </Grid>
                                         </StackPanel>
@@ -150,14 +161,14 @@ OpeningEffect="{materialDesign:TransitionEffect FadeIn, Duration=0:0:1}">
                                 </ItemsPanelTemplate>
                             </ListBox.ItemsPanel>
                         </ListBox>
-                        <StackPanel Margin="5" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
+                        <StackPanel IsEnabled="{Binding IsVisibleProgressBar,Converter={StaticResource InverseBooleanConverter}}" Margin="5" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
                             <Button Content="{lex:Loc Back}" 
                                     Command="{Binding BackPageCommand}"
                                 Foreground="{StaticResource ForegroundColorLight}"/>
                             <Border Margin="5 0" Background="{StaticResource PrimaryHueMidBrush}" MinWidth="35">
                                 <TextBlock Text="{Binding PageCount}" FontSize="20"  Foreground="{StaticResource ForegroundColorLight}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
-                            <Button Content="{lex:Loc Next}" 
+                            <Button Content="{lex:Loc Next}"  
                                 Command="{Binding NextPageCommand}"
                                 Foreground="{StaticResource ForegroundColorLight}"/>
                         </StackPanel>
