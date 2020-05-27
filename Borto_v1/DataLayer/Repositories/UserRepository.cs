@@ -86,6 +86,18 @@ namespace Borto_v1
                 return tmp != null ? true : false;
             }
         }
+        public string GetEmail(string login)
+        {
+            using (var db = new PlayerContext())
+            {
+                User tmp = db.Users.AsNoTracking().FirstOrDefault(x => x.Login.Equals(login));
+                if(string.IsNullOrWhiteSpace(tmp.Email))
+                {
+                    return null;
+                }
+                return tmp.Email;
+            }
+        }
         /// <summary>
         /// Check there is a user with this login and password
         /// </summary>

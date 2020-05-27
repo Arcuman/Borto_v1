@@ -61,6 +61,15 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A new password has been sent to the mail.
+        /// </summary>
+        public static string A_new_password_has_been_sent_to_the_mail {
+            get {
+                return ResourceManager.GetString("A_new_password_has_been_sent_to_the_mail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account.
         /// </summary>
         public static string Account {
@@ -268,6 +277,24 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Login.
+        /// </summary>
+        public static string Enter_Login {
+            get {
+                return ResourceManager.GetString("Enter_Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Watch Later.
         /// </summary>
         public static string Favorite {
@@ -291,6 +318,15 @@ namespace Borto_v1.Properties {
         public static string Folder {
             get {
                 return ResourceManager.GetString("Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forgot your password.
+        /// </summary>
+        public static string Forgot_your_password {
+            get {
+                return ResourceManager.GetString("Forgot_your_password", resourceCulture);
             }
         }
         
@@ -354,6 +390,15 @@ namespace Borto_v1.Properties {
         public static string Long_first {
             get {
                 return ResourceManager.GetString("Long_first", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mail is not attached.
+        /// </summary>
+        public static string Mail_is_not_attached {
+            get {
+                return ResourceManager.GetString("Mail_is_not_attached", resourceCulture);
             }
         }
         
@@ -651,6 +696,15 @@ namespace Borto_v1.Properties {
         public static string This_login_is_already_exist {
             get {
                 return ResourceManager.GetString("This_login_is_already_exist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This login is not exist.
+        /// </summary>
+        public static string This_login_is_not_exist {
+            get {
+                return ResourceManager.GetString("This_login_is_not_exist", resourceCulture);
             }
         }
         

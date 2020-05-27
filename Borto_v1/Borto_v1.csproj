@@ -259,6 +259,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Business Logic\AzureHelper.cs" />
+    <Compile Include="Business Logic\MailsService.cs" />
     <Compile Include="DataLayer\Configuration\CommentConfiguration.cs" />
     <Compile Include="DataLayer\Configuration\PlaylistConfiguration.cs" />
     <Compile Include="DataLayer\Configuration\SubscriptionConfiguration.cs" />
@@ -301,6 +302,7 @@
     <Compile Include="Helpers\MessageWindow\OpenWindowMessage.cs" />
     <Compile Include="Helpers\Command\RelayCommandParametr.cs" />
     <Compile Include="Helpers\Enum\WindowType.cs" />
+    <Compile Include="Helpers\Validation\EmailRule.cs" />
     <Compile Include="Helpers\Validation\MaximumCharacterRule.cs" />
     <Compile Include="Helpers\Validation\MinimumCharacterRule.cs" />
     <Compile Include="Helpers\Validation\NickNameRule.cs" />
@@ -309,6 +311,15 @@
     <Compile Include="Helpers\Validation\LoginRule.cs" />
     <Compile Include="Helpers\Validation\OnlyLettersRule.cs" />
     <Compile Include="Helpers\Validation\PasswordRule.cs" />
+    <Compile Include="Migrations\202005261936577_InitialCreate.cs" />
+    <Compile Include="Migrations\202005261936577_InitialCreate.designer.cs">
+      <DependentUpon>202005261936577_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005270804598_add email.cs" />
+    <Compile Include="Migrations\202005270804598_add email.designer.cs">
+      <DependentUpon>202005270804598_add email.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModel\Menu\PlaylistViewModel.cs" />
     <Compile Include="ViewModel\OtherPage\PlaylistVideosViewModel.cs" />
     <Compile Include="ViewModel\OtherPage\SubscriptionsViewModel.cs" />
@@ -495,6 +506,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\202005261936577_InitialCreate.resx">
+      <DependentUpon>202005261936577_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005270804598_add email.resx">
+      <DependentUpon>202005270804598_add email.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru-RU.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.ru-RU.Designer.cs</LastGenOutput>

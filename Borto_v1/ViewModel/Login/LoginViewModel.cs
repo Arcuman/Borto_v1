@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using System;
+using System.Linq;
 using System.Resources;
 using System.Threading;
 using WPFLocalizeExtension.Engine;
@@ -153,6 +154,61 @@ namespace Borto_v1
                     }));
             }
         }
+        private RelayCommand forgotPasswordCommand;
+        public RelayCommand ForgotPasswordCommand
+        {
+            get
+            {
+                return forgotPasswordCommand
+                    ?? (forgotPasswordCommand = new RelayCommand(
+                    () =>
+                    {
+                        IsOpenDialog = true;
+                    }));
+            }
+        }
+        private RelayCommand restoryCommand;
+        public RelayCommand RestoryCommand
+        {
+            get
+            {
+                return restoryCommand
+                    ?? (restoryCommand = new RelayCommand(
+                    () =>
+                    {
+                        ThreadPool.QueueUserWorkItem(
+                       o =>
+                       {
+                           IsVisibleProgressBar = true;
+                           if (!context.Users.IsExist(Login))
+                           {
+
+                               IsOpenDialog = false;
+                               SimpleIoc.Default.GetInstance<LoginWindowViewModel>().Message = Properties.Resources.This_login_is_not_exist;
+                               SimpleIoc.Default.GetInstance<LoginWindowViewModel>().IsOpenDialog = true;
+                           }
+                           else if (context.Users.GetEmail(Login) == null)
+                           {
+                               IsOpenDialog = false;
+                               SimpleIoc.Default.GetInstance<LoginWindowViewModel>().Message = Properties.Resources.Mail_is_not_attached;
+                               SimpleIoc.Default.GetInstance<LoginWindowViewModel>().IsOpenDialog = true;
+                           }
+                           else
+                           {
+                               User user = context.Users.Find(x => x.Login.Equals(Login)).FirstOrDefault();
+                               string Password = MailsService.GetPass(10);
+                               user.Password = User.getHash(Password);
+                               context.Users.Update(user);
+                               MailsService.SendEmail(context.Users.GetEmail(Login), "Password recovery", $"<h2>Your temporary password {Password} </h2>");
+                               IsOpenDialog = false;
+                               SimpleIoc.Default.GetInstance<LoginWindowViewModel>().Message = Properties.Resources.A_new_password_has_been_sent_to_the_mail;
+                               SimpleIoc.Default.GetInstance<LoginWindowViewModel>().IsOpenDialog = true;
+                           }
+                           IsVisibleProgressBar = false;
+                       });
+                    }));
+            }
+        }
 
 
         private RelayCommandParametr _loginCommand;
@@ -185,8 +241,8 @@ namespace Borto_v1
                                 else
                                 {
                                     IsVisibleProgressBar = false;
-                                    Message = Properties.Resources.IncorrectData;
-                                    IsOpenDialog = true;
+                                    SimpleIoc.Default.GetInstance<LoginWindowViewModel>().Message = Properties.Resources.IncorrectData;
+                                    SimpleIoc.Default.GetInstance<LoginWindowViewModel>().IsOpenDialog = true;
                                 }
                             }
                             catch (Exception ex)

@@ -22,6 +22,8 @@ namespace Borto_v1
 
         private string name;
 
+        private string email;
+
         private string nickName;
 
         private string oldPassword;
@@ -64,6 +66,23 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+            set
+            {
+                if (email == value)
+                {
+                    return;
+                }
+                email = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public int CountSubscribers
         {
             get
@@ -289,6 +308,7 @@ namespace Borto_v1
 
                         User.Image = Image;
                         User.NickName = NickName;
+                        User.Email = Email;
                         context.Users.Update(User);
                         context.Save();
                         SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Data_saved_successfully;
@@ -436,6 +456,8 @@ namespace Borto_v1
                         Name = User.Name;
 
                         NickName = User.NickName;
+
+                        Email = User.Email;
 
                         IsVisibleEditNameIcon = true;
 

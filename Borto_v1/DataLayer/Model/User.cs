@@ -25,6 +25,8 @@ namespace Borto_v1
         public string Password { get; set; }
 
         public byte[] Image { get; set; }
+        [MaxLength()]
+        public string Email { get; set; }
 
         public UserRole Role { get; set; }
 

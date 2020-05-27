@@ -138,6 +138,9 @@
   <data name="AgreementTermOfUse" xml:space="preserve">
     <value>Я согласен с условиями пользования</value>
   </data>
+  <data name="A_new_password_has_been_sent_to_the_mail" xml:space="preserve">
+    <value>Новый пароль отправлен на почту</value>
+  </data>
   <data name="Back" xml:space="preserve">
     <value>Назад</value>
   </data>
@@ -186,6 +189,12 @@
   <data name="Duration" xml:space="preserve">
     <value>Длительность:</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Почта</value>
+  </data>
+  <data name="Enter_Login" xml:space="preserve">
+    <value>Введите логин</value>
+  </data>
   <data name="Favorite" xml:space="preserve">
     <value>Смотреть позже</value>
   </data>
@@ -194,6 +203,9 @@
   </data>
   <data name="Folder" xml:space="preserve">
     <value>Путь</value>
+  </data>
+  <data name="Forgot_your_password" xml:space="preserve">
+    <value>Забыли пароль?</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Главная</value>
@@ -215,6 +227,9 @@
   </data>
   <data name="Long_first" xml:space="preserve">
     <value>Сначала длинные</value>
+  </data>
+  <data name="Mail_is_not_attached" xml:space="preserve">
+    <value>Почта не привяза к логину</value>
   </data>
   <data name="MyVideos" xml:space="preserve">
     <value>Видео пользователя</value>
@@ -314,6 +329,9 @@
   </data>
   <data name="This_login_is_already_exist" xml:space="preserve">
     <value>Такой логин уже существует</value>
+  </data>
+  <data name="This_login_is_not_exist" xml:space="preserve">
+    <value>Такой логин не существует</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Название</value>

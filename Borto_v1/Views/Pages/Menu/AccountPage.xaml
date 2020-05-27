@@ -101,7 +101,8 @@
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
-                            <RowDefinition Height="0.8*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="0.9*"/>
                             <RowDefinition Height="2.3*"/>
                         </Grid.RowDefinitions>
                         <Grid   Height="40" >
@@ -118,7 +119,7 @@
                                   x:Name="NameTextBox" MaxLength="41"
                                       Foreground="{StaticResource BackgroundLightBlueBrush}"
                                    VerticalAlignment="Center" 
-                                  FontSize="22" 
+                                  FontSize="20" 
                                   IsReadOnly="{Binding IsVisibleEditNameIcon}" >
                                 <TextBox.Text>
                                     <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
@@ -144,7 +145,7 @@
                                   x:Name="NickNameTextBox"
                                       Foreground="{StaticResource BackgroundLightBlueBrush}"
                                    VerticalAlignment="Center" 
-                                  FontSize="22" MaxLength="41"
+                                  FontSize="20" MaxLength="41"
                                    IsReadOnly="{Binding IsVisibleEditNameIcon}" >
                                 <TextBox.Text>
                                     <Binding Path="NickName" UpdateSourceTrigger="PropertyChanged">
@@ -158,6 +159,57 @@
                                 </TextBox.Text>
                             </TextBox>
                         </Grid>
+                        <Grid Grid.Row="3"  Height="40" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.3*"/>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock HorizontalAlignment="Center" 
+                                       VerticalAlignment="Center" Text="{lex:Loc Email}" FontSize="22" />
+                            <TextBox  Grid.Column="1" 
+                                  x:Name="Email"
+                                      Foreground="{StaticResource BackgroundLightBlueBrush}"
+                                   VerticalAlignment="Center"
+                                  FontSize="20" MaxLength="70" >
+                                <TextBox.Text>
+                                    <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <local:NotEmptyValidationRule  />
+                                            <local:MinimumCharacterRule MinimumCharacters="2" />
+                                            <local:EmailRule/>
+                                            <local:MaximumCharacterRule MaximumCharacters="70" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Button HorizontalAlignment="Left" Margin="50 0" Command="{Binding SaveChangeNameCommand}" 
+                                    Height="35" Padding="0" Width="35" Grid.Column="2" 
+                                    Foreground="{StaticResource ForegroundColorLight}"
+                                     >
+                                <Button.Content>
+                                    <Grid>
+                                        <materialDesign:PackIcon 
+                                    Width="15" Height="15" Kind="Check"  Foreground="{StaticResource ForegroundColorLight}"/>
+
+                                    </Grid>
+                                </Button.Content>
+                                <Button.Style >
+                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedLightButton}">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Email}" Value="False"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="IsEnabled" Value="True"/>
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Grid>
+                        
                         <Grid Grid.Row="2">
                             <Button     Margin="0 0 10 0" Width="35" Height="35" Padding="0"
                                         Command="{Binding ChangeNameCommand}"
@@ -202,7 +254,7 @@
                                 </Button>
                             </StackPanel>
                         </Grid>
-                        <Grid  Grid.Row="3">
+                        <Grid  Grid.Row="4">
                             <Button VerticalAlignment="Top"
                                 HorizontalAlignment="Center"
                                 Content="{lex:Loc Change_Password}" 

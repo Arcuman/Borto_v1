@@ -17,11 +17,36 @@
     <materialDesign:DialogHost 
         IsOpen="{Binding IsOpenDialog,FallbackValue=False}">
         <materialDesign:DialogHost.DialogContent>
-            <Border Height="Auto" Width="Auto">
-                <StackPanel Margin="16">
-                    <TextBlock Text="{Binding Message,FallbackValue=The login is already exist}"/>
-                    <Button Margin="0 10 0 0" Style="{StaticResource MaterialDesignFlatAccentButton}"
-                                Content="{lex:Loc Close}" Width="Auto" Height="30" Command="{Binding CloseDialodCommand}"/>
+            <Border  Height="200" Width="250">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16">
+                    <TextBlock FontSize="18" HorizontalAlignment="Center" Text="{lex:Loc Enter_Login}"/>
+                    <TextBox Margin="10 10" x:Name="loginTextBoxForgot" FontSize="16" MinWidth="200"
+                                     materialDesign:HintAssist.Hint="{lex:Loc Login}"  MaxLength="41">
+                        <TextBox.Text>
+                            <Binding Path="Login" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <local:NotEmptyValidationRule  />
+                                    <local:MinimumCharacterRule MinimumCharacters="5" />
+                                    <local:MaximumCharacterRule MaximumCharacters="40" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <StackPanel>
+                        <ProgressBar 
+                                Visibility="{Binding IsVisibleProgressBar,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    FallbackValue=Collapsed}"
+                                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                Value="35" 
+                                Margin="20 20 20 10"
+                                IsIndeterminate="{Binding IsVisibleProgressBar}" />
+                        <Button FontSize="16" Visibility="{Binding IsVisibleProgressBar,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    ConverterParameter=false}"
+                                Margin="0 10 0 0" Style="{StaticResource MaterialDesignFlatAccentButton}"
+                                Content="{lex:Loc Send}" Width="Auto" Height="30" Command="{Binding RestoryCommand}"/>
+                </StackPanel>
                 </StackPanel>
             </Border>
         </materialDesign:DialogHost.DialogContent>
@@ -98,7 +123,9 @@ OpeningEffect="{materialDesign:TransitionEffect SlideInFromBottom, Duration=0:0:
                                 </Button>
 
                             </StackPanel>
-                            <Button Command="{Binding RegisterCommand}" Content="{lex:Loc SignUp}" Margin="30 10 30 10" Foreground="{StaticResource ForegroundColorLight}"/>
+                            <Button Command="{Binding RegisterCommand}" Content="{lex:Loc SignUp}" Margin="30 10 30 0" Foreground="{StaticResource ForegroundColorLight}"/>
+                            <Button Background="Transparent" BorderBrush="Transparent" Command="{Binding ForgotPasswordCommand}" Content="{lex:Loc Forgot_your_password}" 
+                                    FontSize="12"  HorizontalAlignment="Center" Padding="0" Margin="0 10" Height="20" Foreground="{StaticResource BackgroundDarkBlueBrush}"/>
                         </StackPanel>
                     </Border>
                     <Border Width="70" Height="70" HorizontalAlignment="Center" VerticalAlignment="Top" Background="{StaticResource ForegroundColorLight}" CornerRadius="50">
