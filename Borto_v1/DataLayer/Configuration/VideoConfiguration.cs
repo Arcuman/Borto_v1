@@ -13,9 +13,11 @@ namespace Borto_v1
                 HasColumnName("IdVideo").
                 HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).
                 IsRequired();
+
             this.HasRequired(o => o.User)
                 .WithRequiredDependent()
                .WillCascadeOnDelete(false);
+
             this.HasRequired(o => o.User)
          .WithMany(c => c.Videos)
          .HasForeignKey(o => o.UserId);

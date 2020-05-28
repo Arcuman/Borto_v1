@@ -42,6 +42,7 @@ namespace Borto_v1
 
         private int videosCount;
 
+        private bool isListNull;
         #endregion
 
         #region Public members
@@ -77,6 +78,22 @@ namespace Borto_v1
                 }
 
                 selectedVideo = value;
+                RaisePropertyChanged();
+            }
+        }
+        public bool IsListNull
+        {
+            get
+            {
+                return isListNull;
+            }
+            set
+            {
+                if (isListNull == value)
+                {
+                    return;
+                }
+                isListNull = value;
                 RaisePropertyChanged();
             }
         }
@@ -158,6 +175,7 @@ namespace Borto_v1
                         user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
                         IsVisibleProgressBar = true;
                         PageCount = 1;
+                        IsListNull = false;
                         SearchField = string.Empty;
                         loadedThread = new Thread(() =>
                         {
@@ -165,6 +183,10 @@ namespace Borto_v1
                             {
                                 Videos = new ObservableCollection<Video>(context.WatchLaters.GetVideoByRange(PageCount, videoOnThePage,
                                                                                                                 SortState.New, SearchField, user.IdUser, out videosCount));
+                                if (Videos.Count() == 0)
+                                    IsListNull = true;
+                                else
+                                    IsListNull = false;
                                 isSortedBy = SortState.New;
                                 IsVisibleProgressBar = false;
                             }

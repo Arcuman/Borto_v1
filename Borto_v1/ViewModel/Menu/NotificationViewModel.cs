@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Borto_v1
 {
-    class SubscriptionsViewModel : ViewModelBase
+    public class NotificationViewModel : ViewModelBase
     {
         #region Private Fields
 
@@ -22,28 +23,29 @@ namespace Borto_v1
 
         private Thread loadedThread;
 
-        private ObservableCollection<User> users;
+        private ObservableCollection<Notification> notifications;
 
         private bool isVisibleProgressBar;
 
         private bool isListNull;
+
         #endregion
 
         #region Public Fields
 
-        public ObservableCollection<User> Users
+        public ObservableCollection<Notification> Notifications
         {
             get
             {
-                return users;
+                return notifications;
             }
             set
             {
-                if (users == value)
+                if (notifications == value)
                 {
                     return;
                 }
-                users = value;
+                notifications = value;
                 RaisePropertyChanged();
             }
         }
@@ -64,8 +66,7 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
-
-         public bool IsListNull
+        public bool IsListNull
         {
             get
             {
@@ -102,49 +103,84 @@ namespace Borto_v1
                             try
                             {
 
-                                Users = new ObservableCollection<User>(context.Subscription.GetUsersByUserId(user.IdUser));
-                                if (Users.Count() == 0)
+                                Notifications = new ObservableCollection<Notification>(context.Notifications.GetAll(user.IdUser));
+                                if (Notifications.Count() == 0)
                                     IsListNull = true;
                                 else
-                                IsListNull = false;
+                                    IsListNull = false;
                                 IsVisibleProgressBar = false;
                             }
                             catch (Exception ex)
                             {
                                 SimpleIoc.Default.GetInstance<MainViewModel>().Message = ex.Message;
                                 SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
-
                             }
-
                         });
                         loadedThread.IsBackground = true;
                         loadedThread.Start();
                     }));
             }
         }
-        private RelayCommandParametr accountPageCommand;
-        public RelayCommandParametr AccountPageCommand
+
+        private RelayCommandParametr _viewWatchingPageCommand;
+        public RelayCommandParametr ViewWatchingPageCommand
         {
             get
             {
-                return accountPageCommand
-                    ?? (accountPageCommand = new RelayCommandParametr(
+                return _viewWatchingPageCommand
+                    ?? (_viewWatchingPageCommand = new RelayCommandParametr(
                     (obj) =>
                     {
-                        var user = obj as User;
-                        _navigationService.NavigateTo("UserAccount", user);
+                        var temp = obj as Notification;
+                        _navigationService.NavigateTo("VideoWatching", temp.Video);
                     }));
             }
         }
+        private RelayCommandParametr _accountpageCommand;
+        public RelayCommandParametr AccountpageCommand
+        {
+            get
+            {
+                return _accountpageCommand
+                    ?? (_accountpageCommand = new RelayCommandParametr(
+                    (obj) =>
+                    {
+                        var temp = obj as Notification;
+                        _navigationService.NavigateTo("UserAccount", temp.Sender);
+
+                    }));
+            }
+        }
+         private RelayCommandParametr deleteCommand;
+        public RelayCommandParametr DeleteCommand
+        {
+            get
+            {
+                return deleteCommand
+                    ?? (deleteCommand = new RelayCommandParametr(
+                    (obj) =>
+                    {
+                        var temp = obj as Notification;
+                        context.Notifications.Delete(temp.NotificationId);
+                        Notifications.Remove(temp);
+                        if(Notifications.Count == 0)
+                        {
+                            IsListNull = true;
+                        }
+                    }));
+            }
+        }
+
         #endregion
 
-        #region ctor
-        public SubscriptionsViewModel(IFrameNavigationService navigationService)
+        #region ctor 
+
+        public NotificationViewModel(IFrameNavigationService navigationService)
         {
             _navigationService = navigationService;
             user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
-
         }
+
         #endregion
     }
 }

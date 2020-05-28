@@ -34,6 +34,7 @@ namespace Borto_v1
             navigationService.Configure("Login", new Uri("../Pages/Login/Login.xaml", UriKind.Relative));
             navigationService.Configure("Register", new Uri("../Pages/Login/RegisterPage.xaml", UriKind.Relative));
             navigationService.Configure("Player", new Uri("../Pages/Menu/VideoPlayerPage.xaml", UriKind.Relative));
+            navigationService.Configure("Notification", new Uri("../Pages/Menu/NotificationPage.xaml", UriKind.Relative));
             navigationService.Configure("AdminComments", new Uri("../Pages/AdminPages/CommentsPage.xaml", UriKind.Relative));
             navigationService.Configure("AdminVideos", new Uri("../Pages/AdminPages/AdminVideosPage.xaml", UriKind.Relative));
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);

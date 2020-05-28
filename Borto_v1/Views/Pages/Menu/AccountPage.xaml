@@ -96,133 +96,97 @@
                                 Foreground="{StaticResource ForegroundColorLight}" Command="{Binding SubscriptionsCommand}"/>
                     </Grid>
                 </Grid>
-                <Grid Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3">
-                    <Grid >
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="0.9*"/>
-                            <RowDefinition Height="2.3*"/>
-                        </Grid.RowDefinitions>
-                        <Grid   Height="40" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.3*"/>
-                                <ColumnDefinition Width="1.5*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                <materialDesign:ColorZone Margin="20" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="Light"  Grid.Column="1"  Grid.ColumnSpan="2">
+                    <Grid  Margin="0 5">
+                        <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="0.9*"/>
+                                <RowDefinition Height="2.3*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Margin="0 5"  Height="40" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.3*"/>
+                                    <ColumnDefinition Width="1.8*"/>
+                                    <ColumnDefinition Width="0.9*"/>
+                                </Grid.ColumnDefinitions>
 
-                            <TextBlock Width="Auto" VerticalAlignment="Center"
+                                <TextBlock Width="Auto" VerticalAlignment="Center"
                                        HorizontalAlignment="Center" Text="{lex:Loc Name}"
                                        FontSize="22" />
-                            <TextBox  Grid.Column="1" 
+                                <TextBox  Grid.Column="1" 
                                   x:Name="NameTextBox" MaxLength="41"
                                       Foreground="{StaticResource BackgroundLightBlueBrush}"
                                    VerticalAlignment="Center" 
                                   FontSize="20" 
                                   IsReadOnly="{Binding IsVisibleEditNameIcon}" >
-                                <TextBox.Text>
-                                    <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:NotEmptyValidationRule  />
-                                            <local:MinimumCharacterRule MinimumCharacters="2" />
-                                            <local:OnlyLettersRule  />
-                                            <local:MaximumCharacterRule MaximumCharacters="40" />
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                        </Grid>
-                        <Grid Grid.Row="1"  Height="40" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.3*"/>
-                                <ColumnDefinition Width="1.5*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock HorizontalAlignment="Center" 
+                                    <TextBox.Text>
+                                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:NotEmptyValidationRule  />
+                                                <local:MinimumCharacterRule MinimumCharacters="2" />
+                                                <local:OnlyLettersRule  />
+                                                <local:MaximumCharacterRule MaximumCharacters="40" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </Grid>
+                            <Grid Grid.Row="1" Margin="0 5" Height="40" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.3*"/>
+                                    <ColumnDefinition Width="1.8*"/>
+                                    <ColumnDefinition Width="0.9*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock HorizontalAlignment="Center" 
                                        VerticalAlignment="Center" Text="{lex:Loc NickName}" FontSize="22" />
-                            <TextBox  Grid.Column="1" 
+                                <TextBox  Grid.Column="1" 
                                   x:Name="NickNameTextBox"
                                       Foreground="{StaticResource BackgroundLightBlueBrush}"
                                    VerticalAlignment="Center" 
                                   FontSize="20" MaxLength="41"
                                    IsReadOnly="{Binding IsVisibleEditNameIcon}" >
-                                <TextBox.Text>
-                                    <Binding Path="NickName" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:NotEmptyValidationRule  />
-                                            <local:MinimumCharacterRule MinimumCharacters="2" />
-                                            <local:NickNameRule  />
-                                            <local:MaximumCharacterRule MaximumCharacters="40" />
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                        </Grid>
-                        <Grid Grid.Row="3"  Height="40" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.3*"/>
-                                <ColumnDefinition Width="1.5*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock HorizontalAlignment="Center" 
+                                    <TextBox.Text>
+                                        <Binding Path="NickName" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:NotEmptyValidationRule  />
+                                                <local:MinimumCharacterRule MinimumCharacters="2" />
+                                                <local:NickNameRule  />
+                                                <local:MaximumCharacterRule MaximumCharacters="40" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </Grid>
+                            <Grid Grid.Row="3" Margin="0 5" Height="40" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.3*"/>
+                                    <ColumnDefinition Width="1.8*"/>
+                                    <ColumnDefinition Width="0.9*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock HorizontalAlignment="Center" 
                                        VerticalAlignment="Center" Text="{lex:Loc Email}" FontSize="22" />
-                            <TextBox  Grid.Column="1" 
+                                <TextBox  Grid.Column="1" 
                                   x:Name="Email"
                                       Foreground="{StaticResource BackgroundLightBlueBrush}"
                                    VerticalAlignment="Center"
                                   FontSize="20" MaxLength="70" >
-                                <TextBox.Text>
-                                    <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:NotEmptyValidationRule  />
-                                            <local:MinimumCharacterRule MinimumCharacters="2" />
-                                            <local:EmailRule/>
-                                            <local:MaximumCharacterRule MaximumCharacters="70" />
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                            <Button HorizontalAlignment="Left" Margin="50 0" Command="{Binding SaveChangeNameCommand}" 
+                                    <TextBox.Text>
+                                        <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:NotEmptyValidationRule  />
+                                                <local:MinimumCharacterRule MinimumCharacters="2" />
+                                                <local:EmailRule/>
+                                                <local:MaximumCharacterRule MaximumCharacters="70" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                                <Button HorizontalAlignment="Left" Margin="50 0 20 0" Command="{Binding SaveChangeNameCommand}" 
                                     Height="35" Padding="0" Width="35" Grid.Column="2" 
-                                    Foreground="{StaticResource ForegroundColorLight}"
-                                     >
-                                <Button.Content>
-                                    <Grid>
-                                        <materialDesign:PackIcon 
-                                    Width="15" Height="15" Kind="Check"  Foreground="{StaticResource ForegroundColorLight}"/>
-
-                                    </Grid>
-                                </Button.Content>
-                                <Button.Style >
-                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedLightButton}">
-                                        <Setter Property="IsEnabled" Value="False"/>
-                                        <Style.Triggers>
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Email}" Value="False"/>
-                                                </MultiDataTrigger.Conditions>
-                                                <Setter Property="IsEnabled" Value="True"/>
-                                            </MultiDataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
-                        </Grid>
-                        
-                        <Grid Grid.Row="2">
-                            <Button     Margin="0 0 10 0" Width="35" Height="35" Padding="0"
-                                        Command="{Binding ChangeNameCommand}"
-                                        Visibility="{Binding IsVisibleEditNameIcon,
-                                        Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
-                                        >
-                                <materialDesign:PackIcon Width="15" Height="15" Kind="Edit"  Foreground="{StaticResource ForegroundColorLight}"/>
-                            </Button>
-                            <StackPanel HorizontalAlignment="Center"  Visibility="{Binding IsVisibleEditNameIcon,
-                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
-                                    ConverterParameter=False}"  Orientation="Horizontal">
-                                <Button Command="{Binding SaveChangeNameCommand}" 
-                                    Height="35" Padding="0" Width="35"
                                     Foreground="{StaticResource ForegroundColorLight}"
                                      >
                                     <Button.Content>
@@ -238,8 +202,7 @@
                                             <Style.Triggers>
                                                 <MultiDataTrigger>
                                                     <MultiDataTrigger.Conditions>
-                                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NameTextBox}" Value="False"/>
-                                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NickNameTextBox}" Value="False"/>
+                                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Email}" Value="False"/>
                                                     </MultiDataTrigger.Conditions>
                                                     <Setter Property="IsEnabled" Value="True"/>
                                                 </MultiDataTrigger>
@@ -247,96 +210,20 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-                                <Button Width="35" Height="35" Padding="0"
-                                        Margin="20 0 0 0"
-                                        Command="{Binding CancelNameCommand}">
-                                    <materialDesign:PackIcon Width="15" Height="15" Kind="Cancel"  Foreground="{StaticResource ForegroundColorLight}"/>
+                            </Grid>
+
+                            <Grid Margin="0 5" Grid.Row="2">
+                                <Button     Margin="0 0 10 0" Width="35" Height="35" Padding="0"
+                                        Command="{Binding ChangeNameCommand}"
+                                        Visibility="{Binding IsVisibleEditNameIcon,
+                                        Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
+                                        >
+                                    <materialDesign:PackIcon Width="15" Height="15" Kind="Edit"  Foreground="{StaticResource ForegroundColorLight}"/>
                                 </Button>
-                            </StackPanel>
-                        </Grid>
-                        <Grid  Grid.Row="4">
-                            <Button VerticalAlignment="Top"
-                                HorizontalAlignment="Center"
-                                Content="{lex:Loc Change_Password}" 
-                                Foreground="{StaticResource ForegroundColorLight}"
-                                Command="{Binding ChangePasswordCommand}"
-                                Style="{StaticResource MaterialDesignFlatLightBgButton}"
-                                Visibility="{Binding IsVisibleEditPasswrodIcon,
-                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
-                                />
-                            <Grid  Visibility="{Binding IsVisibleEditPasswrodIcon,
-                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},ConverterParameter=False}"
-                               >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Grid   Height="40" >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1.3*"/>
-                                        <ColumnDefinition Width="1.5*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" 
-                                           Text="{lex:Loc Old_Password}" FontSize="22" />
-                                    <PasswordBox  Grid.Column="1" Name="OldPassword" Foreground="{StaticResource BackgroundLightBlueBrush}" 
-                                                  VerticalAlignment="Center" Padding="0"  
-                                                  MaxLength="41">
-                                        <PasswordBox.Style>
-                                            <Style TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignFloatingHintPasswordBox}">
-                                                <Style.Setters>
-                                                    <Setter Property="local:PasswordBoxAssistant.BindPassword" Value="True"/>
-                                                    <Setter Property="local:PasswordBoxAssistant.BoundPassword">
-                                                        <Setter.Value>
-                                                            <Binding Path="OldPassword" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                                                <Binding.ValidationRules>
-                                                                    <local:NotEmptyValidationRule  />
-                                                                    <local:MinimumCharacterRule MinimumCharacters="8" />
-                                                                    <local:MaximumCharacterRule MaximumCharacters="40" />
-                                                                </Binding.ValidationRules>
-                                                            </Binding>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style.Setters>
-                                            </Style>
-                                        </PasswordBox.Style>
-                                    </PasswordBox>
-                                </Grid>
-                                <Grid  Grid.Row="1"  Height="40" >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1.3*"/>
-                                        <ColumnDefinition Width="1.5*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{lex:Loc New_Password}" FontSize="22" />
-                                    <PasswordBox  Grid.Column="1" x:Name="NewPassword"
-                                                  Foreground="{StaticResource BackgroundLightBlueBrush}" VerticalAlignment="Center" 
-                                                  Padding="0"  MaxLength="41">
-                                        <PasswordBox.Style>
-                                            <Style TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignFloatingHintPasswordBox}">
-                                                <Style.Setters>
-                                                    <Setter Property="local:PasswordBoxAssistant.BindPassword" Value="True"/>
-                                                    <Setter Property="local:PasswordBoxAssistant.BoundPassword">
-                                                        <Setter.Value>
-                                                            <Binding Path="NewPassword" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
-                                                                <Binding.ValidationRules>
-                                                                    <local:NotEmptyValidationRule  />
-                                                                    <local:MinimumCharacterRule MinimumCharacters="8" />
-                                                                    <local:NotContainSpaceRuse  />
-                                                                    <local:PasswordRule  />
-                                                                    <local:MaximumCharacterRule MaximumCharacters="40" />
-                                                                </Binding.ValidationRules>
-                                                            </Binding>
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                </Style.Setters>
-                                            </Style>
-                                        </PasswordBox.Style>
-                                    </PasswordBox>
-                                </Grid>
-                                <StackPanel Margin="0 25 0 0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2">
-                                    <Button Command="{Binding SaveChangePasswordCommand}" 
+                                <StackPanel HorizontalAlignment="Center"  Visibility="{Binding IsVisibleEditNameIcon,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    ConverterParameter=False}"  Orientation="Horizontal">
+                                    <Button Command="{Binding SaveChangeNameCommand}" 
                                     Height="35" Padding="0" Width="35"
                                     Foreground="{StaticResource ForegroundColorLight}"
                                      >
@@ -353,8 +240,8 @@
                                                 <Style.Triggers>
                                                     <MultiDataTrigger>
                                                         <MultiDataTrigger.Conditions>
-                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=OldPassword}" Value="False"/>
-                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NewPassword}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NameTextBox}" Value="False"/>
+                                                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NickNameTextBox}" Value="False"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <Setter Property="IsEnabled" Value="True"/>
                                                     </MultiDataTrigger>
@@ -364,14 +251,130 @@
                                     </Button>
                                     <Button Width="35" Height="35" Padding="0"
                                         Margin="20 0 0 0"
-                                        Command="{Binding CancelPasswordCommand}">
+                                        Command="{Binding CancelNameCommand}">
                                         <materialDesign:PackIcon Width="15" Height="15" Kind="Cancel"  Foreground="{StaticResource ForegroundColorLight}"/>
                                     </Button>
                                 </StackPanel>
                             </Grid>
+                            <Grid Margin="0 5" Grid.Row="4">
+                                <Button VerticalAlignment="Top"
+                                HorizontalAlignment="Center"
+                                Content="{lex:Loc Change_Password}" 
+                                Foreground="{StaticResource ForegroundColorLight}"
+                                Command="{Binding ChangePasswordCommand}"
+                                Style="{StaticResource MaterialDesignFlatLightBgButton}"
+                                Visibility="{Binding IsVisibleEditPasswrodIcon,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
+                                />
+                                <Grid  Visibility="{Binding IsVisibleEditPasswrodIcon,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},ConverterParameter=False}"
+                               >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Margin="0 5"  Height="40" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.3*"/>
+                                            <ColumnDefinition Width="1.5*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" HorizontalAlignment="Center"  VerticalAlignment="Center" 
+                                           Text="{lex:Loc Old_Password}" FontSize="22" />
+                                        <PasswordBox  Grid.Column="1" Name="OldPassword" Foreground="{StaticResource BackgroundLightBlueBrush}" 
+                                                  VerticalAlignment="Center" Padding="0"  
+                                                  MaxLength="41">
+                                            <PasswordBox.Style>
+                                                <Style TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                                                    <Style.Setters>
+                                                        <Setter Property="local:PasswordBoxAssistant.BindPassword" Value="True"/>
+                                                        <Setter Property="local:PasswordBoxAssistant.BoundPassword">
+                                                            <Setter.Value>
+                                                                <Binding Path="OldPassword" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                                                    <Binding.ValidationRules>
+                                                                        <local:NotEmptyValidationRule  />
+                                                                        <local:MinimumCharacterRule MinimumCharacters="8" />
+                                                                        <local:MaximumCharacterRule MaximumCharacters="40" />
+                                                                    </Binding.ValidationRules>
+                                                                </Binding>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style.Setters>
+                                                </Style>
+                                            </PasswordBox.Style>
+                                        </PasswordBox>
+                                    </Grid>
+                                    <Grid Margin="0 5" Grid.Row="1"  Height="40" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1.3*"/>
+                                            <ColumnDefinition Width="1.5*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{lex:Loc New_Password}" FontSize="22" />
+                                        <PasswordBox  Grid.Column="1" x:Name="NewPassword"
+                                                  Foreground="{StaticResource BackgroundLightBlueBrush}" VerticalAlignment="Center" 
+                                                  Padding="0"  MaxLength="41">
+                                            <PasswordBox.Style>
+                                                <Style TargetType="PasswordBox" BasedOn="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                                                    <Style.Setters>
+                                                        <Setter Property="local:PasswordBoxAssistant.BindPassword" Value="True"/>
+                                                        <Setter Property="local:PasswordBoxAssistant.BoundPassword">
+                                                            <Setter.Value>
+                                                                <Binding Path="NewPassword" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                                                                    <Binding.ValidationRules>
+                                                                        <local:NotEmptyValidationRule  />
+                                                                        <local:MinimumCharacterRule MinimumCharacters="8" />
+                                                                        <local:NotContainSpaceRuse  />
+                                                                        <local:PasswordRule  />
+                                                                        <local:MaximumCharacterRule MaximumCharacters="40" />
+                                                                    </Binding.ValidationRules>
+                                                                </Binding>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style.Setters>
+                                                </Style>
+                                            </PasswordBox.Style>
+                                        </PasswordBox>
+                                    </Grid>
+                                    <StackPanel Margin="0 25 0 5" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2">
+                                        <Button Command="{Binding SaveChangePasswordCommand}" 
+                                    Height="35" Padding="0" Width="35"
+                                    Foreground="{StaticResource ForegroundColorLight}"
+                                     >
+                                            <Button.Content>
+                                                <Grid>
+                                                    <materialDesign:PackIcon 
+                                    Width="15" Height="15" Kind="Check"  Foreground="{StaticResource ForegroundColorLight}"/>
+
+                                                </Grid>
+                                            </Button.Content>
+                                            <Button.Style >
+                                                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedLightButton}">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                    <Style.Triggers>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=OldPassword}" Value="False"/>
+                                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=NewPassword}" Value="False"/>
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter Property="IsEnabled" Value="True"/>
+                                                        </MultiDataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                        <Button Width="35" Height="35" Padding="0"
+                                        Margin="20 0 0 0"
+                                        Command="{Binding CancelPasswordCommand}">
+                                            <materialDesign:PackIcon Width="15" Height="15" Kind="Cancel"  Foreground="{StaticResource ForegroundColorLight}"/>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     </Grid>
-                </Grid>
+                </materialDesign:ColorZone>
                 <Grid Grid.Row="1" Grid.ColumnSpan="3"  VerticalAlignment="Bottom" Margin="0,0,0,0.4">
                     <StackPanel>
                         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"

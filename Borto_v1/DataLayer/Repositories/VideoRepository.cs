@@ -12,8 +12,6 @@ namespace Borto_v1
     {
         private PlayerContext db;
 
-        private PlayerContext temp_db_context;
-
         public VideoRepository(PlayerContext context)
         {
         }
@@ -76,7 +74,7 @@ namespace Borto_v1
         {
             using (var db = new PlayerContext())
             {
-                return db.Videos.Find(id);
+                return db.Videos.AsNoTracking().Include(x=>x.User).Where(x=>x.IdVideo==id).First();
             }
         }
 

@@ -140,7 +140,19 @@ namespace Borto_v1
                     (x) => IsVisibleProgressBar == false));
             }
         }
-
+        private RelayCommandParametr closeDialogCommand;
+        public RelayCommandParametr CloseDialogCommand
+        {
+            get
+            {
+                return closeDialogCommand
+                    ?? (closeDialogCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        IsOpenDialog = false;
+                    }));
+            }
+        }
         private RelayCommand closeDialodCommand;
         public RelayCommand CloseDialodCommand
         {
@@ -154,17 +166,18 @@ namespace Borto_v1
                     }));
             }
         }
-        private RelayCommand forgotPasswordCommand;
-        public RelayCommand ForgotPasswordCommand
+        private RelayCommandParametr forgotPasswordCommand;
+        public RelayCommandParametr ForgotPasswordCommand
         {
             get
             {
                 return forgotPasswordCommand
-                    ?? (forgotPasswordCommand = new RelayCommand(
-                    () =>
+                    ?? (forgotPasswordCommand = new RelayCommandParametr(
+                    (x) =>
                     {
                         IsOpenDialog = true;
-                    }));
+                    },
+                    (x) => IsVisibleProgressBar == false));
             }
         }
         private RelayCommand restoryCommand;

@@ -475,6 +475,33 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Notifications.
+        /// </summary>
+        public static string No_Notification {
+            get {
+                return ResourceManager.GetString("No_Notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No videos.
+        /// </summary>
+        public static string No_Videos {
+            get {
+                return ResourceManager.GetString("No_Videos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification.
+        /// </summary>
+        public static string Notification {
+            get {
+                return ResourceManager.GetString("Notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Old first.
         /// </summary>
         public static string Old_first {
@@ -772,7 +799,7 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Video.
+        ///   Looks up a localized string similar to Video .
         /// </summary>
         public static string Video {
             get {

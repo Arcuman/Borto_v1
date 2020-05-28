@@ -1,0 +1,142 @@
+﻿<Page x:Class="Borto_v1.NotificationPage"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Borto_v1" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d"  xmlns:lex="http://wpflocalizeextension.codeplex.com"
+      d:DesignHeight="600" d:DesignWidth="1060"
+      Title="NotificationPage">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Page.Resources>
+        <local:ParametrizedBooleanToVisibilityConverter x:Key="ParametrizedBooleanToVisibilityConverter"/>
+        <local:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        <local:ByteToBitmapImageConverter x:Key="ByteToBitmapImageConverter"/>
+        <local:EnumConverter x:Key="EnumConverter"/>
+    </Page.Resources>
+    <Grid Background="#f0f8ff" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Height="55">
+            <materialDesign:ColorZone Height="50" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="PrimaryMid" DockPanel.Dock="Top">
+                <Grid  Background="{StaticResource BackgroundLightBlueBrush}">
+                    <TextBlock HorizontalAlignment="Center" Text="{lex:Loc Notification}" Margin="5" 
+                                    FontSize="28" FontWeight="Medium" 
+                               Foreground="{StaticResource ForegroundColorLight}"/>
+
+                </Grid>
+            </materialDesign:ColorZone>
+        </Grid>
+        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
+              PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
+            <Grid Grid.Row="1">
+                <TextBlock Text="{lex:Loc No_Notification}" FontSize="28" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource BackgroundLightBlueBrush}"
+                           Visibility="{Binding IsListNull,  Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"/>
+                <ProgressBar 
+                                Panel.ZIndex="1"
+                                Visibility="{Binding IsVisibleProgressBar,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
+                                    FallbackValue=Visible}"
+                                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                Value="45"  Width="150"  Height="150"
+                                Margin="10 10" 
+                                IsIndeterminate="{Binding IsVisibleProgressBar}" />
+                <ListBox HorizontalAlignment="Center"  Name="ListViewProduct"
+                     ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="1" 
+                     ItemsSource="{Binding Notifications}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <materialDesign:ColorZone CornerRadius="15" Margin="15" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="Light" >
+                                <Border Margin="10" CornerRadius="15" BorderBrush="Transparent" Background="Transparent"  Width="Auto" Height="Auto" >
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <materialDesign:PackIcon Kind="NotificationsActive" VerticalAlignment="Top" 
+                                                      HorizontalAlignment="Left"   Foreground="{StaticResource BackgroundDarkBlueBrush}" MinWidth="50" MinHeight="50" />
+                                        <Border  Margin="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="100" CornerRadius="50" >
+                                            <Border.Effect>
+                                                <DropShadowEffect ShadowDepth="5"/>
+                                            </Border.Effect>
+                                            <Border.Background>
+                                                <ImageBrush x:Name="AccountImage" ImageSource="{Binding User.Image, Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}"/>
+                                            </Border.Background>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                    <i:InvokeCommandAction Command="{Binding ElementName= ListViewProduct,Path=DataContext.AccountpageCommand}" 
+                                                       CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Border>
+                                        <Grid Width="Auto" Height="Auto" Margin="10 0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <StackPanel VerticalAlignment="Top"  Orientation="Horizontal" >
+                                                <TextBlock  Text="{Binding Sender.NickName}" Foreground="{StaticResource BackgroundLightBlueBrush}" FontSize="18">
+                                                    <i:Interaction.Triggers>
+                                                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                                <i:InvokeCommandAction Command="{Binding ElementName= ListViewProduct,Path=DataContext.AccountpageCommand}" 
+                                                                   CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}"/>
+                                                            </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                                </TextBlock>
+                                                <TextBlock  Text="{Binding Message, Converter={StaticResource EnumConverter}}" FontSize="18"/>
+                                                <TextBlock  Text="{Binding Video.Name}" Foreground="{StaticResource BackgroundLightBlueBrush}" Margin="5 0 0 0" Width="200" TextTrimming="CharacterEllipsis" FontSize="18">
+                                                     <i:Interaction.Triggers>
+                                                         <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                             <i:InvokeCommandAction Command="{Binding ElementName= ListViewProduct,Path=DataContext.ViewWatchingPageCommand}" 
+                                                                CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}"/>
+                                                         </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            <Button Grid.Row="1" Content="{lex:Loc Delete}"
+                                                     Command="{Binding ElementName= ListViewProduct,Path=DataContext.DeleteCommand}" 
+                                                                CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}"
+                                                    Width="120" VerticalAlignment="Bottom" Margin="0 20 0 5"/>
+                                        </Grid>
+                                        <Border  Margin="5" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="100"  >
+                                            <Border.Effect>
+                                                <DropShadowEffect ShadowDepth="5"/>
+                                            </Border.Effect>
+                                            <Border.Background>
+                                                <ImageBrush  ImageSource="{Binding Video.Image, Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}"/>
+                                            </Border.Background>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                    <i:InvokeCommandAction Command="{Binding ElementName= ListViewProduct,Path=DataContext.ViewWatchingPageCommand}" 
+                                                       CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </materialDesign:ColorZone>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

@@ -252,8 +252,17 @@
   <data name="NickName" xml:space="preserve">
     <value>Никнейм</value>
   </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Оповещения</value>
+  </data>
   <data name="No_internet_connection" xml:space="preserve">
     <value>Нет соединения с интернетом</value>
+  </data>
+  <data name="No_Notification" xml:space="preserve">
+    <value>Нет оповещений</value>
+  </data>
+  <data name="No_Videos" xml:space="preserve">
+    <value>Нет видео</value>
   </data>
   <data name="Old_first" xml:space="preserve">
     <value>Сначала старые</value>
@@ -271,7 +280,7 @@
     <value>Плеер</value>
   </data>
   <data name="Playlist" xml:space="preserve">
-    <value>Плейлист</value>
+    <value>Плейлисты</value>
   </data>
   <data name="Post_Date" xml:space="preserve">
     <value>Дата публикации</value>
@@ -355,7 +364,7 @@
     <value>Никнейм</value>
   </data>
   <data name="Video" xml:space="preserve">
-    <value>Видео</value>
+    <value>Видео </value>
   </data>
   <data name="Videos" xml:space="preserve">
     <value>Видео</value>

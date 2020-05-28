@@ -18,6 +18,12 @@
         IsOpen="{Binding IsOpenDialog,FallbackValue=False}">
         <materialDesign:DialogHost.DialogContent>
             <Border  Height="200" Width="250">
+                <Grid>
+                <Button Command="{Binding CloseDialogCommand}" Padding="1"  VerticalAlignment="Top" HorizontalAlignment="Right" Width="25" Height="25"
+                            Margin="0 3 5 0" Background="Transparent"
+                            BorderBrush="Transparent">
+                    <materialDesign:PackIcon Kind="Close" Width="25" Height="25" Foreground="{StaticResource BackgroundLightBlueBrush}" />
+                </Button>
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16">
                     <TextBlock FontSize="18" HorizontalAlignment="Center" Text="{lex:Loc Enter_Login}"/>
                     <TextBox Margin="10 10" x:Name="loginTextBoxForgot" FontSize="16" MinWidth="200"
@@ -48,6 +54,7 @@
                                 Content="{lex:Loc Send}" Width="Auto" Height="30" Command="{Binding RestoryCommand}"/>
                 </StackPanel>
                 </StackPanel>
+                </Grid>
             </Border>
         </materialDesign:DialogHost.DialogContent>
     <Grid  Background="Transparent">

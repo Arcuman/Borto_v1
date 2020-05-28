@@ -86,14 +86,13 @@
                      
                      Click="button_Click">
                     <materialDesign:PackIcon Width="25" Height="25" Kind="Menu"
-                                             
                                              Foreground="{StaticResource ForegroundColorLight}"/>
                 </Button>
                 <ListView  Grid.Row="1" x:Name="ListViewMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
                     <ListViewItem>
-                        <StackPanel  Margin="18" Height="25" Orientation="Horizontal">
+                        <StackPanel  Margin="18 12" Height="25" Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Tv" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                            <TextBlock Foreground="{StaticResource ForegroundColorLight}" Text="{lex:Loc Home}" Margin="25 0" FontSize="20" VerticalAlignment="Center"/>
+                            <TextBlock Foreground="{StaticResource ForegroundColorLight}" Text="{lex:Loc Home}" Margin="15 0" FontSize="18" VerticalAlignment="Center"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
@@ -103,9 +102,9 @@
                         </i:Interaction.Triggers>
                     </ListViewItem>
                     <ListViewItem>
-                        <StackPanel Margin="18" Height="25" Orientation="Horizontal">
+                        <StackPanel Margin="18 12" Height="25" Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Upload" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                            <TextBlock Text="{lex:Loc Upload}" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                            <TextBlock Text="{lex:Loc Upload}" Margin="15 0" FontSize="18" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
@@ -115,9 +114,9 @@
                         </i:Interaction.Triggers>
                     </ListViewItem>
                     <ListViewItem >
-                        <StackPanel Margin="18" Height="25" Orientation="Horizontal">
+                        <StackPanel Margin="18 12" Height="25" Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="VideoClassic"  Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                            <TextBlock Text ="{lex:Loc Player}" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                            <TextBlock Text ="{lex:Loc Player}" Margin="15 0" FontSize="18" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
@@ -125,11 +124,13 @@
                                                       Command="{Binding ViewWatchingPageCommand}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
-                    </ListViewItem> 
+                    </ListViewItem>
                     <ListViewItem  Padding="8 0">
-                        <StackPanel Margin="18 10" Height="60"  Orientation="Horizontal">
+                        <StackPanel Margin="18 4" Height="60"  Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Clock"  Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                            <TextBlock Text="{lex:Loc Favorite}" Margin="25 0" Width="100" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                            <TextBlock Text="{lex:Loc Favorite}" Margin="15 0"
+                                       Width="100" FontSize="18" TextWrapping="Wrap"
+                                       VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
@@ -139,21 +140,9 @@
                         </i:Interaction.Triggers>
                     </ListViewItem>
                     <ListViewItem>
-                        <StackPanel  Margin="18" Height="25" Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Account" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                            <TextBlock Text="{lex:Loc Account}" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                        </StackPanel>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
-                                <i:InvokeCommandAction
-                                                      Command="{Binding AccountpageCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ListViewItem>
-                    <ListViewItem>
-                        <StackPanel  Margin="18" Height="25" Orientation="Horizontal">
+                        <StackPanel  Margin="18 12" Height="25" Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="PlaylistStar" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                            <TextBlock Text="{lex:Loc Playlist}" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                            <TextBlock Text="{lex:Loc Playlist}" Margin="15 0" FontSize="18" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
@@ -162,10 +151,34 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ListViewItem>
+                    <ListViewItem>
+                        <StackPanel  Margin="18 12" Height="25" Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Account" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                            <TextBlock Text="{lex:Loc Account}" Margin="15 0" FontSize="18" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                        </StackPanel>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction
+                                                      Command="{Binding AccountpageCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListViewItem>
+                    <ListViewItem Padding="8 8">
+                        <StackPanel  Margin="18 12" Height="25" Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Notifications" Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                            <TextBlock Text="{lex:Loc Notification}" Margin="15 0" FontSize="18" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                        </StackPanel>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                                <i:InvokeCommandAction
+                                                      Command="{Binding NotificationCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListViewItem>
                     <ListViewItem Visibility="{Binding IsAdmin,Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}">
-                        <StackPanel  Margin="18" Height="25" Orientation="Horizontal">
+                        <StackPanel  Margin="18 12" Height="25" Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Cogs"  Width="30" Height="30" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
-                            <TextBlock Text="{lex:Loc Admin}" Margin="25 0" FontSize="20" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
+                            <TextBlock Text="{lex:Loc Admin}" Margin="15 0" FontSize="18" VerticalAlignment="Center" Foreground="{StaticResource ForegroundColorLight}"/>
                         </StackPanel>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PreviewMouseLeftButtonDown">

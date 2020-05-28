@@ -405,5 +405,5 @@ D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Vie
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Views\Pages\UserAccountPage.baml
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Views\Pages\SubscriptionsPage.g.cs
 D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Views\Pages\SubscriptionsPage.baml
-D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Borto_v1.Migrations.InitialCreate.resources
-D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Borto_v1.Migrations.addemail.resources
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Views\Pages\Menu\NotificationPage.g.cs
+D:\BSTU 2 course\2sem\CourseWork\Course\Borto_v1\Borto_v1\Borto_v1\obj\Debug\Views\Pages\Menu\NotificationPage.baml

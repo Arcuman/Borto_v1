@@ -53,44 +53,47 @@
                      ItemsSource="{Binding Users}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Border Background="White" Margin="15" Width="300" Height="200" BorderThickness="0 0 0 1" BorderBrush="{StaticResource BackgroundDarkBlueBrush}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <Border  Width="150" Height="150" Grid.RowSpan="2" CornerRadius="125" Margin="10 0">
-                                        <Border.Effect>
-                                            <DropShadowEffect ShadowDepth="5"/>
-                                        </Border.Effect>
-                                        <Border.Background>
-                                            <ImageBrush ImageSource="{Binding Image}"/>
-                                        </Border.Background>
-                                    </Border>
-                                    <TextBlock Grid.Row="0" FontFamily="Franklin Gothic Medium" 
+                            <materialDesign:ColorZone Margin="15" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="Light" >
+                                <Border BorderBrush="Transparent" Background="Transparent"  Width="300" Height="200" >
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Border  Width="150" Height="150" Grid.RowSpan="2" CornerRadius="125" Margin="10 0">
+                                            <Border.Effect>
+                                                <DropShadowEffect ShadowDepth="5"/>
+                                            </Border.Effect>
+                                            <Border.Background>
+                                                <ImageBrush ImageSource="{Binding Image}"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <TextBlock Grid.Row="0" FontFamily="Franklin Gothic Medium" 
                                Grid.Column="1" VerticalAlignment="Center"
                                Margin="15 0" Text="{Binding NickName}" 
                                MaxWidth="130"
                                HorizontalAlignment="Center"
                                TextTrimming="CharacterEllipsis" FontSize="32"/>
-                                    <TextBlock Grid.Row="1" FontFamily="Franklin Gothic Medium"
+                                        <TextBlock Grid.Row="1" FontFamily="Franklin Gothic Medium"
                                Grid.Column="1" VerticalAlignment="Center"
                                Margin="15 0" Text="{Binding Name}" 
                                MaxWidth="200"
                                HorizontalAlignment="Center"
                                TextTrimming="CharacterEllipsis" FontSize="32"/>
-                                </Grid>
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="MouseLeftButtonUp">
-                                        <i:InvokeCommandAction Command="{Binding ElementName= ListViewProduct,Path=DataContext.AccountPageCommand}" 
+                                    </Grid>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                                            <i:InvokeCommandAction Command="{Binding ElementName= ListViewProduct,Path=DataContext.AccountPageCommand}" 
                                                        CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </Border>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </Border>
+                            </materialDesign:ColorZone>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                     <ListBox.ItemsPanel>

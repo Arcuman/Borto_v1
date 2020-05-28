@@ -252,8 +252,17 @@
   <data name="NickName" xml:space="preserve">
     <value>Nickname</value>
   </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
   <data name="No_internet_connection" xml:space="preserve">
     <value>No internet connection</value>
+  </data>
+  <data name="No_Notification" xml:space="preserve">
+    <value>No Notifications</value>
+  </data>
+  <data name="No_Videos" xml:space="preserve">
+    <value>No videos</value>
   </data>
   <data name="Old_first" xml:space="preserve">
     <value>Old first</value>
@@ -355,7 +364,7 @@
     <value>User Nickname</value>
   </data>
   <data name="Video" xml:space="preserve">
-    <value>Video</value>
+    <value>Video </value>
   </data>
   <data name="Videos" xml:space="preserve">
     <value>Videos</value>

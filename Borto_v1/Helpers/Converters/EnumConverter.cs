@@ -42,6 +42,26 @@ namespace Borto_v1
                         }
                 }
             }
+            if (value is NotificationType)
+            {
+                switch ((NotificationType)value)
+                {
+                    case NotificationType.NewVideo:
+                        {
+                            if (culture.Name == "en-US")
+                                return " uploaded a new video:";
+                            else
+                                return " выложил новое видео: ";
+                        }
+                    case NotificationType.NewComment:
+                        {
+                            if (culture.Name == "en-US")
+                                return " commented a video:";
+                            else
+                                return " оставил комментарий к видео:";
+                        }
+                }
+                }
             return "";
         }
 

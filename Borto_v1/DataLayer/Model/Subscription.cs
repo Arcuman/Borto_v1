@@ -12,13 +12,13 @@ namespace Borto_v1
     {
         public int SubscriptionId { get; set; }
 
-        [Required]
         public int UserId { get; set; }
         [ForeignKey("UserId")]
         public User User { get; set; }
 
-        public int UserSubId { get; set; }
 
+        public int UserSubId { get; set; }
+        [ForeignKey("UserSubId")]
         public User UserSub { get; set; }
 
         public Subscription()

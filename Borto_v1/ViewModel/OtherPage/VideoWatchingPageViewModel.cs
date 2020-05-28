@@ -54,6 +54,7 @@ namespace Borto_v1
 
         private ObservableCollection<Comment> comments;
 
+        private string NotificationVideoName;
         /// <summary>
         /// Is Owner Video 
         /// </summary>
@@ -109,7 +110,7 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
-         public bool IsLoading
+        public bool IsLoading
         {
             get
             {
@@ -522,6 +523,8 @@ namespace Borto_v1
                             Comments = new ObservableCollection<Comment>(context.Comments.GetAllByVideo(Video.IdVideo));
 
                             Comment = string.Empty;
+
+                            Notification();
                         }
                         catch (Exception ex)
                         {
@@ -578,22 +581,37 @@ namespace Borto_v1
                     }));
             }
         }
-        private RelayCommand _accountpageCommand;
-        public RelayCommand AccountpageCommand
+        private RelayCommandParametr _accountpageCommand;
+        public RelayCommandParametr AccountpageCommand
         {
             get
             {
                 return _accountpageCommand
-                    ?? (_accountpageCommand = new RelayCommand(
-                    () =>
+                    ?? (_accountpageCommand = new RelayCommandParametr(
+                    (obj) =>
                     {
-                        if (Video.UserId == user.IdUser)
+                        var temp = obj as Comment;
+                        if (temp == null)
                         {
-                            _navigationService.NavigateTo("Account", Video.User);
+                            if (Video.UserId == user.IdUser)
+                            {
+                                _navigationService.NavigateTo("Account", Video.User);
+                            }
+                            else
+                            {
+                                _navigationService.NavigateTo("UserAccount", Video.User);
+                            }
                         }
                         else
                         {
-                            _navigationService.NavigateTo("UserAccount", Video.User);
+                            if (temp.UserId == user.IdUser)
+                            {
+                                _navigationService.NavigateTo("Account", temp.User);
+                            }
+                            else
+                            {
+                                _navigationService.NavigateTo("UserAccount", temp.User);
+                            }
                         }
 
                     }));
@@ -608,7 +626,7 @@ namespace Borto_v1
                     ?? (openPlayListCommand = new RelayCommandParametr(
                     (x) =>
                     {
-                        
+
                         IsOpenDialog = true;
                     }));
             }
@@ -754,6 +772,8 @@ namespace Borto_v1
         {
             _navigationService = navigationService;
             Video = navigationService.Parameter as Video;
+            if (Video.User == null)
+                Video = context.Videos.Get(Video.IdVideo);
             VideoImage = Video.Image;
         }
         #endregion
@@ -765,7 +785,7 @@ namespace Borto_v1
         public void Initialize()
         {
             IsLoading = false;
-           user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
+            user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
 
             IsVisibleEditNameIcon = true;
 
@@ -822,7 +842,7 @@ namespace Borto_v1
         }
         public void SetCheckboxCollection()
         {
-           
+
             Playlists = new ObservableCollection<CheckingPlaylist>();
             tempPlaylists = new ObservableCollection<CheckingPlaylist>();
             foreach (var item in playlist)
@@ -854,7 +874,7 @@ namespace Borto_v1
                             break;
                         else if (newPlaylist.isChecked == false)
                         {
-                            int id = context.PlaylistVideo.GetIfExist(newPlaylist.playlist.IdPlaylist,Video.IdVideo).IdPlaylistVideo;
+                            int id = context.PlaylistVideo.GetIfExist(newPlaylist.playlist.IdPlaylist, Video.IdVideo).IdPlaylistVideo;
                             context.PlaylistVideo.Delete(id);
                         }
                         else
@@ -881,6 +901,20 @@ namespace Borto_v1
                 tempPlaylists.Add(check);
             }
             IsOpenDialog = false;
+        }
+        public void Notification()
+        {
+            Notification notification;
+            notification = new Notification()
+            {
+                UserId = Video.User.IdUser,
+                Message = NotificationType.NewComment,
+                NotificationDate = DateTime.Now,
+                VideoId = Video.IdVideo,
+                SenderId = user.IdUser
+            };
+            context.Notifications.Create(notification);
+            NotificationVideoName = string.Empty;
         }
         #endregion
     }

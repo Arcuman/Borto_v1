@@ -77,6 +77,9 @@ OpeningEffect="{materialDesign:TransitionEffect FadeIn, Duration=0:0:1}">
             <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto"
               PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
                 <Grid>
+                    <TextBlock Text="{lex:Loc No_Videos}" FontSize="28" 
+                           HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource BackgroundLightBlueBrush}"
+                           Visibility="{Binding IsListNull,  Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"/>
                     <ProgressBar 
                                 Panel.ZIndex="1"
                                 Visibility="{Binding IsVisibleProgressBar,

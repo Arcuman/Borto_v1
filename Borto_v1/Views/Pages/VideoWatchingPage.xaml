@@ -74,7 +74,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="0.05*"/>
                             <ColumnDefinition  Width="2*"/>
-                            <ColumnDefinition Width="0.5*"/>
+                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -163,7 +163,7 @@
                         </Grid>
                         <Border Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2"
                          Width="Auto" Height="Auto"
-                         MaxWidth="600" MaxHeight="400" CornerRadius="5" Margin="10 10">
+                         MaxWidth="600" MaxHeight="400" CornerRadius="5" Margin="10 0">
                             <Border.Effect>
                                 <DropShadowEffect ShadowDepth="2"/>
                             </Border.Effect>
@@ -171,91 +171,99 @@
                                 <ImageBrush ImageSource="{Binding VideoImage, Mode=OneTime}" Stretch="Fill"/>
                             </Border.Background>
                         </Border>
-
-                        <Grid Grid.Row="1" Grid.Column="3">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.ColumnSpan="3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Border HorizontalAlignment="Left"  Width="70" Height="70" CornerRadius="35" >
-                                    <Border.Effect>
-                                        <DropShadowEffect ShadowDepth="5"/>
-                                    </Border.Effect>
-                                    <Border.Background>
-                                        <ImageBrush x:Name="AccountImage" ImageSource="{Binding UserImage,Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}"/>
-                                    </Border.Background>
-                                </Border>
-                                <TextBlock FontFamily="Franklin Gothic Medium" 
+                        <materialDesign:ColorZone Width="Auto" Height="Auto" Margin="15 0" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="Light" Grid.Row="1" Grid.RowSpan="2" Grid.Column="3">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid Margin="0 15" Grid.Row="0" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Margin="5 0" HorizontalAlignment="Center" Grid.ColumnSpan="3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border HorizontalAlignment="Left"  Width="70" Height="70" CornerRadius="35" >
+                                            <Border.Effect>
+                                                <DropShadowEffect ShadowDepth="5"/>
+                                            </Border.Effect>
+                                            <Border.Background>
+                                                <ImageBrush x:Name="AccountImage" ImageSource="{Binding UserImage,Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}"/>
+                                            </Border.Background>
+                                        </Border>
+                                        <TextBlock FontFamily="Franklin Gothic Medium" 
                                Grid.Column="1" VerticalAlignment="Center"
                                Margin="15 0" Text="{Binding UserName}" 
                                MaxWidth="130"
                                HorizontalAlignment="Left"
                                TextTrimming="CharacterEllipsis" FontSize="28"/>
-                                <TextBlock FontFamily="Franklin Gothic Medium"
+                                        <TextBlock FontFamily="Franklin Gothic Medium"
                                Grid.Column="2" VerticalAlignment="Center"
                                Margin="15 0" Text="{Binding UserNickName}" 
                                MaxWidth="200"
                                HorizontalAlignment="Left"
                                TextTrimming="CharacterEllipsis" FontSize="28"/>
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="MouseLeftButtonUp">
-                                        <i:InvokeCommandAction 
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                <i:InvokeCommandAction 
                                             Command="{Binding AccountpageCommand}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </Grid>
-                            <StackPanel VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
-                                <TextBlock VerticalAlignment="Center"
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Grid>
+                                    <StackPanel HorizontalAlignment="Center" Margin="5 15" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+                                        <TextBlock VerticalAlignment="Center"
                                         Foreground="{StaticResource BackgroundLightBlueBrush}"        
                             FontSize="22" Margin="3 0" Text="{lex:Loc DateUpload}"/>
-                                <TextBlock VerticalAlignment="Bottom"
+                                        <TextBlock VerticalAlignment="Bottom"
                             FontSize="20" Text="{Binding UploadDate}"/>
-                            </StackPanel>
+                                    </StackPanel>
 
-                        </Grid>
-                        <Grid Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Margin="0 0 20 0" HorizontalAlignment="Left">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <TextBlock  Foreground="{StaticResource BackgroundLightBlueBrush}"      
+                                </Grid>
+                                <Grid HorizontalAlignment="Center" Margin="5 15 20 15" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2"  >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock  Foreground="{StaticResource BackgroundLightBlueBrush}"      
                                     Text="{lex:Loc Description}" FontSize="28" />
-                            <Border BorderBrush="{StaticResource BackgroundDarkBlueBrush}" BorderThickness="0 1 0 1" Grid.Row="1" Width="Auto" Height="135">
-                                <Grid>
-                                    <TextBlock  Height="Auto"
+                                    <Border BorderBrush="{StaticResource BackgroundDarkBlueBrush}" BorderThickness="0 1 0 1" Grid.Row="1" Width="Auto" Height="135">
+                                        <Grid>
+                                            <TextBlock  Height="Auto"
                                     Text="{Binding VideoDescription}"
                                      Visibility="{Binding IsVisibleEditNameIcon,
                                         Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
                                     TextWrapping="Wrap"  FontSize="20" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
-                                    <TextBox  Height="Auto" Name ="DiscriptionTextBox" Width="Auto"
+                                            <TextBox  Height="Auto" Name ="DiscriptionTextBox" Width="Auto"
                                           Visibility="{Binding IsVisibleEditNameIcon,
                                     Converter={StaticResource ParametrizedBooleanToVisibilityConverter},
                                     ConverterParameter=False}" MaxLength="201" ScrollViewer.VerticalScrollBarVisibility="Auto"
                                     TextWrapping="Wrap"  FontSize="20" >
-                                        <TextBox.Text>
-                                            <Binding Path="VideoDescription" UpdateSourceTrigger="PropertyChanged">
-                                                <Binding.ValidationRules>
-                                                    <local:NotEmptyValidationRule  />
-                                                    <local:MinimumCharacterRule MinimumCharacters="2" />
-                                                    <local:MaximumCharacterRule MaximumCharacters="200" />
-                                                </Binding.ValidationRules>
-                                            </Binding>
-                                        </TextBox.Text>
-                                    </TextBox>
+                                                <TextBox.Text>
+                                                    <Binding Path="VideoDescription" UpdateSourceTrigger="PropertyChanged">
+                                                        <Binding.ValidationRules>
+                                                            <local:NotEmptyValidationRule  />
+                                                            <local:MinimumCharacterRule MinimumCharacters="2" />
+                                                            <local:MaximumCharacterRule MaximumCharacters="200" />
+                                                        </Binding.ValidationRules>
+                                                    </Binding>
+                                                </TextBox.Text>
+                                            </TextBox>
+                                        </Grid>
+                                    </Border>
                                 </Grid>
-                            </Border>
-                        </Grid>
+                            </Grid>
+                        </materialDesign:ColorZone>
                         <Grid Grid.Row="3"  Grid.ColumnSpan="5">
                             <Grid  IsEnabled="{Binding IsLoading}">
                                 <Grid.ColumnDefinitions>
@@ -366,7 +374,9 @@
                                     </Button.Style>
                                 </Button>
                             </StackPanel>
-                            <ListBox HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" Grid.Row="1" ItemsSource="{Binding Comments}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
+                            <ListBox HorizontalAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                                     Name="CommentsList"
+                                     Grid.Row="1" ItemsSource="{Binding Comments}" ItemContainerStyle="{DynamicResource ListBoxItemStyle1}" >
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Border Margin="5 0 0 5" Width="540" BorderThickness="0 0 0 1" BorderBrush="{StaticResource BackgroundDarkBlueBrush}">
@@ -386,6 +396,12 @@
                                                     <Border.Background>
                                                         <ImageBrush x:Name="AccountImage" ImageSource="{Binding User.Image,Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}"/>
                                                     </Border.Background>
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                                                            <i:InvokeCommandAction Command="{Binding ElementName= CommentsList,Path=DataContext.AccountpageCommand}" 
+                                                       CommandParameter="{Binding Path=SelectedItem , ElementName=CommentsList}"/>
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
                                                 </Border>
                                                 <TextBlock Grid.Column="1"
                                                    Margin="15 5"

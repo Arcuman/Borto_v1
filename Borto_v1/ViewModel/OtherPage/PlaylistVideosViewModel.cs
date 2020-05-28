@@ -39,6 +39,7 @@ namespace Borto_v1
 
         private int videosCount;
 
+        private bool isListNull;
         #endregion
 
         #region Public members
@@ -74,6 +75,22 @@ namespace Borto_v1
                 }
 
                 selectedVideo = value;
+                RaisePropertyChanged();
+            }
+        }
+        public bool IsListNull
+        {
+            get
+            {
+                return isListNull;
+            }
+            set
+            {
+                if (isListNull == value)
+                {
+                    return;
+                }
+                isListNull = value;
                 RaisePropertyChanged();
             }
         }
@@ -157,6 +174,10 @@ namespace Borto_v1
                         int id = context.PlaylistVideo.GetIfExist(playlist.IdPlaylist, SelectedVideo.IdVideo).IdPlaylistVideo;
                         context.PlaylistVideo.Delete(id);
                         Videos.Remove(SelectedVideo);
+                        if (Videos.Count == 0)
+                        {
+                            IsListNull = true;
+                        }
                     }));
             }
         }
@@ -171,11 +192,16 @@ namespace Borto_v1
                     {
                         IsVisibleProgressBar = true;
                         PageCount = 1;
+                        IsListNull = false;
                         loadedThread = new Thread(() =>
                         {
                             try
                             {
                                 Videos = new ObservableCollection<Video>(context.PlaylistVideo.GetVideoByPlayList(PageCount,videoOnThePage, playlist.IdPlaylist, out videosCount));
+                                if (Videos.Count() == 0)
+                                    IsListNull = true;
+                                else
+                                    IsListNull = false;
                                 IsVisibleProgressBar = false;
                             }
                             catch (Exception ex)

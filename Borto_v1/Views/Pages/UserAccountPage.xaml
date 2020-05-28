@@ -28,12 +28,7 @@
                                             Mode="PrimaryMid" >
             <Grid Background="{StaticResource BackgroundLightBlueBrush}" >
                 <TextBlock HorizontalAlignment="Center"  Text="{lex:Loc Account_Page}" Margin="5"  FontSize="28" FontWeight="Medium" Foreground="{StaticResource ForegroundColorLight}"/>
-                <Button Width="35" Height="35" Padding="0" HorizontalAlignment="Right"
-                                        Margin="0 0 20 0" Background="{StaticResource BackgroundDarkBlueBrush}"
-                        BorderBrush="{StaticResource BackgroundDarkBlueBrush}"
-                                        Command="{Binding ExitCommand}" ToolTip="Log out">
-                    <materialDesign:PackIcon Width="15" Height="15" Kind="Logout"  Foreground="{StaticResource ForegroundColorLight}"/>
-                </Button>
+               
             </Grid>
 
         </materialDesign:ColorZone>
@@ -49,7 +44,7 @@
                     <ColumnDefinition Width="16*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid Margin="5,5,5.4,5.4">
+                <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
@@ -63,82 +58,84 @@
                         </Border.Background>
                     </Border>
                 </Grid>
-                <Grid Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3">
+                <materialDesign:ColorZone Margin="20 25" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="Light"  Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3">
                     <Grid >
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition Height="0.8*"/>
-                            <RowDefinition Height="2.3*"/>
-                        </Grid.RowDefinitions>
-                        <Grid   Height="40" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.3*"/>
-                                <ColumnDefinition Width="1.5*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                        <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition Height="0.8*"/>
+                                <RowDefinition Height="2.3*"/>
+                            </Grid.RowDefinitions>
+                            <Grid  Margin="0 15" Height="40" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.3*"/>
+                                    <ColumnDefinition Width="1.5*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-                            <TextBlock Width="Auto" VerticalAlignment="Center"
-                                       HorizontalAlignment="Center" Text="{lex:Loc Name}"
+                                <TextBlock Width="Auto" VerticalAlignment="Center"
+                                       HorizontalAlignment="Right" Text="{lex:Loc Name}"
                                        FontSize="22" />
-                            <TextBlock  Grid.Column="1" 
+                                <TextBlock Margin="15 0" Grid.Column="1" 
                                   x:Name="NameTextBox" 
                                       Foreground="{StaticResource BackgroundLightBlueBrush}"
                                    VerticalAlignment="Center" Text="{Binding Name}"
                                   FontSize="22" >
-                            </TextBlock>
-                        </Grid>
-                        <Grid Grid.Row="1"  Height="40" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.3*"/>
-                                <ColumnDefinition Width="1.5*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock HorizontalAlignment="Center" 
+                                </TextBlock>
+                            </Grid>
+                            <Grid Grid.Row="1" Margin="0 15" Height="40" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.3*"/>
+                                    <ColumnDefinition Width="1.5*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock HorizontalAlignment="Right"
                                        VerticalAlignment="Center" Text="{lex:Loc NickName}" FontSize="22" />
-                            <TextBlock  Grid.Column="1" 
+                                <TextBlock Margin="15 0" Grid.Column="1" 
                                   x:Name="NickNameTextBox"
                                       Foreground="{StaticResource BackgroundLightBlueBrush}"
                                    VerticalAlignment="Center" 
                                   FontSize="22" Text="{Binding NickName}" >
-                            </TextBlock>
-                        </Grid>
-                        <Grid Margin="0 10" Grid.Row="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1.3*"/>
-                                <ColumnDefinition Width="1.5*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid HorizontalAlignment="Center">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock  Text="{lex:Loc Subscribers}" VerticalAlignment="Center" FontSize="22"
-                                           HorizontalAlignment="Right" Foreground="{StaticResource BackgroundLightBlueBrush}"/>
-                                <TextBlock Grid.Column="1" Text= "{Binding CountSubscribers}" VerticalAlignment="Center" Margin="5 0"
-                                           HorizontalAlignment="Left"  FontSize="22" Foreground="{StaticResource BackgroundLightBlueBrush}"/>
+                                </TextBlock>
                             </Grid>
-                            <Button Margin="10 0" Grid.Column="1" HorizontalAlignment="Center" Command="{Binding SubscribeCommand}">
-                                <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon
+                            <Grid Margin="0 10" Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Margin="0 15" HorizontalAlignment="Center" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.5*"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock  Text="{lex:Loc Subscribers}" VerticalAlignment="Center" FontSize="22"
+                                           HorizontalAlignment="Right" Foreground="{StaticResource BackgroundLightBlueBrush}"/>
+                                    <TextBlock Grid.Column="1" Text= "{Binding CountSubscribers}" VerticalAlignment="Center" Margin="5 0"
+                                           HorizontalAlignment="Right"  FontSize="22" Foreground="{StaticResource BackgroundLightBlueBrush}"/>
+                                </Grid>
+                                <Button Margin="10 0" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Command="{Binding SubscribeCommand}">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <materialDesign:PackIcon
                                                              VerticalAlignment="Center" 
                                                               Visibility="{Binding IsSubscribe,
                                                                          Converter={StaticResource ParametrizedBooleanToVisibilityConverter},ConverterParameter=false}"
                                                              Kind="Close" Width="25" Height="25" Margin="5 0"/>
-                                    <materialDesign:PackIcon 
+                                            <materialDesign:PackIcon 
                             VerticalAlignment="Center"
                              Visibility="{Binding IsSubscribe,
                                         Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}"
                             Kind="Check" Width="25" Height="25" Margin="5 0"/>
-                                        <TextBlock Text="{lex:Loc Subscribe}"   Foreground="{StaticResource ForegroundColorLight}"/>
-                                    </StackPanel>
-                                </Button.Content>
-                            </Button>
+                                            <TextBlock Text="{lex:Loc Subscribe}"   Foreground="{StaticResource ForegroundColorLight}"/>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
-                </Grid>
+                </materialDesign:ColorZone>
                 <Grid Grid.Row="1" Grid.ColumnSpan="3"  VerticalAlignment="Bottom" Margin="0,0,0,0.4">
                     <StackPanel>
                         <TextBlock Style="{StaticResource MaterialDesignHeadline5TextBlock}"

@@ -34,11 +34,18 @@ namespace Borto_v1
 
         public virtual List<Subscription> Subscriptions { get; set; }
 
+        public virtual List<Subscription> SubscriptionsSub { get; set; }
+
         public virtual List<Mark> Marks { get; set; }
+
+        public bool SendByEmail { get; set; }
 
         public virtual List<WatchLater> WatchLaters { get; set; }
 
         public virtual List<Comment> Comment { get; set; }
+
+        public virtual List<Notification> Notifications { get; set; }
+        public virtual List<Notification> NotificationsSender { get; set; }
 
         public User()
         { 
@@ -52,6 +59,7 @@ namespace Borto_v1
             Password = password;
             Image = image;
             Role = UserRole.User;
+            SendByEmail = false;
         }
 
         public static string getHash(string password)

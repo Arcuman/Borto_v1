@@ -19,7 +19,10 @@ namespace Borto_v1
 
         private string name;
 
+        private string NotificationVideoName;
+
         private Thread uploadThread;
+
 
         private User user;
 
@@ -80,7 +83,7 @@ namespace Borto_v1
             }
         }
 
-         public string Name
+        public string Name
         {
             get
             {
@@ -97,7 +100,7 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
-         public string Description
+        public string Description
         {
             get
             {
@@ -137,7 +140,7 @@ namespace Borto_v1
         {
             get
             {
-                
+
 
                 return _setPathtoImageCommand
                     ?? (_setPathtoImageCommand = new RelayCommandParametr(
@@ -154,7 +157,7 @@ namespace Borto_v1
         {
             get
             {
-                
+
 
                 return _setPathtoVideoCommand
                     ?? (_setPathtoVideoCommand = new RelayCommandParametr(
@@ -197,7 +200,7 @@ namespace Borto_v1
 
                         }
                     },
-                    (x)=> !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(PathVideo)));
+                    (x) => !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(PathVideo)));
             }
         }
         private RelayCommandParametr uploadConverterCommand;
@@ -230,7 +233,7 @@ namespace Borto_v1
 
                         }
                     },
-                    (x)=> !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(PathVideo)));
+                    (x) => !String.IsNullOrWhiteSpace(Name) && !String.IsNullOrWhiteSpace(PathVideo)));
             }
         }
 
@@ -290,10 +293,11 @@ namespace Borto_v1
 
             context.Save();
 
-            IsVisibleProgressBar = false;
-
+            NotificationVideoName = Name;
+            Notification(video);
             SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Your_video_uploaded;
             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+            IsVisibleProgressBar = false;
 
             Name = Description = PathVideo = string.Empty;
         }
@@ -301,25 +305,29 @@ namespace Borto_v1
         {
             maxDuration = Video.GetMaxDuration(PathVideo);
 
-            LibraryAzure.ConverterVideoAzure  helper = new LibraryAzure.ConverterVideoAzure();
+            LibraryAzure.ConverterVideoAzure helper = new LibraryAzure.ConverterVideoAzure();
 
             string uniqueness = Guid.NewGuid().ToString("N");
             serverfilepath = Name + uniqueness;
 
-            await helper.UploadConvert(serverfilepath,PathVideo);
+            await helper.UploadConvert(serverfilepath, PathVideo);
 
             user = SimpleIoc.Default.GetInstance<MainViewModel>().User;
-            
+
             Video video = new Video(Name, Description, image, user.IdUser, serverfilepath, maxDuration);
             video.HasConvertation = true;
             context.Videos.Create(video);
 
             context.Save();
 
-            IsVisibleProgressBar = false;
 
             SimpleIoc.Default.GetInstance<MainViewModel>().Message = Properties.Resources.Your_video_uploaded;
             SimpleIoc.Default.GetInstance<MainViewModel>().IsOpenDialog = true;
+            IsVisibleProgressBar = false;
+
+            NotificationVideoName = Name;
+
+            Notification(video);
 
             Name = Description = PathVideo = string.Empty;
         }
@@ -339,7 +347,34 @@ namespace Borto_v1
                 image = ms.ToArray();
             }
         }
-
+        public void Notification(Video video)
+        {
+            var subs = context.Subscription.GetSubs(user.IdUser);
+            if (subs.Count == 0)
+                return;
+            else
+            {
+                Notification notification;
+                foreach (var userTo in subs)
+                {
+                    notification = new Notification()
+                    {
+                        UserId = userTo.IdUser,
+                        Message = NotificationType.NewVideo,
+                        NotificationDate = DateTime.Now,
+                        VideoId = video.IdVideo,
+                        SenderId = user.IdUser
+                    };
+                    context.Notifications.Create(notification);
+                    if (userTo.SendByEmail)
+                    {
+                        MailsService.SendEmail(user.Email, $"New video from user {user.NickName} - video name: {NotificationVideoName}");
+                    }
+                }
+            }
+            NotificationVideoName = string.Empty;
+            subs.Clear();
+        }
         #endregion
     }
 

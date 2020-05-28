@@ -118,8 +118,6 @@
                         <TextBox.Text>
                             <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <local:NotEmptyValidationRule  />
-                                    <local:MinimumCharacterRule MinimumCharacters="2" />
                                     <local:MaximumCharacterRule MaximumCharacters="200" />
                                 </Binding.ValidationRules>
                             </Binding>

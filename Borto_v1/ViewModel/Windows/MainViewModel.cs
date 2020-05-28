@@ -149,6 +149,20 @@ namespace Borto_v1
                     }));
             }
         }
+         private RelayCommand notificationCommand;
+        public RelayCommand NotificationCommand
+        {
+            get
+            {
+                return notificationCommand
+                    ?? (notificationCommand = new RelayCommand(
+                    () =>
+                    {
+                        _navigationService.NavigateTo("Notification");
+                    }));
+            }
+        }
+
         private RelayCommand playlistCommand;
         public RelayCommand PlaylistCommand
         {

@@ -112,51 +112,53 @@
                                     Command="{Binding ShowAddFieldsCommand}">
                         <materialDesign:PackIcon Width="35" Height="35" Kind="Add" Foreground="{StaticResource ForegroundColorLight}"/>
                     </Button>
-                    <StackPanel Background="White" HorizontalAlignment="Center"  Visibility="{Binding IsVisibleAddFields,
-                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}">
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <materialDesign:ColorZone Visibility="{Binding IsVisibleAddFields,
+                                    Converter={StaticResource ParametrizedBooleanToVisibilityConverter}}" HorizontalAlignment="Center" materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                            Mode="Light"  Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3">
+                        <StackPanel >
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
 
-                            <Border  Margin="10 5 10 5" Width="Auto" Height="Auto" CornerRadius="15">
-                                <Border.Effect>
-                                    <DropShadowEffect ShadowDepth="5"/>
-                                </Border.Effect>
-                                <Image x:Name="PlaylistImage" MaxWidth="280" MaxHeight="190"  Width="Auto" Height="Auto" Source="{Binding Image,Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}" Stretch="Fill" />
-                            </Border>
-                            <TextBox FontSize="22" Height="Auto" VerticalAlignment="Top" Width="200" MaxLength="26"
+                                <Border  Margin="10 5 10 5" Width="Auto" Height="Auto" CornerRadius="15">
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="5"/>
+                                    </Border.Effect>
+                                    <Image x:Name="PlaylistImage" MaxWidth="280" MaxHeight="190"  Width="Auto" Height="Auto" Source="{Binding Image,Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}" Stretch="Fill" />
+                                </Border>
+                                <TextBox FontSize="22" Height="Auto" VerticalAlignment="Top" Width="200" MaxLength="26"
                                      TextWrapping="Wrap" Name="nameTextBox"
                                      materialDesign:HintAssist.Hint="{lex:Loc Title}">
-                                <TextBox.Text>
-                                    <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding.ValidationRules>
-                                            <local:NotEmptyValidationRule  />
-                                            <local:MinimumCharacterRule MinimumCharacters="2" />
-                                            <local:OnlyLettersRule  />
-                                            <local:MaximumCharacterRule MaximumCharacters="25" />
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>
-                        </StackPanel>
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                            <Button Margin="5" Width="Auto" Content="{lex:Loc AddPlaylist}" 
+                                    <TextBox.Text>
+                                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:NotEmptyValidationRule  />
+                                                <local:MinimumCharacterRule MinimumCharacters="2" />
+                                                <local:MaximumCharacterRule MaximumCharacters="25" />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Button Margin="5" Width="Auto" Content="{lex:Loc AddPlaylist}" 
                                     Command="{Binding AddPlaylistCommand}">
-                                <Button.Style >
-                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedLightButton}">
-                                        <Setter Property="IsEnabled" Value="False"/>
-                                        <Style.Triggers>
-                                            <MultiDataTrigger>
-                                                <MultiDataTrigger.Conditions>
-                                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=nameTextBox}" Value="False"/>
-                                                </MultiDataTrigger.Conditions>
-                                                <Setter Property="IsEnabled" Value="True"/>
-                                            </MultiDataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
-                            <Button Margin="5" Width="Auto" Height="Auto" Content="{lex:Loc Cancel}" Command="{Binding CancelAddCommand}"/>
+                                    <Button.Style >
+                                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedLightButton}">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                            <Style.Triggers>
+                                                <MultiDataTrigger>
+                                                    <MultiDataTrigger.Conditions>
+                                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=nameTextBox}" Value="False"/>
+                                                    </MultiDataTrigger.Conditions>
+                                                    <Setter Property="IsEnabled" Value="True"/>
+                                                </MultiDataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                <Button Margin="5" Width="Auto" Height="Auto" Content="{lex:Loc Cancel}" Command="{Binding CancelAddCommand}"/>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
+                    </materialDesign:ColorZone>
                 </Grid>
             </Grid>
         </ScrollViewer>

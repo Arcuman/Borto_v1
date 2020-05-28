@@ -8,32 +8,31 @@ using System.Threading.Tasks;
 
 namespace Borto_v1
 {
-   public class SubscriptionConfiguration : EntityTypeConfiguration<Subscription>
+    class NotificationConfiguration : EntityTypeConfiguration<Notification>
     {
-        internal SubscriptionConfiguration() : base()
+        internal NotificationConfiguration() : base()
         {
-            this.HasKey(p => p.SubscriptionId);
-            Property(p => p.SubscriptionId).
-                HasColumnName("SubscriptionId").
+            this.HasKey(p => p.NotificationId);
+            Property(p => p.NotificationId).
+                HasColumnName("NotificationId").
                 HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity).
                 IsRequired();
 
-            this.HasRequired(o => o.UserSub)
+            this.HasRequired(o => o.Sender)
                 .WithRequiredDependent()
                .WillCascadeOnDelete(false);
 
-            this.HasRequired(o => o.UserSub)
-         .WithMany(c => c.Subscriptions)
-         .HasForeignKey(o=>o.UserSubId);
+            this.HasRequired(o => o.Sender)
+         .WithMany(c => c.NotificationsSender)
+         .HasForeignKey(o => o.SenderId);
 
             this.HasRequired(o => o.User)
                 .WithRequiredDependent()
                .WillCascadeOnDelete(false);
 
             this.HasRequired(o => o.User)
-         .WithMany(c => c.SubscriptionsSub)
+         .WithMany(c => c.Notifications)
          .HasForeignKey(o => o.UserId); ;
-
 
         }
     }

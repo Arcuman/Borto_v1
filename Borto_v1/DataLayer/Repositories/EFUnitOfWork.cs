@@ -21,6 +21,7 @@ namespace Borto_v1
 
         private PlaylistVideoRepository playlistVideoRepository;
 
+        private NotificationRepository notificationRepository;
 
         private SubscriptionRepository subscriptionRepository;
 
@@ -96,6 +97,15 @@ namespace Borto_v1
                 if (subscriptionRepository == null)
                     subscriptionRepository = new SubscriptionRepository(db);
                 return subscriptionRepository;
+            }
+        }
+        public NotificationRepository Notifications
+        {
+            get
+            {
+                if (notificationRepository == null)
+                    notificationRepository = new NotificationRepository(db);
+                return notificationRepository;
             }
         }
 

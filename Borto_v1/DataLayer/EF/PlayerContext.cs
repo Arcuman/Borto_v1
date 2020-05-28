@@ -5,7 +5,7 @@ namespace Borto_v1
 {
     public class PlayerContext : DbContext
     {
-        public PlayerContext() : base("BortoServer")
+        public PlayerContext() : base("BortoLocal")
         {
 
         }
@@ -19,6 +19,8 @@ namespace Borto_v1
             modelBuilder.Configurations.Add(new PlaylistConfiguration());
             modelBuilder.Configurations.Add(new WatchLaterConfiguration());
             modelBuilder.Configurations.Add(new PlaylistVideoConfiguration());
+            modelBuilder.Configurations.Add(new SubscriptionConfiguration());
+            modelBuilder.Configurations.Add(new NotificationConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -37,5 +39,7 @@ namespace Borto_v1
         public DbSet<PlaylistVideo> PlaylistVideos { get; set; }
 
         public DbSet<Subscription> Subscriptions { get; set; }
+
+        public DbSet<Notification> Notifications { get; set; }
     }
 }

@@ -70,6 +70,21 @@ namespace Borto_v1
                 return users;
             }
         }
+        public List<User> GetSubs(int userId)
+        {
+            using (var db = new PlayerContext())
+            {
+                var temp = db.Subscriptions.Where(x => x.UserSubId == userId).Select(x => x.UserId).ToList();
+                List<User> users = new List<User>();
+                foreach (var item in temp)
+                {
+                    var user = db.Users.Where(x => x.IdUser == item).FirstOrDefault();
+                    if (user != null)
+                        users.Add(user);
+                };
+                return users;
+            }
+        }
 
         public Subscription Get(int id)
         {
