@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Borto_v1.Comment">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABBAAAAAAAAABAAAAAAAAgAAIAAAAEAAAACAAAAAAg=</HashCode>
+      <FileName>DataLayer\Model\Comment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.Mark">
+    <Position X="8" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAgAAIAAAAAAAAAAAAAAEAk=</HashCode>
+      <FileName>DataLayer\Model\Mark.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.Notification">
+    <Position X="11.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAgBAIABAACAAAAAIAAIAAg=</HashCode>
+      <FileName>DataLayer\Model\Notification.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.Playlist">
+    <Position X="10" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAACwAAAAAAhAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataLayer\Model\Playlist.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.PlaylistVideo">
+    <Position X="11.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAABAAQAAIAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>DataLayer\Model\PlaylistVideo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.Subscription">
+    <Position X="11.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAEAAAAAACAAAAAAgAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>DataLayer\Model\Subscription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.User">
+    <Position X="7.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAECCAgAAAAEAAAAAQAAAIAABECAAQUAgCAAAg=</HashCode>
+      <FileName>DataLayer\Model\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.Video">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAABACAAAAAiCAIAAAAAAAwAAACAAhAgAAQAAgAAIAA=</HashCode>
+      <FileName>DataLayer\Model\Video.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Borto_v1.WatchLater">
+    <Position X="10" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAgAAIAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>DataLayer\Model\WatchLater.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Borto_v1.NotificationType">
+    <Position X="14" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataLayer\Enum\NotificationType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Borto_v1.TypeMark">
+    <Position X="11.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>DataLayer\Enum\TypeMark.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Borto_v1.UserRole">
+    <Position X="13.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DataLayer\Enum\UserRole.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Borto_v1.LikeState">
+    <Position X="13.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAAA=</HashCode>
+      <FileName>Helpers\Enum\LikeState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

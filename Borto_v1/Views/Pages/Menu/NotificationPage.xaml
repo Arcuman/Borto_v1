@@ -73,7 +73,7 @@
                                                 <DropShadowEffect ShadowDepth="5"/>
                                             </Border.Effect>
                                             <Border.Background>
-                                                <ImageBrush x:Name="AccountImage" ImageSource="{Binding User.Image, Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}"/>
+                                                <ImageBrush x:Name="AccountImage" ImageSource="{Binding Sender.Image, Mode=TwoWay,Converter={StaticResource ByteToBitmapImageConverter}}"/>
                                             </Border.Background>
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="MouseLeftButtonUp">
@@ -87,24 +87,30 @@
                                                 <RowDefinition Height="Auto"/>
                                                 <RowDefinition Height="Auto"/>
                                             </Grid.RowDefinitions>
-                                            <StackPanel VerticalAlignment="Top"  Orientation="Horizontal" >
-                                                <TextBlock  Text="{Binding Sender.NickName}" Foreground="{StaticResource BackgroundLightBlueBrush}" FontSize="18">
+                                            <StackPanel  VerticalAlignment="Top"  >
+                                                <StackPanel  Orientation="Horizontal">
+                                                    <TextBlock  Text="{Binding Sender.NickName}" Foreground="{StaticResource BackgroundLightBlueBrush}" FontSize="18">
                                                     <i:Interaction.Triggers>
                                                             <i:EventTrigger EventName="MouseLeftButtonUp">
                                                                 <i:InvokeCommandAction Command="{Binding ElementName= ListViewProduct,Path=DataContext.AccountpageCommand}" 
                                                                    CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}"/>
                                                             </i:EventTrigger>
                                             </i:Interaction.Triggers>
-                                                </TextBlock>
-                                                <TextBlock  Text="{Binding Message, Converter={StaticResource EnumConverter}}" FontSize="18"/>
-                                                <TextBlock  Text="{Binding Video.Name}" Foreground="{StaticResource BackgroundLightBlueBrush}" Margin="5 0 0 0" Width="200" TextTrimming="CharacterEllipsis" FontSize="18">
+                                                    </TextBlock>
+                                                    <TextBlock  Text="{Binding Message, Converter={StaticResource EnumConverter}}" FontSize="18"/>
+                                                    <TextBlock  Text="{Binding Video.Name}" Foreground="{StaticResource BackgroundLightBlueBrush}" Margin="5 0 0 0" Width="200" TextTrimming="CharacterEllipsis" FontSize="18">
                                                      <i:Interaction.Triggers>
                                                          <i:EventTrigger EventName="MouseLeftButtonUp">
                                                              <i:InvokeCommandAction Command="{Binding ElementName= ListViewProduct,Path=DataContext.ViewWatchingPageCommand}" 
                                                                 CommandParameter="{Binding Path=SelectedItem , ElementName=ListViewProduct}"/>
                                                          </i:EventTrigger>
                                             </i:Interaction.Triggers>
-                                                </TextBlock>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock  Text="{Binding Date}" FontSize="18"/>
+                                                    <TextBlock  Text="{Binding NotificationDate}" Margin="5 0" FontSize="18"/>
+                                                </StackPanel>
                                             </StackPanel>
                                             <Button Grid.Row="1" Content="{lex:Loc Delete}"
                                                      Command="{Binding ElementName= ListViewProduct,Path=DataContext.DeleteCommand}" 

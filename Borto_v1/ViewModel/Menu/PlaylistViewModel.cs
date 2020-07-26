@@ -152,7 +152,7 @@ namespace Borto_v1
                     ?? (setPathtoImageCommand = new RelayCommandParametr(
                     (x) =>
                     {
-                        Messenger.Default.Send<NotificationMessage>(new NotificationMessage(this, "ChooseImage"));
+                        Messenger.Default.Send<NotificationMessage>(new NotificationMessage(this, "ChooseImagePlaylist"));
                     }));
             }
         }
@@ -207,6 +207,7 @@ namespace Borto_v1
                           {
                               context.Playlist.Create(playlist);
                               Name = null;
+                              SetImage();
                           });
                         addPlaylist.IsBackground = true;
                         addPlaylist.Start();
@@ -244,7 +245,6 @@ namespace Borto_v1
                     }));
             }
         }
-
         private RelayCommandParametr loadedCommand;
         public RelayCommandParametr LoadedCommand
         {
@@ -308,6 +308,7 @@ namespace Borto_v1
                 Image = ms.ToArray();
             }
         }
+
 
         #endregion
     }

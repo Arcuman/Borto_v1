@@ -521,6 +521,7 @@
     <None Include="Borto_v1_2_TemporaryKey.pfx" />
     <None Include="Borto_v1_3_TemporaryKey.pfx" />
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -524,7 +524,8 @@ namespace Borto_v1
 
                             Comment = string.Empty;
 
-                            Notification();
+                            if (user.IdUser != Video.UserId)
+                                Notification();
                         }
                         catch (Exception ex)
                         {

@@ -368,7 +368,7 @@ namespace Borto_v1
                     context.Notifications.Create(notification);
                     if (userTo.SendByEmail)
                     {
-                        MailsService.SendEmail(user.Email, $"New video from user {user.NickName} - video name: {NotificationVideoName}");
+                        MailsService.SendEmail(userTo.Email, $"New video from user {user.NickName} - video name: {NotificationVideoName}");
                     }
                 }
             }

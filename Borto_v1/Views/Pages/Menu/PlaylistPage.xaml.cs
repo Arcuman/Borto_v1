@@ -36,7 +36,7 @@ namespace Borto_v1
                       switch (message.Notification)
                       {
 
-                          case "ChooseImage":
+                          case "ChooseImagePlaylist":
                               {
                                   OpenFileDialog openFileDialog = new OpenFileDialog();
                                   openFileDialog.Filter = "Image Files(*.jpg; *.jpeg; *.png; *.bmp) | *.jpg; *.jpeg; *.png; *.bmp";

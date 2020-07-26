@@ -46,6 +46,7 @@ namespace Borto_v1
 
         private int countSubscribers;
 
+        private bool sendByEmail;
         #endregion
 
         #region Public Fields
@@ -66,6 +67,23 @@ namespace Borto_v1
                 RaisePropertyChanged();
             }
         }
+         public bool SendByEmail
+        {
+            get
+            {
+                return sendByEmail;
+            }
+            set
+            {
+                if (sendByEmail == value)
+                {
+                    return;
+                }
+                sendByEmail = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public string Email
         {
             get
@@ -295,6 +313,25 @@ namespace Borto_v1
                     }));
             }
         }
+        private RelayCommandParametr changeStateSendingCommand;
+        public RelayCommandParametr ChangeStateSendingCommand
+        {
+            get
+            {
+                return changeStateSendingCommand
+                    ?? (changeStateSendingCommand = new RelayCommandParametr(
+                    (x) =>
+                    {
+                        SendByEmail = !SendByEmail;
+                        SimpleIoc.Default.GetInstance<MainViewModel>().User.SendByEmail = SendByEmail;
+                        User.SendByEmail = SendByEmail;
+                        context.Users.Update(User);
+                        context.Save();
+
+                    },x=> !string.IsNullOrWhiteSpace(User.Email)));
+            }
+        }
+
         private RelayCommandParametr saveChangeNameCommand;
         public RelayCommandParametr SaveChangeNameCommand
         {
@@ -451,7 +488,7 @@ namespace Borto_v1
                     {
                         IsVisibleProgressBar = true;
 
-                        
+                        SendByEmail = User.SendByEmail;
 
                         Name = User.Name;
 

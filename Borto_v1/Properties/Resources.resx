@@ -192,6 +192,9 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="Email_Notification" xml:space="preserve">
+    <value>Email Notifications</value>
+  </data>
   <data name="Enter_Login" xml:space="preserve">
     <value>Enter Login</value>
   </data>
@@ -253,7 +256,7 @@
     <value>Nickname</value>
   </data>
   <data name="Notification" xml:space="preserve">
-    <value>Notification</value>
+    <value>Notifications</value>
   </data>
   <data name="No_internet_connection" xml:space="preserve">
     <value>No internet connection</value>
@@ -280,7 +283,7 @@
     <value>Player</value>
   </data>
   <data name="Playlist" xml:space="preserve">
-    <value>Playlist</value>
+    <value>Playlists</value>
   </data>
   <data name="Post_Date" xml:space="preserve">
     <value>Post date</value>

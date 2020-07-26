@@ -286,6 +286,15 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email Notifications.
+        /// </summary>
+        public static string Email_Notification {
+            get {
+                return ResourceManager.GetString("Email_Notification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter Login.
         /// </summary>
         public static string Enter_Login {
@@ -493,7 +502,7 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notification.
+        ///   Looks up a localized string similar to Notifications.
         /// </summary>
         public static string Notification {
             get {
@@ -547,7 +556,7 @@ namespace Borto_v1.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Playlist.
+        ///   Looks up a localized string similar to Playlists.
         /// </summary>
         public static string Playlist {
             get {
